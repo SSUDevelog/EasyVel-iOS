@@ -1,5 +1,7 @@
-# Created by https://www.toptal.com/developers/gitignore/api/swift,macos,xcode
-# Edit at https://www.toptal.com/developers/gitignore?templates=swift,macos,xcode
+# Created by https://www.toptal.com/developers/gitignore/api/macos,xcode,swift
+# Edit at https://www.toptal.com/developers/gitignore?templates=macos,xcode,swift
+
+
 
 ### macOS ###
 # General
@@ -41,6 +43,7 @@ Temporary Items
 
 ## User settings
 xcuserdata/
+
 ## compatibility with Xcode 8 and earlier (ignoring not required starting Xcode 9)
 *.xcscmblueprint
 *.xccheckout
@@ -125,8 +128,10 @@ iOSInjectionProject/
 *.xcodeproj/*
 !*.xcodeproj/project.pbxproj
 !*.xcodeproj/xcshareddata/
+!*.xcodeproj/project.xcworkspace/
 !*.xcworkspace/contents.xcworkspacedata
 /*.gcno
 **/xcshareddata/WorkspaceSettings.xcsettings
 
-# End of https://www.toptal.com/developers/gitignore/api/swift,macos,xcode
+
+# End of https://www.toptal.com/developers/gitignore/api/macos,xcode,swift

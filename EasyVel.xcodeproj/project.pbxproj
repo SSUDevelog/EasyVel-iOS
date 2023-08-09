@@ -262,7 +262,7 @@
 		9134423B2A004BA2000E1ED1 /* DefaultPostsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPostsRepository.swift; sourceTree = "<group>"; };
 		9134423D2A004BA8000E1ED1 /* DefaultSignRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSignRepository.swift; sourceTree = "<group>"; };
 		9134423F2A004BB1000E1ED1 /* DefaultNotificationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultNotificationRepository.swift; sourceTree = "<group>"; };
-		91487EBE29FC380A009CFECF /* VelogOnMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VelogOnMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		91487EBE29FC380A009CFECF /* EasyVel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyVel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		91487EC129FC380A009CFECF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		91487EC329FC380A009CFECF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		91487EC529FC380A009CFECF /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -309,7 +309,7 @@
 		916E29AD2A3EE90F006F5FE9 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		916E29B02A3EEE60006F5FE9 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		916E29B32A406952006F5FE9 /* AccessTokenDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenDTO.swift; sourceTree = "<group>"; };
-		916E29B52A408CC3006F5FE9 /* VelogOnMobile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VelogOnMobile.entitlements; sourceTree = "<group>"; };
+		916E29B52A408CC3006F5FE9 /* EasyVel.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EasyVel.entitlements; sourceTree = "<group>"; };
 		917BA3302A03D8EF000409B7 /* StorageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageViewController.swift; sourceTree = "<group>"; };
 		917BA3322A03D8F7000409B7 /* StorageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageView.swift; sourceTree = "<group>"; };
 		917BA3342A03E14A000409B7 /* StorageHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageHeadView.swift; sourceTree = "<group>"; };
@@ -655,7 +655,7 @@
 		91487EB529FC380A009CFECF = {
 			isa = PBXGroup;
 			children = (
-				91487EC029FC380A009CFECF /* VelogOnMobile */,
+				91487EC029FC380A009CFECF /* EasyVel */,
 				91487EBF29FC380A009CFECF /* Products */,
 				91E442A22A110190008CB516 /* Frameworks */,
 			);
@@ -664,21 +664,21 @@
 		91487EBF29FC380A009CFECF /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				91487EBE29FC380A009CFECF /* VelogOnMobile.app */,
+				91487EBE29FC380A009CFECF /* EasyVel.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		91487EC029FC380A009CFECF /* VelogOnMobile */ = {
+		91487EC029FC380A009CFECF /* EasyVel */ = {
 			isa = PBXGroup;
 			children = (
-				916E29B52A408CC3006F5FE9 /* VelogOnMobile.entitlements */,
+				916E29B52A408CC3006F5FE9 /* EasyVel.entitlements */,
 				917BA34F2A0508DF000409B7 /* Realm */,
 				913441E229FFD5BE000E1ED1 /* Network */,
 				91487EDE29FC3946009CFECF /* Feature */,
 				91487EDF29FC3950009CFECF /* Global */,
 			);
-			path = VelogOnMobile;
+			path = EasyVel;
 			sourceTree = "<group>";
 		};
 		91487EDE29FC3946009CFECF /* Feature */ = {
@@ -1123,9 +1123,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		91487EBD29FC380A009CFECF /* VelogOnMobile */ = {
+		91487EBD29FC380A009CFECF /* EasyVel */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 91487ED229FC380C009CFECF /* Build configuration list for PBXNativeTarget "VelogOnMobile" */;
+			buildConfigurationList = 91487ED229FC380C009CFECF /* Build configuration list for PBXNativeTarget "EasyVel" */;
 			buildPhases = (
 				91487EBA29FC380A009CFECF /* Sources */,
 				91487EBB29FC380A009CFECF /* Frameworks */,
@@ -1135,7 +1135,7 @@
 			);
 			dependencies = (
 			);
-			name = VelogOnMobile;
+			name = EasyVel;
 			packageProductDependencies = (
 				91487ED629FC38CC009CFECF /* SnapKit */,
 				91487ED929FC3921009CFECF /* Moya */,
@@ -1148,7 +1148,7 @@
 				9158618A2A2DFA6D00461F9A /* RxSwift */,
 			);
 			productName = VelogOnMobile;
-			productReference = 91487EBE29FC380A009CFECF /* VelogOnMobile.app */;
+			productReference = 91487EBE29FC380A009CFECF /* EasyVel.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1166,7 +1166,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 91487EB929FC380A009CFECF /* Build configuration list for PBXProject "VelogOnMobile" */;
+			buildConfigurationList = 91487EB929FC380A009CFECF /* Build configuration list for PBXProject "EasyVel" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -1186,7 +1186,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				91487EBD29FC380A009CFECF /* VelogOnMobile */,
+				91487EBD29FC380A009CFECF /* EasyVel */,
 			);
 		};
 /* End PBXProject section */
@@ -1507,13 +1507,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = VelogOnMobile/VelogOnMobile.entitlements;
+				CODE_SIGN_ENTITLEMENTS = EasyVel/EasyVel.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2023072602;
-				DEVELOPMENT_TEAM = D96A3BCL3R;
+				DEVELOPMENT_TEAM = T6DNHAHXG9;
 				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = VelogOnMobile/Global/Config/Info.plist;
+				INFOPLIST_FILE = EasyVel/Global/Config/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -1540,12 +1540,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = VelogOnMobile/VelogOnMobile.entitlements;
+				CODE_SIGN_ENTITLEMENTS = EasyVel/EasyVel.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2023072602;
-				DEVELOPMENT_TEAM = D96A3BCL3R;
+				DEVELOPMENT_TEAM = T6DNHAHXG9;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = VelogOnMobile/Global/Config/Info.plist;
+				INFOPLIST_FILE = EasyVel/Global/Config/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -1570,7 +1570,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		91487EB929FC380A009CFECF /* Build configuration list for PBXProject "VelogOnMobile" */ = {
+		91487EB929FC380A009CFECF /* Build configuration list for PBXProject "EasyVel" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				91487ED029FC380C009CFECF /* Debug */,
@@ -1579,7 +1579,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		91487ED229FC380C009CFECF /* Build configuration list for PBXNativeTarget "VelogOnMobile" */ = {
+		91487ED229FC380C009CFECF /* Build configuration list for PBXNativeTarget "EasyVel" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				91487ED329FC380C009CFECF /* Debug */,
