@@ -62,6 +62,6 @@
 
 ## iOS Developers
 
-| 홍준혁 | 주현아 | 장석우 |
-| :---------:|:----------:|:----------:|
-| [lms7802](https://github.com/hongjunehuke) | [JuHyeonAh](https://github.com/JuHyeonAh) | [meltsplit](https://github.com/meltsplit)
+| 홍준혁 | 주현아 | 장석우 | 이성민 |
+| :---------:|:----------:|:----------:|:----------:|
+| [lms7802](https://github.com/hongjunehuke) | [JuHyeonAh](https://github.com/JuHyeonAh) | [meltsplit](https://github.com/meltsplit) | [seongmin221](https://github.com/seongmin221)
