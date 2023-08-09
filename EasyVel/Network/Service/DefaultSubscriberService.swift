@@ -22,15 +22,11 @@ final class DefaultSubscriberService: BaseNetworkService, SubscriberService {
         completion: @escaping (NetworkResult<Any>) -> Void
     ) {
         provider.request(.addSubscriber(fcmToken: fcmToken, name: name)) { result in
-            switch result {
-            case .success(let response):
-                let statusCode = response.statusCode
-                let data = response.data
-                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .addSubscriber)
-                completion(networkResult)
-            case .failure(let err):
-                print(err)
-            }
+            self.disposeNetwork(result,
+                                dataModel: VoidDTO.self,
+                                completion: completion)
+            
+
         }
     }
     
@@ -38,15 +34,8 @@ final class DefaultSubscriberService: BaseNetworkService, SubscriberService {
         completion: @escaping (NetworkResult<Any>) -> Void
     ) {
         provider.request(.getSubscriber) { result in
-            switch result {
-            case.success(let response):
-                let statusCode = response.statusCode
-                let data = response.data
-                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .getSubscriber)
-                completion(networkResult)
-            case .failure(let err):
-                print(err)
-            }
+            self.disposeNetwork(result,
+                                dataModel: [SubscriberListResponse].self, completion: completion)
         }
     }
     
@@ -55,15 +44,8 @@ final class DefaultSubscriberService: BaseNetworkService, SubscriberService {
         completion: @escaping (NetworkResult<Any>) -> Void
     ) {
         provider.request(.searchSubscriber(name: name)) { result in
-            switch result {
-            case.success(let response):
-                let statusCode = response.statusCode
-                let data = response.data
-                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .searchSubscriber)
-                completion(networkResult)
-            case .failure(let err):
-                print(err)
-            }
+            self.disposeNetwork(result,
+                                dataModel: SearchSubscriberResponse.self, completion: completion)
         }
     }
     
@@ -72,15 +54,8 @@ final class DefaultSubscriberService: BaseNetworkService, SubscriberService {
         completion: @escaping (NetworkResult<Any>) -> Void
     ) {
         provider.request(.deleteSubscriber(targetName: targetName)) { result in
-            switch result {
-            case.success(let response):
-                let statusCode = response.statusCode
-                let data = response.data
-                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .deleteSubscriber)
-                completion(networkResult)
-            case .failure(let err):
-                print(err)
-            }
+            self.disposeNetwork(result,
+                                dataModel: UnSubscribeResponse.self, completion: completion)
         }
     }
     
@@ -89,15 +64,8 @@ final class DefaultSubscriberService: BaseNetworkService, SubscriberService {
         completion: @escaping (NetworkResult<Any>) -> Void
     ) {
         provider.request(.getSubscriberUserMain(name: name)) { result in
-            switch result {
-            case.success(let response):
-                let statusCode = response.statusCode
-                let data = response.data
-                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .getSubscriberUserMain)
-                completion(networkResult)
-            case .failure(let err):
-                print(err)
-            }
+            self.disposeNetwork(result,
+                                dataModel: SubscriberUserMainResponse.self, completion: completion)
         }
     }
 }

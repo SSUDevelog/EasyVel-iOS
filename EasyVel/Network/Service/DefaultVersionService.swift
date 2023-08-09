@@ -20,15 +20,9 @@ final class DefaultVersionService: BaseNetworkService, VersionService {
         completion: @escaping (NetworkResult<Any>) -> Void
     ) {
         provider.request(.versionCheck) { result in
-            switch result {
-            case.success(let response):
-                let statusCode = response.statusCode
-                let data = response.data
-                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .checkVersion)
-                completion(networkResult)
-            case .failure(let err):
-                print(err)
-            }
+            self.disposeNetwork(result,
+                                dataModel: VersionCheckDTO.self,
+                                completion: completion)
         }
     }
 }

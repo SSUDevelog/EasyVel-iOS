@@ -20,15 +20,9 @@ final class DefaultPostService: BaseNetworkService, PostService {
         completion: @escaping (NetworkResult<Any>) -> Void
     ) {
         provider.request(.getSubscriberPosts) { result in
-            switch result {
-            case.success(let response):
-                let statusCode = response.statusCode
-                let data = response.data
-                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .getSubscriberPosts)
-                completion(networkResult)
-            case .failure(let err):
-                print(err)
-            }
+            self.disposeNetwork(result,
+                                dataModel: GetSubscriberPostResponse.self,
+                                completion: completion)
         }
     }
     
@@ -36,15 +30,9 @@ final class DefaultPostService: BaseNetworkService, PostService {
         completion: @escaping (NetworkResult<Any>) -> Void
     ) {
         provider.request(.getTagPosts) { result in
-            switch result {
-            case.success(let response):
-                let statusCode = response.statusCode
-                let data = response.data
-                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .getTagPosts)
-                completion(networkResult)
-            case .failure(let err):
-                print(err)
-            }
+            self.disposeNetwork(result,
+                                dataModel: GetTagPostResponse.self,
+                                completion: completion)
         }
     }
     
@@ -53,15 +41,9 @@ final class DefaultPostService: BaseNetworkService, PostService {
         completion: @escaping (NetworkResult<Any>) -> Void
     ) {
         provider.request(.getOneTagPosts(tag: tag)) { result in
-            switch result {
-            case.success(let response):
-                let statusCode = response.statusCode
-                let data = response.data
-                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .getOneTagPosts)
-                completion(networkResult)
-            case .failure(let err):
-                print(err)
-            }
+            self.disposeNetwork(result,
+                                dataModel: [PostDTO].self,
+                                completion: completion)
         }
     }
     
@@ -70,15 +52,9 @@ final class DefaultPostService: BaseNetworkService, PostService {
         completion: @escaping (NetworkResult<Any>) -> Void
     ) {
         provider.request(.getPopularPosts) { result in
-            switch result {
-            case.success(let response):
-                let statusCode = response.statusCode
-                let data = response.data
-                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .getPopularPosts)
-                completion(networkResult)
-            case .failure(let err):
-                print(err)
-            }
+            self.disposeNetwork(result,
+                                dataModel: [String].self,
+                                completion: completion)
         }
     }
     
@@ -86,15 +62,9 @@ final class DefaultPostService: BaseNetworkService, PostService {
         completion: @escaping (NetworkResult<Any>) -> Void
     ) {
         provider.request(.trendsPosts) { result in
-            switch result {
-            case.success(let response):
-                let statusCode = response.statusCode
-                let data = response.data
-                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .trendPosts)
-                completion(networkResult)
-            case .failure(let err):
-                print(err)
-            }
+            self.disposeNetwork(result,
+                                dataModel: TrendPostResponse.self.self,
+                                completion: completion)
         }
     }
 }

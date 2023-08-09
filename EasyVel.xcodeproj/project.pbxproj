@@ -30,6 +30,7 @@
 		87DC479C2A573349007823CB /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DC479B2A573349007823CB /* AuthError.swift */; };
 		87DC479E2A59B1F6007823CB /* SignInUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DC479D2A59B1F6007823CB /* SignInUseCase.swift */; };
 		87F25EEB2A84385800E03C32 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F25EEA2A84385800E03C32 /* Config.swift */; };
+		87F25EF22A844EE100E03C32 /* VoidDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F25EF12A844EE100E03C32 /* VoidDTO.swift */; };
 		910950522A4F155F00D04D41 /* CurrentSearchDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910950512A4F155F00D04D41 /* CurrentSearchDTO.swift */; };
 		910950582A50117F00D04D41 /* VersionCheckDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910950572A50117F00D04D41 /* VersionCheckDTO.swift */; };
 		9109505A2A5011DD00D04D41 /* VersionTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910950592A5011DD00D04D41 /* VersionTargetType.swift */; };
@@ -174,7 +175,7 @@
 		91ED178B2A00E59900158787 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ED178A2A00E59900158787 /* PostService.swift */; };
 		91ED178D2A00E5A600158787 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ED178C2A00E5A600158787 /* AuthService.swift */; };
 		91ED178F2A00E5B100158787 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ED178E2A00E5B100158787 /* NotificationService.swift */; };
-		91ED17912A00E92800158787 /* ResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ED17902A00E92800158787 /* ResponseData.swift */; };
+		91ED17912A00E92800158787 /* ResponseData_Deprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ED17902A00E92800158787 /* ResponseData_Deprecated.swift */; };
 		91ED17932A00EA8F00158787 /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ED17922A00EA8F00158787 /* ErrorResponse.swift */; };
 		91ED179A2A00F00800158787 /* BaseNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ED17992A00F00800158787 /* BaseNetworkService.swift */; };
 /* End PBXBuildFile section */
@@ -205,6 +206,7 @@
 		87F25EE82A84363000E03C32 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		87F25EE92A84363C00E03C32 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		87F25EEA2A84385800E03C32 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		87F25EF12A844EE100E03C32 /* VoidDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoidDTO.swift; sourceTree = "<group>"; };
 		910950512A4F155F00D04D41 /* CurrentSearchDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentSearchDTO.swift; sourceTree = "<group>"; };
 		910950572A50117F00D04D41 /* VersionCheckDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionCheckDTO.swift; sourceTree = "<group>"; };
 		910950592A5011DD00D04D41 /* VersionTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionTargetType.swift; sourceTree = "<group>"; };
@@ -344,7 +346,7 @@
 		91ED178A2A00E59900158787 /* PostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
 		91ED178C2A00E5A600158787 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		91ED178E2A00E5B100158787 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
-		91ED17902A00E92800158787 /* ResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseData.swift; sourceTree = "<group>"; };
+		91ED17902A00E92800158787 /* ResponseData_Deprecated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseData_Deprecated.swift; sourceTree = "<group>"; };
 		91ED17922A00EA8F00158787 /* ErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
 		91ED17992A00F00800158787 /* BaseNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNetworkService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -612,7 +614,7 @@
 			isa = PBXGroup;
 			children = (
 				91ED17992A00F00800158787 /* BaseNetworkService.swift */,
-				91ED17902A00E92800158787 /* ResponseData.swift */,
+				91ED17902A00E92800158787 /* ResponseData_Deprecated.swift */,
 				91ED17852A00E55600158787 /* Protocol */,
 				9109505D2A50140C00D04D41 /* DefaultVersionService.swift */,
 				913442392A004B9B000E1ED1 /* DefaultSubscriberService.swift */,
@@ -649,6 +651,7 @@
 				9134421629FFDCCF000E1ED1 /* TagDTO */,
 				9134420D29FFDADB000E1ED1 /* SubscribeDTO */,
 				9134420C29FFDAA6000E1ED1 /* SignDTO */,
+				87F25EF12A844EE100E03C32 /* VoidDTO.swift */,
 			);
 			path = ServerDTO;
 			sourceTree = "<group>";
@@ -1202,7 +1205,7 @@
 				91487F0229FC3C16009CFECF /* SizeLiterals.swift in Sources */,
 				91BE70682A5D8043008886DD /* SettingUsingPolicyViewController.swift in Sources */,
 				91487EF829FC3B01009CFECF /* BaseCollectionViewCell.swift in Sources */,
-				91ED17912A00E92800158787 /* ResponseData.swift in Sources */,
+				91ED17912A00E92800158787 /* ResponseData_Deprecated.swift in Sources */,
 				910950582A50117F00D04D41 /* VersionCheckDTO.swift in Sources */,
 				9134421F29FFEAF7000E1ED1 /* BroadcastRequest.swift in Sources */,
 				9166BE982A49E8F600FFC026 /* ServerFailViewController.swift in Sources */,
@@ -1323,6 +1326,7 @@
 				9128B0562A23CC7400FB1252 /* ScrapStorageViewController.swift in Sources */,
 				91487F3729FD88E7009CFECF /* ListViewController.swift in Sources */,
 				91A052132A28F9E6009F32D1 /* ScrapFolder.swift in Sources */,
+				87F25EF22A844EE100E03C32 /* VoidDTO.swift in Sources */,
 				91CC1D4C2A0AD7C2006BF786 /* LoadingView.swift in Sources */,
 				7CB706D62A32067900083EC6 /* SearchCollectionViewCell.swift in Sources */,
 			);

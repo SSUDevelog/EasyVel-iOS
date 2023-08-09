@@ -21,15 +21,8 @@ final class DefaultNotificationService: BaseNetworkService, NotificationService 
         completion: @escaping (NetworkResult<Any>) -> Void
     ) {
         provider.request(.broadCast(body: body)) { result in
-            switch result {
-            case.success(let response):
-                let statusCode = response.statusCode
-                let data = response.data
-                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .broadCast)
-                completion(networkResult)
-            case .failure(let err):
-                print(err)
-            }
+            self.disposeNetwork(result,
+                                dataModel: BroadcastResponse.self, completion: completion)
         }
     }
 
@@ -38,15 +31,8 @@ final class DefaultNotificationService: BaseNetworkService, NotificationService 
         completion: @escaping (NetworkResult<Any>) -> Void
     ) {
         provider.request(.joingroup(body: body)) { result in
-            switch result {
-            case .success(let response):
-                let statusCode = response.statusCode
-                let data = response.data
-                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .addTag)
-                completion(networkResult)
-            case .failure(let err):
-                print(err)
-            }
+            self.disposeNetwork(result,
+                                dataModel: VoidDTO.self, completion: completion)
         }
     }
 }

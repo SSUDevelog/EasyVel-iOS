@@ -21,15 +21,9 @@ final class DefaultAuthService: BaseNetworkService, AuthService {
         completion: @escaping (NetworkResult<Any>) -> Void
     ) {
         provider.request(.signIn(body: body)) { result in
-            switch result {
-            case.success(let response):
-                let statusCode = response.statusCode
-                let data = response.data
-                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .signIn)
-                completion(networkResult)
-            case .failure(let err):
-                print(err)
-            }
+            self.disposeNetwork(result,
+                                dataModel: SignInResponse.self,
+                                completion: completion)
         }
     }
     
@@ -37,15 +31,9 @@ final class DefaultAuthService: BaseNetworkService, AuthService {
         completion: @escaping (NetworkResult<Any>) -> Void
     ) {
         provider.request(.signOut) { result in
-            switch result {
-            case.success(let response):
-                let statusCode = response.statusCode
-                let data = response.data
-                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .signOut)
-                completion(networkResult)
-            case .failure(let err):
-                print(err)
-            }
+            self.disposeNetwork(result,
+                                dataModel: SignOutResponse.self.self,
+                                completion: completion)
         }
     }
     
@@ -54,15 +42,9 @@ final class DefaultAuthService: BaseNetworkService, AuthService {
         completion: @escaping (NetworkResult<Any>) -> Void
     ) {
         provider.request(.signUp(body: body)) { result in
-            switch result {
-            case.success(let response):
-                let statusCode = response.statusCode
-                let data = response.data
-                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .signUp)
-                completion(networkResult)
-            case .failure(let err):
-                print(err)
-            }
+            self.disposeNetwork(result,
+                                dataModel: SignUpResponse.self,
+                                completion: completion)
         }
     }
     
@@ -71,15 +53,9 @@ final class DefaultAuthService: BaseNetworkService, AuthService {
         completion: @escaping (NetworkResult<Any>) -> Void
     ) {
         provider.request(.refreshToken(token: token)) { result in
-            switch result {
-            case.success(let response):
-                let statusCode = response.statusCode
-                let data = response.data
-                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .refreshToken)
-                completion(networkResult)
-            case .failure(let err):
-                print(err)
-            }
+            self.disposeNetwork(result,
+                                     dataModel: String.self,
+                                     completion: completion)
         }
     }
     

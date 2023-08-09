@@ -21,15 +21,9 @@ final class DefaultTagService: BaseNetworkService, TagService {
         completion: @escaping (NetworkResult<Any>) -> Void
     ) {
         provider.request(.addTag(tag: tag)) { result in
-            switch result {
-            case .success(let response):
-                let statusCode = response.statusCode
-                let data = response.data
-                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .addTag)
-                completion(networkResult)
-            case .failure(let err):
-                print(err)
-            }
+            self.disposeNetwork(result,
+                                dataModel: VoidDTO.self,
+                                completion: completion)
         }
     }
     
@@ -38,15 +32,9 @@ final class DefaultTagService: BaseNetworkService, TagService {
         completion: @escaping (NetworkResult<Any>) -> Void
     ) {
         provider.request(.deleteTag(tag: tag)) { result in
-            switch result {
-            case.success(let response):
-                let statusCode = response.statusCode
-                let data = response.data
-                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .deleteTag)
-                completion(networkResult)
-            case .failure(let err):
-                print(err)
-            }
+            self.disposeNetwork(result,
+                                dataModel: VoidDTO.self,
+                                completion: completion)
         }
     }
     
@@ -54,15 +42,9 @@ final class DefaultTagService: BaseNetworkService, TagService {
         completion: @escaping (NetworkResult<Any>) -> Void
     ) {
         provider.request(.getTag) { result in
-            switch result {
-            case.success(let response):
-                let statusCode = response.statusCode
-                let data = response.data
-                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .getTag)
-                completion(networkResult)
-            case .failure(let err):
-                print(err)
-            }
+            self.disposeNetwork(result,
+                                 dataModel: [String].self,
+                                 completion: completion)
         }
     }
 }
