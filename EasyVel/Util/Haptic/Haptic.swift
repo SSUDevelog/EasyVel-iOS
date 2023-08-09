@@ -8,7 +8,7 @@
 import UIKit
 
 @frozen
-enum HapticService {
+enum Haptic {
     case impact(UIImpactFeedbackGenerator.FeedbackStyle)
     case notification(UINotificationFeedbackGenerator.FeedbackType)
     case selection

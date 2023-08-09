@@ -166,7 +166,7 @@
 		91CC1D2C2A0A7D40006BF786 /* JoinGroupRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CC1D2B2A0A7D40006BF786 /* JoinGroupRequest.swift */; };
 		91CC1D4C2A0AD7C2006BF786 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CC1D4B2A0AD7C2006BF786 /* LoadingView.swift */; };
 		91CCEA3C2A0D017A001362AD /* PostTagUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CCEA3B2A0D017A001362AD /* PostTagUIButton.swift */; };
-		91CCEA602A0E9CC9001362AD /* HapticService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CCEA5F2A0E9CC9001362AD /* HapticService.swift */; };
+		91CCEA602A0E9CC9001362AD /* Haptic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CCEA5F2A0E9CC9001362AD /* Haptic.swift */; };
 		91DEF3DD2A017774001B6A9D /* TagSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91DEF3DC2A017774001B6A9D /* TagSearchViewModel.swift */; };
 		91E442872A10F385008CB516 /* RxBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E442862A10F385008CB516 /* RxBaseViewController.swift */; };
 		91E4428B2A10F3C7008CB516 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E4428A2A10F3C7008CB516 /* BaseViewModel.swift */; };
@@ -336,7 +336,7 @@
 		91CC1D2B2A0A7D40006BF786 /* JoinGroupRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinGroupRequest.swift; sourceTree = "<group>"; };
 		91CC1D4B2A0AD7C2006BF786 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		91CCEA3B2A0D017A001362AD /* PostTagUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTagUIButton.swift; sourceTree = "<group>"; };
-		91CCEA5F2A0E9CC9001362AD /* HapticService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticService.swift; sourceTree = "<group>"; };
+		91CCEA5F2A0E9CC9001362AD /* Haptic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptic.swift; sourceTree = "<group>"; };
 		91DEF3DC2A017774001B6A9D /* TagSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagSearchViewModel.swift; sourceTree = "<group>"; };
 		91E442862A10F385008CB516 /* RxBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxBaseViewController.swift; sourceTree = "<group>"; };
 		91E4428A2A10F3C7008CB516 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
@@ -531,12 +531,12 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
-		87F25EF02A843A6200E03C32 /* Service */ = {
+		87F25EF02A843A6200E03C32 /* Haptic */ = {
 			isa = PBXGroup;
 			children = (
-				91CCEA5F2A0E9CC9001362AD /* HapticService.swift */,
+				91CCEA5F2A0E9CC9001362AD /* Haptic.swift */,
 			);
-			path = Service;
+			path = Haptic;
 			sourceTree = "<group>";
 		};
 		87F25EF32A84579100E03C32 /* Model */ = {
@@ -552,6 +552,15 @@
 			children = (
 			);
 			path = Tag;
+			sourceTree = "<group>";
+		};
+		87F25EF52A845AB900E03C32 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				917BA34F2A0508DF000409B7 /* Realm */,
+				913441E229FFD5BE000E1ED1 /* Network */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		910950562A50116D00D04D41 /* Version */ = {
@@ -733,8 +742,7 @@
 				916FDCFB2A17EA0700BB1E16 /* Application */,
 				87F25EE02A8433D800E03C32 /* Resource */,
 				91487EDF29FC3950009CFECF /* Util */,
-				917BA34F2A0508DF000409B7 /* Realm */,
-				913441E229FFD5BE000E1ED1 /* Network */,
+				87F25EF52A845AB900E03C32 /* Service */,
 				87F25EE32A84344A00E03C32 /* Data */,
 				87F25EDF2A8433D300E03C32 /* Domain */,
 				91487EDE29FC3946009CFECF /* Presentation */,
@@ -763,7 +771,7 @@
 		91487EDF29FC3950009CFECF /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				87F25EF02A843A6200E03C32 /* Service */,
+				87F25EF02A843A6200E03C32 /* Haptic */,
 				91487EF929FC3B28009CFECF /* Extension */,
 				87F25EED2A84394F00E03C32 /* Constant */,
 				87DC479A2A573342007823CB /* Error */,
@@ -1184,7 +1192,7 @@
 				9109505E2A50140C00D04D41 /* DefaultVersionService.swift in Sources */,
 				913442302A004352000E1ED1 /* SubscriberTargetType.swift in Sources */,
 				87DC47932A5713FB007823CB /* SplashViewModel.swift in Sources */,
-				91CCEA602A0E9CC9001362AD /* HapticService.swift in Sources */,
+				91CCEA602A0E9CC9001362AD /* Haptic.swift in Sources */,
 				9134420929FFDA32000E1ED1 /* SignOutRequest.swift in Sources */,
 				91487F0229FC3C16009CFECF /* SizeLiterals.swift in Sources */,
 				91BE70682A5D8043008886DD /* SettingUsingPolicyViewController.swift in Sources */,

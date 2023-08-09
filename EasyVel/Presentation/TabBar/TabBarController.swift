@@ -169,7 +169,7 @@ extension TabBarController: UITabBarControllerDelegate {
             name: Notification.Name("scrollToTop"),
             object: nil
         )
-        let impactService = HapticService.impact(.light)
+        let impactService = Haptic.impact(.light)
         impactService.run()
     }
 }
