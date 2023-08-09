@@ -105,7 +105,7 @@ final class ListViewController: RxBaseViewController<ListViewModel> {
     }
     
     private func searchSubcriberButtonTapped() {
-        let viewModel = SubscriberSearchViewModel(subscriberList: viewModel?.subscriberList)
+        let viewModel = SubscriberSearchViewModel(subscriberList: viewModel?.subscriberList, service: DefaultSubscriberService.shared)
         let searchSubcriberViewController = SubscriberSearchViewController(viewModel: viewModel)
         viewModel.subscriberSearchDelegate = self
         searchSubcriberViewController.modalPresentationStyle = .pageSheet
@@ -116,7 +116,8 @@ final class ListViewController: RxBaseViewController<ListViewModel> {
         userMainURL: String
     ) {
         let webViewModel = WebViewModel(
-            url: userMainURL
+            url: userMainURL,
+            service: DefaultSubscriberService.shared
         )
         let webViewController = WebViewController(viewModel: webViewModel)
         webViewController.isPostWebView = false

@@ -9,9 +9,12 @@ import Foundation
 
 import Moya
 
-final class DefaultTagRepository: BaseRepository, TagRepository {
+final class DefaultTagService: BaseNetworkService, TagService {
+    
+    static let shared = DefaultTagService()
+    private override init() {}
 
-    let provider = MoyaProvider<TagAPI>(plugins: [MoyaLoggerPlugin()])
+    let provider = MoyaProvider<TagTargetType>(plugins: [MoyaLoggerPlugin()])
     
     func addTag(
         tag: String,

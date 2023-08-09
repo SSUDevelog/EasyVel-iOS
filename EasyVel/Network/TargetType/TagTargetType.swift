@@ -9,13 +9,13 @@ import Foundation
 
 import Moya
 
-enum TagAPI {
+enum TagTargetType {
     case addTag(tag: String)
     case deleteTag(tag: String)
     case getTag
 }
 
-extension TagAPI: BaseTargetType {
+extension TagTargetType: BaseTargetType {
     var path: String {
         switch self {
         case .addTag:

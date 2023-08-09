@@ -9,9 +9,12 @@ import Foundation
 
 import Moya
 
-final class DefaultCheckVersionRepository: BaseRepository, CheckVersionRepository {
+final class DefaultVersionService: BaseNetworkService, VersionService {
     
-    let provider = MoyaProvider<VersionCheckAPI>(plugins: [MoyaLoggerPlugin()])
+    static let shared = DefaultVersionService()
+    private override init() {}
+    
+    let provider = MoyaProvider<VersionTargetType>(plugins: [MoyaLoggerPlugin()])
     
     func getVersion(
         completion: @escaping (NetworkResult<Any>) -> Void

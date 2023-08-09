@@ -9,11 +9,11 @@ import Foundation
 
 import Moya
 
-enum VersionCheckAPI {
+enum VersionTargetType {
     case versionCheck
 }
 
-extension VersionCheckAPI: BaseTargetType {
+extension VersionTargetType: BaseTargetType {
     var path: String {
         switch self {
         case .versionCheck:

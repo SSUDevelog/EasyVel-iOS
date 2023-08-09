@@ -1,5 +1,5 @@
 //
-//  SubscriberAPI.swift
+//  PostsAPI.swift
 //  VelogOnMobile
 //
 //  Created by 홍준혁 on 2023/05/02.
@@ -9,21 +9,22 @@ import Foundation
 
 import Moya
 
-final class DefaultSubscriberRepository: BaseRepository, SubscriberRepository {
+final class DefaultPostService: BaseNetworkService, PostService {
     
-    let provider = MoyaProvider<SubscriberAPI>(plugins: [MoyaLoggerPlugin()])
+    static let shared = DefaultPostService()
+    private override init() {}
     
-    func addSubscriber(
-        fcmToken: String,
-        name: String,
+    let provider = MoyaProvider<PostTargetType>(plugins: [MoyaLoggerPlugin()])
+    
+    func getSubscriberPosts(
         completion: @escaping (NetworkResult<Any>) -> Void
     ) {
-        provider.request(.addSubscriber(fcmToken: fcmToken, name: name)) { result in
+        provider.request(.getSubscriberPosts) { result in
             switch result {
-            case .success(let response):
+            case.success(let response):
                 let statusCode = response.statusCode
                 let data = response.data
-                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .addSubscriber)
+                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .getSubscriberPosts)
                 completion(networkResult)
             case .failure(let err):
                 print(err)
@@ -31,15 +32,15 @@ final class DefaultSubscriberRepository: BaseRepository, SubscriberRepository {
         }
     }
     
-    func getSubscriber(
+    func getTagPosts(
         completion: @escaping (NetworkResult<Any>) -> Void
     ) {
-        provider.request(.getSubscriber) { result in
+        provider.request(.getTagPosts) { result in
             switch result {
             case.success(let response):
                 let statusCode = response.statusCode
                 let data = response.data
-                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .getSubscriber)
+                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .getTagPosts)
                 completion(networkResult)
             case .failure(let err):
                 print(err)
@@ -47,16 +48,16 @@ final class DefaultSubscriberRepository: BaseRepository, SubscriberRepository {
         }
     }
     
-    func searchSubscriber(
-        name: String,
+    func getOneTagPosts(
+        tag: String,
         completion: @escaping (NetworkResult<Any>) -> Void
     ) {
-        provider.request(.searchSubscriber(name: name)) { result in
+        provider.request(.getOneTagPosts(tag: tag)) { result in
             switch result {
             case.success(let response):
                 let statusCode = response.statusCode
                 let data = response.data
-                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .searchSubscriber)
+                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .getOneTagPosts)
                 completion(networkResult)
             case .failure(let err):
                 print(err)
@@ -64,16 +65,16 @@ final class DefaultSubscriberRepository: BaseRepository, SubscriberRepository {
         }
     }
     
-    func deleteSubscriber(
-        targetName: String,
+    
+    func getPopularPosts(
         completion: @escaping (NetworkResult<Any>) -> Void
     ) {
-        provider.request(.deleteSubscriber(targetName: targetName)) { result in
+        provider.request(.getPopularPosts) { result in
             switch result {
             case.success(let response):
                 let statusCode = response.statusCode
                 let data = response.data
-                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .deleteSubscriber)
+                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .getPopularPosts)
                 completion(networkResult)
             case .failure(let err):
                 print(err)
@@ -81,16 +82,15 @@ final class DefaultSubscriberRepository: BaseRepository, SubscriberRepository {
         }
     }
     
-    func getSubscriberUserMain(
-        name: String,
+    func getTrendPosts(
         completion: @escaping (NetworkResult<Any>) -> Void
     ) {
-        provider.request(.getSubscriberUserMain(name: name)) { result in
+        provider.request(.trendsPosts) { result in
             switch result {
             case.success(let response):
                 let statusCode = response.statusCode
                 let data = response.data
-                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .getSubscriberUserMain)
+                let networkResult = self.judgeStatus(by: statusCode, data, responseData: .trendPosts)
                 completion(networkResult)
             case .failure(let err):
                 print(err)

@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol SubscriberRepository {
+protocol SubscriberService {
     func addSubscriber(fcmToken: String, name: String, completion: @escaping (NetworkResult<Any>) -> Void)
     func getSubscriber(completion: @escaping (NetworkResult<Any>) -> Void)
     func searchSubscriber(name: String, completion: @escaping (NetworkResult<Any>) -> Void)

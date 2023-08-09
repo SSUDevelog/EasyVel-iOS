@@ -13,6 +13,8 @@ import RxSwift
 
 final class TagSearchViewModel: BaseViewModel {
     
+    let service: TagService
+    
     //MARK: - Properties
     
     private var addTag: String?
@@ -51,7 +53,8 @@ final class TagSearchViewModel: BaseViewModel {
     var deleteTagStatusOutPut = PublishRelay<(Bool, String)>()
     var myTagsEmpty = PublishRelay<Bool>()
     
-    override init() {
+    init(service: TagService) {
+        self.service = service
         super.init()
         
     }
@@ -149,7 +152,7 @@ private extension TagSearchViewModel {
     
     func requestAddTagAPI(tag: String) -> Observable<Bool> {
         return Observable.create { observer in
-            NetworkService.shared.tagRepository.addTag(tag: tag) { [weak self] result in
+            self.service.addTag(tag: tag) { [weak self] result in
                 switch result {
                 case .success(_):
                     observer.onNext(true)
@@ -169,7 +172,7 @@ private extension TagSearchViewModel {
         
     func requestMyTagAPI() -> Observable<[String]> {
         return Observable.create { observer in
-            NetworkService.shared.tagRepository.getTag() { [weak self] result in
+            self.service.getTag() { [weak self] result in
                 switch result {
                 case .success(let response):
                     guard let list = response as? [String] else {
@@ -193,7 +196,7 @@ private extension TagSearchViewModel {
     
     func requestDeleteTagAPI(tag: String) -> Observable<Bool> {
         return Observable.create { observer in
-            NetworkService.shared.tagRepository.deleteTag(tag: tag) { [weak self] result in
+            self.service.deleteTag(tag: tag) { [weak self] result in
                 switch result {
                 case .success(_):
                     observer.onNext(true)

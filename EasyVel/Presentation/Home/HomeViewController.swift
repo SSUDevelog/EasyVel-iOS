@@ -140,8 +140,8 @@ final class HomeViewController: BaseViewController {
     private func setPageViewController() {
         let factory = KeywordPostsVCFactory()
         dataSourceViewController = [UIViewController(),
-                                    PostsViewController(viewModel: .init(viewType: .trend)),
-                                    PostsViewController(viewModel: .init(viewType: .follow))]
+                                    PostsViewController(viewModel: .init(viewType: .trend, service: DefaultPostService.shared)),
+                                    PostsViewController(viewModel: .init(viewType: .follow,service: DefaultPostService.shared))]
         
         
         for tag in tags {
@@ -166,7 +166,7 @@ final class HomeViewController: BaseViewController {
     
     //TODO: - MVVM 리팩시 ViewModel이 담당
     func requestGetTagAPI() {
-        NetworkService.shared.tagRepository.getTag { result in
+        DefaultTagService.shared.getTag { result in
             switch result {
             case .success(let response):
                 guard let response = response as? [String] else { return }
@@ -191,7 +191,7 @@ final class HomeViewController: BaseViewController {
 extension HomeViewController: HomeMenuBarDelegate {
     func menuBar(didSelectItemAt item: Int) {
         if item == 0 {
-            let tagSearchVC = TagSearchViewController(viewModel: TagSearchViewModel())
+            let tagSearchVC = TagSearchViewController(viewModel: TagSearchViewModel(service: DefaultTagService.shared))
             navigationController?.pushViewController(tagSearchVC, animated: true)
             return
         }

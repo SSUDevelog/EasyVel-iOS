@@ -7,8 +7,11 @@
 
 import Foundation
 
-protocol PostsRepository {
+protocol PostService {
     func getSubscriberPosts(completion: @escaping (NetworkResult<Any>) -> Void)
     func getTagPosts(completion: @escaping (NetworkResult<Any>) -> Void)
     func getPopularPosts(completion: @escaping (NetworkResult<Any>) -> Void)
+    func getOneTagPosts(tag: String,
+                        completion: @escaping (NetworkResult<Any>) -> Void)
+    func getTrendPosts(completion: @escaping (NetworkResult<Any>) -> Void)
 }

@@ -35,7 +35,7 @@ final class TabBarController: UITabBarController {
 
     // MARK: - viewModel properties
     
-    let listViewModel = ListViewModel()
+    let listViewModel = ListViewModel(service: DefaultSubscriberService.shared)
     let scrapStorageViewModel = ScrapStorageViewModel()
     
     // MARK: - viewController properties
@@ -43,7 +43,7 @@ final class TabBarController: UITabBarController {
     let homeVC = HomeViewController()
     lazy var listVC = ListViewController(viewModel: listViewModel)
     lazy var storageVC = ScrapStorageViewController(viewModel: scrapStorageViewModel)
-    let settingViewModel = SettingViewModel()
+    let settingViewModel = SettingViewModel(service: DefaultAuthService.shared)
     lazy var settingVC = SettingViewController(viewModel: settingViewModel)
     
     
@@ -222,7 +222,7 @@ extension TabBarController {
     }
     
     func getLatestVersion() {
-        NetworkService.shared.checkVersionRepository.getVersion {
+        DefaultVersionService.shared.getVersion {
             result in
             switch result {
             case .success(let response):

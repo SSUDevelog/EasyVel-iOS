@@ -20,6 +20,7 @@ final class PostsViewModel: BaseViewModel {
     }
     
     let realm = RealmService()
+    let service: PostService
     
     private var viewType: ViewType = .trend
     private var tag: String
@@ -37,10 +38,12 @@ final class PostsViewModel: BaseViewModel {
     
     init(
         viewType: ViewType,
-         tag: String = ""
+         tag: String = "",
+        service: PostService
     ) {
         self.viewType = viewType
         self.tag = tag
+        self.service = service
         super.init()
         
         makeOutput()
@@ -149,7 +152,7 @@ final class PostsViewModel: BaseViewModel {
 private extension PostsViewModel {
     func getOneTagPosts(tag: String) -> Observable<[PostDTO]?> {
         return Observable.create { observer in
-            NetworkService.shared.postsRepository.getOneTagPosts(tag: tag) { [weak self] result in
+            self.service.getOneTagPosts(tag: tag) { [weak self] result in
                 switch result {
                 case .success(let response):
                     guard let posts = response as? [PostDTO] else {
@@ -173,7 +176,7 @@ private extension PostsViewModel {
     
     func getTrendPosts() -> Observable<[PostDTO]?> {
         return Observable.create { observer in
-            NetworkService.shared.postsRepository.getTrendPosts() { [weak self] result in
+            self.service.getTrendPosts() { [weak self] result in
                 switch result {
                 case .success(let response):
                     guard let posts = response as? TrendPostResponse else {
@@ -197,7 +200,7 @@ private extension PostsViewModel {
     
     func getSubscriberPosts() -> Observable<[PostDTO]?> {
         return Observable.create { observer in
-            NetworkService.shared.postsRepository.getSubscriberPosts() { [weak self] result in
+            self.service.getSubscriberPosts() { [weak self] result in
                 switch result {
                 case .success(let response):
                     guard let posts = response as? GetSubscriberPostResponse else {

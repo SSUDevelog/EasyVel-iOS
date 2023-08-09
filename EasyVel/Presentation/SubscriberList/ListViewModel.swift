@@ -12,6 +12,8 @@ import RxSwift
 
 final class ListViewModel: BaseViewModel {
     
+    let service: SubscriberService
+    
     var subscriberList: [SubscriberListResponse]?
     var isListEmpty: Bool = Bool()
     var tempDeleteSubscriber: String?
@@ -32,7 +34,8 @@ final class ListViewModel: BaseViewModel {
     
     // MARK: - init
     
-    override init() {
+    init(service: SubscriberService) {
+        self.service = service
         super.init()
         makeOutput()
     }
@@ -118,7 +121,7 @@ final class ListViewModel: BaseViewModel {
 private extension ListViewModel {
     func getSubscriberList() -> Observable<[SubscriberListResponse]> {
         return Observable.create { observer -> Disposable in
-            NetworkService.shared.subscriberRepository.getSubscriber() { [weak self] result in
+            DefaultSubscriberService.shared.getSubscriber() { [weak self] result in
                 switch result {
                 case .success(let response):
                     guard let list = response as? [SubscriberListResponse] else {
@@ -143,7 +146,7 @@ private extension ListViewModel {
         targetName: String,
         completion: @escaping (String) -> Void
     ) {
-        NetworkService.shared.subscriberRepository.deleteSubscriber(
+        DefaultSubscriberService.shared.deleteSubscriber(
             targetName: targetName
         ){ [weak self] result in
             switch result {
@@ -163,7 +166,7 @@ private extension ListViewModel {
         name: String,
         completion: @escaping (SubscriberUserMainResponse) -> Void
     ) {
-        NetworkService.shared.subscriberRepository.getSubscriberUserMain(
+        service.getSubscriberUserMain(
             name: name
         ) { [weak self] result in
             switch result {

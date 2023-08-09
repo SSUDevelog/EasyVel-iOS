@@ -32,9 +32,9 @@
 		87F25EEB2A84385800E03C32 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F25EEA2A84385800E03C32 /* Config.swift */; };
 		910950522A4F155F00D04D41 /* CurrentSearchDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910950512A4F155F00D04D41 /* CurrentSearchDTO.swift */; };
 		910950582A50117F00D04D41 /* VersionCheckDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910950572A50117F00D04D41 /* VersionCheckDTO.swift */; };
-		9109505A2A5011DD00D04D41 /* VersionCheckAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910950592A5011DD00D04D41 /* VersionCheckAPI.swift */; };
-		9109505C2A5013C100D04D41 /* CheckVersionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9109505B2A5013C100D04D41 /* CheckVersionRepository.swift */; };
-		9109505E2A50140C00D04D41 /* DefaultCheckVersionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9109505D2A50140C00D04D41 /* DefaultCheckVersionRepository.swift */; };
+		9109505A2A5011DD00D04D41 /* VersionTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910950592A5011DD00D04D41 /* VersionTargetType.swift */; };
+		9109505C2A5013C100D04D41 /* VersionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9109505B2A5013C100D04D41 /* VersionService.swift */; };
+		9109505E2A50140C00D04D41 /* DefaultVersionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9109505D2A50140C00D04D41 /* DefaultVersionService.swift */; };
 		910C02FB2A4D7BC5005D5797 /* PostSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910C02FA2A4D7BC5005D5797 /* PostSearchViewModel.swift */; };
 		9128AFE52A2117A200FB1252 /* WebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9128AFE42A2117A200FB1252 /* WebViewModel.swift */; };
 		9128B0262A236D2800FB1252 /* ScrapPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9128B0252A236D2800FB1252 /* ScrapPopUpView.swift */; };
@@ -58,8 +58,7 @@
 		913441E729FFD622000E1ED1 /* MoyaLoggerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913441E629FFD622000E1ED1 /* MoyaLoggerPlugin.swift */; };
 		913441EA29FFD649000E1ED1 /* BaseTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913441E929FFD649000E1ED1 /* BaseTargetType.swift */; };
 		913441EE29FFD6E3000E1ED1 /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913441ED29FFD6E3000E1ED1 /* NetworkResult.swift */; };
-		913441F029FFD6FB000E1ED1 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913441EF29FFD6FB000E1ED1 /* NetworkService.swift */; };
-		913441F429FFD742000E1ED1 /* TagAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913441F329FFD742000E1ED1 /* TagAPI.swift */; };
+		913441F429FFD742000E1ED1 /* TagTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913441F329FFD742000E1ED1 /* TagTargetType.swift */; };
 		913441F929FFD776000E1ED1 /* SignUpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913441F829FFD776000E1ED1 /* SignUpRequest.swift */; };
 		913441FB29FFD8AC000E1ED1 /* SignInRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913441FA29FFD8AC000E1ED1 /* SignInRequest.swift */; };
 		9134420529FFD965000E1ED1 /* SignInResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9134420429FFD965000E1ED1 /* SignInResponse.swift */; };
@@ -77,15 +76,15 @@
 		9134422729FFF9BC000E1ED1 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9134422629FFF9BC000E1ED1 /* ListView.swift */; };
 		913442292A0001EC000E1ED1 /* PostsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913442282A0001EC000E1ED1 /* PostsView.swift */; };
 		9134422D2A00418A000E1ED1 /* URLConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9134422C2A00418A000E1ED1 /* URLConstants.swift */; };
-		913442302A004352000E1ED1 /* SubscriberAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9134422F2A004352000E1ED1 /* SubscriberAPI.swift */; };
-		913442322A004663000E1ED1 /* PostsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913442312A004663000E1ED1 /* PostsAPI.swift */; };
-		913442342A004795000E1ED1 /* SignAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913442332A004795000E1ED1 /* SignAPI.swift */; };
-		913442362A00491C000E1ED1 /* NotificationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913442352A00491C000E1ED1 /* NotificationAPI.swift */; };
-		913442382A004B91000E1ED1 /* DefaultTagRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913442372A004B91000E1ED1 /* DefaultTagRepository.swift */; };
-		9134423A2A004B9B000E1ED1 /* DefaultSubscriberRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913442392A004B9B000E1ED1 /* DefaultSubscriberRepository.swift */; };
-		9134423C2A004BA2000E1ED1 /* DefaultPostsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9134423B2A004BA2000E1ED1 /* DefaultPostsRepository.swift */; };
-		9134423E2A004BA8000E1ED1 /* DefaultSignRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9134423D2A004BA8000E1ED1 /* DefaultSignRepository.swift */; };
-		913442402A004BB1000E1ED1 /* DefaultNotificationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9134423F2A004BB1000E1ED1 /* DefaultNotificationRepository.swift */; };
+		913442302A004352000E1ED1 /* SubscriberTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9134422F2A004352000E1ED1 /* SubscriberTargetType.swift */; };
+		913442322A004663000E1ED1 /* PostTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913442312A004663000E1ED1 /* PostTargetType.swift */; };
+		913442342A004795000E1ED1 /* SignTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913442332A004795000E1ED1 /* SignTargetType.swift */; };
+		913442362A00491C000E1ED1 /* NotificationTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913442352A00491C000E1ED1 /* NotificationTargetType.swift */; };
+		913442382A004B91000E1ED1 /* DefaultTagService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913442372A004B91000E1ED1 /* DefaultTagService.swift */; };
+		9134423A2A004B9B000E1ED1 /* DefaultSubscriberService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913442392A004B9B000E1ED1 /* DefaultSubscriberService.swift */; };
+		9134423C2A004BA2000E1ED1 /* DefaultPostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9134423B2A004BA2000E1ED1 /* DefaultPostService.swift */; };
+		9134423E2A004BA8000E1ED1 /* DefaultAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9134423D2A004BA8000E1ED1 /* DefaultAuthService.swift */; };
+		913442402A004BB1000E1ED1 /* DefaultNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9134423F2A004BB1000E1ED1 /* DefaultNotificationService.swift */; };
 		91487EC229FC380A009CFECF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91487EC129FC380A009CFECF /* AppDelegate.swift */; };
 		91487EC429FC380A009CFECF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91487EC329FC380A009CFECF /* SceneDelegate.swift */; };
 		91487EC629FC380A009CFECF /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91487EC529FC380A009CFECF /* SignInViewController.swift */; };
@@ -170,14 +169,14 @@
 		91DEF3DD2A017774001B6A9D /* TagSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91DEF3DC2A017774001B6A9D /* TagSearchViewModel.swift */; };
 		91E442872A10F385008CB516 /* RxBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E442862A10F385008CB516 /* RxBaseViewController.swift */; };
 		91E4428B2A10F3C7008CB516 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E4428A2A10F3C7008CB516 /* BaseViewModel.swift */; };
-		91ED17872A00E57700158787 /* TagRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ED17862A00E57700158787 /* TagRepository.swift */; };
-		91ED17892A00E58D00158787 /* SubscriberRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ED17882A00E58D00158787 /* SubscriberRepository.swift */; };
-		91ED178B2A00E59900158787 /* PostsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ED178A2A00E59900158787 /* PostsRepository.swift */; };
-		91ED178D2A00E5A600158787 /* SignRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ED178C2A00E5A600158787 /* SignRepository.swift */; };
-		91ED178F2A00E5B100158787 /* NotificationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ED178E2A00E5B100158787 /* NotificationRepository.swift */; };
+		91ED17872A00E57700158787 /* TagService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ED17862A00E57700158787 /* TagService.swift */; };
+		91ED17892A00E58D00158787 /* SubscriberService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ED17882A00E58D00158787 /* SubscriberService.swift */; };
+		91ED178B2A00E59900158787 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ED178A2A00E59900158787 /* PostService.swift */; };
+		91ED178D2A00E5A600158787 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ED178C2A00E5A600158787 /* AuthService.swift */; };
+		91ED178F2A00E5B100158787 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ED178E2A00E5B100158787 /* NotificationService.swift */; };
 		91ED17912A00E92800158787 /* ResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ED17902A00E92800158787 /* ResponseData.swift */; };
 		91ED17932A00EA8F00158787 /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ED17922A00EA8F00158787 /* ErrorResponse.swift */; };
-		91ED179A2A00F00800158787 /* BaseRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ED17992A00F00800158787 /* BaseRepository.swift */; };
+		91ED179A2A00F00800158787 /* BaseNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ED17992A00F00800158787 /* BaseNetworkService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -208,9 +207,9 @@
 		87F25EEA2A84385800E03C32 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		910950512A4F155F00D04D41 /* CurrentSearchDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentSearchDTO.swift; sourceTree = "<group>"; };
 		910950572A50117F00D04D41 /* VersionCheckDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionCheckDTO.swift; sourceTree = "<group>"; };
-		910950592A5011DD00D04D41 /* VersionCheckAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionCheckAPI.swift; sourceTree = "<group>"; };
-		9109505B2A5013C100D04D41 /* CheckVersionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckVersionRepository.swift; sourceTree = "<group>"; };
-		9109505D2A50140C00D04D41 /* DefaultCheckVersionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCheckVersionRepository.swift; sourceTree = "<group>"; };
+		910950592A5011DD00D04D41 /* VersionTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionTargetType.swift; sourceTree = "<group>"; };
+		9109505B2A5013C100D04D41 /* VersionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionService.swift; sourceTree = "<group>"; };
+		9109505D2A50140C00D04D41 /* DefaultVersionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultVersionService.swift; sourceTree = "<group>"; };
 		910C02FA2A4D7BC5005D5797 /* PostSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSearchViewModel.swift; sourceTree = "<group>"; };
 		9128AFE42A2117A200FB1252 /* WebViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewModel.swift; sourceTree = "<group>"; };
 		9128B0252A236D2800FB1252 /* ScrapPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapPopUpView.swift; sourceTree = "<group>"; };
@@ -234,8 +233,7 @@
 		913441E629FFD622000E1ED1 /* MoyaLoggerPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaLoggerPlugin.swift; sourceTree = "<group>"; };
 		913441E929FFD649000E1ED1 /* BaseTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTargetType.swift; sourceTree = "<group>"; };
 		913441ED29FFD6E3000E1ED1 /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
-		913441EF29FFD6FB000E1ED1 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
-		913441F329FFD742000E1ED1 /* TagAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagAPI.swift; sourceTree = "<group>"; };
+		913441F329FFD742000E1ED1 /* TagTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagTargetType.swift; sourceTree = "<group>"; };
 		913441F829FFD776000E1ED1 /* SignUpRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRequest.swift; sourceTree = "<group>"; };
 		913441FA29FFD8AC000E1ED1 /* SignInRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInRequest.swift; sourceTree = "<group>"; };
 		9134420429FFD965000E1ED1 /* SignInResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInResponse.swift; sourceTree = "<group>"; };
@@ -253,15 +251,15 @@
 		9134422629FFF9BC000E1ED1 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		913442282A0001EC000E1ED1 /* PostsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsView.swift; sourceTree = "<group>"; };
 		9134422C2A00418A000E1ED1 /* URLConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLConstants.swift; sourceTree = "<group>"; };
-		9134422F2A004352000E1ED1 /* SubscriberAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriberAPI.swift; sourceTree = "<group>"; };
-		913442312A004663000E1ED1 /* PostsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsAPI.swift; sourceTree = "<group>"; };
-		913442332A004795000E1ED1 /* SignAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignAPI.swift; sourceTree = "<group>"; };
-		913442352A00491C000E1ED1 /* NotificationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAPI.swift; sourceTree = "<group>"; };
-		913442372A004B91000E1ED1 /* DefaultTagRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTagRepository.swift; sourceTree = "<group>"; };
-		913442392A004B9B000E1ED1 /* DefaultSubscriberRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSubscriberRepository.swift; sourceTree = "<group>"; };
-		9134423B2A004BA2000E1ED1 /* DefaultPostsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPostsRepository.swift; sourceTree = "<group>"; };
-		9134423D2A004BA8000E1ED1 /* DefaultSignRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSignRepository.swift; sourceTree = "<group>"; };
-		9134423F2A004BB1000E1ED1 /* DefaultNotificationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultNotificationRepository.swift; sourceTree = "<group>"; };
+		9134422F2A004352000E1ED1 /* SubscriberTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriberTargetType.swift; sourceTree = "<group>"; };
+		913442312A004663000E1ED1 /* PostTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTargetType.swift; sourceTree = "<group>"; };
+		913442332A004795000E1ED1 /* SignTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignTargetType.swift; sourceTree = "<group>"; };
+		913442352A00491C000E1ED1 /* NotificationTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTargetType.swift; sourceTree = "<group>"; };
+		913442372A004B91000E1ED1 /* DefaultTagService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTagService.swift; sourceTree = "<group>"; };
+		913442392A004B9B000E1ED1 /* DefaultSubscriberService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSubscriberService.swift; sourceTree = "<group>"; };
+		9134423B2A004BA2000E1ED1 /* DefaultPostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPostService.swift; sourceTree = "<group>"; };
+		9134423D2A004BA8000E1ED1 /* DefaultAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAuthService.swift; sourceTree = "<group>"; };
+		9134423F2A004BB1000E1ED1 /* DefaultNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultNotificationService.swift; sourceTree = "<group>"; };
 		91487EBE29FC380A009CFECF /* EasyVel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyVel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		91487EC129FC380A009CFECF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		91487EC329FC380A009CFECF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -341,14 +339,14 @@
 		91E442862A10F385008CB516 /* RxBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxBaseViewController.swift; sourceTree = "<group>"; };
 		91E4428A2A10F3C7008CB516 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		91E442A32A110191008CB516 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		91ED17862A00E57700158787 /* TagRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagRepository.swift; sourceTree = "<group>"; };
-		91ED17882A00E58D00158787 /* SubscriberRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriberRepository.swift; sourceTree = "<group>"; };
-		91ED178A2A00E59900158787 /* PostsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsRepository.swift; sourceTree = "<group>"; };
-		91ED178C2A00E5A600158787 /* SignRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignRepository.swift; sourceTree = "<group>"; };
-		91ED178E2A00E5B100158787 /* NotificationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRepository.swift; sourceTree = "<group>"; };
+		91ED17862A00E57700158787 /* TagService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagService.swift; sourceTree = "<group>"; };
+		91ED17882A00E58D00158787 /* SubscriberService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriberService.swift; sourceTree = "<group>"; };
+		91ED178A2A00E59900158787 /* PostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
+		91ED178C2A00E5A600158787 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		91ED178E2A00E5B100158787 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		91ED17902A00E92800158787 /* ResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseData.swift; sourceTree = "<group>"; };
 		91ED17922A00EA8F00158787 /* ErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
-		91ED17992A00F00800158787 /* BaseRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRepository.swift; sourceTree = "<group>"; };
+		91ED17992A00F00800158787 /* BaseNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNetworkService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -604,39 +602,39 @@
 			isa = PBXGroup;
 			children = (
 				91ED179D2A00F73200158787 /* Foundation */,
-				913441E429FFD5FA000E1ED1 /* API */,
-				913441E329FFD5D1000E1ED1 /* Repository */,
+				913441E429FFD5FA000E1ED1 /* TargetType */,
+				913441E329FFD5D1000E1ED1 /* Service */,
 			);
 			path = Network;
 			sourceTree = "<group>";
 		};
-		913441E329FFD5D1000E1ED1 /* Repository */ = {
+		913441E329FFD5D1000E1ED1 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				91ED179C2A00F2FE00158787 /* ResponseData */,
-				91ED179B2A00F2DB00158787 /* BaseRepository */,
+				91ED17992A00F00800158787 /* BaseNetworkService.swift */,
+				91ED17902A00E92800158787 /* ResponseData.swift */,
 				91ED17852A00E55600158787 /* Protocol */,
-				9109505D2A50140C00D04D41 /* DefaultCheckVersionRepository.swift */,
-				913442392A004B9B000E1ED1 /* DefaultSubscriberRepository.swift */,
-				913442372A004B91000E1ED1 /* DefaultTagRepository.swift */,
-				9134423B2A004BA2000E1ED1 /* DefaultPostsRepository.swift */,
-				9134423D2A004BA8000E1ED1 /* DefaultSignRepository.swift */,
-				9134423F2A004BB1000E1ED1 /* DefaultNotificationRepository.swift */,
+				9109505D2A50140C00D04D41 /* DefaultVersionService.swift */,
+				913442392A004B9B000E1ED1 /* DefaultSubscriberService.swift */,
+				913442372A004B91000E1ED1 /* DefaultTagService.swift */,
+				9134423B2A004BA2000E1ED1 /* DefaultPostService.swift */,
+				9134423D2A004BA8000E1ED1 /* DefaultAuthService.swift */,
+				9134423F2A004BB1000E1ED1 /* DefaultNotificationService.swift */,
 			);
-			path = Repository;
+			path = Service;
 			sourceTree = "<group>";
 		};
-		913441E429FFD5FA000E1ED1 /* API */ = {
+		913441E429FFD5FA000E1ED1 /* TargetType */ = {
 			isa = PBXGroup;
 			children = (
-				910950592A5011DD00D04D41 /* VersionCheckAPI.swift */,
-				913441F329FFD742000E1ED1 /* TagAPI.swift */,
-				9134422F2A004352000E1ED1 /* SubscriberAPI.swift */,
-				913442312A004663000E1ED1 /* PostsAPI.swift */,
-				913442332A004795000E1ED1 /* SignAPI.swift */,
-				913442352A00491C000E1ED1 /* NotificationAPI.swift */,
+				910950592A5011DD00D04D41 /* VersionTargetType.swift */,
+				913441F329FFD742000E1ED1 /* TagTargetType.swift */,
+				9134422F2A004352000E1ED1 /* SubscriberTargetType.swift */,
+				913442312A004663000E1ED1 /* PostTargetType.swift */,
+				913442332A004795000E1ED1 /* SignTargetType.swift */,
+				913442352A00491C000E1ED1 /* NotificationTargetType.swift */,
 			);
-			path = API;
+			path = TargetType;
 			sourceTree = "<group>";
 		};
 		913441F729FFD760000E1ED1 /* ServerDTO */ = {
@@ -1050,12 +1048,12 @@
 		91ED17852A00E55600158787 /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
-				9109505B2A5013C100D04D41 /* CheckVersionRepository.swift */,
-				91ED17862A00E57700158787 /* TagRepository.swift */,
-				91ED17882A00E58D00158787 /* SubscriberRepository.swift */,
-				91ED178A2A00E59900158787 /* PostsRepository.swift */,
-				91ED178C2A00E5A600158787 /* SignRepository.swift */,
-				91ED178E2A00E5B100158787 /* NotificationRepository.swift */,
+				9109505B2A5013C100D04D41 /* VersionService.swift */,
+				91ED17862A00E57700158787 /* TagService.swift */,
+				91ED17882A00E58D00158787 /* SubscriberService.swift */,
+				91ED178A2A00E59900158787 /* PostService.swift */,
+				91ED178C2A00E5A600158787 /* AuthService.swift */,
+				91ED178E2A00E5B100158787 /* NotificationService.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -1068,22 +1066,6 @@
 			path = ErrorDTO;
 			sourceTree = "<group>";
 		};
-		91ED179B2A00F2DB00158787 /* BaseRepository */ = {
-			isa = PBXGroup;
-			children = (
-				91ED17992A00F00800158787 /* BaseRepository.swift */,
-			);
-			path = BaseRepository;
-			sourceTree = "<group>";
-		};
-		91ED179C2A00F2FE00158787 /* ResponseData */ = {
-			isa = PBXGroup;
-			children = (
-				91ED17902A00E92800158787 /* ResponseData.swift */,
-			);
-			path = ResponseData;
-			sourceTree = "<group>";
-		};
 		91ED179D2A00F73200158787 /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
@@ -1091,7 +1073,6 @@
 				91487F1629FC5481009CFECF /* NetworkMonitor.swift */,
 				913441E929FFD649000E1ED1 /* BaseTargetType.swift */,
 				913441ED29FFD6E3000E1ED1 /* NetworkResult.swift */,
-				913441EF29FFD6FB000E1ED1 /* NetworkService.swift */,
 				9134422C2A00418A000E1ED1 /* URLConstants.swift */,
 			);
 			path = Foundation;
@@ -1197,24 +1178,24 @@
 			files = (
 				91487EC629FC380A009CFECF /* SignInViewController.swift in Sources */,
 				916E29A82A3EDA45006F5FE9 /* SettingViewModel.swift in Sources */,
-				9134423E2A004BA8000E1ED1 /* DefaultSignRepository.swift in Sources */,
+				9134423E2A004BA8000E1ED1 /* DefaultAuthService.swift in Sources */,
 				910950522A4F155F00D04D41 /* CurrentSearchDTO.swift in Sources */,
 				91487EC229FC380A009CFECF /* AppDelegate.swift in Sources */,
-				913442322A004663000E1ED1 /* PostsAPI.swift in Sources */,
-				91ED178D2A00E5A600158787 /* SignRepository.swift in Sources */,
+				913442322A004663000E1ED1 /* PostTargetType.swift in Sources */,
+				91ED178D2A00E5A600158787 /* AuthService.swift in Sources */,
 				916E29B12A3EEE60006F5FE9 /* SignInView.swift in Sources */,
 				91487F1029FC4736009CFECF /* UIStackView+Extension.swift in Sources */,
-				9134423A2A004B9B000E1ED1 /* DefaultSubscriberRepository.swift in Sources */,
+				9134423A2A004B9B000E1ED1 /* DefaultSubscriberService.swift in Sources */,
 				91487EEF29FC3A4D009CFECF /* SettingViewController.swift in Sources */,
 				9128B04A2A23C59700FB1252 /* ScrapStorageView.swift in Sources */,
 				9134421D29FFEAC9000E1ED1 /* BroadcastResponse.swift in Sources */,
 				917BA3552A0509D8000409B7 /* RealmService.swift in Sources */,
 				91487EFB29FC3B6A009CFECF /* UIColor+Extension.swift in Sources */,
 				9128B0462A23BD3800FB1252 /* ScrapPopUpDelegate.swift in Sources */,
-				9109505C2A5013C100D04D41 /* CheckVersionRepository.swift in Sources */,
+				9109505C2A5013C100D04D41 /* VersionService.swift in Sources */,
 				877ED7C32A4AAED500D80464 /* HomeMenuCollectionViewCell.swift in Sources */,
-				9109505E2A50140C00D04D41 /* DefaultCheckVersionRepository.swift in Sources */,
-				913442302A004352000E1ED1 /* SubscriberAPI.swift in Sources */,
+				9109505E2A50140C00D04D41 /* DefaultVersionService.swift in Sources */,
+				913442302A004352000E1ED1 /* SubscriberTargetType.swift in Sources */,
 				87DC47932A5713FB007823CB /* SplashViewModel.swift in Sources */,
 				91CCEA602A0E9CC9001362AD /* HapticService.swift in Sources */,
 				9134420929FFDA32000E1ED1 /* SignOutRequest.swift in Sources */,
@@ -1229,10 +1210,10 @@
 				91487F4D29FD9858009CFECF /* TagSearchViewController.swift in Sources */,
 				914D8DD12A028AED00516B4C /* PostsViewModel.swift in Sources */,
 				917BA3312A03D8EF000409B7 /* StorageViewController.swift in Sources */,
-				913442362A00491C000E1ED1 /* NotificationAPI.swift in Sources */,
+				913442362A00491C000E1ED1 /* NotificationTargetType.swift in Sources */,
 				91BFF2F82A27833C00F5D13E /* PostScrapButtonDidTapped.swift in Sources */,
 				91BE70662A5D7B9B008886DD /* SettingPolicyViewController.swift in Sources */,
-				913442382A004B91000E1ED1 /* DefaultTagRepository.swift in Sources */,
+				913442382A004B91000E1ED1 /* DefaultTagService.swift in Sources */,
 				9134422D2A00418A000E1ED1 /* URLConstants.swift in Sources */,
 				8765EFF02A29EA6D00EF6733 /* HomeMenuBar.swift in Sources */,
 				91487F2F29FD1A67009CFECF /* SubscriberSearchView.swift in Sources */,
@@ -1241,7 +1222,7 @@
 				9134422329FFF59D000E1ED1 /* SettingTableView.swift in Sources */,
 				9134421129FFDB5D000E1ED1 /* SearchSubscriberResponse.swift in Sources */,
 				9128B05A2A23CC9000FB1252 /* ScrapStorageViewModel.swift in Sources */,
-				9109505A2A5011DD00D04D41 /* VersionCheckAPI.swift in Sources */,
+				9109505A2A5011DD00D04D41 /* VersionTargetType.swift in Sources */,
 				9134421329FFDBE8000E1ED1 /* GetSubscriberPostResponse.swift in Sources */,
 				917BA3522A050903000409B7 /* RealmStoragePost.swift in Sources */,
 				916227DA2A454FD800118018 /* SubscriberListResponse.swift in Sources */,
@@ -1250,12 +1231,12 @@
 				9128B0322A23778400FB1252 /* ScrapFolderBottomSheetViewModel.swift in Sources */,
 				917BA3452A050631000409B7 /* StorageViewModel.swift in Sources */,
 				913441FB29FFD8AC000E1ED1 /* SignInRequest.swift in Sources */,
-				913442342A004795000E1ED1 /* SignAPI.swift in Sources */,
+				913442342A004795000E1ED1 /* SignTargetType.swift in Sources */,
 				916227DE2A46C6E900118018 /* SubscriberUserMainResponse.swift in Sources */,
 				9134421A29FFE692000E1ED1 /* GetTagPostResponse.swift in Sources */,
 				87187C042A4DF7F200BF05F7 /* PopularTagTableViewCell.swift in Sources */,
 				91DEF3DD2A017774001B6A9D /* TagSearchViewModel.swift in Sources */,
-				91ED17872A00E57700158787 /* TagRepository.swift in Sources */,
+				91ED17872A00E57700158787 /* TagService.swift in Sources */,
 				9128B0542A23CADD00FB1252 /* ScrapStorageDTO.swift in Sources */,
 				9128B0362A237AFE00FB1252 /* ScrapFolderBottomSheetTableViewCell.swift in Sources */,
 				9166BE952A498B1700FFC026 /* Toast.swift in Sources */,
@@ -1281,7 +1262,7 @@
 				87DC47992A572ECF007823CB /* UserRepository.swift in Sources */,
 				87DC47882A556867007823CB /* VelogAlertViewController.swift in Sources */,
 				9134420529FFD965000E1ED1 /* SignInResponse.swift in Sources */,
-				913441F429FFD742000E1ED1 /* TagAPI.swift in Sources */,
+				913441F429FFD742000E1ED1 /* TagTargetType.swift in Sources */,
 				916E29AA2A3EE332006F5FE9 /* AutoSignInDTO.swift in Sources */,
 				91ED17932A00EA8F00158787 /* ErrorResponse.swift in Sources */,
 				910C02FB2A4D7BC5005D5797 /* PostSearchViewModel.swift in Sources */,
@@ -1289,23 +1270,22 @@
 				87DC47952A572BE5007823CB /* SplashUseCase.swift in Sources */,
 				7CB706D42A32064900083EC6 /* SearchTableViewCell.swift in Sources */,
 				8745835E2A42184B00954274 /* KeywordPostsVCFactory.swift in Sources */,
-				913441F029FFD6FB000E1ED1 /* NetworkService.swift in Sources */,
 				91487F3D29FD893D009CFECF /* ListHeadView.swift in Sources */,
 				8765EFEE2A29E62600EF6733 /* UIFont+Extension.swift in Sources */,
 				9128B04C2A23C7A100FB1252 /* ScrapStorageCollectionViewCell.swift in Sources */,
-				913442402A004BB1000E1ED1 /* DefaultNotificationRepository.swift in Sources */,
+				913442402A004BB1000E1ED1 /* DefaultNotificationService.swift in Sources */,
 				87DC479E2A59B1F6007823CB /* SignInUseCase.swift in Sources */,
 				91487F4329FD8AC9009CFECF /* ListViewModel.swift in Sources */,
 				9128B0432A23B50500FB1252 /* ReusableView.swift in Sources */,
-				91ED179A2A00F00800158787 /* BaseRepository.swift in Sources */,
+				91ED179A2A00F00800158787 /* BaseNetworkService.swift in Sources */,
 				917BA3412A03E8FE000409B7 /* StorageTableViewCell.swift in Sources */,
 				9128B0412A23B4E200FB1252 /* UITableView+Extension.swift in Sources */,
 				913441F929FFD776000E1ED1 /* SignUpRequest.swift in Sources */,
 				91487F1929FC549C009CFECF /* NoNetworkView.swift in Sources */,
 				917BA33F2A03E8A1000409B7 /* StorageTableView.swift in Sources */,
-				91ED178F2A00E5B100158787 /* NotificationRepository.swift in Sources */,
+				91ED178F2A00E5B100158787 /* NotificationService.swift in Sources */,
 				9134420729FFD9F9000E1ED1 /* SignUpResponse.swift in Sources */,
-				91ED178B2A00E59900158787 /* PostsRepository.swift in Sources */,
+				91ED178B2A00E59900158787 /* PostService.swift in Sources */,
 				91CC1D2C2A0A7D40006BF786 /* JoinGroupRequest.swift in Sources */,
 				91487F3B29FD892B009CFECF /* ListTableView.swift in Sources */,
 				916227D82A44569500118018 /* UITextField+Extension.swift in Sources */,
@@ -1319,7 +1299,7 @@
 				9134422529FFF7C8000E1ED1 /* SettingView.swift in Sources */,
 				9128B02E2A2376FB00FB1252 /* ScrapFolderBottomSheetViewController.swift in Sources */,
 				91E442872A10F385008CB516 /* RxBaseViewController.swift in Sources */,
-				9134423C2A004BA2000E1ED1 /* DefaultPostsRepository.swift in Sources */,
+				9134423C2A004BA2000E1ED1 /* DefaultPostService.swift in Sources */,
 				91487F2D29FD0812009CFECF /* SubscriberSearchViewController.swift in Sources */,
 				916E29B42A406952006F5FE9 /* AccessTokenDTO.swift in Sources */,
 				91487F1729FC5481009CFECF /* NetworkMonitor.swift in Sources */,
@@ -1339,7 +1319,7 @@
 				9128B0262A236D2800FB1252 /* ScrapPopUpView.swift in Sources */,
 				914D8DD92A02B22A00516B4C /* WebViewController.swift in Sources */,
 				91487F5929FDA269009CFECF /* PostsTableViewCell.swift in Sources */,
-				91ED17892A00E58D00158787 /* SubscriberRepository.swift in Sources */,
+				91ED17892A00E58D00158787 /* SubscriberService.swift in Sources */,
 				9128B0562A23CC7400FB1252 /* ScrapStorageViewController.swift in Sources */,
 				91487F3729FD88E7009CFECF /* ListViewController.swift in Sources */,
 				91A052132A28F9E6009F32D1 /* ScrapFolder.swift in Sources */,

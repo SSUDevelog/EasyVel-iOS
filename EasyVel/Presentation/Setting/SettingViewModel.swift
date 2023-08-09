@@ -13,6 +13,8 @@ import RxRelay
 final class SettingViewModel: BaseViewModel {
     
     let realm = RealmService()
+    let service: AuthService
+    
     private var userLocalVersion: String? {
         guard let dictionary = Bundle.main.infoDictionary,
               let version = dictionary["CFBundleShortVersionString"] as? String else { return nil }
@@ -33,7 +35,9 @@ final class SettingViewModel: BaseViewModel {
     
     // MARK: - init
     
-    override init() {
+    init(service: AuthService) {
+        self.service = service
+        
         super.init()
         makeOutput()
     }
@@ -88,7 +92,7 @@ extension SettingViewModel {
         body: SignOutRequest
     ) -> Observable<Bool> {
         return Observable.create { observer in
-            NetworkService.shared.signRepository.signOut() { [weak self] result in
+            self.service.signOut() { [weak self] result in
                 switch result {
                 case .success(_):
                     observer.onNext(true)

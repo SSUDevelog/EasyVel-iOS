@@ -12,6 +12,8 @@ import RxSwift
 
 final class SubscriberSearchViewModel: BaseViewModel {
     
+    private let service: SubscriberService
+    
     var subscriberSearchDelegate: SubscriberSearchProtocol?
     private var subscriberList: [SubscriberListResponse]?
     private var searchSubscriberName: String?
@@ -26,10 +28,14 @@ final class SubscriberSearchViewModel: BaseViewModel {
     let subscriberAddButtonDidTap = PublishRelay<String>()
 
     init(
-        subscriberList: [SubscriberListResponse]?
+        subscriberList: [SubscriberListResponse]?,
+        service: SubscriberService
     ) {
-        super.init()
+        self.service = service
         self.subscriberList = subscriberList
+        
+        super.init()
+        
         makeOutput()
     }
     
@@ -95,7 +101,7 @@ private extension SubscriberSearchViewModel {
         name: String
     ) -> Observable<SearchSubscriberResponse> {
         return Observable.create { observer in
-            NetworkService.shared.subscriberRepository.searchSubscriber(
+            self.service.searchSubscriber(
                 name: name
             ) { [weak self] result in
                 switch result {
@@ -123,7 +129,7 @@ private extension SubscriberSearchViewModel {
         name: String
     ) -> Observable<Bool> {
         return Observable.create { observer in
-            NetworkService.shared.subscriberRepository.addSubscriber(
+            self.service.addSubscriber(
                 fcmToken: "",
                 name: name
             ) { [weak self] result in

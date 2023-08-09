@@ -35,7 +35,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             viewModel: SplashViewModel(
                 useCase: DefaultSplashUseCase(
                     repository: DefaultUserRepository(
-                        service: DefaultSignRepository()
+                        service: DefaultAuthService.shared
                     )
                 )
             )

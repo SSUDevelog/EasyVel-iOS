@@ -15,7 +15,7 @@ final class KeywordPostsVCFactory {
         tag: String
     ) -> PostsViewController {
         let vc = PostsViewController(
-            viewModel: PostsViewModel(viewType: .keyword, tag: tag)
+            viewModel: PostsViewModel(viewType: .keyword, tag: tag, service: DefaultPostService.shared)
         )
         return vc
     }
@@ -28,7 +28,7 @@ final class KeywordPostsVCFactory {
         postDTOList: [PostDTO]
     ) -> PostsViewController {
         let vc = PostsViewController(
-            viewModel: PostsViewModel(viewType: .keyword, tag: tag),
+            viewModel: PostsViewModel(viewType: .keyword, tag: tag,service: DefaultPostService.shared),
             isNavigationBarHidden: isNavigationBarHidden,
             posts: postDTOList
         )

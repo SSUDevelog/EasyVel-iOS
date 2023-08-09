@@ -9,7 +9,7 @@ import Foundation
 
 import Moya
 
-enum SignAPI {
+enum SignTargetType {
     case appleSignIn(identityToken: String)
     case signIn(body: SignInRequest)
     case signOut
@@ -17,7 +17,7 @@ enum SignAPI {
     case refreshToken(token: String)
 }
 
-extension SignAPI: BaseTargetType {
+extension SignTargetType: BaseTargetType {
     var path: String {
         switch self {
         case .appleSignIn:

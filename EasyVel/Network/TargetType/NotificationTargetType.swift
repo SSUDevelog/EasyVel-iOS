@@ -9,12 +9,12 @@ import Foundation
 
 import Moya
 
-enum NotificationAPI {
+enum NotificationTargetType {
     case broadCast(body: BroadcastRequest)
     case joingroup(body: JoinGroupRequest)
 }
 
-extension NotificationAPI: BaseTargetType {
+extension NotificationTargetType: BaseTargetType {
     var path: String {
         switch self {
         case .broadCast:

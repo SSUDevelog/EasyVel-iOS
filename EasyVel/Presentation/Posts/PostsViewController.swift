@@ -117,7 +117,7 @@ extension PostsViewController: PostScrapButtonDidTapped {
         isScrapPostsList?[cellIndex] = isScrapped
         // MARK: - fix me, viewModel 주입 방법 수정
         
-        let viewModel = PostsViewModel(viewType: .keyword)
+        let viewModel = PostsViewModel(viewType: .keyword, service: DefaultPostService.shared)
         viewModel.cellScrapButtonDidTap.accept((storagePost, isScrapped))
     }
 }
@@ -178,7 +178,7 @@ extension PostsViewController: UITableViewDelegate {
             url: posts?[index].url
         )
         
-        let webViewModel = WebViewModel(url: selectedCell.url)
+        let webViewModel = WebViewModel(url: selectedCell.url,service: DefaultSubscriberService.shared)
         webViewModel.postWriter = posts?[index].name
         webViewModel.storagePost = storagePost
         

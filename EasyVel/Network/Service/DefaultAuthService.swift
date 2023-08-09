@@ -9,9 +9,12 @@ import Foundation
 
 import Moya
 
-final class DefaultSignRepository: BaseRepository, SignRepository {
+final class DefaultAuthService: BaseNetworkService, AuthService {
   
-    let provider = MoyaProvider<SignAPI>(plugins: [MoyaLoggerPlugin()])
+    static let shared = DefaultAuthService()
+    private override init() {}
+    
+    let provider = MoyaProvider<SignTargetType>(plugins: [MoyaLoggerPlugin()])
     
     func signIn(
         body: SignInRequest,

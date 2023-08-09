@@ -12,8 +12,12 @@ import RxSwift
 
 final class WebViewModel: BaseViewModel {
     
+    let service: SubscriberService
+    
     private var urlString: String = ""
     private let realm = RealmService()
+    
+    
     var postWriter: String?
     var storagePost: StoragePost?
     
@@ -31,11 +35,14 @@ final class WebViewModel: BaseViewModel {
     var cannotFoundWebViewURLOutput = PublishRelay<Bool>()
     
     init(
-        url: String
+        url: String,
+        service: SubscriberService
     ) {
+        self.service = service
+        self.urlString = url
+        
         super.init()
         
-        self.urlString = url
         makeOutput()
     }
     
@@ -118,7 +125,7 @@ extension WebViewModel {
     func addSubscriber(
         name: String
     ) {
-        NetworkService.shared.subscriberRepository.addSubscriber(
+        service.addSubscriber(
             fcmToken: TextLiterals.noneText,
             name: name
         ) { [weak self] result in
@@ -135,7 +142,7 @@ extension WebViewModel {
     func deleteSubscriber(
         name: String
     ) {
-        NetworkService.shared.subscriberRepository.deleteSubscriber(
+        service.deleteSubscriber(
             targetName: name
         ) { [weak self] result in
             switch result {
@@ -150,7 +157,7 @@ extension WebViewModel {
     
     func getSubscriberList() -> Observable<[SubscriberListResponse]> {
         return Observable.create { observer in
-            NetworkService.shared.subscriberRepository.getSubscriber() { [weak self] result in
+            self.service.getSubscriber() { [weak self] result in
                 switch result {
                 case .success(let response):
                     guard let list = response as? [SubscriberListResponse] else {

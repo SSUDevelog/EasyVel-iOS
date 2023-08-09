@@ -9,9 +9,12 @@ import Foundation
 
 import Moya
 
-final class DefaultNotificationRepository: BaseRepository, NotificationRepository {
+final class DefaultNotificationService: BaseNetworkService, NotificationService {
 
-    let provider = MoyaProvider<NotificationAPI>(plugins: [MoyaLoggerPlugin()])
+    static let shared = DefaultNotificationService()
+    private override init() {}
+    
+    let provider = MoyaProvider<NotificationTargetType>(plugins: [MoyaLoggerPlugin()])
     
     func broadCast(
         body: BroadcastRequest,

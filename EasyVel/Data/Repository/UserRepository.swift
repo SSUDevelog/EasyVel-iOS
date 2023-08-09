@@ -22,11 +22,11 @@ final class DefaultUserRepository: UserRepository {
     
     //MARK: - Properties
     
-    private let service: SignRepository
+    private let service: AuthService
     
     //MARK: - Life Cycle
 
-    init(service: SignRepository) {
+    init(service: AuthService) {
         self.service = service
     }
     

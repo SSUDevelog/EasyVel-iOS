@@ -9,7 +9,7 @@ import Foundation
 
 import Moya
 
-enum PostsAPI {
+enum PostTargetType {
     case getSubscriberPosts
     case getTagPosts
     case getOneTagPosts(tag: String)
@@ -17,7 +17,7 @@ enum PostsAPI {
     case trendsPosts
 }
 
-extension PostsAPI: BaseTargetType {
+extension PostTargetType: BaseTargetType {
     var path: String {
         switch self {
         case .getSubscriberPosts:

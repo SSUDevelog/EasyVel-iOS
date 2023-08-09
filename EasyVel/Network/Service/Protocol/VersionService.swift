@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol CheckVersionRepository {
+protocol VersionService {
     func getVersion(completion: @escaping (NetworkResult<Any>) -> Void)
 }

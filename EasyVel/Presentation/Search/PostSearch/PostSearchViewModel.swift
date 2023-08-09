@@ -109,7 +109,7 @@ final class PostSearchViewModel: BaseViewModel {
 extension PostSearchViewModel {
     func getOneTagPosts(tag: String) -> Observable<[PostDTO]> {
         return Observable.create { observer in
-            NetworkService.shared.postsRepository.getOneTagPosts(tag: tag) { [weak self] result in
+            DefaultPostService.shared.getOneTagPosts(tag: tag) { [weak self] result in
                 switch result {
                 case .success(let response):
                     guard let posts = response as? [PostDTO] else {

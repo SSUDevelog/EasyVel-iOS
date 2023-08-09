@@ -9,7 +9,7 @@ import Foundation
 
 import Moya
 
-class BaseRepository {
+class BaseNetworkService {
     
     func judgeStatus(by statusCode: Int, _ data: Data, responseData: ResponseData) -> NetworkResult<Any> {
         let decoder = JSONDecoder()

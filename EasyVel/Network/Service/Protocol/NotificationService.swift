@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol NotificationRepository {
+protocol NotificationService {
     func broadCast(body: BroadcastRequest, completion: @escaping (NetworkResult<Any>) -> Void)
 }

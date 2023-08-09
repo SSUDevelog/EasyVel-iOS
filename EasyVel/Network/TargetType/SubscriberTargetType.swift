@@ -9,7 +9,7 @@ import Foundation
 
 import Moya
 
-enum SubscriberAPI {
+enum SubscriberTargetType {
     case addSubscriber(fcmToken: String, name: String)
     case getSubscriber
     case searchSubscriber(name: String)
@@ -17,7 +17,7 @@ enum SubscriberAPI {
     case getSubscriberUserMain(name: String)
 }
 
-extension SubscriberAPI: BaseTargetType {
+extension SubscriberTargetType: BaseTargetType {
     var path: String {
         switch self {
         case .addSubscriber:
