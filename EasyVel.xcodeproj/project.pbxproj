@@ -23,13 +23,13 @@
 		877ED7CB2A4AD2EC00D80464 /* PostDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877ED7CA2A4AD2EC00D80464 /* PostDTO.swift */; };
 		87DC47882A556867007823CB /* VelogAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DC47872A556867007823CB /* VelogAlertViewController.swift */; };
 		87DC478A2A560857007823CB /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DC47892A560857007823CB /* UIApplication+Extension.swift */; };
-		87DC478E2A56F85E007823CB /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DC478D2A56F85E007823CB /* AuthManager.swift */; };
 		87DC47912A5713F4007823CB /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DC47902A5713F4007823CB /* SplashViewController.swift */; };
 		87DC47932A5713FB007823CB /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DC47922A5713FB007823CB /* SplashViewModel.swift */; };
 		87DC47952A572BE5007823CB /* SplashUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DC47942A572BE5007823CB /* SplashUseCase.swift */; };
 		87DC47992A572ECF007823CB /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DC47982A572ECF007823CB /* UserRepository.swift */; };
 		87DC479C2A573349007823CB /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DC479B2A573349007823CB /* AuthError.swift */; };
 		87DC479E2A59B1F6007823CB /* SignInUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DC479D2A59B1F6007823CB /* SignInUseCase.swift */; };
+		87F25EEB2A84385800E03C32 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F25EEA2A84385800E03C32 /* Config.swift */; };
 		910950522A4F155F00D04D41 /* CurrentSearchDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910950512A4F155F00D04D41 /* CurrentSearchDTO.swift */; };
 		910950582A50117F00D04D41 /* VersionCheckDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910950572A50117F00D04D41 /* VersionCheckDTO.swift */; };
 		9109505A2A5011DD00D04D41 /* VersionCheckAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910950592A5011DD00D04D41 /* VersionCheckAPI.swift */; };
@@ -57,7 +57,6 @@
 		9128B05C2A23DCEF00FB1252 /* StorageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9128B05B2A23DCEF00FB1252 /* StorageDTO.swift */; };
 		913441E729FFD622000E1ED1 /* MoyaLoggerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913441E629FFD622000E1ED1 /* MoyaLoggerPlugin.swift */; };
 		913441EA29FFD649000E1ED1 /* BaseTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913441E929FFD649000E1ED1 /* BaseTargetType.swift */; };
-		913441EC29FFD673000E1ED1 /* BaseURLConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913441EB29FFD673000E1ED1 /* BaseURLConstant.swift */; };
 		913441EE29FFD6E3000E1ED1 /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913441ED29FFD6E3000E1ED1 /* NetworkResult.swift */; };
 		913441F029FFD6FB000E1ED1 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913441EF29FFD6FB000E1ED1 /* NetworkService.swift */; };
 		913441F429FFD742000E1ED1 /* TagAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913441F329FFD742000E1ED1 /* TagAPI.swift */; };
@@ -132,7 +131,7 @@
 		916227D82A44569500118018 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916227D72A44569500118018 /* UITextField+Extension.swift */; };
 		916227DA2A454FD800118018 /* SubscriberListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916227D92A454FD800118018 /* SubscriberListResponse.swift */; };
 		916227DE2A46C6E900118018 /* SubscriberUserMainResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916227DD2A46C6E900118018 /* SubscriberUserMainResponse.swift */; };
-		9166BE952A498B1700FFC026 /* ShowToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9166BE942A498B1700FFC026 /* ShowToast.swift */; };
+		9166BE952A498B1700FFC026 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9166BE942A498B1700FFC026 /* Toast.swift */; };
 		9166BE982A49E8F600FFC026 /* ServerFailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9166BE972A49E8F600FFC026 /* ServerFailViewController.swift */; };
 		916E29A82A3EDA45006F5FE9 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916E29A72A3EDA45006F5FE9 /* SettingViewModel.swift */; };
 		916E29AA2A3EE332006F5FE9 /* AutoSignInDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916E29A92A3EE332006F5FE9 /* AutoSignInDTO.swift */; };
@@ -198,13 +197,15 @@
 		877ED7CA2A4AD2EC00D80464 /* PostDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDTO.swift; sourceTree = "<group>"; };
 		87DC47872A556867007823CB /* VelogAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VelogAlertViewController.swift; sourceTree = "<group>"; };
 		87DC47892A560857007823CB /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
-		87DC478D2A56F85E007823CB /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		87DC47902A5713F4007823CB /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		87DC47922A5713FB007823CB /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
 		87DC47942A572BE5007823CB /* SplashUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashUseCase.swift; sourceTree = "<group>"; };
 		87DC47982A572ECF007823CB /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		87DC479B2A573349007823CB /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
 		87DC479D2A59B1F6007823CB /* SignInUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInUseCase.swift; sourceTree = "<group>"; };
+		87F25EE82A84363000E03C32 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		87F25EE92A84363C00E03C32 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		87F25EEA2A84385800E03C32 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		910950512A4F155F00D04D41 /* CurrentSearchDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentSearchDTO.swift; sourceTree = "<group>"; };
 		910950572A50117F00D04D41 /* VersionCheckDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionCheckDTO.swift; sourceTree = "<group>"; };
 		910950592A5011DD00D04D41 /* VersionCheckAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionCheckAPI.swift; sourceTree = "<group>"; };
@@ -232,7 +233,6 @@
 		9128B05B2A23DCEF00FB1252 /* StorageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageDTO.swift; sourceTree = "<group>"; };
 		913441E629FFD622000E1ED1 /* MoyaLoggerPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaLoggerPlugin.swift; sourceTree = "<group>"; };
 		913441E929FFD649000E1ED1 /* BaseTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTargetType.swift; sourceTree = "<group>"; };
-		913441EB29FFD673000E1ED1 /* BaseURLConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseURLConstant.swift; sourceTree = "<group>"; };
 		913441ED29FFD6E3000E1ED1 /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
 		913441EF29FFD6FB000E1ED1 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		913441F329FFD742000E1ED1 /* TagAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagAPI.swift; sourceTree = "<group>"; };
@@ -302,7 +302,7 @@
 		916227D72A44569500118018 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		916227D92A454FD800118018 /* SubscriberListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriberListResponse.swift; sourceTree = "<group>"; };
 		916227DD2A46C6E900118018 /* SubscriberUserMainResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriberUserMainResponse.swift; sourceTree = "<group>"; };
-		9166BE942A498B1700FFC026 /* ShowToast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowToast.swift; sourceTree = "<group>"; };
+		9166BE942A498B1700FFC026 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		9166BE972A49E8F600FFC026 /* ServerFailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerFailViewController.swift; sourceTree = "<group>"; };
 		916E29A72A3EDA45006F5FE9 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		916E29A92A3EE332006F5FE9 /* AutoSignInDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSignInDTO.swift; sourceTree = "<group>"; };
@@ -424,29 +424,11 @@
 			path = PostsDTO;
 			sourceTree = "<group>";
 		};
-		87DC47862A556852007823CB /* VelogAlertViewController */ = {
-			isa = PBXGroup;
-			children = (
-				87DC47872A556867007823CB /* VelogAlertViewController.swift */,
-			);
-			path = VelogAlertViewController;
-			sourceTree = "<group>";
-		};
-		87DC478C2A56F854007823CB /* Manager */ = {
-			isa = PBXGroup;
-			children = (
-				87DC478D2A56F85E007823CB /* AuthManager.swift */,
-			);
-			path = Manager;
-			sourceTree = "<group>";
-		};
 		87DC478F2A5713BE007823CB /* Splash */ = {
 			isa = PBXGroup;
 			children = (
 				87DC47902A5713F4007823CB /* SplashViewController.swift */,
 				87DC47922A5713FB007823CB /* SplashViewModel.swift */,
-				87DC47942A572BE5007823CB /* SplashUseCase.swift */,
-				87DC47982A572ECF007823CB /* UserRepository.swift */,
 			);
 			path = Splash;
 			sourceTree = "<group>";
@@ -457,6 +439,109 @@
 				87DC479B2A573349007823CB /* AuthError.swift */,
 			);
 			path = Error;
+			sourceTree = "<group>";
+		};
+		87F25EDF2A8433D300E03C32 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				87F25EE42A8434EA00E03C32 /* UseCase */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		87F25EE02A8433D800E03C32 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				91A5C6452A41CBEA0078D8A9 /* Font */,
+				91487ECA29FC380C009CFECF /* Assets.xcassets */,
+				91487ECC29FC380C009CFECF /* LaunchScreen.storyboard */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		87F25EE32A84344A00E03C32 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				87F25EE52A84352000E03C32 /* Repository */,
+				917BA34F2A0508DF000409B7 /* Realm */,
+				913441F729FFD760000E1ED1 /* ServerDTO */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		87F25EE42A8434EA00E03C32 /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				87DC47942A572BE5007823CB /* SplashUseCase.swift */,
+				87DC479D2A59B1F6007823CB /* SignInUseCase.swift */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		87F25EE52A84352000E03C32 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				87DC47982A572ECF007823CB /* UserRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		87F25EE62A8435B300E03C32 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				91487EF029FC3AA3009CFECF /* Base */,
+				87F25EEF2A843A0A00E03C32 /* ViewController */,
+				87F25EEE2A8439F200E03C32 /* View */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		87F25EE72A84361A00E03C32 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				91487ECF29FC380C009CFECF /* Info.plist */,
+				87F25EE82A84363000E03C32 /* Debug.xcconfig */,
+				87F25EE92A84363C00E03C32 /* Release.xcconfig */,
+				87F25EEA2A84385800E03C32 /* Config.swift */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
+		87F25EED2A84394F00E03C32 /* Constant */ = {
+			isa = PBXGroup;
+			children = (
+				91487EFF29FC3BFE009CFECF /* TextLiterals.swift */,
+				91487EFD29FC3BD0009CFECF /* ImageLiterals.swift */,
+				91487F0129FC3C16009CFECF /* SizeLiterals.swift */,
+			);
+			path = Constant;
+			sourceTree = "<group>";
+		};
+		87F25EEE2A8439F200E03C32 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				91487F1829FC549C009CFECF /* NoNetworkView.swift */,
+				9166BE942A498B1700FFC026 /* Toast.swift */,
+				91CC1D4B2A0AD7C2006BF786 /* LoadingView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		87F25EEF2A843A0A00E03C32 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				9166BE972A49E8F600FFC026 /* ServerFailViewController.swift */,
+				87DC47872A556867007823CB /* VelogAlertViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		87F25EF02A843A6200E03C32 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				91CCEA5F2A0E9CC9001362AD /* HapticService.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		910950562A50116D00D04D41 /* VersionCheckDTO */ = {
@@ -495,14 +580,6 @@
 			path = ScrapPopUp;
 			sourceTree = "<group>";
 		};
-		9128B0442A23BBED00FB1252 /* ReusableView */ = {
-			isa = PBXGroup;
-			children = (
-				9128B0422A23B50500FB1252 /* ReusableView.swift */,
-			);
-			path = ReusableView;
-			sourceTree = "<group>";
-		};
 		9128B0482A23C58400FB1252 /* ScrapStorage */ = {
 			isa = PBXGroup;
 			children = (
@@ -526,8 +603,7 @@
 		913441E229FFD5BE000E1ED1 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				913441F729FFD760000E1ED1 /* ServerDTO */,
-				91ED179D2A00F73200158787 /* NetworkCommon */,
+				91ED179D2A00F73200158787 /* Foundation */,
 				913441E429FFD5FA000E1ED1 /* API */,
 				913441E329FFD5D1000E1ED1 /* Repository */,
 			);
@@ -561,26 +637,6 @@
 				913442352A00491C000E1ED1 /* NotificationAPI.swift */,
 			);
 			path = API;
-			sourceTree = "<group>";
-		};
-		913441E529FFD611000E1ED1 /* MoyaPluggin */ = {
-			isa = PBXGroup;
-			children = (
-				913441E629FFD622000E1ED1 /* MoyaLoggerPlugin.swift */,
-			);
-			path = MoyaPluggin;
-			sourceTree = "<group>";
-		};
-		913441E829FFD63A000E1ED1 /* Foundation */ = {
-			isa = PBXGroup;
-			children = (
-				913441E929FFD649000E1ED1 /* BaseTargetType.swift */,
-				913441EB29FFD673000E1ED1 /* BaseURLConstant.swift */,
-				913441ED29FFD6E3000E1ED1 /* NetworkResult.swift */,
-				913441EF29FFD6FB000E1ED1 /* NetworkService.swift */,
-				9134422C2A00418A000E1ED1 /* URLConstants.swift */,
-			);
-			path = Foundation;
 			sourceTree = "<group>";
 		};
 		913441F729FFD760000E1ED1 /* ServerDTO */ = {
@@ -673,17 +729,22 @@
 			isa = PBXGroup;
 			children = (
 				916E29B52A408CC3006F5FE9 /* EasyVel.entitlements */,
-				917BA34F2A0508DF000409B7 /* Realm */,
+				87F25EE72A84361A00E03C32 /* Configuration */,
+				916FDCFB2A17EA0700BB1E16 /* Application */,
+				87F25EE02A8433D800E03C32 /* Resource */,
+				91487EDF29FC3950009CFECF /* Util */,
 				913441E229FFD5BE000E1ED1 /* Network */,
-				91487EDE29FC3946009CFECF /* Feature */,
-				91487EDF29FC3950009CFECF /* Global */,
+				87F25EE32A84344A00E03C32 /* Data */,
+				87F25EDF2A8433D300E03C32 /* Domain */,
+				91487EDE29FC3946009CFECF /* Presentation */,
 			);
 			path = EasyVel;
 			sourceTree = "<group>";
 		};
-		91487EDE29FC3946009CFECF /* Feature */ = {
+		91487EDE29FC3946009CFECF /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				87F25EE62A8435B300E03C32 /* Common */,
 				87DC478F2A5713BE007823CB /* Splash */,
 				91BFF2EF2A25D54500F5D13E /* Sign */,
 				91487F4E29FD9902009CFECF /* TabBar */,
@@ -695,30 +756,19 @@
 				91487EE429FC39C3009CFECF /* SubscriberList */,
 				91487EE629FC39E8009CFECF /* Setting */,
 			);
-			path = Feature;
+			path = Presentation;
 			sourceTree = "<group>";
 		};
-		91487EDF29FC3950009CFECF /* Global */ = {
+		91487EDF29FC3950009CFECF /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				87F25EF02A843A6200E03C32 /* Service */,
+				91487EF929FC3B28009CFECF /* Extension */,
+				87F25EED2A84394F00E03C32 /* Constant */,
 				87DC479A2A573342007823CB /* Error */,
-				91487EF029FC3AA3009CFECF /* Base */,
 				917BA3842A07C2B7000409B7 /* Protocol */,
-				916FDCFB2A17EA0700BB1E16 /* App */,
-				916FDCFC2A17EA2A00BB1E16 /* Config */,
-				91487EE129FC399E009CFECF /* Resource */,
-				916FDCFD2A17EA7500BB1E16 /* Util */,
 			);
-			path = Global;
-			sourceTree = "<group>";
-		};
-		91487EE129FC399E009CFECF /* Resource */ = {
-			isa = PBXGroup;
-			children = (
-				91487ECA29FC380C009CFECF /* Assets.xcassets */,
-				91487ECC29FC380C009CFECF /* LaunchScreen.storyboard */,
-			);
-			path = Resource;
+			path = Util;
 			sourceTree = "<group>";
 		};
 		91487EE429FC39C3009CFECF /* SubscriberList */ = {
@@ -769,6 +819,7 @@
 		91487EF929FC3B28009CFECF /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				9128B0422A23B50500FB1252 /* ReusableView.swift */,
 				91487EFA29FC3B6A009CFECF /* UIColor+Extension.swift */,
 				91487F0F29FC4736009CFECF /* UIStackView+Extension.swift */,
 				91487F1129FC47CE009CFECF /* UIView+Extension.swift */,
@@ -781,25 +832,6 @@
 				87DC47892A560857007823CB /* UIApplication+Extension.swift */,
 			);
 			path = Extension;
-			sourceTree = "<group>";
-		};
-		91487EFC29FC3BBC009CFECF /* Literal */ = {
-			isa = PBXGroup;
-			children = (
-				91487EFD29FC3BD0009CFECF /* ImageLiterals.swift */,
-				91487EFF29FC3BFE009CFECF /* TextLiterals.swift */,
-				91487F0129FC3C16009CFECF /* SizeLiterals.swift */,
-			);
-			path = Literal;
-			sourceTree = "<group>";
-		};
-		91487F1529FC5463009CFECF /* NetworkMonitor */ = {
-			isa = PBXGroup;
-			children = (
-				91487F1629FC5481009CFECF /* NetworkMonitor.swift */,
-				91487F1829FC549C009CFECF /* NoNetworkView.swift */,
-			);
-			path = NetworkMonitor;
 			sourceTree = "<group>";
 		};
 		91487F2B29FD07F7009CFECF /* SubscriberSearch */ = {
@@ -879,54 +911,13 @@
 			path = WebView;
 			sourceTree = "<group>";
 		};
-		9166BE932A498A9C00FFC026 /* ShowToast */ = {
-			isa = PBXGroup;
-			children = (
-				9166BE942A498B1700FFC026 /* ShowToast.swift */,
-			);
-			path = ShowToast;
-			sourceTree = "<group>";
-		};
-		9166BE962A49E8D800FFC026 /* ServerFailView */ = {
-			isa = PBXGroup;
-			children = (
-				9166BE972A49E8F600FFC026 /* ServerFailViewController.swift */,
-			);
-			path = ServerFailView;
-			sourceTree = "<group>";
-		};
-		916FDCFB2A17EA0700BB1E16 /* App */ = {
+		916FDCFB2A17EA0700BB1E16 /* Application */ = {
 			isa = PBXGroup;
 			children = (
 				91487EC129FC380A009CFECF /* AppDelegate.swift */,
 				91487EC329FC380A009CFECF /* SceneDelegate.swift */,
 			);
-			path = App;
-			sourceTree = "<group>";
-		};
-		916FDCFC2A17EA2A00BB1E16 /* Config */ = {
-			isa = PBXGroup;
-			children = (
-				91487ECF29FC380C009CFECF /* Info.plist */,
-			);
-			path = Config;
-			sourceTree = "<group>";
-		};
-		916FDCFD2A17EA7500BB1E16 /* Util */ = {
-			isa = PBXGroup;
-			children = (
-				87DC478C2A56F854007823CB /* Manager */,
-				87DC47862A556852007823CB /* VelogAlertViewController */,
-				9166BE962A49E8D800FFC026 /* ServerFailView */,
-				9166BE932A498A9C00FFC026 /* ShowToast */,
-				91A5C6452A41CBEA0078D8A9 /* Font */,
-				9128B0442A23BBED00FB1252 /* ReusableView */,
-				91CC1D4A2A0AD7B7006BF786 /* Loading */,
-				91487EFC29FC3BBC009CFECF /* Literal */,
-				91487EF929FC3B28009CFECF /* Extension */,
-				91CCEA5E2A0E9CBC001362AD /* Haptic */,
-			);
-			path = Util;
+			path = Application;
 			sourceTree = "<group>";
 		};
 		916FDCFE2A17EBC700BB1E16 /* RealmDTO */ = {
@@ -1027,7 +1018,6 @@
 				916E29B02A3EEE60006F5FE9 /* SignInView.swift */,
 				91487EC529FC380A009CFECF /* SignInViewController.swift */,
 				916E29AD2A3EE90F006F5FE9 /* SignInViewModel.swift */,
-				87DC479D2A59B1F6007823CB /* SignInUseCase.swift */,
 			);
 			path = Sign;
 			sourceTree = "<group>";
@@ -1038,22 +1028,6 @@
 				917BA3422A0503D5000409B7 /* StoragePost.swift */,
 			);
 			path = StorageDTO;
-			sourceTree = "<group>";
-		};
-		91CC1D4A2A0AD7B7006BF786 /* Loading */ = {
-			isa = PBXGroup;
-			children = (
-				91CC1D4B2A0AD7C2006BF786 /* LoadingView.swift */,
-			);
-			path = Loading;
-			sourceTree = "<group>";
-		};
-		91CCEA5E2A0E9CBC001362AD /* Haptic */ = {
-			isa = PBXGroup;
-			children = (
-				91CCEA5F2A0E9CC9001362AD /* HapticService.swift */,
-			);
-			path = Haptic;
 			sourceTree = "<group>";
 		};
 		91E442A22A110190008CB516 /* Frameworks */ = {
@@ -1110,14 +1084,17 @@
 			path = ResponseData;
 			sourceTree = "<group>";
 		};
-		91ED179D2A00F73200158787 /* NetworkCommon */ = {
+		91ED179D2A00F73200158787 /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
-				913441E529FFD611000E1ED1 /* MoyaPluggin */,
-				91487F1529FC5463009CFECF /* NetworkMonitor */,
-				913441E829FFD63A000E1ED1 /* Foundation */,
+				913441E629FFD622000E1ED1 /* MoyaLoggerPlugin.swift */,
+				91487F1629FC5481009CFECF /* NetworkMonitor.swift */,
+				913441E929FFD649000E1ED1 /* BaseTargetType.swift */,
+				913441ED29FFD6E3000E1ED1 /* NetworkResult.swift */,
+				913441EF29FFD6FB000E1ED1 /* NetworkService.swift */,
+				9134422C2A00418A000E1ED1 /* URLConstants.swift */,
 			);
-			path = NetworkCommon;
+			path = Foundation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1281,7 +1258,7 @@
 				91ED17872A00E57700158787 /* TagRepository.swift in Sources */,
 				9128B0542A23CADD00FB1252 /* ScrapStorageDTO.swift in Sources */,
 				9128B0362A237AFE00FB1252 /* ScrapFolderBottomSheetTableViewCell.swift in Sources */,
-				9166BE952A498B1700FFC026 /* ShowToast.swift in Sources */,
+				9166BE952A498B1700FFC026 /* Toast.swift in Sources */,
 				9128B02A2A23757200FB1252 /* ScrapFolderBottomSheetView.swift in Sources */,
 				917BA3432A0503D5000409B7 /* StoragePost.swift in Sources */,
 				91487F5D29FDA2C0009CFECF /* PostsViewController.swift in Sources */,
@@ -1326,19 +1303,18 @@
 				913441F929FFD776000E1ED1 /* SignUpRequest.swift in Sources */,
 				91487F1929FC549C009CFECF /* NoNetworkView.swift in Sources */,
 				917BA33F2A03E8A1000409B7 /* StorageTableView.swift in Sources */,
-				913441EC29FFD673000E1ED1 /* BaseURLConstant.swift in Sources */,
 				91ED178F2A00E5B100158787 /* NotificationRepository.swift in Sources */,
 				9134420729FFD9F9000E1ED1 /* SignUpResponse.swift in Sources */,
 				91ED178B2A00E59900158787 /* PostsRepository.swift in Sources */,
 				91CC1D2C2A0A7D40006BF786 /* JoinGroupRequest.swift in Sources */,
 				91487F3B29FD892B009CFECF /* ListTableView.swift in Sources */,
-				87DC478E2A56F85E007823CB /* AuthManager.swift in Sources */,
 				916227D82A44569500118018 /* UITextField+Extension.swift in Sources */,
 				917BA3882A07C541000409B7 /* SubscriberSearchProtocol.swift in Sources */,
 				913441EE29FFD6E3000E1ED1 /* NetworkResult.swift in Sources */,
 				87DC47912A5713F4007823CB /* SplashViewController.swift in Sources */,
 				916E29AE2A3EE90F006F5FE9 /* SignInViewModel.swift in Sources */,
 				9158618D2A2E04BF00461F9A /* ScrapPostAddInFolderProtocol.swift in Sources */,
+				87F25EEB2A84385800E03C32 /* Config.swift in Sources */,
 				9128B05C2A23DCEF00FB1252 /* StorageDTO.swift in Sources */,
 				9134422529FFF7C8000E1ED1 /* SettingView.swift in Sources */,
 				9128B02E2A2376FB00FB1252 /* ScrapFolderBottomSheetViewController.swift in Sources */,
@@ -1504,6 +1480,7 @@
 		};
 		91487ED329FC380C009CFECF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 87F25EE82A84363000E03C32 /* Debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1513,7 +1490,7 @@
 				DEVELOPMENT_TEAM = T6DNHAHXG9;
 				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = EasyVel/Global/Config/Info.plist;
+				INFOPLIST_FILE = EasyVel/Configuration/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -1537,6 +1514,7 @@
 		};
 		91487ED429FC380C009CFECF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 87F25EE92A84363C00E03C32 /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1545,7 +1523,7 @@
 				CURRENT_PROJECT_VERSION = 2023072602;
 				DEVELOPMENT_TEAM = T6DNHAHXG9;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = EasyVel/Global/Config/Info.plist;
+				INFOPLIST_FILE = EasyVel/Configuration/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
