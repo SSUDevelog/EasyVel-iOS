@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ErrorResponse: Codable {
+struct ErrorDTO: Codable {
     let timeStamp: String?
     let status: Int?
     let error: String?

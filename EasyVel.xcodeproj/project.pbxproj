@@ -176,7 +176,7 @@
 		91ED178D2A00E5A600158787 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ED178C2A00E5A600158787 /* AuthService.swift */; };
 		91ED178F2A00E5B100158787 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ED178E2A00E5B100158787 /* NotificationService.swift */; };
 		91ED17912A00E92800158787 /* ResponseData_Deprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ED17902A00E92800158787 /* ResponseData_Deprecated.swift */; };
-		91ED17932A00EA8F00158787 /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ED17922A00EA8F00158787 /* ErrorResponse.swift */; };
+		91ED17932A00EA8F00158787 /* ErrorDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ED17922A00EA8F00158787 /* ErrorDTO.swift */; };
 		91ED179A2A00F00800158787 /* BaseNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ED17992A00F00800158787 /* BaseNetworkService.swift */; };
 /* End PBXBuildFile section */
 
@@ -347,7 +347,7 @@
 		91ED178C2A00E5A600158787 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		91ED178E2A00E5B100158787 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		91ED17902A00E92800158787 /* ResponseData_Deprecated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseData_Deprecated.swift; sourceTree = "<group>"; };
-		91ED17922A00EA8F00158787 /* ErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
+		91ED17922A00EA8F00158787 /* ErrorDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorDTO.swift; sourceTree = "<group>"; };
 		91ED17992A00F00800158787 /* BaseNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNetworkService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -408,20 +408,14 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		877ED7C42A4ACBEB00D80464 /* TrendDTO */ = {
-			isa = PBXGroup;
-			children = (
-				877ED7C52A4ACC0900D80464 /* TrendPostsDTO.swift */,
-			);
-			path = TrendDTO;
-			sourceTree = "<group>";
-		};
-		877ED7C72A4AD29500D80464 /* PostsDTO */ = {
+		877ED7C72A4AD29500D80464 /* Post */ = {
 			isa = PBXGroup;
 			children = (
 				877ED7CA2A4AD2EC00D80464 /* PostDTO.swift */,
+				877ED7C52A4ACC0900D80464 /* TrendPostsDTO.swift */,
+				9134421929FFE692000E1ED1 /* GetTagPostResponse.swift */,
 			);
-			path = PostsDTO;
+			path = Post;
 			sourceTree = "<group>";
 		};
 		87DC478F2A5713BE007823CB /* Splash */ = {
@@ -462,9 +456,10 @@
 		87F25EE32A84344A00E03C32 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				87F25EF32A84579100E03C32 /* Model */,
 				87F25EE52A84352000E03C32 /* Repository */,
-				917BA34F2A0508DF000409B7 /* Realm */,
-				913441F729FFD760000E1ED1 /* ServerDTO */,
+				913441F729FFD760000E1ED1 /* NetworkDTO */,
+				916FDCFE2A17EBC700BB1E16 /* RealmDTO */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -544,12 +539,27 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
-		910950562A50116D00D04D41 /* VersionCheckDTO */ = {
+		87F25EF32A84579100E03C32 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				917BA3422A0503D5000409B7 /* StoragePost.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		87F25EF42A8457EF00E03C32 /* Tag */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Tag;
+			sourceTree = "<group>";
+		};
+		910950562A50116D00D04D41 /* Version */ = {
 			isa = PBXGroup;
 			children = (
 				910950572A50117F00D04D41 /* VersionCheckDTO.swift */,
 			);
-			path = VersionCheckDTO;
+			path = Version;
 			sourceTree = "<group>";
 		};
 		9128B0242A236D1600FB1252 /* ScrapFolderBottomSheet */ = {
@@ -613,15 +623,14 @@
 		913441E329FFD5D1000E1ED1 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				91ED17992A00F00800158787 /* BaseNetworkService.swift */,
 				91ED17902A00E92800158787 /* ResponseData_Deprecated.swift */,
 				91ED17852A00E55600158787 /* Protocol */,
 				9109505D2A50140C00D04D41 /* DefaultVersionService.swift */,
+				9134423D2A004BA8000E1ED1 /* DefaultAuthService.swift */,
+				9134423F2A004BB1000E1ED1 /* DefaultNotificationService.swift */,
 				913442392A004B9B000E1ED1 /* DefaultSubscriberService.swift */,
 				913442372A004B91000E1ED1 /* DefaultTagService.swift */,
 				9134423B2A004BA2000E1ED1 /* DefaultPostService.swift */,
-				9134423D2A004BA8000E1ED1 /* DefaultAuthService.swift */,
-				9134423F2A004BB1000E1ED1 /* DefaultNotificationService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -639,24 +648,22 @@
 			path = TargetType;
 			sourceTree = "<group>";
 		};
-		913441F729FFD760000E1ED1 /* ServerDTO */ = {
+		913441F729FFD760000E1ED1 /* NetworkDTO */ = {
 			isa = PBXGroup;
 			children = (
-				910950562A50116D00D04D41 /* VersionCheckDTO */,
-				877ED7C72A4AD29500D80464 /* PostsDTO */,
-				877ED7C42A4ACBEB00D80464 /* TrendDTO */,
-				91BFF2F62A27770300F5D13E /* StorageDTO */,
-				91ED17942A00EAE200158787 /* ErrorDTO */,
-				9134421B29FFEAA4000E1ED1 /* NotificationDTO */,
-				9134421629FFDCCF000E1ED1 /* TagDTO */,
-				9134420D29FFDADB000E1ED1 /* SubscribeDTO */,
-				9134420C29FFDAA6000E1ED1 /* SignDTO */,
+				910950562A50116D00D04D41 /* Version */,
+				9134420C29FFDAA6000E1ED1 /* Auth */,
+				9134421B29FFEAA4000E1ED1 /* Notification */,
+				9134420D29FFDADB000E1ED1 /* Subscriber */,
+				87F25EF42A8457EF00E03C32 /* Tag */,
+				877ED7C72A4AD29500D80464 /* Post */,
 				87F25EF12A844EE100E03C32 /* VoidDTO.swift */,
+				91ED17922A00EA8F00158787 /* ErrorDTO.swift */,
 			);
-			path = ServerDTO;
+			path = NetworkDTO;
 			sourceTree = "<group>";
 		};
-		9134420C29FFDAA6000E1ED1 /* SignDTO */ = {
+		9134420C29FFDAA6000E1ED1 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
 				913441FA29FFD8AC000E1ED1 /* SignInRequest.swift */,
@@ -666,10 +673,10 @@
 				9134420829FFDA32000E1ED1 /* SignOutRequest.swift */,
 				9134420A29FFDA71000E1ED1 /* SignOutResponse.swift */,
 			);
-			path = SignDTO;
+			path = Auth;
 			sourceTree = "<group>";
 		};
-		9134420D29FFDADB000E1ED1 /* SubscribeDTO */ = {
+		9134420D29FFDADB000E1ED1 /* Subscriber */ = {
 			isa = PBXGroup;
 			children = (
 				9134421029FFDB5D000E1ED1 /* SearchSubscriberResponse.swift */,
@@ -678,25 +685,17 @@
 				916227D92A454FD800118018 /* SubscriberListResponse.swift */,
 				916227DD2A46C6E900118018 /* SubscriberUserMainResponse.swift */,
 			);
-			path = SubscribeDTO;
+			path = Subscriber;
 			sourceTree = "<group>";
 		};
-		9134421629FFDCCF000E1ED1 /* TagDTO */ = {
-			isa = PBXGroup;
-			children = (
-				9134421929FFE692000E1ED1 /* GetTagPostResponse.swift */,
-			);
-			path = TagDTO;
-			sourceTree = "<group>";
-		};
-		9134421B29FFEAA4000E1ED1 /* NotificationDTO */ = {
+		9134421B29FFEAA4000E1ED1 /* Notification */ = {
 			isa = PBXGroup;
 			children = (
 				9134421C29FFEAC9000E1ED1 /* BroadcastResponse.swift */,
 				9134421E29FFEAF7000E1ED1 /* BroadcastRequest.swift */,
 				91CC1D2B2A0A7D40006BF786 /* JoinGroupRequest.swift */,
 			);
-			path = NotificationDTO;
+			path = Notification;
 			sourceTree = "<group>";
 		};
 		9134422029FFEF74000E1ED1 /* View */ = {
@@ -734,6 +733,7 @@
 				916FDCFB2A17EA0700BB1E16 /* Application */,
 				87F25EE02A8433D800E03C32 /* Resource */,
 				91487EDF29FC3950009CFECF /* Util */,
+				917BA34F2A0508DF000409B7 /* Realm */,
 				913441E229FFD5BE000E1ED1 /* Network */,
 				87F25EE32A84344A00E03C32 /* Data */,
 				87F25EDF2A8433D300E03C32 /* Domain */,
@@ -960,7 +960,6 @@
 			isa = PBXGroup;
 			children = (
 				917BA3542A0509D8000409B7 /* RealmService.swift */,
-				916FDCFE2A17EBC700BB1E16 /* RealmDTO */,
 			);
 			path = Realm;
 			sourceTree = "<group>";
@@ -1023,14 +1022,6 @@
 			path = Sign;
 			sourceTree = "<group>";
 		};
-		91BFF2F62A27770300F5D13E /* StorageDTO */ = {
-			isa = PBXGroup;
-			children = (
-				917BA3422A0503D5000409B7 /* StoragePost.swift */,
-			);
-			path = StorageDTO;
-			sourceTree = "<group>";
-		};
 		91E442A22A110190008CB516 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1061,14 +1052,6 @@
 			path = Protocol;
 			sourceTree = "<group>";
 		};
-		91ED17942A00EAE200158787 /* ErrorDTO */ = {
-			isa = PBXGroup;
-			children = (
-				91ED17922A00EA8F00158787 /* ErrorResponse.swift */,
-			);
-			path = ErrorDTO;
-			sourceTree = "<group>";
-		};
 		91ED179D2A00F73200158787 /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
@@ -1077,6 +1060,7 @@
 				913441E929FFD649000E1ED1 /* BaseTargetType.swift */,
 				913441ED29FFD6E3000E1ED1 /* NetworkResult.swift */,
 				9134422C2A00418A000E1ED1 /* URLConstants.swift */,
+				91ED17992A00F00800158787 /* BaseNetworkService.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -1267,7 +1251,7 @@
 				9134420529FFD965000E1ED1 /* SignInResponse.swift in Sources */,
 				913441F429FFD742000E1ED1 /* TagTargetType.swift in Sources */,
 				916E29AA2A3EE332006F5FE9 /* AutoSignInDTO.swift in Sources */,
-				91ED17932A00EA8F00158787 /* ErrorResponse.swift in Sources */,
+				91ED17932A00EA8F00158787 /* ErrorDTO.swift in Sources */,
 				910C02FB2A4D7BC5005D5797 /* PostSearchViewModel.swift in Sources */,
 				91487F5229FDA143009CFECF /* SettingTableViewCell.swift in Sources */,
 				87DC47952A572BE5007823CB /* SplashUseCase.swift in Sources */,

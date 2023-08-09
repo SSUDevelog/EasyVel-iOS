@@ -23,7 +23,7 @@ class BaseNetworkService {
         case 200..<300:
             return .success(decodedData as Any)
         case 400..<500:
-            guard let decodedData = try? decoder.decode(ErrorResponse.self, from: data) else {
+            guard let decodedData = try? decoder.decode(ErrorDTO.self, from: data) else {
                 return .pathErr
             }
             return .requestErr(decodedData)
