@@ -558,7 +558,7 @@
 			isa = PBXGroup;
 			children = (
 				917BA34F2A0508DF000409B7 /* Realm */,
-				913441E229FFD5BE000E1ED1 /* Network */,
+				913441E229FFD5BE000E1ED1 /* Moya */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -619,14 +619,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		913441E229FFD5BE000E1ED1 /* Network */ = {
+		913441E229FFD5BE000E1ED1 /* Moya */ = {
 			isa = PBXGroup;
 			children = (
 				91ED179D2A00F73200158787 /* Foundation */,
 				913441E429FFD5FA000E1ED1 /* TargetType */,
 				913441E329FFD5D1000E1ED1 /* Service */,
 			);
-			path = Network;
+			path = Moya;
 			sourceTree = "<group>";
 		};
 		913441E329FFD5D1000E1ED1 /* Service */ = {
