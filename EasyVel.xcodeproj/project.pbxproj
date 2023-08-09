@@ -74,7 +74,7 @@
 		9134421F29FFEAF7000E1ED1 /* BroadcastRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9134421E29FFEAF7000E1ED1 /* BroadcastRequest.swift */; };
 		9134422329FFF59D000E1ED1 /* SettingTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9134422229FFF59D000E1ED1 /* SettingTableView.swift */; };
 		9134422529FFF7C8000E1ED1 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9134422429FFF7C8000E1ED1 /* SettingView.swift */; };
-		9134422729FFF9BC000E1ED1 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9134422629FFF9BC000E1ED1 /* ListView.swift */; };
+		9134422729FFF9BC000E1ED1 /* SubscriberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9134422629FFF9BC000E1ED1 /* SubscriberView.swift */; };
 		913442292A0001EC000E1ED1 /* PostsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913442282A0001EC000E1ED1 /* PostsView.swift */; };
 		9134422D2A00418A000E1ED1 /* URLConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9134422C2A00418A000E1ED1 /* URLConstants.swift */; };
 		913442302A004352000E1ED1 /* SubscriberTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9134422F2A004352000E1ED1 /* SubscriberTargetType.swift */; };
@@ -110,11 +110,11 @@
 		91487F2229FC5F2A009CFECF /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91487F2129FC5F2A009CFECF /* TabBarController.swift */; };
 		91487F2D29FD0812009CFECF /* SubscriberSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91487F2C29FD0812009CFECF /* SubscriberSearchViewController.swift */; };
 		91487F2F29FD1A67009CFECF /* SubscriberSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91487F2E29FD1A66009CFECF /* SubscriberSearchView.swift */; };
-		91487F3729FD88E7009CFECF /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91487F3629FD88E7009CFECF /* ListViewController.swift */; };
-		91487F3929FD8915009CFECF /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91487F3829FD8915009CFECF /* ListTableViewCell.swift */; };
-		91487F3B29FD892B009CFECF /* ListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91487F3A29FD892B009CFECF /* ListTableView.swift */; };
-		91487F3D29FD893D009CFECF /* ListHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91487F3C29FD893D009CFECF /* ListHeadView.swift */; };
-		91487F4329FD8AC9009CFECF /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91487F4229FD8AC9009CFECF /* ListViewModel.swift */; };
+		91487F3729FD88E7009CFECF /* SubscriberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91487F3629FD88E7009CFECF /* SubscriberViewController.swift */; };
+		91487F3929FD8915009CFECF /* SubscriberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91487F3829FD8915009CFECF /* SubscriberTableViewCell.swift */; };
+		91487F3B29FD892B009CFECF /* SubscriberTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91487F3A29FD892B009CFECF /* SubscriberTableView.swift */; };
+		91487F3D29FD893D009CFECF /* SubscriberHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91487F3C29FD893D009CFECF /* SubscriberHeadView.swift */; };
+		91487F4329FD8AC9009CFECF /* SubscriberViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91487F4229FD8AC9009CFECF /* SubscriberViewModel.swift */; };
 		91487F4D29FD9858009CFECF /* TagSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91487F4C29FD9858009CFECF /* TagSearchViewController.swift */; };
 		91487F5229FDA143009CFECF /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91487F5129FDA143009CFECF /* SettingTableViewCell.swift */; };
 		91487F5929FDA269009CFECF /* PostsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91487F5829FDA269009CFECF /* PostsTableViewCell.swift */; };
@@ -250,7 +250,7 @@
 		9134421E29FFEAF7000E1ED1 /* BroadcastRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastRequest.swift; sourceTree = "<group>"; };
 		9134422229FFF59D000E1ED1 /* SettingTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableView.swift; sourceTree = "<group>"; };
 		9134422429FFF7C8000E1ED1 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
-		9134422629FFF9BC000E1ED1 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
+		9134422629FFF9BC000E1ED1 /* SubscriberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriberView.swift; sourceTree = "<group>"; };
 		913442282A0001EC000E1ED1 /* PostsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsView.swift; sourceTree = "<group>"; };
 		9134422C2A00418A000E1ED1 /* URLConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLConstants.swift; sourceTree = "<group>"; };
 		9134422F2A004352000E1ED1 /* SubscriberTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriberTargetType.swift; sourceTree = "<group>"; };
@@ -285,11 +285,11 @@
 		91487F2129FC5F2A009CFECF /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		91487F2C29FD0812009CFECF /* SubscriberSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriberSearchViewController.swift; sourceTree = "<group>"; };
 		91487F2E29FD1A66009CFECF /* SubscriberSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriberSearchView.swift; sourceTree = "<group>"; };
-		91487F3629FD88E7009CFECF /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
-		91487F3829FD8915009CFECF /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
-		91487F3A29FD892B009CFECF /* ListTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableView.swift; sourceTree = "<group>"; };
-		91487F3C29FD893D009CFECF /* ListHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListHeadView.swift; sourceTree = "<group>"; };
-		91487F4229FD8AC9009CFECF /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
+		91487F3629FD88E7009CFECF /* SubscriberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriberViewController.swift; sourceTree = "<group>"; };
+		91487F3829FD8915009CFECF /* SubscriberTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriberTableViewCell.swift; sourceTree = "<group>"; };
+		91487F3A29FD892B009CFECF /* SubscriberTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriberTableView.swift; sourceTree = "<group>"; };
+		91487F3C29FD893D009CFECF /* SubscriberHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriberHeadView.swift; sourceTree = "<group>"; };
+		91487F4229FD8AC9009CFECF /* SubscriberViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriberViewModel.swift; sourceTree = "<group>"; };
 		91487F4C29FD9858009CFECF /* TagSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagSearchViewController.swift; sourceTree = "<group>"; };
 		91487F5129FDA143009CFECF /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
 		91487F5829FDA269009CFECF /* PostsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsTableViewCell.swift; sourceTree = "<group>"; };
@@ -762,7 +762,7 @@
 				91BFF2EE2A25D53200F5D13E /* Scrap */,
 				91487F4829FD9663009CFECF /* Search */,
 				91487EE529FC39D8009CFECF /* Posts */,
-				91487EE429FC39C3009CFECF /* SubscriberList */,
+				91487EE429FC39C3009CFECF /* Subscriber */,
 				91487EE629FC39E8009CFECF /* Setting */,
 			);
 			path = Presentation;
@@ -780,14 +780,14 @@
 			path = Util;
 			sourceTree = "<group>";
 		};
-		91487EE429FC39C3009CFECF /* SubscriberList */ = {
+		91487EE429FC39C3009CFECF /* Subscriber */ = {
 			isa = PBXGroup;
 			children = (
 				91487F3E29FD895D009CFECF /* View */,
-				91487F3629FD88E7009CFECF /* ListViewController.swift */,
-				91487F4229FD8AC9009CFECF /* ListViewModel.swift */,
+				91487F3629FD88E7009CFECF /* SubscriberViewController.swift */,
+				91487F4229FD8AC9009CFECF /* SubscriberViewModel.swift */,
 			);
-			path = SubscriberList;
+			path = Subscriber;
 			sourceTree = "<group>";
 		};
 		91487EE529FC39D8009CFECF /* Posts */ = {
@@ -856,10 +856,10 @@
 		91487F3E29FD895D009CFECF /* View */ = {
 			isa = PBXGroup;
 			children = (
-				9134422629FFF9BC000E1ED1 /* ListView.swift */,
-				91487F3C29FD893D009CFECF /* ListHeadView.swift */,
-				91487F3A29FD892B009CFECF /* ListTableView.swift */,
-				91487F3829FD8915009CFECF /* ListTableViewCell.swift */,
+				9134422629FFF9BC000E1ED1 /* SubscriberView.swift */,
+				91487F3C29FD893D009CFECF /* SubscriberHeadView.swift */,
+				91487F3A29FD892B009CFECF /* SubscriberTableView.swift */,
+				91487F3829FD8915009CFECF /* SubscriberTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1247,7 +1247,7 @@
 				91487EC429FC380A009CFECF /* SceneDelegate.swift in Sources */,
 				91E4428B2A10F3C7008CB516 /* BaseViewModel.swift in Sources */,
 				8765EFF42A29ECDE00EF6733 /* String+Extension.swift in Sources */,
-				9134422729FFF9BC000E1ED1 /* ListView.swift in Sources */,
+				9134422729FFF9BC000E1ED1 /* SubscriberView.swift in Sources */,
 				91487F5B29FDA287009CFECF /* PostsTableView.swift in Sources */,
 				91CCEA3C2A0D017A001362AD /* PostTagUIButton.swift in Sources */,
 				91487F2229FC5F2A009CFECF /* TabBarController.swift in Sources */,
@@ -1265,12 +1265,12 @@
 				87DC47952A572BE5007823CB /* SplashUseCase.swift in Sources */,
 				7CB706D42A32064900083EC6 /* SearchTableViewCell.swift in Sources */,
 				8745835E2A42184B00954274 /* KeywordPostsVCFactory.swift in Sources */,
-				91487F3D29FD893D009CFECF /* ListHeadView.swift in Sources */,
+				91487F3D29FD893D009CFECF /* SubscriberHeadView.swift in Sources */,
 				8765EFEE2A29E62600EF6733 /* UIFont+Extension.swift in Sources */,
 				9128B04C2A23C7A100FB1252 /* ScrapStorageCollectionViewCell.swift in Sources */,
 				913442402A004BB1000E1ED1 /* DefaultNotificationService.swift in Sources */,
 				87DC479E2A59B1F6007823CB /* SignInUseCase.swift in Sources */,
-				91487F4329FD8AC9009CFECF /* ListViewModel.swift in Sources */,
+				91487F4329FD8AC9009CFECF /* SubscriberViewModel.swift in Sources */,
 				9128B0432A23B50500FB1252 /* ReusableView.swift in Sources */,
 				91ED179A2A00F00800158787 /* BaseNetworkService.swift in Sources */,
 				917BA3412A03E8FE000409B7 /* StorageTableViewCell.swift in Sources */,
@@ -1282,7 +1282,7 @@
 				9134420729FFD9F9000E1ED1 /* SignUpResponse.swift in Sources */,
 				91ED178B2A00E59900158787 /* PostService.swift in Sources */,
 				91CC1D2C2A0A7D40006BF786 /* JoinGroupRequest.swift in Sources */,
-				91487F3B29FD892B009CFECF /* ListTableView.swift in Sources */,
+				91487F3B29FD892B009CFECF /* SubscriberTableView.swift in Sources */,
 				916227D82A44569500118018 /* UITextField+Extension.swift in Sources */,
 				917BA3882A07C541000409B7 /* SubscriberSearchProtocol.swift in Sources */,
 				913441EE29FFD6E3000E1ED1 /* NetworkResult.swift in Sources */,
@@ -1303,7 +1303,7 @@
 				9128B0522A23CA5E00FB1252 /* ScrapStorageCollectionViewDataSource.swift in Sources */,
 				9128B04E2A23C96500FB1252 /* UICollectionView+Extension.swift in Sources */,
 				9128B03F2A237E1800FB1252 /* ScrapFolderBottomSheetDataSource.swift in Sources */,
-				91487F3929FD8915009CFECF /* ListTableViewCell.swift in Sources */,
+				91487F3929FD8915009CFECF /* SubscriberTableViewCell.swift in Sources */,
 				9128B0282A236E7600FB1252 /* UIButton+Extension.swift in Sources */,
 				8765EFEC2A29DC0200EF6733 /* HomeViewController.swift in Sources */,
 				87187C022A4DF7E200BF05F7 /* MyTagCollectionViewCell.swift in Sources */,
@@ -1316,7 +1316,7 @@
 				91487F5929FDA269009CFECF /* PostsTableViewCell.swift in Sources */,
 				91ED17892A00E58D00158787 /* SubscriberService.swift in Sources */,
 				9128B0562A23CC7400FB1252 /* ScrapStorageViewController.swift in Sources */,
-				91487F3729FD88E7009CFECF /* ListViewController.swift in Sources */,
+				91487F3729FD88E7009CFECF /* SubscriberViewController.swift in Sources */,
 				91A052132A28F9E6009F32D1 /* ScrapFolder.swift in Sources */,
 				87F25EF22A844EE100E03C32 /* VoidDTO.swift in Sources */,
 				91CC1D4C2A0AD7C2006BF786 /* LoadingView.swift in Sources */,

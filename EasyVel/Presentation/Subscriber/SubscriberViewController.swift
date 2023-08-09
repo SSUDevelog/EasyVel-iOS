@@ -11,9 +11,9 @@ import RxSwift
 import RxRelay
 import RxCocoa
 
-final class ListViewController: RxBaseViewController<ListViewModel> {
+final class SubscriberViewController: RxBaseViewController<SubscriberViewModel> {
 
-    private let listView = ListView()
+    private let listView = SubscriberView()
     
     override func render() {
         self.view = listView
@@ -30,7 +30,7 @@ final class ListViewController: RxBaseViewController<ListViewModel> {
         navigationController?.navigationBar.isHidden = true
     }
 
-    override func bind(viewModel: ListViewModel) {
+    override func bind(viewModel: SubscriberViewModel) {
         super.bind(viewModel: viewModel)
         bindOutput(viewModel)
         
@@ -49,12 +49,12 @@ final class ListViewController: RxBaseViewController<ListViewModel> {
             
     }
     
-    private func bindOutput(_ viewModel: ListViewModel) {
+    private func bindOutput(_ viewModel: SubscriberViewModel) {
         viewModel.subscriberListOutput
             .asDriver(onErrorJustReturn: [])
             .drive(
-                listView.listTableView.rx.items(cellIdentifier: ListTableViewCell.reuseIdentifier,
-                                                   cellType: ListTableViewCell.self)
+                listView.listTableView.rx.items(cellIdentifier: SubscriberTableViewCell.reuseIdentifier,
+                                                   cellType: SubscriberTableViewCell.self)
             ) { index, data, cell in
                 cell.updateUI(data: data)
                 cell.delegate = self
@@ -139,7 +139,7 @@ final class ListViewController: RxBaseViewController<ListViewModel> {
     }
 }
 
-extension ListViewController: SubscriberSearchProtocol {
+extension SubscriberViewController: SubscriberSearchProtocol {
     func searchSubscriberViewWillDisappear(
         subscriberList: [SubscriberListResponse]
     ) {
@@ -147,7 +147,7 @@ extension ListViewController: SubscriberSearchProtocol {
     }
 }
 
-extension ListViewController: ListTableViewCellDelegate {
+extension SubscriberViewController: SubscriberTableViewCellDelegate {
     func unsubscribeButtonDidTap(name: String) {
         viewModel?.unsubscriberButtonDidTap.accept(name)
     }
@@ -155,7 +155,7 @@ extension ListViewController: ListTableViewCellDelegate {
     
 }
 
-extension ListViewController: VelogAlertViewControllerDelegate {
+extension SubscriberViewController: VelogAlertViewControllerDelegate {
     func yesButtonDidTap(_ alertType: AlertType) {
         viewModel?.deleteSubscribeEvent.accept(())
     }

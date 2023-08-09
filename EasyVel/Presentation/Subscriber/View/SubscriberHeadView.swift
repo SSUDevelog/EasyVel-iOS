@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-final class ListHeadView: BaseUIView {
+final class SubscriberHeadView: BaseUIView {
     
     private let titleLabel: UILabel = {
         let label = UILabel()

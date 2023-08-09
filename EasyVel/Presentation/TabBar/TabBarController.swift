@@ -35,13 +35,13 @@ final class TabBarController: UITabBarController {
 
     // MARK: - viewModel properties
     
-    let listViewModel = ListViewModel(service: DefaultSubscriberService.shared)
+    let listViewModel = SubscriberViewModel(service: DefaultSubscriberService.shared)
     let scrapStorageViewModel = ScrapStorageViewModel()
     
     // MARK: - viewController properties
     
     let homeVC = HomeViewController()
-    lazy var listVC = ListViewController(viewModel: listViewModel)
+    lazy var listVC = SubscriberViewController(viewModel: listViewModel)
     lazy var storageVC = ScrapStorageViewController(viewModel: scrapStorageViewModel)
     let settingViewModel = SettingViewModel(service: DefaultAuthService.shared)
     lazy var settingVC = SettingViewController(viewModel: settingViewModel)

@@ -10,7 +10,7 @@ import UIKit
 import RxRelay
 import RxSwift
 
-final class ListViewModel: BaseViewModel {
+final class SubscriberViewModel: BaseViewModel {
     
     let service: SubscriberService
     
@@ -118,7 +118,7 @@ final class ListViewModel: BaseViewModel {
 
 // MARK: - API
 
-private extension ListViewModel {
+private extension SubscriberViewModel {
     func getSubscriberList() -> Observable<[SubscriberListResponse]> {
         return Observable.create { observer -> Disposable in
             DefaultSubscriberService.shared.getSubscriber() { [weak self] result in

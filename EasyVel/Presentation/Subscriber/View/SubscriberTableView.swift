@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-final class ListTableView: UITableView {
+final class SubscriberTableView: UITableView {
     
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
@@ -21,7 +21,7 @@ final class ListTableView: UITableView {
     }
 
     private func setupTableView() {
-        register(cell: ListTableViewCell.self)
+        register(cell: SubscriberTableViewCell.self)
         separatorStyle = .none
         showsVerticalScrollIndicator = true
         isHidden = true

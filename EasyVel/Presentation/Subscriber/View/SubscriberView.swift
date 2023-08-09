@@ -9,9 +9,9 @@ import UIKit
 
 import SnapKit
 
-final class ListView: BaseUIView {
-    let listTableView = ListTableView(frame: .null, style: .plain)
-    let postsHeadView = ListHeadView()
+final class SubscriberView: BaseUIView {
+    let listTableView = SubscriberTableView(frame: .null, style: .plain)
+    let postsHeadView = SubscriberHeadView()
     let ListViewExceptionView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = ImageLiterals.subscriberListException

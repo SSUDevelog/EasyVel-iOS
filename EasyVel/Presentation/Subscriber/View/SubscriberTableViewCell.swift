@@ -9,13 +9,13 @@ import UIKit
 
 import SnapKit
 
-protocol ListTableViewCellDelegate: AnyObject {
+protocol SubscriberTableViewCellDelegate: AnyObject {
     func unsubscribeButtonDidTap(name: String)
 }
 
-final class ListTableViewCell: BaseTableViewCell {
+final class SubscriberTableViewCell: BaseTableViewCell {
     
-    weak var delegate: ListTableViewCellDelegate?
+    weak var delegate: SubscriberTableViewCellDelegate?
     
     let subscriberImage: UIImageView = {
         let imageView = UIImageView()
