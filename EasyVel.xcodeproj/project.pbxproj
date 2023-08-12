@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E7B1ABA2A8774FF00EE7739 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3E7B1AB92A8774FF00EE7739 /* Debug.xcconfig */; };
+		3E7B1ABC2A87751700EE7739 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3E7B1ABB2A87751700EE7739 /* Release.xcconfig */; };
 		7CB706D22A32062500083EC6 /* PostSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB706D12A32062500083EC6 /* PostSearchViewController.swift */; };
 		7CB706D42A32064900083EC6 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB706D32A32064900083EC6 /* SearchTableViewCell.swift */; };
 		7CB706D62A32067900083EC6 /* SearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB706D52A32067900083EC6 /* SearchCollectionViewCell.swift */; };
@@ -181,6 +183,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3E7B1AB92A8774FF00EE7739 /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		3E7B1ABB2A87751700EE7739 /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		7CB706D12A32062500083EC6 /* PostSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSearchViewController.swift; sourceTree = "<group>"; };
 		7CB706D32A32064900083EC6 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		7CB706D52A32067900083EC6 /* SearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -203,8 +207,6 @@
 		87DC47982A572ECF007823CB /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		87DC479B2A573349007823CB /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
 		87DC479D2A59B1F6007823CB /* SignInUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInUseCase.swift; sourceTree = "<group>"; };
-		87F25EE82A84363000E03C32 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
-		87F25EE92A84363C00E03C32 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		87F25EEA2A84385800E03C32 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		87F25EF12A844EE100E03C32 /* VoidDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoidDTO.swift; sourceTree = "<group>"; };
 		910950512A4F155F00D04D41 /* CurrentSearchDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentSearchDTO.swift; sourceTree = "<group>"; };
@@ -495,8 +497,8 @@
 			isa = PBXGroup;
 			children = (
 				91487ECF29FC380C009CFECF /* Info.plist */,
-				87F25EE82A84363000E03C32 /* Debug.xcconfig */,
-				87F25EE92A84363C00E03C32 /* Release.xcconfig */,
+				3E7B1AB92A8774FF00EE7739 /* Debug.xcconfig */,
+				3E7B1ABB2A87751700EE7739 /* Release.xcconfig */,
 				87F25EEA2A84385800E03C32 /* Config.swift */,
 			);
 			path = Configuration;
@@ -1157,9 +1159,11 @@
 				91A5C6552A41CC5F0078D8A9 /* Pretendard-Light.otf in Resources */,
 				91A5C6512A41CC480078D8A9 /* Pretendard-Regular.otf in Resources */,
 				91A5C64D2A41CC480078D8A9 /* Pretendard-ExtraBold.otf in Resources */,
+				3E7B1ABA2A8774FF00EE7739 /* Debug.xcconfig in Resources */,
 				91A5C64E2A41CC480078D8A9 /* Pretendard-SemiBold.otf in Resources */,
 				91487ECE29FC380C009CFECF /* LaunchScreen.storyboard in Resources */,
 				91487ECB29FC380C009CFECF /* Assets.xcassets in Resources */,
+				3E7B1ABC2A87751700EE7739 /* Release.xcconfig in Resources */,
 				91A5C6572A41CC660078D8A9 /* Pretendard-Medium.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1456,7 +1460,6 @@
 		};
 		91487ED329FC380C009CFECF /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 87F25EE82A84363000E03C32 /* Debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1490,7 +1493,6 @@
 		};
 		91487ED429FC380C009CFECF /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 87F25EE92A84363C00E03C32 /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
