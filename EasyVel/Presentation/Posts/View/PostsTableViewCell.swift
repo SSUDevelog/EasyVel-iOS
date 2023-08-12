@@ -25,7 +25,7 @@ final class PostsTableViewCell: BaseTableViewCell {
     var post: PostDTO?
     var url = String()
     
-    let imgView: UIImageView = {
+    private let imgView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 8
@@ -33,14 +33,14 @@ final class PostsTableViewCell: BaseTableViewCell {
         return imageView
     }()
     
-    let title: UILabel = {
+    private let title: UILabel = {
         let title = UILabel()
         title.textColor = .gray700
         title.font = .subhead
         return title
     }()
     
-    let textView: UITextView = {
+    private let textView: UITextView = {
         let textView = UITextView()
         textView.textColor = .gray500
         textView.isEditable = false
@@ -50,14 +50,14 @@ final class PostsTableViewCell: BaseTableViewCell {
         return textView
     }()
 
-    let date: UILabel = {
+    private let date: UILabel = {
         let label = UILabel()
         label.textColor = .gray300
         label.font = .caption_1_M
         return label
     }()
     
-    let name: UILabel = {
+    private let name: UILabel = {
         let label = UILabel()
         label.textColor = .gray300
         label.font = .caption_1_M
@@ -70,10 +70,10 @@ final class PostsTableViewCell: BaseTableViewCell {
         return button
     }()
     
-    let tagFristButton: PostTagUIButton = PostTagUIButton()
-    let tagSecondButton: PostTagUIButton = PostTagUIButton()
-    let tagThirdButton: PostTagUIButton = PostTagUIButton()
-    let buttonStackView: UIStackView = {
+    private let tagFristButton: PostTagUIButton = PostTagUIButton()
+    private let tagSecondButton: PostTagUIButton = PostTagUIButton()
+    private let tagThirdButton: PostTagUIButton = PostTagUIButton()
+    private let buttonStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.spacing = 6
         stackView.axis = .horizontal
