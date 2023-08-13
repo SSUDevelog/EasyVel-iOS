@@ -29,7 +29,12 @@ class PostTagUIButton: UIButton {
         self.backgroundColor = .brandColor
         self.setTitleColor(.white, for: .normal)
         self.titleLabel?.font = .caption_1_M
-        self.contentEdgeInsets = UIEdgeInsets(top: 2, left: 12, bottom: 2, right: 12)
+//        self.contentEdgeInsets = UIEdgeInsets(top: 2, left: 12, bottom: 2, right: 12)
         self.isHidden = true
+        
+        var configuration = UIButton.Configuration.filled()
+        configuration.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 12, bottom: 2, trailing: 12)
+        configuration.baseBackgroundColor = .brandColor
+        self.configuration = configuration
     }
 }
