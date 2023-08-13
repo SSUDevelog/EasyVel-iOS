@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		3E7B1ABA2A8774FF00EE7739 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3E7B1AB92A8774FF00EE7739 /* Debug.xcconfig */; };
 		3E7B1ABC2A87751700EE7739 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3E7B1ABB2A87751700EE7739 /* Release.xcconfig */; };
+		3E7B1AC02A87E90500EE7739 /* PostsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7B1ABF2A87E90500EE7739 /* PostsCollectionViewCell.swift */; };
+		3E7B1AC22A892DB300EE7739 /* PostsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7B1AC12A892DB300EE7739 /* PostsDataSource.swift */; };
 		7CB706D22A32062500083EC6 /* PostSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB706D12A32062500083EC6 /* PostSearchViewController.swift */; };
 		7CB706D42A32064900083EC6 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB706D32A32064900083EC6 /* SearchTableViewCell.swift */; };
 		7CB706D62A32067900083EC6 /* SearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB706D52A32067900083EC6 /* SearchCollectionViewCell.swift */; };
@@ -185,6 +187,8 @@
 /* Begin PBXFileReference section */
 		3E7B1AB92A8774FF00EE7739 /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		3E7B1ABB2A87751700EE7739 /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		3E7B1ABF2A87E90500EE7739 /* PostsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsCollectionViewCell.swift; sourceTree = "<group>"; };
+		3E7B1AC12A892DB300EE7739 /* PostsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsDataSource.swift; sourceTree = "<group>"; };
 		7CB706D12A32062500083EC6 /* PostSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSearchViewController.swift; sourceTree = "<group>"; };
 		7CB706D32A32064900083EC6 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		7CB706D52A32067900083EC6 /* SearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -909,6 +913,8 @@
 				913442282A0001EC000E1ED1 /* PostsView.swift */,
 				91487F5A29FDA287009CFECF /* PostsTableView.swift */,
 				91487F5829FDA269009CFECF /* PostsTableViewCell.swift */,
+				3E7B1ABF2A87E90500EE7739 /* PostsCollectionViewCell.swift */,
+				3E7B1AC12A892DB300EE7739 /* PostsDataSource.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1187,6 +1193,7 @@
 				9134423A2A004B9B000E1ED1 /* DefaultSubscriberService.swift in Sources */,
 				91487EEF29FC3A4D009CFECF /* SettingViewController.swift in Sources */,
 				9128B04A2A23C59700FB1252 /* ScrapStorageView.swift in Sources */,
+				3E7B1AC22A892DB300EE7739 /* PostsDataSource.swift in Sources */,
 				9134421D29FFEAC9000E1ED1 /* BroadcastResponse.swift in Sources */,
 				917BA3552A0509D8000409B7 /* RealmService.swift in Sources */,
 				91487EFB29FC3B6A009CFECF /* UIColor+Extension.swift in Sources */,
@@ -1223,6 +1230,7 @@
 				9128B05A2A23CC9000FB1252 /* ScrapStorageViewModel.swift in Sources */,
 				9109505A2A5011DD00D04D41 /* VersionTargetType.swift in Sources */,
 				9134421329FFDBE8000E1ED1 /* GetSubscriberPostResponse.swift in Sources */,
+				3E7B1AC02A87E90500EE7739 /* PostsCollectionViewCell.swift in Sources */,
 				917BA3522A050903000409B7 /* RealmStoragePost.swift in Sources */,
 				916227DA2A454FD800118018 /* SubscriberListResponse.swift in Sources */,
 				9128AFE52A2117A200FB1252 /* WebViewModel.swift in Sources */,
