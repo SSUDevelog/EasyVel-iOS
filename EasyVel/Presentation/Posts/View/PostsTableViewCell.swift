@@ -28,7 +28,6 @@ final class PostsTableViewCell: BaseTableViewCell {
     private let imgView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
-        imageView.layer.cornerRadius = 8
         imageView.clipsToBounds = true
         return imageView
     }()
@@ -70,9 +69,9 @@ final class PostsTableViewCell: BaseTableViewCell {
         return button
     }()
     
-    private let tagFristButton: PostTagUIButton = PostTagUIButton()
-    private let tagSecondButton: PostTagUIButton = PostTagUIButton()
-    private let tagThirdButton: PostTagUIButton = PostTagUIButton()
+    private let tagFristButton: PostTagLabel = PostTagLabel()
+    private let tagSecondButton: PostTagLabel = PostTagLabel()
+    private let tagThirdButton: PostTagLabel = PostTagLabel()
     private let buttonStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.spacing = 6
@@ -150,17 +149,17 @@ final class PostsTableViewCell: BaseTableViewCell {
     
     private func tagFristButtonIsNotHidden(buttonTitle: String) {
         tagFristButton.isHidden = false
-        tagFristButton.setTitle(buttonTitle, for: .normal)
+        tagFristButton.text = buttonTitle
     }
     
     private func tagSecondButtonIsNotHidden(buttonTitle: String) {
         tagSecondButton.isHidden = false
-        tagSecondButton.setTitle(buttonTitle, for: .normal)
+        tagSecondButton.text = buttonTitle
     }
     
     private func tagThirdButtonIsNotHidden(buttonTitle: String) {
         tagThirdButton.isHidden = false
-        tagThirdButton.setTitle(buttonTitle, for: .normal)
+        tagThirdButton.text = buttonTitle
     }
     
     func updateButton() {

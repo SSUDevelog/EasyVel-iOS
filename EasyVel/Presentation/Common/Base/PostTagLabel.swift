@@ -14,20 +14,20 @@ class PostTagLabel: UILabel {
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         
-        setUI()
+        configUI()
     }
     
-    private func setUI() {
+    override var intrinsicContentSize: CGSize {
+        let size = super.intrinsicContentSize
+        return CGSize(width: size.width + 24, height: 28)
+    }
+    
+    private func configUI() {
         self.backgroundColor = .brandColor
         self.textColor = .white
         self.font = .body_1_M
         self.textAlignment = .center
         self.makeRounded(ratio: 2)
-        
-        self.snp.makeConstraints {
-            $0.width.equalTo(intrinsicContentSize.width + 24)
-            $0.height.equalTo(intrinsicContentSize.height + 4)
-        }
     }
     
 }
