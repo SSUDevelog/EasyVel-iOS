@@ -169,7 +169,7 @@
 		91BFF2F82A27833C00F5D13E /* PostScrapButtonDidTapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BFF2F72A27833C00F5D13E /* PostScrapButtonDidTapped.swift */; };
 		91CC1D2C2A0A7D40006BF786 /* JoinGroupRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CC1D2B2A0A7D40006BF786 /* JoinGroupRequest.swift */; };
 		91CC1D4C2A0AD7C2006BF786 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CC1D4B2A0AD7C2006BF786 /* LoadingView.swift */; };
-		91CCEA3C2A0D017A001362AD /* PostTagUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CCEA3B2A0D017A001362AD /* PostTagUIButton.swift */; };
+		91CCEA3C2A0D017A001362AD /* PostTagLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CCEA3B2A0D017A001362AD /* PostTagLabel.swift */; };
 		91CCEA602A0E9CC9001362AD /* Haptic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CCEA5F2A0E9CC9001362AD /* Haptic.swift */; };
 		91DEF3DD2A017774001B6A9D /* TagSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91DEF3DC2A017774001B6A9D /* TagSearchViewModel.swift */; };
 		91E442872A10F385008CB516 /* RxBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E442862A10F385008CB516 /* RxBaseViewController.swift */; };
@@ -341,7 +341,7 @@
 		91BFF2F72A27833C00F5D13E /* PostScrapButtonDidTapped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostScrapButtonDidTapped.swift; sourceTree = "<group>"; };
 		91CC1D2B2A0A7D40006BF786 /* JoinGroupRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinGroupRequest.swift; sourceTree = "<group>"; };
 		91CC1D4B2A0AD7C2006BF786 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
-		91CCEA3B2A0D017A001362AD /* PostTagUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTagUIButton.swift; sourceTree = "<group>"; };
+		91CCEA3B2A0D017A001362AD /* PostTagLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTagLabel.swift; sourceTree = "<group>"; };
 		91CCEA5F2A0E9CC9001362AD /* Haptic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptic.swift; sourceTree = "<group>"; };
 		91DEF3DC2A017774001B6A9D /* TagSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagSearchViewModel.swift; sourceTree = "<group>"; };
 		91E442862A10F385008CB516 /* RxBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxBaseViewController.swift; sourceTree = "<group>"; };
@@ -824,7 +824,7 @@
 				91487EF329FC3AD8009CFECF /* BaseUIView.swift */,
 				91487EF529FC3AEF009CFECF /* BaseTableViewCell.swift */,
 				91487EF729FC3B01009CFECF /* BaseCollectionViewCell.swift */,
-				91CCEA3B2A0D017A001362AD /* PostTagUIButton.swift */,
+				91CCEA3B2A0D017A001362AD /* PostTagLabel.swift */,
 				91E442862A10F385008CB516 /* RxBaseViewController.swift */,
 				91E4428A2A10F3C7008CB516 /* BaseViewModel.swift */,
 			);
@@ -1261,7 +1261,7 @@
 				8765EFF42A29ECDE00EF6733 /* String+Extension.swift in Sources */,
 				9134422729FFF9BC000E1ED1 /* SubscriberView.swift in Sources */,
 				91487F5B29FDA287009CFECF /* PostsTableView.swift in Sources */,
-				91CCEA3C2A0D017A001362AD /* PostTagUIButton.swift in Sources */,
+				91CCEA3C2A0D017A001362AD /* PostTagLabel.swift in Sources */,
 				91487F2229FC5F2A009CFECF /* TabBarController.swift in Sources */,
 				917BA3332A03D8F7000409B7 /* StorageView.swift in Sources */,
 				91487EF629FC3AEF009CFECF /* BaseTableViewCell.swift in Sources */,
@@ -1468,13 +1468,17 @@
 		};
 		91487ED329FC380C009CFECF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3E7B1AB92A8774FF00EE7739 /* Debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = EasyVel/EasyVel.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2023072602;
-				DEVELOPMENT_TEAM = T6DNHAHXG9;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = T6DNHAHXG9;
 				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EasyVel/Configuration/Info.plist;
@@ -1490,6 +1494,8 @@
 				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.JuneHyeokHong.VelogOnMobile;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "please,,,please,,,";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -1501,13 +1507,17 @@
 		};
 		91487ED429FC380C009CFECF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3E7B1ABB2A87751700EE7739 /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = EasyVel/EasyVel.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2023072602;
-				DEVELOPMENT_TEAM = T6DNHAHXG9;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = T6DNHAHXG9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EasyVel/Configuration/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1522,6 +1532,8 @@
 				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.JuneHyeokHong.VelogOnMobile;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "please,,,please,,,";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
