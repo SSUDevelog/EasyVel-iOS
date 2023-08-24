@@ -15,7 +15,7 @@ final class PostsCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - Property
     
-    
+    var post: PostDTO?
     
     // MARK: - UI Property
     
@@ -44,36 +44,21 @@ final class PostsCollectionViewCell: BaseCollectionViewCell {
         return view
     }()
     
-    private let dateLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .gray300
-        label.font = .caption_1_M
-        return label
-    }()
+    private let detailView = PostDetailView()
     
-    private let nameLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .gray300
-        label.font = .caption_1_M
-        return label
-    }()
-    
-    let scrapButton: UIButton = {
+    private let scrapButton: UIButton = {
         let button = UIButton()
         button.setImage(ImageLiterals.bookMark, for: .normal)
         // FIXME: tap scrapbutton action
         return button
     }()
     
-    private let firstTag: PostTagLabel = PostTagLabel()
-    private let secondTag: PostTagLabel = PostTagLabel()
-    private let thirdTag: PostTagLabel = PostTagLabel()
-    private lazy var tagStackView: UIStackView = {
-        let view = UIStackView(arrangedSubviews: [firstTag, secondTag, thirdTag])
-        view.spacing = 6
-        view.axis = .horizontal
+    private let tagScrollView: UIScrollView = {
+        let view = UIScrollView()
+        view.showsHorizontalScrollIndicator = false
         return view
     }()
+    private let tagStackView = PostTagStackView()
     
     // MARK: - Life Cycle
     
@@ -86,9 +71,9 @@ final class PostsCollectionViewCell: BaseCollectionViewCell {
             imageView,
             titleLabel,
             textView,
-            dateLabel,
-            nameLabel,
+            detailView,
             scrapButton,
+            tagScrollView,
             tagStackView
         )
         
@@ -100,27 +85,35 @@ final class PostsCollectionViewCell: BaseCollectionViewCell {
         
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(imageView.snp.bottom).offset(12)
-            $0.height.equalTo(28)
-            $0.leading.trailing.equalToSuperview().inset(15)
+            $0.horizontalEdges.equalToSuperview().inset(20)
         }
         
         textView.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(3)
-            $0.leading.trailing.equalToSuperview().inset(15)
-            $0.height.equalTo(60)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(4)
+            $0.horizontalEdges.equalTo(titleLabel)
         }
         
-        nameLabel.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(5)
-            $0.height.equalTo(15)
-            $0.width.equalTo(120)
-            $0.leading.equalToSuperview().inset(15)
+        detailView.snp.makeConstraints {
+            $0.leading.equalToSuperview().inset(20)
+            $0.top.equalTo(textView.snp.bottom).offset(12)
+            $0.bottom.equalToSuperview().inset(16)
         }
         
-        dateLabel.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(10)
-            $0.height.equalTo(15)
-            $0.trailing.equalToSuperview().inset(15)
+        scrapButton.snp.makeConstraints {
+            $0.height.width.equalTo(44)
+            $0.top.trailing.equalToSuperview().inset(4)
+        }
+        
+        tagScrollView.snp.makeConstraints {
+            $0.leading.equalToSuperview().inset(12)
+            $0.trailing.equalTo(scrapButton.snp.leading).offset(-12)
+            $0.top.equalToSuperview().inset(10)
+            $0.height.equalTo(28)
+        }
+        
+        tagScrollView.addSubview(tagStackView)
+        tagStackView.snp.makeConstraints {
+            $0.edges.height.equalToSuperview()
         }
     }
     
@@ -138,4 +131,21 @@ final class PostsCollectionViewCell: BaseCollectionViewCell {
     
     
     
+}
+
+extension PostsCollectionViewCell {
+    func bind(post: PostDTO) {
+        self.post = post
+        
+        self.titleLabel.text = post.title
+        self.textView.text = post.summary
+        
+        if let urlString = post.img,
+           let url = URL(string: urlString),
+           let name = post.name,
+           let date = post.date {
+            self.imageView.kf.setImage(with: url)
+            self.detailView.bind(name: name, date: date)
+        }
+    }
 }
