@@ -69,15 +69,13 @@ final class PostsTableViewCell: BaseTableViewCell {
         return button
     }()
     
-    private let tagFristButton: PostTagLabel = PostTagLabel()
-    private let tagSecondButton: PostTagLabel = PostTagLabel()
-    private let tagThirdButton: PostTagLabel = PostTagLabel()
-    private let buttonStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.spacing = 6
-        stackView.axis = .horizontal
-        return stackView
+    private let tagScrollView: UIScrollView = {
+        let view = UIScrollView()
+        view.showsHorizontalScrollIndicator = false
+        return view
     }()
+    
+    private let tagStackView = PostTagStackView()
     
     // MARK: - life cycle
     
@@ -85,33 +83,31 @@ final class PostsTableViewCell: BaseTableViewCell {
         self.scrapButton.addTarget(self, action: #selector(scrapButtonTapped), for: .touchUpInside)
         
         self.contentView.addSubviews(
-            buttonStackView,
             imgView,
             date,
             name,
             title,
             textView,
+            tagScrollView,
             scrapButton
         )
         
-        buttonStackView.addArrangedSubviews(
-            tagFristButton,
-            tagSecondButton,
-            tagThirdButton
-        )
-        contentView.bringSubviewToFront(buttonStackView)
+        scrapButton.snp.makeConstraints {
+            $0.height.width.equalTo(44)
+            $0.top.trailing.equalToSuperview().inset(4)
+        }
         
-        buttonStackView.snp.makeConstraints {
+        tagScrollView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(10)
             $0.leading.equalToSuperview().inset(12)
+            $0.trailing.equalTo(scrapButton.snp.leading).offset(-12)
+            $0.height.equalTo(28)
         }
         
-        scrapButton.snp.makeConstraints {
-            $0.height.width.equalTo(32)
-            $0.top.equalToSuperview().offset(10)
-            $0.trailing.equalToSuperview().inset(8)
+        tagScrollView.addSubview(tagStackView)
+        tagStackView.snp.makeConstraints {
+            $0.edges.height.equalToSuperview()
         }
-        contentView.bringSubviewToFront(scrapButton)
         
         imgView.snp.makeConstraints {
             $0.top.equalToSuperview()
@@ -145,21 +141,6 @@ final class PostsTableViewCell: BaseTableViewCell {
             $0.trailing.equalToSuperview().inset(15)
         }
         contentView.bringSubviewToFront(date)
-    }
-    
-    private func tagFristButtonIsNotHidden(buttonTitle: String) {
-        tagFristButton.isHidden = false
-        tagFristButton.text = buttonTitle
-    }
-    
-    private func tagSecondButtonIsNotHidden(buttonTitle: String) {
-        tagSecondButton.isHidden = false
-        tagSecondButton.text = buttonTitle
-    }
-    
-    private func tagThirdButtonIsNotHidden(buttonTitle: String) {
-        tagThirdButton.isHidden = false
-        tagThirdButton.text = buttonTitle
     }
     
     func updateButton() {
@@ -221,7 +202,6 @@ extension PostsTableViewCell {
             if image == TextLiterals.noneText {
                 imgView.isHidden = true
                 title.snp.remakeConstraints {
-                    $0.top.equalTo(buttonStackView.snp.bottom).offset(15)
                     $0.height.equalTo(45)
                     $0.leading.trailing.equalToSuperview().inset(15)
                 }
@@ -232,38 +212,12 @@ extension PostsTableViewCell {
         }
         
         guard let tagList = model.tag else { return }
-        switch model.tag?.count {
-        case 0:
-            if let image = model.img {
-                if image == TextLiterals.noneText {
-                    buttonStackView.isHidden = true
-                    title.snp.remakeConstraints {
-                        $0.top.equalToSuperview()
-                        $0.height.equalTo(45)
-                        $0.leading.trailing.equalToSuperview().inset(15)
-                    }
-                }
-            }
-        case 1:
-            tagFristButtonIsNotHidden(buttonTitle: tagList[0])
-        case 2:
-            tagFristButtonIsNotHidden(buttonTitle: tagList[0])
-            tagSecondButtonIsNotHidden(buttonTitle: tagList[1])
-        case 3:
-            tagFristButtonIsNotHidden(buttonTitle: tagList[0])
-            tagSecondButtonIsNotHidden(buttonTitle: tagList[1])
-            tagThirdButtonIsNotHidden(buttonTitle: tagList[2])
-        default:
-            tagFristButtonIsNotHidden(buttonTitle: tagList[0])
-            tagSecondButtonIsNotHidden(buttonTitle: tagList[1])
-            tagThirdButtonIsNotHidden(buttonTitle: tagList[2])
-        }
+        tagStackView.tagList = tagList
     }
     
     override func prepareForReuse() {
         imgView.isHidden = false
         textView.isHidden = false
-        buttonStackView.isHidden = false
 
         title.snp.remakeConstraints {
             $0.top.equalTo(imgView.snp.bottom).offset(15)
