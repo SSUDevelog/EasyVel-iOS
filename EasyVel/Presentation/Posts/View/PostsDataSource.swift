@@ -48,14 +48,16 @@ final class PostsDataSource {
     
     private func setDataSource() {
         let cellRegistration = UICollectionView.CellRegistration<PostCell, PostDTO> { cell, indexPath, post in
-            // FIXME: Cell configuration
+            cell.bind(post: post)
         }
         
         dataSource = DataSource(collectionView: collectionView, cellProvider: { collectionView, indexPath, id in
             let post = self.postsList[indexPath.item]
-            return collectionView.dequeueConfiguredReusableCell(using: cellRegistration,
-                                                                for: indexPath,
-                                                                item: post)
+            return collectionView.dequeueConfiguredReusableCell(
+                using: cellRegistration,
+                for: indexPath,
+                item: post
+            )
         })
     }
     
