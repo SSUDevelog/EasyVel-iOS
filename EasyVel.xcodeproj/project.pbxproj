@@ -31,6 +31,7 @@
 		87DC479E2A59B1F6007823CB /* SignInUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DC479D2A59B1F6007823CB /* SignInUseCase.swift */; };
 		87F25EEB2A84385800E03C32 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F25EEA2A84385800E03C32 /* Config.swift */; };
 		87F25EF22A844EE100E03C32 /* VoidDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F25EF12A844EE100E03C32 /* VoidDTO.swift */; };
+		87F287EC2A9DE2A300A53218 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F287EB2A9DE2A300A53218 /* UIViewController+.swift */; };
 		910950522A4F155F00D04D41 /* CurrentSearchDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910950512A4F155F00D04D41 /* CurrentSearchDTO.swift */; };
 		910950582A50117F00D04D41 /* VersionCheckDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910950572A50117F00D04D41 /* VersionCheckDTO.swift */; };
 		9109505A2A5011DD00D04D41 /* VersionTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910950592A5011DD00D04D41 /* VersionTargetType.swift */; };
@@ -207,6 +208,7 @@
 		87F25EE92A84363C00E03C32 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		87F25EEA2A84385800E03C32 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		87F25EF12A844EE100E03C32 /* VoidDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoidDTO.swift; sourceTree = "<group>"; };
+		87F287EB2A9DE2A300A53218 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		910950512A4F155F00D04D41 /* CurrentSearchDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentSearchDTO.swift; sourceTree = "<group>"; };
 		910950572A50117F00D04D41 /* VersionCheckDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionCheckDTO.swift; sourceTree = "<group>"; };
 		910950592A5011DD00D04D41 /* VersionTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionTargetType.swift; sourceTree = "<group>"; };
@@ -839,6 +841,7 @@
 				8765EFF32A29ECDE00EF6733 /* String+Extension.swift */,
 				916227D72A44569500118018 /* UITextField+Extension.swift */,
 				87DC47892A560857007823CB /* UIApplication+Extension.swift */,
+				87F287EB2A9DE2A300A53218 /* UIViewController+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1315,6 +1318,7 @@
 				914D8DD92A02B22A00516B4C /* WebViewController.swift in Sources */,
 				91487F5929FDA269009CFECF /* PostsTableViewCell.swift in Sources */,
 				91ED17892A00E58D00158787 /* SubscriberService.swift in Sources */,
+				87F287EC2A9DE2A300A53218 /* UIViewController+.swift in Sources */,
 				9128B0562A23CC7400FB1252 /* ScrapStorageViewController.swift in Sources */,
 				91487F3729FD88E7009CFECF /* SubscriberViewController.swift in Sources */,
 				91A052132A28F9E6009F32D1 /* ScrapFolder.swift in Sources */,
