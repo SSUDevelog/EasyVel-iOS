@@ -33,6 +33,7 @@ final class FollowSearchViewModel: BaseViewModel {
     let subscriberAddButtonDidTap = PublishRelay<Void>()
     let searchBarDidChange = PublishRelay<String>()
     let userDidTap = PublishRelay<Void>()
+    let followButtonDidTap = PublishRelay<Bool>()
 
     init(
         subscriberList: [SubscriberListResponse]?,
@@ -47,12 +48,12 @@ final class FollowSearchViewModel: BaseViewModel {
     }
     
     private func makeOutput() {
-        viewWillDisappear
-            .subscribe(onNext: { [weak self] in
-                guard let subscriberList = self?.subscriberList else { return }
-                self?.subscriberSearchDelegate?.searchSubscriberViewWillDisappear(subscriberList: subscriberList)
-            })
-            .disposed(by: disposeBag)
+//        viewWillDisappear
+//            .subscribe(onNext: { [weak self] in
+//                guard let subscriberList = self?.subscriberList else { return }
+//                self?.subscriberSearchDelegate?.searchSubscriberViewWillDisappear(subscriberList: subscriberList)
+//            })
+//            .disposed(by: disposeBag)
         
         
         searchBarDidChange
@@ -80,83 +81,20 @@ final class FollowSearchViewModel: BaseViewModel {
             }
             .disposed(by: disposeBag)
         
-//
-//
-//
-//                if response.validate == false {
-//
-//                    searchUserOutput.accept((false, nil))
-//
-//                    return Observable.just(false)
-//                } else {
-//                    searchUserOutput
-//                    if let searchSubscriberName = response.userName,
-//                       let searchSubscriberImageURL = response.profilePictureURL {
-//                        self.searchSubscriberName = searchSubscriberName
-//                        self.searchSubscriberImageURL = searchSubscriberImageURL
-//                    }
-//                    return self.addSubscriber(name: response.userName ?? String())
-//                }
-//            }
-//            .subscribe(onNext: { [weak self] response in
-//                guard let self = self else { return }
-//                if response {
-//                    self.subscriberAddStatusOutput.accept((response, TextLiterals.addSubsriberSuccessText))
-//                    guard let searchSubscriberName = self.searchSubscriberName else { return }
-//                    guard let searchSubscriberImageURL = self.searchSubscriberImageURL else { return }
-//                    self.addNewSubscriber(
-//                        searchSubscriberName: searchSubscriberName,
-//                        searchSubscriberImageURL: searchSubscriberImageURL
-//                    )
-//                }
-//            })
-//            .disposed(by: disposeBag)
+        followButtonDidTap
+            .debounce(.seconds(1), scheduler: MainScheduler.instance)
+            .subscribe { [weak self] isSelected in
+                guard let name = self?.userData?.userName else { return }
+                if isSelected {
+                    self?.addSubscriber2(name: name)
+                } else {
+                    self?.deleteSubscriber(name: name)
+                }
+            }
+            .disposed(by: disposeBag)
         
-//        subscriberAddButtonDidTap
-//            .flatMapLatest { [weak self] name -> Observable<SearchSubscriberResponse> in
-//                guard let self = self else { return Observable.empty() }
-//                return self.searchSubscriber(name: name)
-//            }
-//            .flatMapLatest { [weak self] response -> Observable<Bool> in
-//                guard let self = self else { return Observable.empty() }
-//                if response.validate == false {
-//                    let text = TextLiterals.searchSubscriberIsNotValidText
-//                    self.subscriberAddStatusOutput.accept((false, text))
-//                    return Observable.just(false)
-//                } else {
-//                    if let searchSubscriberName = response.userName,
-//                       let searchSubscriberImageURL = response.profilePictureURL {
-//                        self.searchSubscriberName = searchSubscriberName
-//                        self.searchSubscriberImageURL = searchSubscriberImageURL
-//                    }
-//                    return self.addSubscriber(name: response.userName ?? String())
-//                }
-//            }
-//            .subscribe(onNext: { [weak self] response in
-//                guard let self = self else { return }
-//                if response {
-//                    self.subscriberAddStatusOutput.accept((response, TextLiterals.addSubsriberSuccessText))
-//                    guard let searchSubscriberName = self.searchSubscriberName else { return }
-//                    guard let searchSubscriberImageURL = self.searchSubscriberImageURL else { return }
-//                    self.addNewSubscriber(
-//                        searchSubscriberName: searchSubscriberName,
-//                        searchSubscriberImageURL: searchSubscriberImageURL
-//                    )
-//                }
-//            })
-//            .disposed(by: disposeBag)
     }
     
-    private func addNewSubscriber(
-        searchSubscriberName: String,
-        searchSubscriberImageURL: String
-    ) {
-        let newSubscriber = SubscriberListResponse(
-            img: searchSubscriberImageURL,
-            name: searchSubscriberName
-        )
-        self.subscriberList?.insert(newSubscriber, at: 0)
-    }
 }
 
 // MARK: - api
@@ -190,9 +128,7 @@ private extension FollowSearchViewModel {
         }
     }
     
-    func addSubscriber(
-        name: String
-    ) -> Observable<Bool> {
+    func addSubscriber(name: String) -> Observable<Bool> {
         return Observable.create { observer in
             self.service.addSubscriber(
                 fcmToken: "",
@@ -214,4 +150,21 @@ private extension FollowSearchViewModel {
             return Disposables.create()
         }
     }
+    
+    func addSubscriber2(name: String)  {
+        self.service.addSubscriber(
+            fcmToken: "",
+            name: name
+        ) { result in
+            print("할게 있나,,어차피 비동기")
+        }
+    }
+    
+    func deleteSubscriber(name: String) {
+        self.service.deleteSubscriber(targetName: name) { result in
+            print("ㅇㅇ..")
+        }
+    }
+    
+    
 }

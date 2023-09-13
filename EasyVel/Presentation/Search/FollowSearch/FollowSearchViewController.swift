@@ -51,6 +51,14 @@ final class FollowSearchViewController: RxBaseViewController<FollowSearchViewMod
         }
         .disposed(by: disposeBag)
         
+        searchView.followButton.rx.tap
+            .bind { [weak self] _ in
+                guard let self else { return }
+                self.searchView.followButton.isSelected.toggle()
+                viewModel.followButtonDidTap.accept(self.searchView.followButton.isSelected)
+            }
+            .disposed(by: disposeBag)
+        
         bindOutput(viewModel)
         
     }
@@ -60,7 +68,7 @@ final class FollowSearchViewController: RxBaseViewController<FollowSearchViewMod
         viewModel.searchUserOutput
             .asDriver(onErrorJustReturn: (Bool(),nil))
             .drive { [weak self] (isSuccess, response) in
-                
+                self?.searchView.followButton.isSelected = false //TODO: 서버가 response에 follow여부 알려주면 해당값으로 치환
                 self?.searchView.notFoundImageView.isHidden = isSuccess
                 self?.searchView.contentView.isHidden = !isSuccess
                 guard isSuccess else { return }
