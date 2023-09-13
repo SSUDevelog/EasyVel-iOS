@@ -95,6 +95,13 @@ final class TabBarController: UITabBarController {
             object: nil
         )
         
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(updateFollowVC),
+            name: Notification.Name("updateFollowVC"),
+            object: nil
+        )
+        
         
     }
     
@@ -123,6 +130,11 @@ final class TabBarController: UITabBarController {
     @objc
     private func updateHomeVC() {
         self.homeVC.requestGetTagAPI()
+    }
+    
+    @objc
+    private func updateFollowVC() {
+        self.listViewModel.refreshSubscriberList.accept(true)
     }
     
     private func setUpTabBar(){

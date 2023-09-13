@@ -83,12 +83,12 @@ final class FollowSearchViewModel: BaseViewModel {
         
         followButtonDidTap
             .debounce(.seconds(1), scheduler: MainScheduler.instance)
-            .subscribe { [weak self] isSelected in
-                guard let name = self?.userData?.userName else { return }
+            .subscribe { isSelected in
+                guard let name = self.userData?.userName else { return }
                 if isSelected {
-                    self?.addSubscriber2(name: name)
+                    self.addSubscriber2(name: name)
                 } else {
-                    self?.deleteSubscriber(name: name)
+                    self.deleteSubscriber(name: name)
                 }
             }
             .disposed(by: disposeBag)
@@ -156,13 +156,19 @@ private extension FollowSearchViewModel {
             fcmToken: "",
             name: name
         ) { result in
-            print("할게 있나,,어차피 비동기")
+            NotificationCenter.default.post(
+                name: Notification.Name("updateFollowVC"),
+                object: nil
+            )
         }
     }
     
     func deleteSubscriber(name: String) {
         self.service.deleteSubscriber(targetName: name) { result in
-            print("ㅇㅇ..")
+            NotificationCenter.default.post(
+                name: Notification.Name("updateFollowVC"),
+                object: nil
+            )
         }
     }
     
