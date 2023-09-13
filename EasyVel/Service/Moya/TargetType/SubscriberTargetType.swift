@@ -11,9 +11,9 @@ import Moya
 
 enum SubscriberTargetType {
     case addSubscriber(fcmToken: String, name: String)
-    case getSubscriber
-    case searchSubscriber(name: String)
-    case deleteSubscriber(targetName: String)
+    case getFollowList
+    case searchUser(name: String)
+    case deleteFollow(targetName: String)
     case getSubscriberUserMain(name: String)
 }
 
@@ -22,11 +22,11 @@ extension SubscriberTargetType: BaseTargetType {
         switch self {
         case .addSubscriber:
             return URLConstants.subscriber + "/addsubscriber"
-        case .getSubscriber:
+        case .getFollowList:
             return URLConstants.subscriber + "/getsubscriber"
-        case .searchSubscriber(let name):
+        case .searchUser(let name):
             return URLConstants.subscriber + "/inputname/" + name
-        case .deleteSubscriber(let targetName):
+        case .deleteFollow(let targetName):
             return URLConstants.subscriber + "/unsubscribe/" + targetName
         case .getSubscriberUserMain(let name):
             return URLConstants.subscriber + "/usermain/" + name
@@ -37,9 +37,9 @@ extension SubscriberTargetType: BaseTargetType {
         switch self {
         case .addSubscriber:
             return .post
-        case .getSubscriber, .searchSubscriber, .getSubscriberUserMain:
+        case .getFollowList, .searchUser, .getSubscriberUserMain:
             return .get
-        case .deleteSubscriber:
+        case .deleteFollow:
             return .delete
         }
     }
@@ -52,14 +52,14 @@ extension SubscriberTargetType: BaseTargetType {
                              "name": name],
                 encoding: URLEncoding.queryString
             )
-        case .getSubscriber:
+        case .getFollowList:
             return .requestPlain
-        case .searchSubscriber(let name):
+        case .searchUser(let name):
             return .requestParameters(
                 parameters: ["name": name],
                 encoding: URLEncoding.queryString
             )
-        case .deleteSubscriber(let targetName):
+        case .deleteFollow(let targetName):
             return .requestParameters(
                 parameters: ["targetName": targetName],
                 encoding: URLEncoding.queryString

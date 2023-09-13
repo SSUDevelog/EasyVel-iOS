@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol SubscriberSearchProtocol {
-    func searchSubscriberViewWillDisappear(subscriberList: [SubscriberListResponse])
-}
+//protocol SubscriberSearchProtocol {
+//    func searchSubscriberViewWillDisappear(subscriberList: [FollowListResponse])
+//}

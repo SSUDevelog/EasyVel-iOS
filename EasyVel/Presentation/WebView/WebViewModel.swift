@@ -12,7 +12,7 @@ import RxSwift
 
 final class WebViewModel: BaseViewModel {
     
-    let service: SubscriberService
+    let service: FollowService
     
     private var urlString: String = ""
     private let realm = RealmService()
@@ -36,7 +36,7 @@ final class WebViewModel: BaseViewModel {
     
     init(
         url: String,
-        service: SubscriberService
+        service: FollowService
     ) {
         self.service = service
         self.urlString = url
@@ -66,7 +66,7 @@ final class WebViewModel: BaseViewModel {
             .disposed(by: disposeBag)
         
         viewWillAppear
-            .flatMapLatest( { [weak self] _ -> Observable<[SubscriberListResponse]> in
+            .flatMapLatest( { [weak self] _ -> Observable<[FollowListResponse]> in
                 guard let self = self else { return Observable.empty() }
                 return self.getSubscriberList()
             })
@@ -125,7 +125,7 @@ extension WebViewModel {
     func addSubscriber(
         name: String
     ) {
-        service.addSubscriber(
+        service.addFollow(
             fcmToken: TextLiterals.noneText,
             name: name
         ) { [weak self] result in
@@ -142,7 +142,7 @@ extension WebViewModel {
     func deleteSubscriber(
         name: String
     ) {
-        service.deleteSubscriber(
+        service.deleteFollow(
             targetName: name
         ) { [weak self] result in
             switch result {
@@ -155,12 +155,12 @@ extension WebViewModel {
         }
     }
     
-    func getSubscriberList() -> Observable<[SubscriberListResponse]> {
+    func getSubscriberList() -> Observable<[FollowListResponse]> {
         return Observable.create { observer in
-            self.service.getSubscriber() { [weak self] result in
+            self.service.getFollowList() { [weak self] result in
                 switch result {
                 case .success(let response):
-                    guard let list = response as? [SubscriberListResponse] else {
+                    guard let list = response as? [FollowListResponse] else {
                         self?.serverFailOutput.accept(true)
                         observer.onError(NSError(domain: "ParsingError", code: 0, userInfo: nil))
                         return

@@ -10,31 +10,31 @@ import UIKit
 import RxRelay
 import RxSwift
 
-final class SubscriberViewModel: BaseViewModel {
+final class FollowViewModel: BaseViewModel {
     
-    let service: SubscriberService
+    let service: FollowService
     
-    var subscriberList: [SubscriberListResponse]?
-    var isListEmpty: Bool = Bool()
-    var tempDeleteSubscriber: String?
+    var followList: [FollowListResponse]?
+    var isFollowEmpty: Bool = Bool()
+    var tempDeleteFollow: String?
     
     // MARK: - Output
 
-    var subscriberListOutput = PublishRelay<[SubscriberListResponse]>()
-    var isListEmptyOutput = PublishRelay<Bool>()
-    var subscriberUserMainURLOutput = PublishRelay<String>()
-    var presentUnsubscribeAlertOutput = PublishRelay<Bool>()
+    var followListOutput = PublishRelay<[FollowListResponse]>()
+    var isFollowEmptyOutput = PublishRelay<Bool>()
+    var followUserMainURLOutput = PublishRelay<String>()
+    var presentUnfollowAlertOutput = PublishRelay<Bool>()
     
     // MARK: - Input
     
-    let refreshSubscriberList = PublishRelay<Bool>()
-    let subscriberTableViewCellDidTap = PublishRelay<String>()
-    let unsubscriberButtonDidTap = PublishRelay<String>()
-    let deleteSubscribeEvent = PublishRelay<Void>()
+    let refreshFollowList = PublishRelay<Bool>()
+    let followTableViewCellDidTap = PublishRelay<String>()
+    let unfollowButtonDidTap = PublishRelay<String>()
+    let deleteFollowEvent = PublishRelay<Void>()
     
     // MARK: - init
     
-    init(service: SubscriberService) {
+    init(service: FollowService) {
         self.service = service
         super.init()
         makeOutput()
@@ -49,16 +49,16 @@ final class SubscriberViewModel: BaseViewModel {
             })
             .disposed(by: disposeBag)
         
-        deleteSubscribeEvent
+        deleteFollowEvent
             .subscribe(onNext: { [weak self] _ in
                 guard let self = self,
-                      let tempDeleteSubscriber = tempDeleteSubscriber else { return }
-                if let subscriberList = self.subscriberList {
-                    let reloadSubscriberList = subscriberList.filter {
+                      let tempDeleteSubscriber = tempDeleteFollow else { return }
+                if let followList = self.followList {
+                    let reloadFollowList = followList.filter {
                         $0.name != tempDeleteSubscriber
                     }
-                    self.subscriberList = reloadSubscriberList
-                    self.subscriberListOutput.accept(reloadSubscriberList)
+                    self.followList = reloadFollowList
+                    self.followListOutput.accept(reloadFollowList)
                 }
                 self.deleteSubscriber(targetName: tempDeleteSubscriber) { [weak self] _ in
                     self?.getListData()
@@ -66,29 +66,29 @@ final class SubscriberViewModel: BaseViewModel {
             })
             .disposed(by: disposeBag)
         
-        refreshSubscriberList
+        refreshFollowList
             .subscribe(onNext: { [weak self] _ in
                 guard let self = self else { return }
                 self.getListData()
             })
             .disposed(by: disposeBag)
         
-        subscriberTableViewCellDidTap
+        followTableViewCellDidTap
             .subscribe(onNext: { [weak self] subscriberName in
                 guard let self = self else { return }
                 self.getSubscriberUserMainURL(
                     name: subscriberName
                 ) { [weak self] subscriberUserMainURLString in
                     guard let userMainURL = subscriberUserMainURLString.userMainUrl else { return }
-                    self?.subscriberUserMainURLOutput.accept(userMainURL)
+                    self?.followUserMainURLOutput.accept(userMainURL)
                 }
             })
             .disposed(by: disposeBag)
         
-        unsubscriberButtonDidTap
+        unfollowButtonDidTap
             .subscribe { name in
-                self.tempDeleteSubscriber = name
-                self.presentUnsubscribeAlertOutput.accept(true)
+                self.tempDeleteFollow = name
+                self.presentUnfollowAlertOutput.accept(true)
             }
             .disposed(by: disposeBag)
     }
@@ -97,8 +97,8 @@ final class SubscriberViewModel: BaseViewModel {
         getSubscriberList()
             .map { Array($0.reversed()) }
             .subscribe(onNext: { [weak self] subscriberList in
-                self?.subscriberList = subscriberList
-                self?.subscriberListOutput.accept(subscriberList)
+                self?.followList = subscriberList
+                self?.followListOutput.accept(subscriberList)
                 let subscriberNameList = subscriberList.map { $0.name }
                 self?.checkListIsEmpty(subsciberList: subscriberNameList)
             })
@@ -109,22 +109,22 @@ final class SubscriberViewModel: BaseViewModel {
         subsciberList: [String]
     ) {
         if subsciberList.isEmpty == true {
-            isListEmptyOutput.accept(true)
+            isFollowEmptyOutput.accept(true)
         } else {
-            isListEmptyOutput.accept(false)
+            isFollowEmptyOutput.accept(false)
         }
     }
 }
 
 // MARK: - API
 
-private extension SubscriberViewModel {
-    func getSubscriberList() -> Observable<[SubscriberListResponse]> {
+private extension FollowViewModel {
+    func getSubscriberList() -> Observable<[FollowListResponse]> {
         return Observable.create { observer -> Disposable in
-            DefaultSubscriberService.shared.getSubscriber() { [weak self] result in
+            DefaultFollowService.shared.getFollowList() { [weak self] result in
                 switch result {
                 case .success(let response):
-                    guard let list = response as? [SubscriberListResponse] else {
+                    guard let list = response as? [FollowListResponse] else {
                         self?.serverFailOutput.accept(true)
                         return
                     }
@@ -146,7 +146,7 @@ private extension SubscriberViewModel {
         targetName: String,
         completion: @escaping (String) -> Void
     ) {
-        DefaultSubscriberService.shared.deleteSubscriber(
+        DefaultFollowService.shared.deleteFollow(
             targetName: targetName
         ){ [weak self] result in
             switch result {
@@ -164,14 +164,14 @@ private extension SubscriberViewModel {
     
     func getSubscriberUserMainURL(
         name: String,
-        completion: @escaping (SubscriberUserMainResponse) -> Void
+        completion: @escaping (FollowUserMainResponse) -> Void
     ) {
-        service.getSubscriberUserMain(
+        service.getFollowUserMain(
             name: name
         ) { [weak self] result in
             switch result {
             case .success(let response):
-                guard let url = response as? SubscriberUserMainResponse else {
+                guard let url = response as? FollowUserMainResponse else {
                     self?.serverFailOutput.accept(true)
                     return
                 }

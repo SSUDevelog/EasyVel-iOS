@@ -67,7 +67,7 @@
 		9134420729FFD9F9000E1ED1 /* SignUpResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9134420629FFD9F9000E1ED1 /* SignUpResponse.swift */; };
 		9134420929FFDA32000E1ED1 /* SignOutRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9134420829FFDA32000E1ED1 /* SignOutRequest.swift */; };
 		9134420B29FFDA71000E1ED1 /* SignOutResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9134420A29FFDA71000E1ED1 /* SignOutResponse.swift */; };
-		9134421129FFDB5D000E1ED1 /* SearchSubscriberResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9134421029FFDB5D000E1ED1 /* SearchSubscriberResponse.swift */; };
+		9134421129FFDB5D000E1ED1 /* SearchUserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9134421029FFDB5D000E1ED1 /* SearchUserResponse.swift */; };
 		9134421329FFDBE8000E1ED1 /* GetSubscriberPostResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9134421229FFDBE8000E1ED1 /* GetSubscriberPostResponse.swift */; };
 		9134421529FFDC9C000E1ED1 /* UnSubsribeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9134421429FFDC9C000E1ED1 /* UnSubsribeResponse.swift */; };
 		9134421A29FFE692000E1ED1 /* GetTagPostResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9134421929FFE692000E1ED1 /* GetTagPostResponse.swift */; };
@@ -75,7 +75,7 @@
 		9134421F29FFEAF7000E1ED1 /* BroadcastRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9134421E29FFEAF7000E1ED1 /* BroadcastRequest.swift */; };
 		9134422329FFF59D000E1ED1 /* SettingTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9134422229FFF59D000E1ED1 /* SettingTableView.swift */; };
 		9134422529FFF7C8000E1ED1 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9134422429FFF7C8000E1ED1 /* SettingView.swift */; };
-		9134422729FFF9BC000E1ED1 /* SubscriberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9134422629FFF9BC000E1ED1 /* SubscriberView.swift */; };
+		9134422729FFF9BC000E1ED1 /* FollowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9134422629FFF9BC000E1ED1 /* FollowView.swift */; };
 		913442292A0001EC000E1ED1 /* PostsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913442282A0001EC000E1ED1 /* PostsView.swift */; };
 		9134422D2A00418A000E1ED1 /* URLConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9134422C2A00418A000E1ED1 /* URLConstants.swift */; };
 		913442302A004352000E1ED1 /* SubscriberTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9134422F2A004352000E1ED1 /* SubscriberTargetType.swift */; };
@@ -83,7 +83,7 @@
 		913442342A004795000E1ED1 /* SignTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913442332A004795000E1ED1 /* SignTargetType.swift */; };
 		913442362A00491C000E1ED1 /* NotificationTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913442352A00491C000E1ED1 /* NotificationTargetType.swift */; };
 		913442382A004B91000E1ED1 /* DefaultTagService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913442372A004B91000E1ED1 /* DefaultTagService.swift */; };
-		9134423A2A004B9B000E1ED1 /* DefaultSubscriberService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913442392A004B9B000E1ED1 /* DefaultSubscriberService.swift */; };
+		9134423A2A004B9B000E1ED1 /* DefaultFollowService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913442392A004B9B000E1ED1 /* DefaultFollowService.swift */; };
 		9134423C2A004BA2000E1ED1 /* DefaultPostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9134423B2A004BA2000E1ED1 /* DefaultPostService.swift */; };
 		9134423E2A004BA8000E1ED1 /* DefaultAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9134423D2A004BA8000E1ED1 /* DefaultAuthService.swift */; };
 		913442402A004BB1000E1ED1 /* DefaultNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9134423F2A004BB1000E1ED1 /* DefaultNotificationService.swift */; };
@@ -109,19 +109,19 @@
 		91487F1729FC5481009CFECF /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91487F1629FC5481009CFECF /* NetworkMonitor.swift */; };
 		91487F1929FC549C009CFECF /* NoNetworkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91487F1829FC549C009CFECF /* NoNetworkView.swift */; };
 		91487F2229FC5F2A009CFECF /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91487F2129FC5F2A009CFECF /* TabBarController.swift */; };
-		91487F2D29FD0812009CFECF /* SubscriberSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91487F2C29FD0812009CFECF /* SubscriberSearchViewController.swift */; };
-		91487F2F29FD1A67009CFECF /* SubscriberSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91487F2E29FD1A66009CFECF /* SubscriberSearchView.swift */; };
-		91487F3729FD88E7009CFECF /* SubscriberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91487F3629FD88E7009CFECF /* SubscriberViewController.swift */; };
-		91487F3929FD8915009CFECF /* SubscriberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91487F3829FD8915009CFECF /* SubscriberTableViewCell.swift */; };
-		91487F3B29FD892B009CFECF /* SubscriberTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91487F3A29FD892B009CFECF /* SubscriberTableView.swift */; };
-		91487F3D29FD893D009CFECF /* SubscriberHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91487F3C29FD893D009CFECF /* SubscriberHeadView.swift */; };
-		91487F4329FD8AC9009CFECF /* SubscriberViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91487F4229FD8AC9009CFECF /* SubscriberViewModel.swift */; };
+		91487F2D29FD0812009CFECF /* FollowSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91487F2C29FD0812009CFECF /* FollowSearchViewController.swift */; };
+		91487F2F29FD1A67009CFECF /* FollowSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91487F2E29FD1A66009CFECF /* FollowSearchView.swift */; };
+		91487F3729FD88E7009CFECF /* FollowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91487F3629FD88E7009CFECF /* FollowViewController.swift */; };
+		91487F3929FD8915009CFECF /* FollowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91487F3829FD8915009CFECF /* FollowTableViewCell.swift */; };
+		91487F3B29FD892B009CFECF /* FollowTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91487F3A29FD892B009CFECF /* FollowTableView.swift */; };
+		91487F3D29FD893D009CFECF /* FollowHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91487F3C29FD893D009CFECF /* FollowHeadView.swift */; };
+		91487F4329FD8AC9009CFECF /* FollowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91487F4229FD8AC9009CFECF /* FollowViewModel.swift */; };
 		91487F4D29FD9858009CFECF /* TagSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91487F4C29FD9858009CFECF /* TagSearchViewController.swift */; };
 		91487F5229FDA143009CFECF /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91487F5129FDA143009CFECF /* SettingTableViewCell.swift */; };
 		91487F5929FDA269009CFECF /* PostsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91487F5829FDA269009CFECF /* PostsTableViewCell.swift */; };
 		91487F5B29FDA287009CFECF /* PostsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91487F5A29FDA287009CFECF /* PostsTableView.swift */; };
 		91487F5D29FDA2C0009CFECF /* PostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91487F5C29FDA2C0009CFECF /* PostsViewController.swift */; };
-		914D8DCE2A02417C00516B4C /* SubscriberSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914D8DCD2A02417C00516B4C /* SubscriberSearchViewModel.swift */; };
+		914D8DCE2A02417C00516B4C /* FollowSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914D8DCD2A02417C00516B4C /* FollowSearchViewModel.swift */; };
 		914D8DD12A028AED00516B4C /* PostsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914D8DD02A028AED00516B4C /* PostsViewModel.swift */; };
 		914D8DD92A02B22A00516B4C /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914D8DD82A02B22A00516B4C /* WebViewController.swift */; };
 		915861852A2DFA6D00461F9A /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = 915861842A2DFA6D00461F9A /* RxBlocking */; };
@@ -130,8 +130,8 @@
 		9158618B2A2DFA6D00461F9A /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9158618A2A2DFA6D00461F9A /* RxSwift */; };
 		9158618D2A2E04BF00461F9A /* ScrapPostAddInFolderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9158618C2A2E04BF00461F9A /* ScrapPostAddInFolderProtocol.swift */; };
 		916227D82A44569500118018 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916227D72A44569500118018 /* UITextField+Extension.swift */; };
-		916227DA2A454FD800118018 /* SubscriberListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916227D92A454FD800118018 /* SubscriberListResponse.swift */; };
-		916227DE2A46C6E900118018 /* SubscriberUserMainResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916227DD2A46C6E900118018 /* SubscriberUserMainResponse.swift */; };
+		916227DA2A454FD800118018 /* FollowListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916227D92A454FD800118018 /* FollowListResponse.swift */; };
+		916227DE2A46C6E900118018 /* FollowUserMainResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916227DD2A46C6E900118018 /* FollowUserMainResponse.swift */; };
 		9166BE952A498B1700FFC026 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9166BE942A498B1700FFC026 /* Toast.swift */; };
 		9166BE982A49E8F600FFC026 /* ServerFailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9166BE972A49E8F600FFC026 /* ServerFailViewController.swift */; };
 		916E29A82A3EDA45006F5FE9 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916E29A72A3EDA45006F5FE9 /* SettingViewModel.swift */; };
@@ -172,7 +172,7 @@
 		91E442872A10F385008CB516 /* RxBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E442862A10F385008CB516 /* RxBaseViewController.swift */; };
 		91E4428B2A10F3C7008CB516 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E4428A2A10F3C7008CB516 /* BaseViewModel.swift */; };
 		91ED17872A00E57700158787 /* TagService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ED17862A00E57700158787 /* TagService.swift */; };
-		91ED17892A00E58D00158787 /* SubscriberService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ED17882A00E58D00158787 /* SubscriberService.swift */; };
+		91ED17892A00E58D00158787 /* FollowService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ED17882A00E58D00158787 /* FollowService.swift */; };
 		91ED178B2A00E59900158787 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ED178A2A00E59900158787 /* PostService.swift */; };
 		91ED178D2A00E5A600158787 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ED178C2A00E5A600158787 /* AuthService.swift */; };
 		91ED178F2A00E5B100158787 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ED178E2A00E5B100158787 /* NotificationService.swift */; };
@@ -244,7 +244,7 @@
 		9134420629FFD9F9000E1ED1 /* SignUpResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpResponse.swift; sourceTree = "<group>"; };
 		9134420829FFDA32000E1ED1 /* SignOutRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutRequest.swift; sourceTree = "<group>"; };
 		9134420A29FFDA71000E1ED1 /* SignOutResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutResponse.swift; sourceTree = "<group>"; };
-		9134421029FFDB5D000E1ED1 /* SearchSubscriberResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSubscriberResponse.swift; sourceTree = "<group>"; };
+		9134421029FFDB5D000E1ED1 /* SearchUserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserResponse.swift; sourceTree = "<group>"; };
 		9134421229FFDBE8000E1ED1 /* GetSubscriberPostResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSubscriberPostResponse.swift; sourceTree = "<group>"; };
 		9134421429FFDC9C000E1ED1 /* UnSubsribeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnSubsribeResponse.swift; sourceTree = "<group>"; };
 		9134421929FFE692000E1ED1 /* GetTagPostResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTagPostResponse.swift; sourceTree = "<group>"; };
@@ -252,7 +252,7 @@
 		9134421E29FFEAF7000E1ED1 /* BroadcastRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastRequest.swift; sourceTree = "<group>"; };
 		9134422229FFF59D000E1ED1 /* SettingTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableView.swift; sourceTree = "<group>"; };
 		9134422429FFF7C8000E1ED1 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
-		9134422629FFF9BC000E1ED1 /* SubscriberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriberView.swift; sourceTree = "<group>"; };
+		9134422629FFF9BC000E1ED1 /* FollowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowView.swift; sourceTree = "<group>"; };
 		913442282A0001EC000E1ED1 /* PostsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsView.swift; sourceTree = "<group>"; };
 		9134422C2A00418A000E1ED1 /* URLConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLConstants.swift; sourceTree = "<group>"; };
 		9134422F2A004352000E1ED1 /* SubscriberTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriberTargetType.swift; sourceTree = "<group>"; };
@@ -260,7 +260,7 @@
 		913442332A004795000E1ED1 /* SignTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignTargetType.swift; sourceTree = "<group>"; };
 		913442352A00491C000E1ED1 /* NotificationTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTargetType.swift; sourceTree = "<group>"; };
 		913442372A004B91000E1ED1 /* DefaultTagService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTagService.swift; sourceTree = "<group>"; };
-		913442392A004B9B000E1ED1 /* DefaultSubscriberService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSubscriberService.swift; sourceTree = "<group>"; };
+		913442392A004B9B000E1ED1 /* DefaultFollowService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFollowService.swift; sourceTree = "<group>"; };
 		9134423B2A004BA2000E1ED1 /* DefaultPostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPostService.swift; sourceTree = "<group>"; };
 		9134423D2A004BA8000E1ED1 /* DefaultAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAuthService.swift; sourceTree = "<group>"; };
 		9134423F2A004BB1000E1ED1 /* DefaultNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultNotificationService.swift; sourceTree = "<group>"; };
@@ -285,25 +285,25 @@
 		91487F1629FC5481009CFECF /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		91487F1829FC549C009CFECF /* NoNetworkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoNetworkView.swift; sourceTree = "<group>"; };
 		91487F2129FC5F2A009CFECF /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
-		91487F2C29FD0812009CFECF /* SubscriberSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriberSearchViewController.swift; sourceTree = "<group>"; };
-		91487F2E29FD1A66009CFECF /* SubscriberSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriberSearchView.swift; sourceTree = "<group>"; };
-		91487F3629FD88E7009CFECF /* SubscriberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriberViewController.swift; sourceTree = "<group>"; };
-		91487F3829FD8915009CFECF /* SubscriberTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriberTableViewCell.swift; sourceTree = "<group>"; };
-		91487F3A29FD892B009CFECF /* SubscriberTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriberTableView.swift; sourceTree = "<group>"; };
-		91487F3C29FD893D009CFECF /* SubscriberHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriberHeadView.swift; sourceTree = "<group>"; };
-		91487F4229FD8AC9009CFECF /* SubscriberViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriberViewModel.swift; sourceTree = "<group>"; };
+		91487F2C29FD0812009CFECF /* FollowSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowSearchViewController.swift; sourceTree = "<group>"; };
+		91487F2E29FD1A66009CFECF /* FollowSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowSearchView.swift; sourceTree = "<group>"; };
+		91487F3629FD88E7009CFECF /* FollowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowViewController.swift; sourceTree = "<group>"; };
+		91487F3829FD8915009CFECF /* FollowTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowTableViewCell.swift; sourceTree = "<group>"; };
+		91487F3A29FD892B009CFECF /* FollowTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowTableView.swift; sourceTree = "<group>"; };
+		91487F3C29FD893D009CFECF /* FollowHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowHeadView.swift; sourceTree = "<group>"; };
+		91487F4229FD8AC9009CFECF /* FollowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowViewModel.swift; sourceTree = "<group>"; };
 		91487F4C29FD9858009CFECF /* TagSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagSearchViewController.swift; sourceTree = "<group>"; };
 		91487F5129FDA143009CFECF /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
 		91487F5829FDA269009CFECF /* PostsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsTableViewCell.swift; sourceTree = "<group>"; };
 		91487F5A29FDA287009CFECF /* PostsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsTableView.swift; sourceTree = "<group>"; };
 		91487F5C29FDA2C0009CFECF /* PostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsViewController.swift; sourceTree = "<group>"; };
-		914D8DCD2A02417C00516B4C /* SubscriberSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriberSearchViewModel.swift; sourceTree = "<group>"; };
+		914D8DCD2A02417C00516B4C /* FollowSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowSearchViewModel.swift; sourceTree = "<group>"; };
 		914D8DD02A028AED00516B4C /* PostsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsViewModel.swift; sourceTree = "<group>"; };
 		914D8DD82A02B22A00516B4C /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		9158618C2A2E04BF00461F9A /* ScrapPostAddInFolderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapPostAddInFolderProtocol.swift; sourceTree = "<group>"; };
 		916227D72A44569500118018 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
-		916227D92A454FD800118018 /* SubscriberListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriberListResponse.swift; sourceTree = "<group>"; };
-		916227DD2A46C6E900118018 /* SubscriberUserMainResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriberUserMainResponse.swift; sourceTree = "<group>"; };
+		916227D92A454FD800118018 /* FollowListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowListResponse.swift; sourceTree = "<group>"; };
+		916227DD2A46C6E900118018 /* FollowUserMainResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowUserMainResponse.swift; sourceTree = "<group>"; };
 		9166BE942A498B1700FFC026 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		9166BE972A49E8F600FFC026 /* ServerFailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerFailViewController.swift; sourceTree = "<group>"; };
 		916E29A72A3EDA45006F5FE9 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
@@ -344,7 +344,7 @@
 		91E4428A2A10F3C7008CB516 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		91E442A32A110191008CB516 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		91ED17862A00E57700158787 /* TagService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagService.swift; sourceTree = "<group>"; };
-		91ED17882A00E58D00158787 /* SubscriberService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriberService.swift; sourceTree = "<group>"; };
+		91ED17882A00E58D00158787 /* FollowService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowService.swift; sourceTree = "<group>"; };
 		91ED178A2A00E59900158787 /* PostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
 		91ED178C2A00E5A600158787 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		91ED178E2A00E5B100158787 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
@@ -639,7 +639,7 @@
 				9109505D2A50140C00D04D41 /* DefaultVersionService.swift */,
 				9134423D2A004BA8000E1ED1 /* DefaultAuthService.swift */,
 				9134423F2A004BB1000E1ED1 /* DefaultNotificationService.swift */,
-				913442392A004B9B000E1ED1 /* DefaultSubscriberService.swift */,
+				913442392A004B9B000E1ED1 /* DefaultFollowService.swift */,
 				913442372A004B91000E1ED1 /* DefaultTagService.swift */,
 				9134423B2A004BA2000E1ED1 /* DefaultPostService.swift */,
 			);
@@ -690,11 +690,11 @@
 		9134420D29FFDADB000E1ED1 /* Subscriber */ = {
 			isa = PBXGroup;
 			children = (
-				9134421029FFDB5D000E1ED1 /* SearchSubscriberResponse.swift */,
+				9134421029FFDB5D000E1ED1 /* SearchUserResponse.swift */,
 				9134421229FFDBE8000E1ED1 /* GetSubscriberPostResponse.swift */,
 				9134421429FFDC9C000E1ED1 /* UnSubsribeResponse.swift */,
-				916227D92A454FD800118018 /* SubscriberListResponse.swift */,
-				916227DD2A46C6E900118018 /* SubscriberUserMainResponse.swift */,
+				916227D92A454FD800118018 /* FollowListResponse.swift */,
+				916227DD2A46C6E900118018 /* FollowUserMainResponse.swift */,
 			);
 			path = Subscriber;
 			sourceTree = "<group>";
@@ -764,7 +764,7 @@
 				91BFF2EE2A25D53200F5D13E /* Scrap */,
 				91487F4829FD9663009CFECF /* Search */,
 				91487EE529FC39D8009CFECF /* Posts */,
-				91487EE429FC39C3009CFECF /* Subscriber */,
+				91487EE429FC39C3009CFECF /* Follow */,
 				91487EE629FC39E8009CFECF /* Setting */,
 			);
 			path = Presentation;
@@ -782,14 +782,14 @@
 			path = Util;
 			sourceTree = "<group>";
 		};
-		91487EE429FC39C3009CFECF /* Subscriber */ = {
+		91487EE429FC39C3009CFECF /* Follow */ = {
 			isa = PBXGroup;
 			children = (
 				91487F3E29FD895D009CFECF /* View */,
-				91487F3629FD88E7009CFECF /* SubscriberViewController.swift */,
-				91487F4229FD8AC9009CFECF /* SubscriberViewModel.swift */,
+				91487F3629FD88E7009CFECF /* FollowViewController.swift */,
+				91487F4229FD8AC9009CFECF /* FollowViewModel.swift */,
 			);
-			path = Subscriber;
+			path = Follow;
 			sourceTree = "<group>";
 		};
 		91487EE529FC39D8009CFECF /* Posts */ = {
@@ -846,23 +846,23 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
-		91487F2B29FD07F7009CFECF /* SubscriberSearch */ = {
+		91487F2B29FD07F7009CFECF /* FollowSearch */ = {
 			isa = PBXGroup;
 			children = (
-				91487F2E29FD1A66009CFECF /* SubscriberSearchView.swift */,
-				91487F2C29FD0812009CFECF /* SubscriberSearchViewController.swift */,
-				914D8DCD2A02417C00516B4C /* SubscriberSearchViewModel.swift */,
+				91487F2E29FD1A66009CFECF /* FollowSearchView.swift */,
+				91487F2C29FD0812009CFECF /* FollowSearchViewController.swift */,
+				914D8DCD2A02417C00516B4C /* FollowSearchViewModel.swift */,
 			);
-			path = SubscriberSearch;
+			path = FollowSearch;
 			sourceTree = "<group>";
 		};
 		91487F3E29FD895D009CFECF /* View */ = {
 			isa = PBXGroup;
 			children = (
-				9134422629FFF9BC000E1ED1 /* SubscriberView.swift */,
-				91487F3C29FD893D009CFECF /* SubscriberHeadView.swift */,
-				91487F3A29FD892B009CFECF /* SubscriberTableView.swift */,
-				91487F3829FD8915009CFECF /* SubscriberTableViewCell.swift */,
+				9134422629FFF9BC000E1ED1 /* FollowView.swift */,
+				91487F3C29FD893D009CFECF /* FollowHeadView.swift */,
+				91487F3A29FD892B009CFECF /* FollowTableView.swift */,
+				91487F3829FD8915009CFECF /* FollowTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -870,9 +870,9 @@
 		91487F4829FD9663009CFECF /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				91487F2B29FD07F7009CFECF /* FollowSearch */,
 				7CB706C62A3202EB00083EC6 /* PostSearch */,
 				91487F4929FD966B009CFECF /* TagSearch */,
-				91487F2B29FD07F7009CFECF /* SubscriberSearch */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -1055,7 +1055,7 @@
 			children = (
 				9109505B2A5013C100D04D41 /* VersionService.swift */,
 				91ED17862A00E57700158787 /* TagService.swift */,
-				91ED17882A00E58D00158787 /* SubscriberService.swift */,
+				91ED17882A00E58D00158787 /* FollowService.swift */,
 				91ED178A2A00E59900158787 /* PostService.swift */,
 				91ED178C2A00E5A600158787 /* AuthService.swift */,
 				91ED178E2A00E5B100158787 /* NotificationService.swift */,
@@ -1183,7 +1183,7 @@
 				91ED178D2A00E5A600158787 /* AuthService.swift in Sources */,
 				916E29B12A3EEE60006F5FE9 /* SignInView.swift in Sources */,
 				91487F1029FC4736009CFECF /* UIStackView+Extension.swift in Sources */,
-				9134423A2A004B9B000E1ED1 /* DefaultSubscriberService.swift in Sources */,
+				9134423A2A004B9B000E1ED1 /* DefaultFollowService.swift in Sources */,
 				91487EEF29FC3A4D009CFECF /* SettingViewController.swift in Sources */,
 				9128B04A2A23C59700FB1252 /* ScrapStorageView.swift in Sources */,
 				9134421D29FFEAC9000E1ED1 /* BroadcastResponse.swift in Sources */,
@@ -1214,23 +1214,23 @@
 				913442382A004B91000E1ED1 /* DefaultTagService.swift in Sources */,
 				9134422D2A00418A000E1ED1 /* URLConstants.swift in Sources */,
 				8765EFF02A29EA6D00EF6733 /* HomeMenuBar.swift in Sources */,
-				91487F2F29FD1A67009CFECF /* SubscriberSearchView.swift in Sources */,
+				91487F2F29FD1A67009CFECF /* FollowSearchView.swift in Sources */,
 				877ED7CB2A4AD2EC00D80464 /* PostDTO.swift in Sources */,
 				91487EFE29FC3BD0009CFECF /* ImageLiterals.swift in Sources */,
 				9134422329FFF59D000E1ED1 /* SettingTableView.swift in Sources */,
-				9134421129FFDB5D000E1ED1 /* SearchSubscriberResponse.swift in Sources */,
+				9134421129FFDB5D000E1ED1 /* SearchUserResponse.swift in Sources */,
 				9128B05A2A23CC9000FB1252 /* ScrapStorageViewModel.swift in Sources */,
 				9109505A2A5011DD00D04D41 /* VersionTargetType.swift in Sources */,
 				9134421329FFDBE8000E1ED1 /* GetSubscriberPostResponse.swift in Sources */,
 				917BA3522A050903000409B7 /* RealmStoragePost.swift in Sources */,
-				916227DA2A454FD800118018 /* SubscriberListResponse.swift in Sources */,
+				916227DA2A454FD800118018 /* FollowListResponse.swift in Sources */,
 				9128AFE52A2117A200FB1252 /* WebViewModel.swift in Sources */,
 				877ED7C62A4ACC0900D80464 /* TrendPostsDTO.swift in Sources */,
 				9128B0322A23778400FB1252 /* ScrapFolderBottomSheetViewModel.swift in Sources */,
 				917BA3452A050631000409B7 /* StorageViewModel.swift in Sources */,
 				913441FB29FFD8AC000E1ED1 /* SignInRequest.swift in Sources */,
 				913442342A004795000E1ED1 /* SignTargetType.swift in Sources */,
-				916227DE2A46C6E900118018 /* SubscriberUserMainResponse.swift in Sources */,
+				916227DE2A46C6E900118018 /* FollowUserMainResponse.swift in Sources */,
 				9134421A29FFE692000E1ED1 /* GetTagPostResponse.swift in Sources */,
 				87187C042A4DF7F200BF05F7 /* PopularTagTableViewCell.swift in Sources */,
 				91DEF3DD2A017774001B6A9D /* TagSearchViewModel.swift in Sources */,
@@ -1250,7 +1250,7 @@
 				91487EC429FC380A009CFECF /* SceneDelegate.swift in Sources */,
 				91E4428B2A10F3C7008CB516 /* BaseViewModel.swift in Sources */,
 				8765EFF42A29ECDE00EF6733 /* String+Extension.swift in Sources */,
-				9134422729FFF9BC000E1ED1 /* SubscriberView.swift in Sources */,
+				9134422729FFF9BC000E1ED1 /* FollowView.swift in Sources */,
 				91487F5B29FDA287009CFECF /* PostsTableView.swift in Sources */,
 				91CCEA3C2A0D017A001362AD /* PostTagUIButton.swift in Sources */,
 				91487F2229FC5F2A009CFECF /* TabBarController.swift in Sources */,
@@ -1268,12 +1268,12 @@
 				87DC47952A572BE5007823CB /* SplashUseCase.swift in Sources */,
 				7CB706D42A32064900083EC6 /* SearchTableViewCell.swift in Sources */,
 				8745835E2A42184B00954274 /* KeywordPostsVCFactory.swift in Sources */,
-				91487F3D29FD893D009CFECF /* SubscriberHeadView.swift in Sources */,
+				91487F3D29FD893D009CFECF /* FollowHeadView.swift in Sources */,
 				8765EFEE2A29E62600EF6733 /* UIFont+Extension.swift in Sources */,
 				9128B04C2A23C7A100FB1252 /* ScrapStorageCollectionViewCell.swift in Sources */,
 				913442402A004BB1000E1ED1 /* DefaultNotificationService.swift in Sources */,
 				87DC479E2A59B1F6007823CB /* SignInUseCase.swift in Sources */,
-				91487F4329FD8AC9009CFECF /* SubscriberViewModel.swift in Sources */,
+				91487F4329FD8AC9009CFECF /* FollowViewModel.swift in Sources */,
 				9128B0432A23B50500FB1252 /* ReusableView.swift in Sources */,
 				91ED179A2A00F00800158787 /* BaseNetworkService.swift in Sources */,
 				917BA3412A03E8FE000409B7 /* StorageTableViewCell.swift in Sources */,
@@ -1285,7 +1285,7 @@
 				9134420729FFD9F9000E1ED1 /* SignUpResponse.swift in Sources */,
 				91ED178B2A00E59900158787 /* PostService.swift in Sources */,
 				91CC1D2C2A0A7D40006BF786 /* JoinGroupRequest.swift in Sources */,
-				91487F3B29FD892B009CFECF /* SubscriberTableView.swift in Sources */,
+				91487F3B29FD892B009CFECF /* FollowTableView.swift in Sources */,
 				916227D82A44569500118018 /* UITextField+Extension.swift in Sources */,
 				917BA3882A07C541000409B7 /* SubscriberSearchProtocol.swift in Sources */,
 				913441EE29FFD6E3000E1ED1 /* NetworkResult.swift in Sources */,
@@ -1298,15 +1298,15 @@
 				9128B02E2A2376FB00FB1252 /* ScrapFolderBottomSheetViewController.swift in Sources */,
 				91E442872A10F385008CB516 /* RxBaseViewController.swift in Sources */,
 				9134423C2A004BA2000E1ED1 /* DefaultPostService.swift in Sources */,
-				91487F2D29FD0812009CFECF /* SubscriberSearchViewController.swift in Sources */,
+				91487F2D29FD0812009CFECF /* FollowSearchViewController.swift in Sources */,
 				916E29B42A406952006F5FE9 /* AccessTokenDTO.swift in Sources */,
 				91487F1729FC5481009CFECF /* NetworkMonitor.swift in Sources */,
 				917BA3352A03E14A000409B7 /* StorageHeadView.swift in Sources */,
-				914D8DCE2A02417C00516B4C /* SubscriberSearchViewModel.swift in Sources */,
+				914D8DCE2A02417C00516B4C /* FollowSearchViewModel.swift in Sources */,
 				9128B0522A23CA5E00FB1252 /* ScrapStorageCollectionViewDataSource.swift in Sources */,
 				9128B04E2A23C96500FB1252 /* UICollectionView+Extension.swift in Sources */,
 				9128B03F2A237E1800FB1252 /* ScrapFolderBottomSheetDataSource.swift in Sources */,
-				91487F3929FD8915009CFECF /* SubscriberTableViewCell.swift in Sources */,
+				91487F3929FD8915009CFECF /* FollowTableViewCell.swift in Sources */,
 				9128B0282A236E7600FB1252 /* UIButton+Extension.swift in Sources */,
 				8765EFEC2A29DC0200EF6733 /* HomeViewController.swift in Sources */,
 				87187C022A4DF7E200BF05F7 /* MyTagCollectionViewCell.swift in Sources */,
@@ -1317,10 +1317,10 @@
 				9128B0262A236D2800FB1252 /* ScrapPopUpView.swift in Sources */,
 				914D8DD92A02B22A00516B4C /* WebViewController.swift in Sources */,
 				91487F5929FDA269009CFECF /* PostsTableViewCell.swift in Sources */,
-				91ED17892A00E58D00158787 /* SubscriberService.swift in Sources */,
+				91ED17892A00E58D00158787 /* FollowService.swift in Sources */,
 				87F287EC2A9DE2A300A53218 /* UIViewController+.swift in Sources */,
 				9128B0562A23CC7400FB1252 /* ScrapStorageViewController.swift in Sources */,
-				91487F3729FD88E7009CFECF /* SubscriberViewController.swift in Sources */,
+				91487F3729FD88E7009CFECF /* FollowViewController.swift in Sources */,
 				91A052132A28F9E6009F32D1 /* ScrapFolder.swift in Sources */,
 				87F25EF22A844EE100E03C32 /* VoidDTO.swift in Sources */,
 				91CC1D4C2A0AD7C2006BF786 /* LoadingView.swift in Sources */,

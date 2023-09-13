@@ -42,6 +42,7 @@ final class TagSearchViewModel: BaseViewModel {
         var myTagCellDidTap: Observable<String>
         var popularTagCellDidTap: Observable<String>
     }
+    
 
     // MARK: - Output
     

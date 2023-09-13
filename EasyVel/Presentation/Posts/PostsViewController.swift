@@ -184,7 +184,7 @@ extension PostsViewController: UITableViewDelegate {
             url: posts?[index].url
         )
         
-        let webViewModel = WebViewModel(url: selectedCell.url,service: DefaultSubscriberService.shared)
+        let webViewModel = WebViewModel(url: selectedCell.url,service: DefaultFollowService.shared)
         webViewModel.postWriter = posts?[index].name
         webViewModel.storagePost = storagePost
         
