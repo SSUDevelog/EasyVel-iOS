@@ -25,6 +25,7 @@ final class FollowSearchViewController: RxBaseViewController<FollowSearchViewMod
                            state: .normal)
         searchBar.delegate = self
         searchBar.searchTextField.returnKeyType = .done
+        searchBar.autocapitalizationType = .none
         return searchBar
     }()
     
@@ -132,6 +133,9 @@ extension FollowSearchViewController: UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            searchView.notFoundImageView.isHidden = true
+        }
         viewModel?.searchBarDidChange.accept(searchText)
         
     }

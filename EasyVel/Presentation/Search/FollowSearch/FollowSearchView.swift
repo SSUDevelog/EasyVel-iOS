@@ -59,6 +59,7 @@ final class FollowSearchView: BaseUIView {
     let notFoundImageView: UIImageView = {
         let imageView = UIImageView(image: ImageLiterals.notFoundUser)
         imageView.contentMode = .scaleAspectFit
+        imageView.isHidden = true
         return imageView
     }()
     

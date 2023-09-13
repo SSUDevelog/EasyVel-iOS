@@ -48,13 +48,6 @@ final class FollowSearchViewModel: BaseViewModel {
     }
     
     private func makeOutput() {
-//        viewWillDisappear
-//            .subscribe(onNext: { [weak self] in
-//                guard let subscriberList = self?.subscriberList else { return }
-//                self?.subscriberSearchDelegate?.searchSubscriberViewWillDisappear(subscriberList: subscriberList)
-//            })
-//            .disposed(by: disposeBag)
-        
         
         searchBarDidChange
             .throttle(.milliseconds(500), latest: true, scheduler: MainScheduler.instance)
@@ -86,7 +79,7 @@ final class FollowSearchViewModel: BaseViewModel {
             .subscribe { isSelected in
                 guard let name = self.userData?.userName else { return }
                 if isSelected {
-                    self.addSubscriber2(name: name)
+                    self.addSubscriber(name: name)
                 } else {
                     self.deleteSubscriber(name: name)
                 }
@@ -100,9 +93,7 @@ final class FollowSearchViewModel: BaseViewModel {
 // MARK: - api
 
 private extension FollowSearchViewModel {
-    func searchSubscriber(
-        name: String
-    ) -> Observable<SearchSubscriberResponse> {
+    func searchSubscriber(name: String) -> Observable<SearchSubscriberResponse> {
         return Observable.create { observer in
             self.service.searchSubscriber(
                 name: name
@@ -128,30 +119,7 @@ private extension FollowSearchViewModel {
         }
     }
     
-    func addSubscriber(name: String) -> Observable<Bool> {
-        return Observable.create { observer in
-            self.service.addSubscriber(
-                fcmToken: "",
-                name: name
-            ) { [weak self] result in
-                switch result {
-                case .success(_):
-                    observer.onNext(true)
-                    observer.onCompleted()
-                case .requestErr(_):
-                    self?.subscriberAddStatusOutput.accept((false, TextLiterals.addSubscriberRequestErrText))
-                    observer.onNext(false)
-                    observer.onCompleted()
-                default:
-                    self?.subscriberAddStatusOutput.accept((false, TextLiterals.addSubscriberRequestErrText))
-                    observer.onError(NSError(domain: "UnknownError", code: 0, userInfo: nil))
-                }
-            }
-            return Disposables.create()
-        }
-    }
-    
-    func addSubscriber2(name: String)  {
+    func addSubscriber(name: String)  {
         self.service.addSubscriber(
             fcmToken: "",
             name: name
