@@ -11,9 +11,9 @@ import RxSwift
 import RxRelay
 import RxCocoa
 
-final class SubscriberViewController: RxBaseViewController<SubscriberViewModel> {
+final class FollowerViewController: RxBaseViewController<FollowerViewModel> {
 
-    private let listView = SubscriberView()
+    private let listView = FollowerView()
     
     override func render() {
         self.view = listView
@@ -30,11 +30,11 @@ final class SubscriberViewController: RxBaseViewController<SubscriberViewModel> 
         navigationController?.navigationBar.isHidden = true
     }
 
-    override func bind(viewModel: SubscriberViewModel) {
+    override func bind(viewModel: FollowerViewModel) {
         super.bind(viewModel: viewModel)
         bindOutput(viewModel)
         
-        listView.postsHeadView.searchSubscriberButton.rx.tap
+        listView.postsHeadView.searchButton.rx.tap.asObservable()
             .subscribe(onNext: { [weak self] in
                 self?.searchSubcriberButtonTapped()
             })
@@ -49,12 +49,12 @@ final class SubscriberViewController: RxBaseViewController<SubscriberViewModel> 
             
     }
     
-    private func bindOutput(_ viewModel: SubscriberViewModel) {
+    private func bindOutput(_ viewModel: FollowerViewModel) {
         viewModel.subscriberListOutput
             .asDriver(onErrorJustReturn: [])
             .drive(
-                listView.listTableView.rx.items(cellIdentifier: SubscriberTableViewCell.reuseIdentifier,
-                                                   cellType: SubscriberTableViewCell.self)
+                listView.listTableView.rx.items(cellIdentifier: FollowerTableViewCell.reuseIdentifier,
+                                                   cellType: FollowerTableViewCell.self)
             ) { index, data, cell in
                 cell.updateUI(data: data)
                 cell.delegate = self
@@ -105,11 +105,11 @@ final class SubscriberViewController: RxBaseViewController<SubscriberViewModel> 
     }
     
     private func searchSubcriberButtonTapped() {
-        let viewModel = SubscriberSearchViewModel(subscriberList: viewModel?.subscriberList, service: DefaultSubscriberService.shared)
-        let searchSubcriberViewController = SubscriberSearchViewController(viewModel: viewModel)
+        let viewModel = FollowSearchViewModel(subscriberList: viewModel?.subscriberList,
+                                                service: DefaultSubscriberService.shared)
+        let followerSearchVC = FollowSearchViewController(viewModel: viewModel)
         viewModel.subscriberSearchDelegate = self
-        searchSubcriberViewController.modalPresentationStyle = .pageSheet
-        self.present(searchSubcriberViewController, animated: true)
+        navigationController?.pushViewController(followerSearchVC, animated: true)
     }
     
     private func pushSubscriberUserMainViewController(
@@ -139,7 +139,7 @@ final class SubscriberViewController: RxBaseViewController<SubscriberViewModel> 
     }
 }
 
-extension SubscriberViewController: SubscriberSearchProtocol {
+extension FollowerViewController: SubscriberSearchProtocol {
     func searchSubscriberViewWillDisappear(
         subscriberList: [SubscriberListResponse]
     ) {
@@ -147,7 +147,7 @@ extension SubscriberViewController: SubscriberSearchProtocol {
     }
 }
 
-extension SubscriberViewController: SubscriberTableViewCellDelegate {
+extension FollowerViewController: FollowerTableViewCellDelegate {
     func unsubscribeButtonDidTap(name: String) {
         viewModel?.unsubscriberButtonDidTap.accept(name)
     }
@@ -155,10 +155,11 @@ extension SubscriberViewController: SubscriberTableViewCellDelegate {
     
 }
 
-extension SubscriberViewController: VelogAlertViewControllerDelegate {
+extension FollowerViewController: VelogAlertViewControllerDelegate {
     func yesButtonDidTap(_ alertType: AlertType) {
         viewModel?.deleteSubscribeEvent.accept(())
     }
     
     
 }
+

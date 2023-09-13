@@ -35,13 +35,13 @@ final class TabBarController: UITabBarController {
 
     // MARK: - viewModel properties
     
-    let listViewModel = SubscriberViewModel(service: DefaultSubscriberService.shared)
+    let listViewModel = FollowerViewModel(service: DefaultSubscriberService.shared)
     let scrapStorageViewModel = ScrapStorageViewModel()
     
     // MARK: - viewController properties
     
     let homeVC = HomeViewController()
-    lazy var listVC = SubscriberViewController(viewModel: listViewModel)
+    lazy var listVC = FollowerViewController(viewModel: listViewModel)
     lazy var storageVC = ScrapStorageViewController(viewModel: scrapStorageViewModel)
     let settingViewModel = SettingViewModel(service: DefaultAuthService.shared)
     lazy var settingVC = SettingViewController(viewModel: settingViewModel)
@@ -143,7 +143,7 @@ final class TabBarController: UITabBarController {
         homeVC.tabBarItem = UITabBarItem(title: "홈",
                                                image: ImageLiterals.home,
                                                selectedImage: ImageLiterals.homeFill)
-        listVC.tabBarItem = UITabBarItem(title: "팔로우",
+        listVC.tabBarItem = UITabBarItem(title: "팔로워",
                                                image: ImageLiterals.list,
                                                selectedImage: ImageLiterals.listFill)
         storageVC.tabBarItem = UITabBarItem(title: "스크랩",

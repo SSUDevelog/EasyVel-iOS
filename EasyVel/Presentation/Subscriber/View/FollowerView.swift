@@ -9,9 +9,9 @@ import UIKit
 
 import SnapKit
 
-final class SubscriberView: BaseUIView {
-    let listTableView = SubscriberTableView(frame: .null, style: .plain)
-    let postsHeadView = SubscriberHeadView()
+final class FollowerView: BaseUIView {
+    let listTableView = FollowerTableView(frame: .null, style: .plain)
+    let postsHeadView = FollowerHeadView()
     let ListViewExceptionView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = ImageLiterals.subscriberListException
@@ -33,7 +33,7 @@ final class SubscriberView: BaseUIView {
         postsHeadView.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(171)
+            $0.height.equalTo(196)
         }
         self.bringSubviewToFront(postsHeadView)
         

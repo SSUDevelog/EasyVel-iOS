@@ -50,6 +50,7 @@ enum TextLiterals {
     static let addSubscriberRequestErrText: String = "이미 추가한 팔로우입니다. 다시 검색해주세요."
     static let subscriberSearchTitleLabelText: String = "Search Subscribers"
     static let subscriberSearchTextFieldPlaceholderText: String = "velog 아이디를 입력해주세요."
+    static let followSearchPlaceholderText: String = "사용자를 검색해보세요."
     
     // MARK: - button label
     

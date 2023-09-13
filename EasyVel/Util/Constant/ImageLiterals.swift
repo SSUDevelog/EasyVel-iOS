@@ -27,6 +27,7 @@ enum ImageLiterals {
     // MARK: - icon
     
     static var searchIcon: UIImage { .load(name: "search") }
+    static var searchGray: UIImage { .load(name: "search.gray") }
     static var plusFolder: UIImage { .load(name: "plusFolder") }
     static var activePlusFolder: UIImage { .load(name: "activePlusFolder") }
     static var scrapFolderIcon: UIImage { .load(name: "scrapFolderIcon") }
@@ -47,6 +48,7 @@ enum ImageLiterals {
     static var subscriberListException: UIImage { .load(name: "subscriberListException") }
     static var serverFailImage: UIImage { .load(name: "serverFailImage") }
     static var webViewException: UIImage { .load(name: "webViewException") }
+    static var notFoundUser: UIImage { .load(name: "notFoundUser")}
 }
 
 extension UIImage {
