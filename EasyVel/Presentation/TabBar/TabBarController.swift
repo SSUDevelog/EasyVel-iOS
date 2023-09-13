@@ -35,13 +35,13 @@ final class TabBarController: UITabBarController {
 
     // MARK: - viewModel properties
     
-    let listViewModel = FollowerViewModel(service: DefaultSubscriberService.shared)
+    let listViewModel = FollowViewModel(service: DefaultFollowService.shared)
     let scrapStorageViewModel = ScrapStorageViewModel()
     
     // MARK: - viewController properties
     
     let homeVC = HomeViewController()
-    lazy var listVC = FollowerViewController(viewModel: listViewModel)
+    lazy var listVC = FollowViewController(viewModel: listViewModel)
     lazy var storageVC = ScrapStorageViewController(viewModel: scrapStorageViewModel)
     let settingViewModel = SettingViewModel(service: DefaultAuthService.shared)
     lazy var settingVC = SettingViewController(viewModel: settingViewModel)
@@ -134,7 +134,7 @@ final class TabBarController: UITabBarController {
     
     @objc
     private func updateFollowVC() {
-        self.listViewModel.refreshSubscriberList.accept(true)
+        self.listViewModel.refreshFollowList.accept(true)
     }
     
     private func setUpTabBar(){

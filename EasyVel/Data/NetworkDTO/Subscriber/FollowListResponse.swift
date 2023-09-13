@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SubscriberListResponse: Codable {
+struct FollowListResponse: Codable {
     let img: String?
     let name: String
 }

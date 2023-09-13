@@ -16,16 +16,14 @@ enum SearchFollowError: Error {
 
 final class FollowSearchViewModel: BaseViewModel {
     
-    private let service: SubscriberService
+    private let service: FollowService
     
-    var subscriberSearchDelegate: SubscriberSearchProtocol?
-    private var subscriberList: [SubscriberListResponse]?
-    private var userData: SearchSubscriberResponse?
+    private var userData: SearchUserResponse?
 
     // MARK: - Output
     
     var subscriberAddStatusOutput = PublishRelay<(Bool, String)>()
-    var searchUserOutput = PublishRelay<(Bool,SearchSubscriberResponse?)>()
+    var searchUserOutput = PublishRelay<(Bool,SearchUserResponse?)>()
     var pushToUserWeb = PublishRelay<String?>()
     
     // MARK: - Input
@@ -36,11 +34,10 @@ final class FollowSearchViewModel: BaseViewModel {
     let followButtonDidTap = PublishRelay<Bool>()
 
     init(
-        subscriberList: [SubscriberListResponse]?,
-        service: SubscriberService
+        subscriberList: [FollowListResponse]?,
+        service: FollowService
     ) {
         self.service = service
-        self.subscriberList = subscriberList
         
         super.init()
         
@@ -53,7 +50,7 @@ final class FollowSearchViewModel: BaseViewModel {
             .throttle(.milliseconds(500), latest: true, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] name in
                 guard let self else { return }
-                self.searchSubscriber(name: name)
+                self.searchUser(name: name)
                     .subscribe(onNext: { [weak self] response in
                         guard let self else  {return }
                         self.userData = response
@@ -79,9 +76,9 @@ final class FollowSearchViewModel: BaseViewModel {
             .subscribe { isSelected in
                 guard let name = self.userData?.userName else { return }
                 if isSelected {
-                    self.addSubscriber(name: name)
+                    self.addFollow(name: name)
                 } else {
-                    self.deleteSubscriber(name: name)
+                    self.deleteFollow(name: name)
                 }
             }
             .disposed(by: disposeBag)
@@ -93,14 +90,14 @@ final class FollowSearchViewModel: BaseViewModel {
 // MARK: - api
 
 private extension FollowSearchViewModel {
-    func searchSubscriber(name: String) -> Observable<SearchSubscriberResponse> {
+    func searchUser(name: String) -> Observable<SearchUserResponse> {
         return Observable.create { observer in
-            self.service.searchSubscriber(
+            self.service.searchUser(
                 name: name
             ) { [weak self] result in
                 switch result {
                 case .success(let response):
-                    guard let result = response as? SearchSubscriberResponse else {
+                    guard let result = response as? SearchUserResponse else {
                         self?.serverFailOutput.accept(true)
                         observer.onCompleted()
                         return
@@ -119,8 +116,8 @@ private extension FollowSearchViewModel {
         }
     }
     
-    func addSubscriber(name: String)  {
-        self.service.addSubscriber(
+    func addFollow(name: String)  {
+        self.service.addFollow(
             fcmToken: "",
             name: name
         ) { result in
@@ -131,8 +128,8 @@ private extension FollowSearchViewModel {
         }
     }
     
-    func deleteSubscriber(name: String) {
-        self.service.deleteSubscriber(targetName: name) { result in
+    func deleteFollow(name: String) {
+        self.service.deleteFollow(targetName: name) { result in
             NotificationCenter.default.post(
                 name: Notification.Name("updateFollowVC"),
                 object: nil

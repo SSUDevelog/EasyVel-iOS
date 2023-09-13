@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-final class FollowerHeadView: BaseUIView {
+final class FollowHeadView: BaseUIView {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -69,6 +69,6 @@ final class FollowerHeadView: BaseUIView {
     }
 }
 
-extension FollowerHeadView: UISearchBarDelegate {
+extension FollowHeadView: UISearchBarDelegate {
     
 }

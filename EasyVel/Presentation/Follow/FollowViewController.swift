@@ -11,12 +11,12 @@ import RxSwift
 import RxRelay
 import RxCocoa
 
-final class FollowerViewController: RxBaseViewController<FollowerViewModel> {
+final class FollowViewController: RxBaseViewController<FollowViewModel> {
 
-    private let listView = FollowerView()
+    private let rootView = FollowView()
     
     override func render() {
-        self.view = listView
+        self.view = rootView
     }
     
     override func viewDidLoad() {
@@ -30,38 +30,38 @@ final class FollowerViewController: RxBaseViewController<FollowerViewModel> {
         navigationController?.navigationBar.isHidden = true
     }
 
-    override func bind(viewModel: FollowerViewModel) {
+    override func bind(viewModel: FollowViewModel) {
         super.bind(viewModel: viewModel)
         bindOutput(viewModel)
         
-        listView.postsHeadView.searchButton.rx.tap.asObservable()
+        rootView.postsHeadView.searchButton.rx.tap.asObservable()
             .subscribe(onNext: { [weak self] in
                 self?.searchSubcriberButtonTapped()
             })
             .disposed(by: disposeBag)
         
-        listView.listTableView.rx.modelSelected(SubscriberListResponse.self).asObservable()
+        rootView.followTableView.rx.modelSelected(FollowListResponse.self).asObservable()
             .subscribe{ data in
-                viewModel.subscriberTableViewCellDidTap.accept(data.name)
+                viewModel.followTableViewCellDidTap.accept(data.name)
             }
             .disposed(by: disposeBag)
             
             
     }
     
-    private func bindOutput(_ viewModel: FollowerViewModel) {
-        viewModel.subscriberListOutput
+    private func bindOutput(_ viewModel: FollowViewModel) {
+        viewModel.followListOutput
             .asDriver(onErrorJustReturn: [])
             .drive(
-                listView.listTableView.rx.items(cellIdentifier: FollowerTableViewCell.reuseIdentifier,
-                                                   cellType: FollowerTableViewCell.self)
+                rootView.followTableView.rx.items(cellIdentifier: FollowTableViewCell.reuseIdentifier,
+                                                   cellType: FollowTableViewCell.self)
             ) { index, data, cell in
                 cell.updateUI(data: data)
                 cell.delegate = self
             }
             .disposed(by: disposeBag)
         
-        viewModel.isListEmptyOutput
+        viewModel.isFollowEmptyOutput
             .asDriver(onErrorJustReturn: Bool())
             .drive(onNext: { [weak self] isListEmpty in
                 if isListEmpty {
@@ -72,14 +72,14 @@ final class FollowerViewController: RxBaseViewController<FollowerViewModel> {
             })
             .disposed(by: disposeBag)
         
-        viewModel.subscriberUserMainURLOutput
+        viewModel.followUserMainURLOutput
             .asDriver(onErrorJustReturn: String())
-            .drive(onNext: { [weak self] subscriberUserMainURL in
-                self?.pushSubscriberUserMainViewController(userMainURL: subscriberUserMainURL)
+            .drive(onNext: { [weak self] followUserMainURL in
+                self?.pushSubscriberUserMainViewController(userMainURL: followUserMainURL)
             })
             .disposed(by: disposeBag)
         
-        viewModel.presentUnsubscribeAlertOutput
+        viewModel.presentUnfollowAlertOutput
             .asDriver(onErrorJustReturn: Bool())
             .drive { [weak self] bool in
                 guard let self else { return } 
@@ -91,25 +91,24 @@ final class FollowerViewController: RxBaseViewController<FollowerViewModel> {
     }
 
     func searchSubscriberViewWillDisappear() {
-        self.viewModel?.refreshSubscriberList.accept(true)
+        self.viewModel?.refreshFollowList.accept(true)
     }
     
     private func hiddenListExceptionView() {
-        listView.ListViewExceptionView.isHidden = true
-        listView.listTableView.isHidden = false
+        rootView.followViewExceptionView.isHidden = true
+        rootView.followTableView.isHidden = false
     }
     
     private func hiddenListTableView() {
-        listView.ListViewExceptionView.isHidden = false
-        listView.listTableView.isHidden = true
+        rootView.followViewExceptionView.isHidden = false
+        rootView.followTableView.isHidden = true
     }
     
     private func searchSubcriberButtonTapped() {
-        let viewModel = FollowSearchViewModel(subscriberList: viewModel?.subscriberList,
-                                                service: DefaultSubscriberService.shared)
-        let followerSearchVC = FollowSearchViewController(viewModel: viewModel)
-        viewModel.subscriberSearchDelegate = self
-        navigationController?.pushViewController(followerSearchVC, animated: true)
+        let viewModel = FollowSearchViewModel(subscriberList: viewModel?.followList,
+                                                service: DefaultFollowService.shared)
+        let followSearchVC = FollowSearchViewController(viewModel: viewModel)
+        navigationController?.pushViewController(followSearchVC, animated: true)
     }
     
     private func pushSubscriberUserMainViewController(
@@ -117,7 +116,7 @@ final class FollowerViewController: RxBaseViewController<FollowerViewModel> {
     ) {
         let webViewModel = WebViewModel(
             url: userMainURL,
-            service: DefaultSubscriberService.shared
+            service: DefaultFollowService.shared
         )
         let webViewController = WebViewController(viewModel: webViewModel)
         webViewController.isPostWebView = false
@@ -135,29 +134,22 @@ final class FollowerViewController: RxBaseViewController<FollowerViewModel> {
     
     @objc
     private func scrollToTop() {
-        listView.listTableView.setContentOffset( .init(x: 0, y: -20), animated: true)
+        rootView.followTableView.setContentOffset( .init(x: 0, y: -20), animated: true)
     }
+
 }
 
-extension FollowerViewController: SubscriberSearchProtocol {
-    func searchSubscriberViewWillDisappear(
-        subscriberList: [SubscriberListResponse]
-    ) {
-        self.viewModel?.subscriberList = subscriberList
-    }
-}
-
-extension FollowerViewController: FollowerTableViewCellDelegate {
+extension FollowViewController: FollowTableViewCellDelegate {
     func unsubscribeButtonDidTap(name: String) {
-        viewModel?.unsubscriberButtonDidTap.accept(name)
+        viewModel?.unfollowButtonDidTap.accept(name)
     }
     
     
 }
 
-extension FollowerViewController: VelogAlertViewControllerDelegate {
+extension FollowViewController: VelogAlertViewControllerDelegate {
     func yesButtonDidTap(_ alertType: AlertType) {
-        viewModel?.deleteSubscribeEvent.accept(())
+        viewModel?.deleteFollowEvent.accept(())
     }
     
     

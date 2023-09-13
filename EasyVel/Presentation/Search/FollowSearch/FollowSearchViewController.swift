@@ -93,7 +93,7 @@ final class FollowSearchViewController: RxBaseViewController<FollowSearchViewMod
                     self?.showToast(toastText: "주소가 올바르지 않습니다.", backgroundColor: .red)
                     return }
                 let webViewModel = WebViewModel(url: url,
-                                                service: DefaultSubscriberService.shared)
+                                                service: DefaultFollowService.shared)
                 let webViewController = WebViewController(viewModel: webViewModel)
                 webViewController.isPostWebView = false
                 self?.navigationController?.pushViewController(webViewController, animated: true)

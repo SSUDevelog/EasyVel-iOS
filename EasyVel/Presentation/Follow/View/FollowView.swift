@@ -9,10 +9,10 @@ import UIKit
 
 import SnapKit
 
-final class FollowerView: BaseUIView {
-    let listTableView = FollowerTableView(frame: .null, style: .plain)
-    let postsHeadView = FollowerHeadView()
-    let ListViewExceptionView: UIImageView = {
+final class FollowView: BaseUIView {
+    let followTableView = FollowTableView(frame: .null, style: .plain)
+    let postsHeadView = FollowHeadView()
+    let followViewExceptionView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = ImageLiterals.subscriberListException
         imageView.isHidden = true
@@ -25,9 +25,9 @@ final class FollowerView: BaseUIView {
     
     override func render() {
         self.addSubviews(
-            listTableView,
+            followTableView,
             postsHeadView,
-            ListViewExceptionView
+            followViewExceptionView
         )
         
         postsHeadView.snp.makeConstraints {
@@ -37,12 +37,12 @@ final class FollowerView: BaseUIView {
         }
         self.bringSubviewToFront(postsHeadView)
         
-        listTableView.snp.makeConstraints {
+        followTableView.snp.makeConstraints {
             $0.top.equalTo(postsHeadView.snp.bottom)
             $0.leading.trailing.bottom.equalToSuperview()
         }
         
-        ListViewExceptionView.snp.makeConstraints {
+        followViewExceptionView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalToSuperview().offset(360)
             $0.height.equalTo(168)

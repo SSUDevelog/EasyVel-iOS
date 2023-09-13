@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-final class FollowerTableView: UITableView {
+final class FollowTableView: UITableView {
     
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
@@ -21,7 +21,7 @@ final class FollowerTableView: UITableView {
     }
 
     private func setupTableView() {
-        register(cell: FollowerTableViewCell.self)
+        register(cell: FollowTableViewCell.self)
         separatorStyle = .none
         showsVerticalScrollIndicator = true
         isHidden = true
