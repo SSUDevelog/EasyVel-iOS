@@ -32,6 +32,11 @@ final class PostSearchViewController: RxBaseViewController<PostSearchViewModel> 
     private let popularSearchTagTableView = UITableView()
     private let searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: 280, height: 0))
     
+    private let searchBarLineView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .gray200
+        return view
+    } ()
     
     private let recentLabel: UILabel = {
         let label = UILabel()
@@ -76,27 +81,35 @@ final class PostSearchViewController: RxBaseViewController<PostSearchViewModel> 
         return label
     }()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        setTableView()
-        setCollectionView()
-        //dismissKeyboardWhenTappedAround()
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = false
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setTableView()
+        setCollectionView()
+        setNotificationCenter(show: #selector(keyboardWillShow), hide: #selector(keyboardWillHide))
+
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.searchBar.endEditing(true)
+    }
+
     override func setupNavigationBar() {
         super.setupNavigationBar()
         searchBar.placeholder = TextLiterals.postSearchViewSearchBarPlaceholderText
         self.navigationItem.titleView = searchBar
     }
     
+    
     override func render() {
+        
         view.addSubviews(
+            searchBarLineView,
             recentLabel,
             deleteButton,
             recentSearchTagCollectionView,
@@ -106,13 +119,18 @@ final class PostSearchViewController: RxBaseViewController<PostSearchViewModel> 
             popularSearchTagTableView
         )
         
+        searchBarLineView.snp.makeConstraints {
+            $0.top.directionalHorizontalEdges.equalTo(view.safeAreaLayoutGuide)
+            $0.height.equalTo(1)
+        }
+        
         recentLabel.snp.makeConstraints{
-            $0.top.equalToSuperview().offset(125)
+            $0.top.equalTo(searchBarLineView.snp.bottom).offset(36)
             $0.leading.equalToSuperview().offset(20)
         }
         
         deleteButton.snp.makeConstraints{
-            $0.top.equalToSuperview().offset(120)
+            $0.centerY.equalTo(recentLabel.snp.centerY)
             $0.trailing.equalToSuperview().inset(20)
         }
         
@@ -145,6 +163,7 @@ final class PostSearchViewController: RxBaseViewController<PostSearchViewModel> 
         }
     }
     
+    
     override func bind(viewModel: PostSearchViewModel) {
         super.bind(viewModel: viewModel)
         bindOutput(viewModel)
@@ -154,6 +173,7 @@ final class PostSearchViewController: RxBaseViewController<PostSearchViewModel> 
                 guard let searchText = searchBar?.text else { return }
                 self.viewModel?.searchPostTagInput.accept(searchText)
                 self.searchedTag = searchText
+                self.searchBar.resignFirstResponder()
                 
                 self.viewModel?.addCurrentSearchTagInput.accept(searchText)
             })
@@ -167,10 +187,12 @@ final class PostSearchViewController: RxBaseViewController<PostSearchViewModel> 
     }
     
     private func bindOutput(_ viewModel: PostSearchViewModel) {
+        
         viewModel.popularPostKeywordListOutput
             .asDriver(onErrorJustReturn: [String]())
             .drive(onNext: { [weak self] popularPostKeywordList in
                 guard let self = self else { return }
+                
                 self.popularSearchTagList = popularPostKeywordList
             })
             .disposed(by: disposeBag)
@@ -180,7 +202,7 @@ final class PostSearchViewController: RxBaseViewController<PostSearchViewModel> 
             .drive(onNext: { [weak self] searchPostResponse in
                 if searchPostResponse.isEmpty {
                     self?.showToast(
-                        toastText: "검색 결과가 없습니다.",
+                        toastText: "검색 결과가 없어요.",
                         backgroundColor: .gray300,
                         height: Int(self?.keyboardHeight ?? CGFloat())
                     )
@@ -247,12 +269,25 @@ extension PostSearchViewController {
         recentSearchTagCollectionView.delegate = self
         recentSearchTagCollectionView.dataSource = self
         
-        
         flowLayout.scrollDirection = .horizontal
         flowLayout.estimatedItemSize.height = 30
         flowLayout.minimumInteritemSpacing = 10
         flowLayout.sectionInset = .init(top: 0, left: 20, bottom: 0, right: 20)
         
+    }
+    
+    @objc
+    func keyboardWillShow(_ notification: NSNotification) {
+        self.popularSearchTagTableView.isUserInteractionEnabled = false
+        self.recentSearchTagCollectionView.isUserInteractionEnabled = false
+        
+    }
+    
+    @objc
+    func keyboardWillHide(_ notification: NSNotification) {
+        self.popularSearchTagTableView.isUserInteractionEnabled = true
+        self.recentSearchTagCollectionView.isUserInteractionEnabled = true
+
     }
 }
 
@@ -273,7 +308,7 @@ extension PostSearchViewController: UITableViewDataSource, UITableViewDelegate {
         cell.configCell(self.popularSearchTagList[indexPath.row], indexPath.row + 1)
         return cell
     }
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let tag = popularSearchTagList[indexPath.row]
         let postsVC = KeywordPostsVCFactory().create(tag: tag, isNavigationBarHidden: false)
@@ -282,7 +317,7 @@ extension PostSearchViewController: UITableViewDataSource, UITableViewDelegate {
 }
 
 extension PostSearchViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-  
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.currentSearchTagList.count
     }
@@ -293,6 +328,4 @@ extension PostSearchViewController: UICollectionViewDelegate, UICollectionViewDa
         cell.configCell(currentSearchTagList[indexPath.row])
         return cell
     }
-    
-    
 }
