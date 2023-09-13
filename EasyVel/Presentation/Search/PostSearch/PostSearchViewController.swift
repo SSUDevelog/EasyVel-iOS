@@ -92,13 +92,13 @@ final class PostSearchViewController: RxBaseViewController<PostSearchViewModel> 
         setTableView()
         setCollectionView()
         setNotificationCenter(show: #selector(keyboardWillShow), hide: #selector(keyboardWillHide))
-
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.searchBar.endEditing(true)
     }
-
+    
     override func setupNavigationBar() {
         super.setupNavigationBar()
         searchBar.placeholder = TextLiterals.postSearchViewSearchBarPlaceholderText
@@ -287,7 +287,7 @@ extension PostSearchViewController {
     func keyboardWillHide(_ notification: NSNotification) {
         self.popularSearchTagTableView.isUserInteractionEnabled = true
         self.recentSearchTagCollectionView.isUserInteractionEnabled = true
-
+        
     }
 }
 
