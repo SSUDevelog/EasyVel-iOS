@@ -45,32 +45,17 @@ final class FollowSearchViewController: RxBaseViewController<FollowSearchViewMod
 
     override func bind(viewModel: FollowSearchViewModel) {
         super.bind(viewModel: viewModel)
+        
+        searchView.tapGesture.rx.event.bind { recognizer in
+            viewModel.userDidTap.accept(Void())
+        }
+        .disposed(by: disposeBag)
+        
         bindOutput(viewModel)
         
-//        searchView.followButton.rx.tap
-//            .throttle(.seconds(2), latest: false, scheduler: MainScheduler.asyncInstance)
-//            .subscribe {
-//                viewModel.subscriberAddButtonDidTap.accept(<#T##event: String##String#>)
-//            }
-//            .disposed(by: disposeBag)
     }
     
     private func bindOutput(_ viewModel: FollowSearchViewModel) {
-//        viewModel.subscriberAddStatusOutput
-//            .asDriver(onErrorJustReturn: (false, ""))
-//            .drive(onNext: { [weak self] isSuccess, statusText in
-//                switch isSuccess {
-//                case true:
-//                    //self?.searchView.searchStatusLabel.textColor = .brandColor
-//                    self?.searchView.searchStatusLabel.text = statusText
-//                    self?.updateStatusLabel(text: statusText)
-//                case false:
-//                    self?.searchView.searchStatusLabel.textColor = .red
-//                    self?.searchView.searchStatusLabel.text = statusText
-//                    self?.updateStatusLabel(text: statusText)
-//                }
-//            })
-//            .disposed(by: disposeBag)
         
         viewModel.searchUserOutput
             .asDriver(onErrorJustReturn: (Bool(),nil))
@@ -89,18 +74,27 @@ final class FollowSearchViewController: RxBaseViewController<FollowSearchViewMod
                     self?.searchView.imageView.image = ImageLiterals.subscriberImage
                 }
                 
-            }.disposed(by: disposeBag)
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.pushToUserWeb
+            .asDriver(onErrorJustReturn: nil)
+            .drive { [weak self] url in
+                guard let url else {
+                    self?.showToast(toastText: "주소가 올바르지 않습니다.", backgroundColor: .red)
+                    return }
+                let webViewModel = WebViewModel(url: url,
+                                                service: DefaultSubscriberService.shared)
+                let webViewController = WebViewController(viewModel: webViewModel)
+                webViewController.isPostWebView = false
+                self?.navigationController?.pushViewController(webViewController, animated: true)
+            }
+            .disposed(by: disposeBag)
+            
+
+        
+        
     }
-//
-//    private func updateStatusLabel(text: String) {
-//        searchView.searchStatusLabel.text = text
-//        delayCompletable(1.5)
-//            .asDriver(onErrorJustReturn: ())
-//            .drive(onCompleted: { [weak self] in
-//                self?.searchView.searchStatusLabel.text = TextLiterals.noneText
-//            })
-//            .disposed(by: disposeBag)
-//    }
     
     private func delayCompletable(_ seconds: TimeInterval) -> Observable<Void> {
         return Observable<Void>.just(())
@@ -127,7 +121,6 @@ extension FollowSearchViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
-        searchBar.text = ""
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

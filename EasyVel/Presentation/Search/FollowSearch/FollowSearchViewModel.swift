@@ -20,18 +20,19 @@ final class FollowSearchViewModel: BaseViewModel {
     
     var subscriberSearchDelegate: SubscriberSearchProtocol?
     private var subscriberList: [SubscriberListResponse]?
-    private var searchSubscriberName: String?
-    private var searchSubscriberImageURL: String?
+    private var userData: SearchSubscriberResponse?
 
     // MARK: - Output
     
     var subscriberAddStatusOutput = PublishRelay<(Bool, String)>()
     var searchUserOutput = PublishRelay<(Bool,SearchSubscriberResponse?)>()
+    var pushToUserWeb = PublishRelay<String?>()
     
     // MARK: - Input
     
     let subscriberAddButtonDidTap = PublishRelay<Void>()
     let searchBarDidChange = PublishRelay<String>()
+    let userDidTap = PublishRelay<Void>()
 
     init(
         subscriberList: [SubscriberListResponse]?,
@@ -61,14 +62,22 @@ final class FollowSearchViewModel: BaseViewModel {
                 self.searchSubscriber(name: name)
                     .subscribe(onNext: { [weak self] response in
                         guard let self else  {return }
+                        self.userData = response
                         self.searchUserOutput.accept((response.validate ?? false, response))
                     },onError: { error in
-                        guard let error = error as? SearchFollowError else { return }
+                        //guard let error = error as? SearchFollowError else { return }
                         self.searchUserOutput.accept((false, nil))
                     })
                     .disposed(by: disposeBag)
                 
             })
+            .disposed(by: disposeBag)
+        
+        userDidTap
+            .throttle(.seconds(2), scheduler: MainScheduler.instance)
+            .subscribe { [weak self] _ in
+                self?.pushToUserWeb.accept(self?.userData?.profileURL)
+            }
             .disposed(by: disposeBag)
         
 //

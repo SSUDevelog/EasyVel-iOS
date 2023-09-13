@@ -10,6 +10,11 @@ import UIKit
 import SnapKit
 
 final class FollowSearchView: BaseUIView {
+    
+    
+    let tapGesture = UITapGestureRecognizer()
+    
+    //MARK: - UI Components
         
     let contentView: UIView = {
         let view = UIView()
@@ -61,6 +66,7 @@ final class FollowSearchView: BaseUIView {
     //MARK: - Life Cycle
 
     override func render() {
+        contentView.addGestureRecognizer(tapGesture)
 
     }
     
