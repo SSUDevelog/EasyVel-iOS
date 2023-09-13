@@ -45,14 +45,14 @@ final class SettingViewController: RxBaseViewController<SettingViewModel> {
                         alertType: alertType,
                         delegate: self
                     )
-                    present(alertVC, animated: false)
+                    self.present(alertVC, animated: false)
                 case 4:
                     alertType = .withdrawal
                     let alertVC = VelogAlertViewController(
                         alertType: alertType,
                         delegate: self
                     )
-                    present(alertVC, animated: false)
+                    self.present(alertVC, animated: false)
                 default:
                     return
                 }

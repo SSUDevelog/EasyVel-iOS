@@ -52,7 +52,7 @@ final class SubscriberViewModel: BaseViewModel {
         deleteSubscribeEvent
             .subscribe(onNext: { [weak self] _ in
                 guard let self = self,
-                      let tempDeleteSubscriber = tempDeleteSubscriber else { return }
+                      let tempDeleteSubscriber = self.tempDeleteSubscriber else { return }
                 if let subscriberList = self.subscriberList {
                     let reloadSubscriberList = subscriberList.filter {
                         $0.name != tempDeleteSubscriber
