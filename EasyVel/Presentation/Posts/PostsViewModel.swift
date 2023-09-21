@@ -26,9 +26,7 @@ final class PostsViewModel: BaseViewModel {
     struct Input {
         let postTrigger: Observable<Void>
         
-        init(
-            _ postTrigger: Observable<Void>
-        ) {
+        init(_ postTrigger: Observable<Void>) {
             self.postTrigger = postTrigger
         }
     }
@@ -37,10 +35,8 @@ final class PostsViewModel: BaseViewModel {
         let postList: Driver<[PostModel]>
         let isPostListEmpty: Driver<Bool>
         
-        init(
-            _ postList: Driver<[PostModel]>,
-            _ isPostListEmpty: Driver<Bool>
-        ) {
+        init(_ postList: Driver<[PostModel]>,
+             _ isPostListEmpty: Driver<Bool>) {
             self.postList = postList
             self.isPostListEmpty = isPostListEmpty
         }
@@ -71,9 +67,8 @@ final class PostsViewModel: BaseViewModel {
                     LoadingView.hideLoading()
                     return [PostModel]()
                 }
-                var postList = postDTO.map { PostModel(id: UUID(), post: $0) }
                 LoadingView.hideLoading()
-                return postList
+                return postDTO.map { PostModel(id: UUID(), post: $0) }
             }
             .asDriver(onErrorJustReturn: [])
         

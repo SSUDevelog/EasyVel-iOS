@@ -135,8 +135,3 @@ extension PostsViewController {
         self.postsDataSource.apply(self.postsSnapshot)
     }
 }
-
-struct PostModel: Identifiable, Hashable {
-    let id: UUID
-    let post: PostDTO?
-}
