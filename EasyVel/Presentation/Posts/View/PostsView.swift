@@ -11,7 +11,12 @@ import SnapKit
 
 final class PostsView: BaseUIView {
     
-    let postsTableView = PostsTableView(frame: .null, style: .insetGrouped)
+    // MARK: - UI Property
+    
+    lazy var collectionView: UICollectionView = {
+        let view = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
+        return view
+    }()
     let keywordsPostsViewExceptionView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = ImageLiterals.emptyPostsList
@@ -19,13 +24,15 @@ final class PostsView: BaseUIView {
         return imageView
     }()
     
+    // MARK: - Setting
+    
     override func render() {
         self.addSubviews(
-            postsTableView,
+            collectionView,
             keywordsPostsViewExceptionView
         )
         
-        postsTableView.snp.makeConstraints {
+        collectionView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
         
@@ -38,5 +45,12 @@ final class PostsView: BaseUIView {
     
     override func configUI() {
         self.backgroundColor = .white
+    }
+}
+
+extension PostsView {
+    private func createLayout() -> UICollectionViewLayout {
+        let configuration = UICollectionLayoutListConfiguration(appearance: .plain)
+        return UICollectionViewCompositionalLayout.list(using: configuration)
     }
 }

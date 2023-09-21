@@ -8,6 +8,8 @@
 import UIKit
 
 import SnapKit
+import RxSwift
+import RxCocoa
 
 final class PostsCollectionViewCell: BaseCollectionViewCell {
     
@@ -15,7 +17,9 @@ final class PostsCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - Property
     
+    var cellScrapObservable: Observable<(IndexPath, Bool)>?
     var post: PostDTO?
+    var isScrapped: Bool = false
     
     // MARK: - UI Property
     
@@ -46,10 +50,12 @@ final class PostsCollectionViewCell: BaseCollectionViewCell {
     
     private let detailView = PostDetailView()
     
-    private let scrapButton: UIButton = {
+    lazy var scrapButton: UIButton = {
         let button = UIButton()
-        button.setImage(ImageLiterals.bookMark, for: .normal)
-        // FIXME: tap scrapbutton action
+        button.setImage(isScrapped ? ImageLiterals.bookMarkFill : ImageLiterals.bookMark,for: .normal)
+        button.addAction(UIAction { _ in
+            
+        }, for: .touchUpInside)
         return button
     }()
     
@@ -122,10 +128,6 @@ final class PostsCollectionViewCell: BaseCollectionViewCell {
         self.clipsToBounds = true
     }
     
-    // MARK: - Action Helper
-    
-    
-    
     // MARK: - Custom Method
     
     
@@ -134,9 +136,8 @@ final class PostsCollectionViewCell: BaseCollectionViewCell {
 }
 
 extension PostsCollectionViewCell {
-    func bind(post: PostDTO) {
+    func loadPost(_ post: PostDTO, _ indexPath: IndexPath) {
         self.post = post
-        
         self.titleLabel.text = post.title
         self.textView.text = post.summary
         
@@ -145,7 +146,8 @@ extension PostsCollectionViewCell {
            let name = post.name,
            let date = post.date {
             self.imageView.kf.setImage(with: url)
-            self.detailView.bind(name: name, date: date)
+            self.detailView.bind(name: name,
+                                 date: date)
         }
     }
 }
