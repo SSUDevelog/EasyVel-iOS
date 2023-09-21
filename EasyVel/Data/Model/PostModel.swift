@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+struct PostModel: Identifiable, Hashable {
+    let id: UUID
+    let post: PostDTO?
+}
