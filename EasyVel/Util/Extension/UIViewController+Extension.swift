@@ -9,6 +9,10 @@ import UIKit
 
 extension UIViewController {
     
+    func navigationBarIsHidden(_ value: Bool) {
+        self.navigationController?.navigationBar.isHidden = value
+    }
+    
     func makeAlert(title: String,
                    message: String,
                    okAction: ((UIAlertAction) -> Void)? = nil,
