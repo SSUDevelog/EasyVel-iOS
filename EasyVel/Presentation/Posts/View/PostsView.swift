@@ -15,7 +15,7 @@ final class PostsView: BaseUIView {
     
     lazy var collectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
-        view.register(cell: PostsCollectionViewCell.self)
+        view.backgroundColor = .gray100
         return view
     }()
     let keywordsPostsViewExceptionView: UIImageView = {
@@ -51,7 +51,24 @@ final class PostsView: BaseUIView {
 
 extension PostsView {
     private func createLayout() -> UICollectionViewLayout {
-        let configuration = UICollectionLayoutListConfiguration(appearance: .plain)
-        return UICollectionViewCompositionalLayout.list(using: configuration)
+        return UICollectionViewCompositionalLayout { _, _ in
+            let itemSize = NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(1),
+                heightDimension: .estimated(317)
+            )
+            let item = NSCollectionLayoutItem(layoutSize: itemSize)
+            
+            let groupSize = NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(1),
+                heightDimension: .estimated(317)
+            )
+            let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+            
+            let section = NSCollectionLayoutSection(group: group)
+            section.interGroupSpacing = 20
+            section.contentInsets = .init(top: 24, leading: 20, bottom: 24, trailing: 20)
+            
+            return section
+        }
     }
 }

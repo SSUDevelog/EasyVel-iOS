@@ -26,14 +26,14 @@ final class PostsCollectionViewCell: BaseCollectionViewCell {
     private let imageView: UIImageView = {
         let view = UIImageView()
         view.contentMode = .scaleAspectFill
-        view.layer.cornerRadius = 8
-        view.clipsToBounds = true
+        view.roundCorners(cornerRadius: 8, maskedCorners: [.layerMaxXMinYCorner, .layerMinXMinYCorner])
         return view
     }()
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .gray700
         label.font = .subhead
+        label.numberOfLines = 2
         return label
     }()
     private let textView: UITextView = {
@@ -42,6 +42,7 @@ final class PostsCollectionViewCell: BaseCollectionViewCell {
         view.isEditable = false
         view.isSelectable = false
         view.isScrollEnabled = false
+        view.textContainer.lineFragmentPadding = 0
         view.font = .body_1_M
         return view
     }()
@@ -80,7 +81,7 @@ final class PostsCollectionViewCell: BaseCollectionViewCell {
         
         imageView.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.leading.trailing.equalToSuperview()
+            $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(125)
         }
         
@@ -91,11 +92,11 @@ final class PostsCollectionViewCell: BaseCollectionViewCell {
         
         textView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(4)
-            $0.horizontalEdges.equalTo(titleLabel)
+            $0.horizontalEdges.equalToSuperview().inset(20)
         }
         
         detailView.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(20)
+            $0.horizontalEdges.equalToSuperview().inset(20)
             $0.top.equalTo(textView.snp.bottom).offset(12)
             $0.bottom.equalToSuperview().inset(16)
         }
@@ -119,8 +120,13 @@ final class PostsCollectionViewCell: BaseCollectionViewCell {
     }
     
     override func configUI() {
+        self.contentView.backgroundColor = .white
         self.layer.cornerRadius = 8
-        self.clipsToBounds = true
+        self.layer.masksToBounds = true
+        self.backgroundView = UIView()
+        self.backgroundView?.layer.shadowOffset = .init(width: 0, height: 0)
+        self.backgroundView?.layer.shadowOpacity = 0.8
+        self.backgroundView?.layer.shadowRadius = 2
     }
     
     // MARK: - Custom Method
