@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct PostDTO: Codable, Identifiable {
-    let id: UUID?
+struct PostDTO: Codable, Hashable {
+//    let id: UUID?
     let comment: Int?
     let date: String?
     let img: String?

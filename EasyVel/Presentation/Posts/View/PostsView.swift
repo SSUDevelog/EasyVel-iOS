@@ -15,6 +15,7 @@ final class PostsView: BaseUIView {
     
     lazy var collectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
+        view.register(cell: PostsCollectionViewCell.self)
         return view
     }()
     let keywordsPostsViewExceptionView: UIImageView = {

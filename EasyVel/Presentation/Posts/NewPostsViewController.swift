@@ -20,8 +20,8 @@ enum ViewType {
 final class NewPostsViewController: RxBaseViewController<NewPostsViewModel> {
     
     typealias PostCell = PostsCollectionViewCell
-    typealias DataSource = UICollectionViewDiffableDataSource<Section, PostDTO.ID>
-    typealias Snapshot = NSDiffableDataSourceSnapshot<Section, PostDTO.ID>
+    typealias DataSource = UICollectionViewDiffableDataSource<Section, PostDTO>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<Section, PostDTO>
     
     enum Section {
         case main
@@ -109,14 +109,11 @@ extension NewPostsViewController {
         
         return DataSource(
             collectionView: postsView.collectionView,
-            cellProvider: { collectionView, indexPath, id in
-                guard let post = self.posts?[indexPath.item] else {
-                    return UICollectionViewCell()
-                }
+            cellProvider: { collectionView, indexPath, item in
                 return collectionView.dequeueConfiguredReusableCell(
                     using: cellRegistration,
                     for: indexPath,
-                    item: post
+                    item: item
                 )
             }
         )
@@ -129,15 +126,14 @@ extension NewPostsViewController {
     func configureSnapshot() {
         self.postsSnapshot = Snapshot()
         self.postsSnapshot.appendSections([.main])
-        postsDataSource.apply(self.postsSnapshot)
+        self.postsDataSource.apply(self.postsSnapshot)
     }
     
     func loadSnapshotData(
         with incomingPosts: [PostDTO]
     ) {
-        let postIDs = incomingPosts.map { $0.id }
-        self.postsSnapshot.appendItems(postIDs, toSection: .main)
-        postsDataSource.apply(self.postsSnapshot)
+        self.postsSnapshot.appendItems(incomingPosts, toSection: .main)
+        self.postsDataSource.apply(self.postsSnapshot)
     }
 }
 
