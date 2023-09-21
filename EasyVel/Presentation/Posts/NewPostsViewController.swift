@@ -51,27 +51,25 @@ final class NewPostsViewController: RxBaseViewController<NewPostsViewModel> {
     // MARK: - Setting
     
     override func bind(viewModel: NewPostsViewModel) {
-        let viewWillAppear = viewModel.viewWillAppear.asObservable()
-        let viewDidScroll = postsView.postsCollectionView.rx.contentOffset
-            .filter { contentOffset in
-                return contentOffset.y < -30
-            }
-            .map { _ in () }
+        let reload = postsView.postsCollectionView.refreshControl!.rx
+            .controlEvent(.valueChanged)
+            .asObservable()
+        let viewWillAppear = viewModel.viewWillAppear
             .asObservable()
         
-        let input = NewPostsViewModel.Input(postTrigger: Observable.merge(viewWillAppear, viewDidScroll))
+        let postTrigger = Observable.merge(reload, viewWillAppear)
+        
+        let input = NewPostsViewModel.Input(
+            postTrigger: postTrigger,
+//            scrapButtonTapped: scrapButtonTapped
+        )
         
         let output = viewModel.transform(input: input)
         
         output.postList
-            .drive(onNext: { [weak self] posts in
-                let postModels = posts.map { (post, isScrapped) in
-                    return PostModel(id: UUID(), post: post, isScrapped: isScrapped)
-                }
-                self?.postsView.dataSource.loadPosts(postModels)
-            })
-            .disposed(by: disposeBag)
-            
+            .map { $0.map { $0.0 } }
+
+        
     }
     
     // MARK: - Action Helper
@@ -82,4 +80,8 @@ final class NewPostsViewController: RxBaseViewController<NewPostsViewModel> {
     
 }
 
+// MARK: - DatatSource
 
+extension NewPostsViewController {
+    
+}
