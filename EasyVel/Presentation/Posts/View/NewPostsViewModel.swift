@@ -13,12 +13,6 @@ import RxRelay
 
 final class NewPostsViewModel: BaseViewModel {
     
-    enum ViewType {
-        case trend
-        case subscriber
-        case tag
-    }
-    
     // MARK: - Properties
     
     let realm = RealmService()
@@ -31,11 +25,25 @@ final class NewPostsViewModel: BaseViewModel {
     
     struct Input {
         let postTrigger: Observable<Void>
+        
+        init(
+            _ postTrigger: Observable<Void>
+        ) {
+            self.postTrigger = postTrigger
+        }
     }
     
     struct Output {
-        let postList: Driver<[(PostDTO, Bool)]>
+        let postList: Driver<[PostDTO]>
         let isPostListEmpty: Driver<Bool>
+        
+        init(
+            _ postList: Driver<[PostDTO]>,
+            _ isPostListEmpty: Driver<Bool>
+        ) {
+            self.postList = postList
+            self.isPostListEmpty = isPostListEmpty
+        }
     }
     
     // MARK: - Initialize
@@ -58,18 +66,11 @@ final class NewPostsViewModel: BaseViewModel {
             .flatMapLatest { _ -> Observable<[PostDTO]?> in
                 self.getPosts()
             }
-            .map { dto -> [(PostDTO, Bool)] in
-                guard let postList = dto
-                else { return [(PostDTO, Bool)]() }
-                
-                let val = postList.mapToTuple({
-                    $0
-                }, {
-                    self
-                        .convertPostDtoToStoragePost(input: $0)
-                        .checkIsUniquePost()
-                })
-                return val
+            .map { dto -> [PostDTO] in
+                guard let postList = dto else {
+                    return [PostDTO]()
+                }
+                return postList
             }
             .asDriver(onErrorJustReturn: [])
         
@@ -77,8 +78,7 @@ final class NewPostsViewModel: BaseViewModel {
             .map { $0.isEmpty }
             .asDriver(onErrorJustReturn: true)
         
-        return Output(postList: postList,
-                      isPostListEmpty: isPostListEmpty)
+        return Output(postList, isPostListEmpty)
     }
     
 }
