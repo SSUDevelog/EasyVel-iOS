@@ -17,6 +17,7 @@
 		3E7B1ABA2A8774FF00EE7739 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3E7B1AB92A8774FF00EE7739 /* Debug.xcconfig */; };
 		3E7B1ABC2A87751700EE7739 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3E7B1ABB2A87751700EE7739 /* Release.xcconfig */; };
 		3E7B1AC02A87E90500EE7739 /* PostsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7B1ABF2A87E90500EE7739 /* PostsCollectionViewCell.swift */; };
+		3E9663562ABC241700EC884D /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9663552ABC241700EC884D /* PostModel.swift */; };
 		7CB706D22A32062500083EC6 /* PostSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB706D12A32062500083EC6 /* PostSearchViewController.swift */; };
 		7CB706D42A32064900083EC6 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB706D32A32064900083EC6 /* SearchTableViewCell.swift */; };
 		7CB706D62A32067900083EC6 /* SearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB706D52A32067900083EC6 /* SearchCollectionViewCell.swift */; };
@@ -197,6 +198,7 @@
 		3E7B1AB92A8774FF00EE7739 /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		3E7B1ABB2A87751700EE7739 /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		3E7B1ABF2A87E90500EE7739 /* PostsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsCollectionViewCell.swift; sourceTree = "<group>"; };
+		3E9663552ABC241700EC884D /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
 		7CB706D12A32062500083EC6 /* PostSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSearchViewController.swift; sourceTree = "<group>"; };
 		7CB706D32A32064900083EC6 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		7CB706D52A32067900083EC6 /* SearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -561,6 +563,7 @@
 			isa = PBXGroup;
 			children = (
 				917BA3422A0503D5000409B7 /* StoragePost.swift */,
+				3E9663552ABC241700EC884D /* PostModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1321,6 +1324,7 @@
 				9128B05C2A23DCEF00FB1252 /* StorageDTO.swift in Sources */,
 				9134422529FFF7C8000E1ED1 /* SettingView.swift in Sources */,
 				9128B02E2A2376FB00FB1252 /* ScrapFolderBottomSheetViewController.swift in Sources */,
+				3E9663562ABC241700EC884D /* PostModel.swift in Sources */,
 				91E442872A10F385008CB516 /* RxBaseViewController.swift in Sources */,
 				9134423C2A004BA2000E1ED1 /* DefaultPostService.swift in Sources */,
 				91487F2D29FD0812009CFECF /* SubscriberSearchViewController.swift in Sources */,
