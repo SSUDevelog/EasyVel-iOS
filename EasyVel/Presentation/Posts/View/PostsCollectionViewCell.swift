@@ -36,15 +36,22 @@ final class PostsCollectionViewCell: BaseCollectionViewCell {
         label.numberOfLines = 2
         return label
     }()
-    private let textView: UITextView = {
-        let view = UITextView()
-        view.textColor = .gray500
-        view.isEditable = false
-        view.isSelectable = false
-        view.isScrollEnabled = false
-        view.textContainer.lineFragmentPadding = 0
-        view.font = .body_1_M
-        return view
+//    private let textView: UITextView = {
+//        let view = UITextView()
+//        view.textColor = .gray500
+//        view.isEditable = false
+//        view.isSelectable = false
+//        view.isScrollEnabled = false
+//        view.textContainer.lineFragmentPadding = 0
+//        view.font = .body_1_M
+//        return view
+//    }()
+    private let summaryLabel: UILabel = {
+        let label = UILabel()
+        label.font = .body_1_M
+        label.textColor = .gray500
+        label.numberOfLines = 3
+        return label
     }()
     private let detailView = PostDetailView()
     lazy var scrapButton: UIButton = {
@@ -72,7 +79,7 @@ final class PostsCollectionViewCell: BaseCollectionViewCell {
         self.contentView.addSubviews(
             imageView,
             titleLabel,
-            textView,
+            summaryLabel,
             detailView,
             scrapButton,
             tagScrollView,
@@ -90,14 +97,14 @@ final class PostsCollectionViewCell: BaseCollectionViewCell {
             $0.horizontalEdges.equalToSuperview().inset(20)
         }
         
-        textView.snp.makeConstraints {
+        summaryLabel.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(4)
             $0.horizontalEdges.equalToSuperview().inset(20)
         }
         
         detailView.snp.makeConstraints {
             $0.horizontalEdges.equalToSuperview().inset(20)
-            $0.top.equalTo(textView.snp.bottom).offset(12)
+            $0.top.equalTo(summaryLabel.snp.bottom).offset(12)
             $0.bottom.equalToSuperview().inset(16)
         }
         
@@ -140,8 +147,8 @@ extension PostsCollectionViewCell {
     func loadPost(_ model: PostModel, _ indexPath: IndexPath) {
         guard let post = model.post else { return }
         self.post = post
-        self.titleLabel.text = post.title
-        self.textView.text = post.summary
+        self.titleLabel.setLineHeight(multiple: 1.3, with: post.title ?? "")
+        self.summaryLabel.setLineHeight(multiple: 1.44, with: post.summary ?? "")
         
         if let urlString = post.img,
            let url = URL(string: urlString),
