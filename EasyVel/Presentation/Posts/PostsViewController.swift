@@ -52,11 +52,11 @@ final class PostsViewController: RxBaseViewController<PostsViewModel> {
     }
     
     override func bind(viewModel: PostsViewModel) {
-        postsView.postsTableView.dataSource = self
-        postsView.postsTableView.delegate = self
+//        postsView.postsTableView.dataSource = self
+//        postsView.postsTableView.delegate = self
         bindOutput(viewModel)
         
-        postsView.postsTableView.rx.contentOffset
+        postsView.collectionView.rx.contentOffset
             .filter { contentOffset in
                 return contentOffset.y < -30
             }
@@ -70,7 +70,8 @@ final class PostsViewController: RxBaseViewController<PostsViewModel> {
             .asDriver(onErrorJustReturn: [PostDTO]())
             .drive(onNext: { [weak self] post in
                 self?.posts = post
-                self?.postsView.postsTableView.reloadData()
+//                self?.postsView.dataSource.loadPosts(post)
+                self?.postsView.collectionView.reloadData()
             })
             .disposed(by: disposeBag)
         
@@ -104,7 +105,7 @@ final class PostsViewController: RxBaseViewController<PostsViewModel> {
     
     @objc
     private func scrollToTop() {
-        postsView.postsTableView.setContentOffset(.zero, animated: true)
+        postsView.collectionView.setContentOffset(.zero, animated: true)
     }
 }
 

@@ -13,12 +13,6 @@ import RxSwift
 
 final class PostsViewModel: BaseViewModel {
     
-    enum ViewType {
-        case trend
-        case follow
-        case keyword
-    }
-    
     let realm = RealmService()
     let service: PostService
     

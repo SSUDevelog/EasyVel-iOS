@@ -139,10 +139,11 @@ final class HomeViewController: BaseViewController {
     
     private func setPageViewController() {
         let factory = KeywordPostsVCFactory()
-        dataSourceViewController = [UIViewController(),
-                                    PostsViewController(viewModel: .init(viewType: .trend, service: DefaultPostService.shared)),
-                                    PostsViewController(viewModel: .init(viewType: .follow,service: DefaultPostService.shared))]
-        
+        dataSourceViewController = [
+            UIViewController(),
+            NewPostsViewController(viewModel: .init(viewType: .trend)),
+            PostsViewController(viewModel: .init(viewType: .follow ,service: DefaultPostService.shared))
+        ]
         
         for tag in tags {
             let vc = factory.create(tag: tag)

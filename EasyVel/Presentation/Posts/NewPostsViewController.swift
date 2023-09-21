@@ -13,8 +13,8 @@ import RxCocoa
 
 enum ViewType {
     case trend
-    case subscriber
-    case tag
+    case follow
+    case keyword
 }
 
 final class NewPostsViewController: RxBaseViewController<NewPostsViewModel> {
@@ -141,7 +141,7 @@ extension NewPostsViewController {
     }
 }
 
-//struct PostModel: Identifiable {
-//    let id: UUID
-//    let post: PostDTO?
-//}
+struct PostModel: Identifiable {
+    let id: UUID
+    let post: PostDTO?
+}

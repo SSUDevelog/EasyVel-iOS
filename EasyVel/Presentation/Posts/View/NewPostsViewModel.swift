@@ -109,9 +109,9 @@ extension NewPostsViewModel {
         switch viewType {
         case .trend:
             return self.getTrendPosts()
-        case .subscriber:
+        case .follow:
             return self.getSubscriberPosts()
-        case .tag:
+        case .keyword:
             return self.getOneTagPosts(tag: self.tag)
         }
     }
