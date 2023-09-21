@@ -141,8 +141,8 @@ final class HomeViewController: BaseViewController {
         let factory = KeywordPostsVCFactory()
         dataSourceViewController = [
             UIViewController(),
-            NewPostsViewController(viewModel: .init(viewType: .trend)),
-            PostsViewController(viewModel: .init(viewType: .follow ,service: DefaultPostService.shared))
+            PostsViewController(viewModel: .init(viewType: .trend)),
+            PostsViewController(viewModel: .init(viewType: .follow))
         ]
         
         for tag in tags {

@@ -30,14 +30,12 @@ final class PostsCollectionViewCell: BaseCollectionViewCell {
         view.clipsToBounds = true
         return view
     }()
-    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .gray700
         label.font = .subhead
         return label
     }()
-    
     private let textView: UITextView = {
         let view = UITextView()
         view.textColor = .gray500
@@ -47,9 +45,7 @@ final class PostsCollectionViewCell: BaseCollectionViewCell {
         view.font = .body_1_M
         return view
     }()
-    
     private let detailView = PostDetailView()
-    
     lazy var scrapButton: UIButton = {
         let button = UIButton()
         button.setImage(isScrapped ? ImageLiterals.bookMarkFill : ImageLiterals.bookMark,for: .normal)
@@ -58,7 +54,6 @@ final class PostsCollectionViewCell: BaseCollectionViewCell {
         }, for: .touchUpInside)
         return button
     }()
-    
     private let tagScrollView: UIScrollView = {
         let view = UIScrollView()
         view.showsHorizontalScrollIndicator = false
@@ -136,7 +131,8 @@ final class PostsCollectionViewCell: BaseCollectionViewCell {
 }
 
 extension PostsCollectionViewCell {
-    func loadPost(_ post: PostDTO, _ indexPath: IndexPath) {
+    func loadPost(_ model: PostModel, _ indexPath: IndexPath) {
+        guard let post = model.post else { return }
         self.post = post
         self.titleLabel.text = post.title
         self.textView.text = post.summary

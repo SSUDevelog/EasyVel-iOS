@@ -1,205 +1,142 @@
 //
-//  KeywordsPostsViewController.swift
-//  VelogOnMobile
+//  NewPostsViewController.swift
+//  EasyVel
 //
-//  Created by 홍준혁 on 2023/04/30.
+//  Created by 이성민 on 2023/08/25.
 //
 
 import UIKit
 
 import RxSwift
 import RxRelay
+import RxCocoa
+
+enum ViewType {
+    case trend
+    case follow
+    case keyword
+}
 
 final class PostsViewController: RxBaseViewController<PostsViewModel> {
-
+    
+    typealias PostCell = PostsCollectionViewCell
+    typealias DataSource = UICollectionViewDiffableDataSource<Section, PostModel>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<Section, PostModel>
+    
+    enum Section {
+        case main
+    }
+    
+    // MARK: - Property
+    
     private var posts: [PostDTO]?
-    private var isScrapPostsList: [Bool]?
-    private var isNavigationBarHidden = true
+    private var isNavigationBarHidden: Bool?
+    
+    // MARK: - UI Property
     
     private let postsView = PostsView()
+    private var postsDataSource: DataSource!
+    private var postsSnapshot: Snapshot!
+    
+    // MARK: - Life Cycle
     
     override init(
         viewModel: PostsViewModel
     ) {
         super.init(viewModel: viewModel)
+        self.view = postsView
     }
     
     init(
         viewModel: PostsViewModel,
-        isNavigationBarHidden: Bool,
-        posts: [PostDTO]
+        posts: [PostDTO],
+        isNavigationBarHidden: Bool
     ) {
         super.init(viewModel: viewModel)
-        self.isNavigationBarHidden = isNavigationBarHidden
         self.posts = posts
+        self.isNavigationBarHidden = isNavigationBarHidden
+        self.view = postsView
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setNotification()
+        navigationBarIsHidden(isNavigationBarHidden ?? true)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        if isNavigationBarHidden == false {
-            navigationController?.navigationBar.isHidden = false
-        }
-    }
-    
-    override func render() {
-        self.view = postsView
-    }
+    // MARK: - Setting
     
     override func bind(viewModel: PostsViewModel) {
-//        postsView.postsTableView.dataSource = self
-//        postsView.postsTableView.delegate = self
-        bindOutput(viewModel)
+        self.confiugreDataSource()
+        //        let reload = postsView.collectionView.refreshControl?.rx
+        //            .controlEvent(.valueChanged)
+        //            .asObservable()
+        let viewWillAppear = viewModel.viewWillAppear
+            .asObservable()
         
-        postsView.collectionView.rx.contentOffset
-            .filter { contentOffset in
-                return contentOffset.y < -30
-            }
-            .map { _ in () }
-            .bind(to: viewModel.tableViewReload)
-            .disposed(by: disposeBag)
+        //        let postTrigger = Observable.merge(reload, viewWillAppear)
+        
+        let input = PostsViewModel.Input(viewWillAppear)
+        
+        let output = viewModel.transform(input: input)
+        
+        output.postList.drive(onNext: {
+            self.loadSnapshotData(with: $0)
+        }).disposed(by: disposeBag)
     }
     
-    private func bindOutput(_ viewModel: PostsViewModel) {
-        viewModel.postsListOutput
-            .asDriver(onErrorJustReturn: [PostDTO]())
-            .drive(onNext: { [weak self] post in
-                self?.posts = post
-//                self?.postsView.dataSource.loadPosts(post)
-                self?.postsView.collectionView.reloadData()
-            })
-            .disposed(by: disposeBag)
-        
-        viewModel.postsListDidScrapOutput
-            .asDriver(onErrorJustReturn: [])
-            .drive(onNext: { [weak self] isScrapList in
-                self?.isScrapPostsList = isScrapList
-            })
-            .disposed(by: disposeBag)
+    // MARK: - Action Helper
+    
+    
+    
+    // MARK: - Custom Method
+    
+}
 
-        viewModel.isPostsEmptyOutput
-            .asDriver(onErrorJustReturn: Bool())
-            .drive(onNext: { [weak self] isEmpty in
-                if isEmpty {
-                    self?.postsView.keywordsPostsViewExceptionView.isHidden = false
-                } else {
-                    self?.postsView.keywordsPostsViewExceptionView.isHidden = true
-                }
-            })
-            .disposed(by: disposeBag)
+// MARK: - DatatSource
+
+extension PostsViewController {
+    private func confiugreDataSource() {
+        self.postsDataSource = createDataSource()
+        self.configureSnapshot()
     }
     
-    private func setNotification() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(scrollToTop),
-            name: Notification.Name("scrollToTop"),
-            object: nil
+    private func createDataSource() -> DataSource {
+        let cellRegistration = UICollectionView.CellRegistration<PostCell, PostModel> { cell, indexPath, post in
+            cell.loadPost(post, indexPath)
+        }
+        
+        return DataSource(
+            collectionView: postsView.collectionView,
+            cellProvider: { collectionView, indexPath, item in
+                return collectionView.dequeueConfiguredReusableCell(
+                    using: cellRegistration,
+                    for: indexPath,
+                    item: item
+                )
+            }
         )
-    }
-    
-    @objc
-    private func scrollToTop() {
-        postsView.collectionView.setContentOffset(.zero, animated: true)
     }
 }
 
-extension PostsViewController: PostScrapButtonDidTapped {
-    func scrapButtonDidTapped(
-        storagePost: StoragePost,
-        isScrapped: Bool,
-        cellIndex: Int
+// MARK: - Snapshot
+
+extension PostsViewController {
+    func configureSnapshot() {
+        self.postsSnapshot = Snapshot()
+        self.postsSnapshot.appendSections([.main])
+        self.postsDataSource.apply(self.postsSnapshot)
+    }
+    
+    func loadSnapshotData(
+        with incomingPosts: [PostModel]
     ) {
-        isScrapPostsList?[cellIndex] = isScrapped
-        // MARK: - fix me, viewModel 주입 방법 수정
-        
-        let viewModel = PostsViewModel(viewType: .keyword, service: DefaultPostService.shared)
-        viewModel.cellScrapButtonDidTap.accept((storagePost, isScrapped))
+        self.postsSnapshot.appendItems(incomingPosts, toSection: .main)
+        self.postsDataSource.apply(self.postsSnapshot)
     }
 }
 
-extension PostsViewController: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return posts?.count ?? 0
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: PostsTableViewCell.identifier, for: indexPath) as? PostsTableViewCell else { return UITableViewCell() }
-        cell.selectionStyle = .none
-        let index = indexPath.section
-        cell.cellDelegate = self
-        cell.cellIndex = index
-        if let data = posts?[index] {
-            cell.binding(model: data)
-            if let isUnique = isScrapPostsList?[index] {
-                if isUnique {
-                    cell.isTapped = false
-                } else {
-                    cell.isTapped = true
-                }
-            }
-            return cell
-        }
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let textNum = posts?[indexPath.section].summary?.count ?? 0
-        if posts?[indexPath.section].img ?? String() == TextLiterals.noneText {
-            switch textNum {
-            case 0...50: return SizeLiterals.postCellSmall
-            case 51...80: return SizeLiterals.postCellMedium
-            case 81...100: return SizeLiterals.postCellLarge
-            default: return SizeLiterals.postCellLarge
-            }
-        } else {
-            return SizeLiterals.postCellXLarge
-        }
-    }
-}
-
-extension PostsViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let selectedCell = tableView.cellForRow(at: indexPath) as? PostsTableViewCell else { return }
-        let index = indexPath.section
-        let storagePost = StoragePost(
-            img: posts?[index].img,
-            name: posts?[index].name,
-            summary: posts?[index].summary,
-            title: posts?[index].title,
-            url: posts?[index].url
-        )
-        
-        let webViewModel = WebViewModel(url: selectedCell.url,service: DefaultSubscriberService.shared)
-        webViewModel.postWriter = posts?[index].name
-        webViewModel.storagePost = storagePost
-        
-        let webViewController = WebViewController(viewModel: webViewModel)
-        webViewController.isPostWebView = true
-        if let isScrapped = isScrapPostsList?[index] {
-            webViewController.setScrapButton(didScrap: !isScrapped)
-        }
-        webViewController.postData = storagePost
-        
-        self.navigationController?.pushViewController(webViewController, animated: true)
-        
-        webViewController.didScrapClosure = { [weak self] didScrap in
-            self?.isScrapPostsList?[index] = !didScrap
-            selectedCell.isTapped = didScrap
-            if didScrap {
-                selectedCell.scrapButton.setImage(ImageLiterals.bookMarkFill, for: .normal)
-            } else {
-                selectedCell.scrapButton.setImage(ImageLiterals.bookMark, for: .normal)
-            }
-        }
-    }
+struct PostModel: Identifiable, Hashable {
+    let id: UUID
+    let post: PostDTO?
 }
