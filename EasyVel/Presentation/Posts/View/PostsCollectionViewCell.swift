@@ -124,8 +124,8 @@ final class PostsCollectionViewCell: BaseCollectionViewCell {
         self.backgroundView = background
         self.layer.shadowOffset = .zero
         self.layer.shadowColor = UIColor.black.cgColor
-        self.layer.shadowOpacity = 0.5
-        self.layer.shadowRadius = 8
+        self.layer.shadowOpacity = 0.08
+        self.layer.shadowRadius = 10
     }
     
     // MARK: - Custom Method
