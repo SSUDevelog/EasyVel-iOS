@@ -36,16 +36,6 @@ final class PostsCollectionViewCell: BaseCollectionViewCell {
         label.numberOfLines = 2
         return label
     }()
-//    private let textView: UITextView = {
-//        let view = UITextView()
-//        view.textColor = .gray500
-//        view.isEditable = false
-//        view.isSelectable = false
-//        view.isScrollEnabled = false
-//        view.textContainer.lineFragmentPadding = 0
-//        view.font = .body_1_M
-//        return view
-//    }()
     private let summaryLabel: UILabel = {
         let label = UILabel()
         label.font = .body_1_M
@@ -127,13 +117,15 @@ final class PostsCollectionViewCell: BaseCollectionViewCell {
     }
     
     override func configUI() {
-        self.contentView.backgroundColor = .white
-        self.layer.cornerRadius = 8
-        self.layer.masksToBounds = true
-        self.backgroundView = UIView()
-        self.backgroundView?.layer.shadowOffset = .init(width: 0, height: 0)
-        self.backgroundView?.layer.shadowOpacity = 0.8
-        self.backgroundView?.layer.shadowRadius = 2
+        let background = UIView(frame: self.bounds)
+        background.backgroundColor = .white
+        background.layer.cornerRadius = 8
+        background.layer.masksToBounds = true
+        self.backgroundView = background
+        self.layer.shadowOffset = .zero
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowOpacity = 0.5
+        self.layer.shadowRadius = 8
     }
     
     // MARK: - Custom Method
@@ -153,10 +145,12 @@ extension PostsCollectionViewCell {
         if let urlString = post.img,
            let url = URL(string: urlString),
            let name = post.name,
-           let date = post.date {
+           let date = post.date,
+           let tagList = post.tag {
             self.imageView.kf.setImage(with: url)
             self.detailView.bind(name: name,
                                  date: date)
+            self.tagStackView.tagList = tagList
         }
     }
 }
