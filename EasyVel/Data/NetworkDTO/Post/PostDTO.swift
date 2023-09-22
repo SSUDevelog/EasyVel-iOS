@@ -8,7 +8,6 @@
 import Foundation
 
 struct PostDTO: Codable, Hashable {
-//    let id: UUID?
     let comment: Int?
     let date: String?
     let img: String?
