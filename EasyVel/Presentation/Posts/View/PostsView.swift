@@ -16,6 +16,7 @@ final class PostsView: BaseUIView {
     lazy var collectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         view.backgroundColor = .gray100
+        view.refreshControl = refreshControl
         return view
     }()
     let keywordsPostsViewExceptionView: UIImageView = {
@@ -24,6 +25,7 @@ final class PostsView: BaseUIView {
         imageView.isHidden = true
         return imageView
     }()
+    let refreshControl = UIRefreshControl()
     
     // MARK: - Setting
     

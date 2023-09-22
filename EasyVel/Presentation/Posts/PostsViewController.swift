@@ -68,20 +68,24 @@ final class PostsViewController: RxBaseViewController<PostsViewModel> {
     
     override func bind(viewModel: PostsViewModel) {
         self.confiugreDataSource()
-        //        let reload = postsView.collectionView.refreshControl?.rx
-        //            .controlEvent(.valueChanged)
-        //            .asObservable()
+        
+        let reload = postsView.refreshControl.rx
+            .controlEvent(.valueChanged)
+            .asObservable()
         let viewWillAppear = viewModel.viewWillAppear
             .asObservable()
-        
-        //        let postTrigger = Observable.merge(reload, viewWillAppear)
-        
-        let input = PostsViewModel.Input(viewWillAppear)
-        
+        let postTrigger = Observable.merge(reload, viewWillAppear)
+
+        let input = PostsViewModel.Input(postTrigger)
         let output = viewModel.transform(input: input)
         
-        output.postList.drive(onNext: {
-            self.loadSnapshotData(with: $0)
+        output.postList.drive(onNext: { [weak self] data in
+            self?.loadSnapshotData(with: data)
+            self?.postsView.refreshControl.endRefreshing()
+        }).disposed(by: disposeBag)
+        
+        output.isPostListEmpty.drive(onNext: { [weak self] isEmpty in
+            self?.showEmptyView(when: isEmpty)
         }).disposed(by: disposeBag)
     }
     
@@ -90,6 +94,10 @@ final class PostsViewController: RxBaseViewController<PostsViewModel> {
     
     
     // MARK: - Custom Method
+    
+    private func showEmptyView(when isPostEmpty: Bool) {
+        self.postsView.keywordsPostsViewExceptionView.isHidden = !isPostEmpty
+    }
     
 }
 
