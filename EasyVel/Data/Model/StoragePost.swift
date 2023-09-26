@@ -14,12 +14,3 @@ struct StoragePost: Codable, Equatable {
     let title: String?
     let url: String?
 }
-
-extension StoragePost {
-    
-    func checkIsUniquePost() -> Bool {
-        let realm = RealmService()
-        return realm.checkUniquePost(input: self)
-    }
-    
-}
