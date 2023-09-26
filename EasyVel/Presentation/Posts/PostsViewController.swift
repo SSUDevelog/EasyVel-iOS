@@ -32,6 +32,8 @@ final class PostsViewController: RxBaseViewController<PostsViewModel> {
     private var posts: [PostDTO]?
     private var isNavigationBarHidden: Bool?
     
+    private var postsViewModel: PostsViewModel?
+    
     // MARK: - UI Property
     
     private let postsView = PostsView()
@@ -44,6 +46,7 @@ final class PostsViewController: RxBaseViewController<PostsViewModel> {
         viewModel: PostsViewModel
     ) {
         super.init(viewModel: viewModel)
+        self.postsViewModel = viewModel
         self.view = postsView
     }
     
@@ -80,8 +83,9 @@ final class PostsViewController: RxBaseViewController<PostsViewModel> {
         let output = viewModel.transform(input: input)
         
         output.postList.drive(onNext: { [weak self] data in
-            self?.loadSnapshotData(with: data)
+            LoadingView.hideLoading()
             self?.postsView.refreshControl.endRefreshing()
+            self?.loadSnapshotData(with: data)
         }).disposed(by: disposeBag)
         
         output.isPostListEmpty.drive(onNext: { [weak self] isEmpty in
@@ -101,7 +105,7 @@ final class PostsViewController: RxBaseViewController<PostsViewModel> {
     
 }
 
-// MARK: - DatatSource
+// MARK: - DataSource
 
 extension PostsViewController {
     private func confiugreDataSource() {
@@ -110,8 +114,10 @@ extension PostsViewController {
     }
     
     private func createDataSource() -> DataSource {
-        let cellRegistration = UICollectionView.CellRegistration<PostCell, PostModel> { cell, indexPath, post in
+        let cellRegistration = UICollectionView.CellRegistration<PostCell, PostModel> { [weak self] cell, indexPath, post in
             cell.loadPost(post, indexPath)
+            
+            self?.bind(cell: cell)
         }
         
         return DataSource(
@@ -124,6 +130,16 @@ extension PostsViewController {
                 )
             }
         )
+    }
+    
+    private func bind(cell: PostsCollectionViewCell) {
+        cell.scrapButtonObservable
+            .drive(onNext: { [weak self] postModel in
+                guard var postModel = postModel else { return }
+                postModel.isScrapped.toggle()
+                cell.isScrapped?.toggle()
+                self?.postsViewModel?.scrapPost(postModel)
+            }).disposed(by: disposeBag)
     }
 }
 
@@ -139,7 +155,9 @@ extension PostsViewController {
     func loadSnapshotData(
         with incomingPosts: [PostModel]
     ) {
+        let previousPosts = self.postsSnapshot.itemIdentifiers(inSection: .main)
+        self.postsSnapshot.deleteItems(previousPosts)
         self.postsSnapshot.appendItems(incomingPosts, toSection: .main)
-        self.postsDataSource.apply(self.postsSnapshot)
+        self.postsDataSource.applySnapshotUsingReloadData(self.postsSnapshot)
     }
 }

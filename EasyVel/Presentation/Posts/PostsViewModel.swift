@@ -54,6 +54,10 @@ final class PostsViewModel: BaseViewModel {
         super.init()
     }
     
+    deinit {
+        print("🗑️🗑️ deinitialized 🗑️🗑️")
+    }
+    
     // MARK: - Custom Functions
     
     func transform(input: Input) -> Output {
@@ -62,13 +66,15 @@ final class PostsViewModel: BaseViewModel {
             .flatMapLatest { _ -> Observable<[PostDTO]?> in
                 self.getPosts()
             }
-            .map { postDTO -> [PostModel] in
-                guard let postDTO = postDTO else {
-                    LoadingView.hideLoading()
-                    return [PostModel]()
+            .map { postDTOs -> [PostDTO] in
+                return postDTOs ?? []
+            }
+            .map { posts -> [PostModel] in
+                return posts.map { postDTO in
+                    let storagePost = self.convertPostDtoToStoragePost(input: postDTO)
+                    let isScrapped = self.isPostScrapped(post: storagePost)
+                    return PostModel(id: UUID(), post: postDTO, isScrapped: isScrapped)
                 }
-                LoadingView.hideLoading()
-                return postDTO.map { PostModel(id: UUID(), post: $0) }
             }
             .asDriver(onErrorJustReturn: [])
         
@@ -97,10 +103,25 @@ extension PostsViewModel {
         )
     }
     
-    private func checkIsUniquePost(
+    // 스크랩 한 뒤 스크롤하면 스크랩이 죽어있음
+    
+    func scrapPost(
+        _ model: PostModel
+    ) {
+        guard let post = model.post else { return }
+        let storagePost = convertPostDtoToStoragePost(input: post)
+        if isPostScrapped(post: storagePost) {
+            guard let url = storagePost.url else { return }
+            self.realm.deletePost(url: url)
+        } else {
+            self.realm.addPost(item: storagePost, folderName: TextLiterals.allPostsScrapFolderText)
+        }
+    }
+    
+    private func isPostScrapped(
         post: StoragePost
     ) -> Bool {
-        return realm.checkUniquePost(input: post)
+        return realm.containsPost(input: post)
     }
     
     private func getPosts() -> Observable<[PostDTO]?> {

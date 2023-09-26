@@ -17,9 +17,18 @@ final class PostsCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - Property
     
-    var cellScrapObservable: Observable<(IndexPath, Bool)>?
-    var post: PostDTO?
-    var isScrapped: Bool = false
+    var post: PostModel?
+    var isScrapped: Bool? {
+        didSet {
+            configureScrapButton()
+        }
+    }
+    
+    var scrapButtonObservable: Driver<PostModel?> {
+        return scrapButton.rx.tap
+            .map { return self.post }
+            .asDriver(onErrorJustReturn: nil)
+    }
     
     // MARK: - UI Property
     
@@ -46,9 +55,8 @@ final class PostsCollectionViewCell: BaseCollectionViewCell {
     private let detailView = PostDetailView()
     lazy var scrapButton: UIButton = {
         let button = UIButton()
-        button.setImage(isScrapped ? ImageLiterals.bookMarkFill : ImageLiterals.bookMark,for: .normal)
         button.addAction(UIAction { _ in
-            
+            // TODO: action ?
         }, for: .touchUpInside)
         return button
     }()
@@ -61,7 +69,11 @@ final class PostsCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - Life Cycle
     
-    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        
+    }
     
     // MARK: - Setting
     
@@ -130,17 +142,21 @@ final class PostsCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - Custom Method
     
-    
-    
+    private func configureScrapButton() {
+        guard let isScrapped = isScrapped else { return }
+        self.post?.isScrapped = isScrapped
+        self.scrapButton.setImage(isScrapped ? ImageLiterals.bookMarkFill : ImageLiterals.bookMark, for: .normal)
+    }
     
 }
 
 extension PostsCollectionViewCell {
-    func loadPost(_ model: PostModel, _ indexPath: IndexPath) {
-        guard let post = model.post else { return }
-        self.post = post
+    func loadPost(_ postModel: PostModel, _ indexPath: IndexPath) {
+        guard let post = postModel.post else { return }
+        self.post = postModel
         self.titleLabel.setLineHeight(multiple: 1.3, with: post.title ?? "")
         self.summaryLabel.setLineHeight(multiple: 1.44, with: post.summary ?? "")
+        self.isScrapped = postModel.isScrapped
         
         if let urlString = post.img,
            let url = URL(string: urlString),
