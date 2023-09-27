@@ -40,7 +40,9 @@ final class TagSearchViewModel: BaseViewModel {
         var searchBarDidEditEvent: Observable<String>
         var searchTextFieldDidEnd: Observable<Void>
         var myTagCellDidTap: Observable<String>
+        var popularTagCellDidTap: Observable<String>
     }
+    
 
     // MARK: - Output
     
@@ -48,6 +50,7 @@ final class TagSearchViewModel: BaseViewModel {
     var popularTagsOutput = BehaviorRelay<[String]>(value: Array<String>(repeating: "", count: 10))
     
     var presentDeleteMyTagAlertOutput = PublishRelay<Bool>()
+    var presentTagPostsViewController = PublishRelay<String>()
     
     var tagAddStatusOutput = PublishRelay<(Bool, String)>()
     var deleteTagStatusOutPut = PublishRelay<(Bool, String)>()
@@ -99,6 +102,12 @@ final class TagSearchViewModel: BaseViewModel {
             .subscribe { [weak self] tag in
                 self?.deleteTag = tag
                 self?.presentDeleteMyTagAlertOutput.accept(true)
+            }
+            .disposed(by: disposeBag)
+        
+        input.popularTagCellDidTap
+            .subscribe { [weak self] tag in
+                self?.presentTagPostsViewController.accept(tag)
             }
             .disposed(by: disposeBag)
         

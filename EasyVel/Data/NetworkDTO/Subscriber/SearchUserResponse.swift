@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SearchSubscriberResponse: Codable {
+struct SearchUserResponse: Codable {
     let profilePictureURL: String?
     let profileURL: String?
     let userName: String?

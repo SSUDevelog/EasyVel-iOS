@@ -9,13 +9,13 @@ import UIKit
 
 import SnapKit
 
-protocol SubscriberTableViewCellDelegate: AnyObject {
+protocol FollowTableViewCellDelegate: AnyObject {
     func unsubscribeButtonDidTap(name: String)
 }
 
-final class SubscriberTableViewCell: BaseTableViewCell {
+final class FollowTableViewCell: BaseTableViewCell {
     
-    weak var delegate: SubscriberTableViewCellDelegate?
+    weak var delegate: FollowTableViewCellDelegate?
     
     let subscriberImage: UIImageView = {
         let imageView = UIImageView()
@@ -79,7 +79,7 @@ final class SubscriberTableViewCell: BaseTableViewCell {
         selectionStyle = .none
     }
     
-    func updateUI(data: SubscriberListResponse) {
+    func updateUI(data: FollowListResponse) {
         if data.img == "" {
             subscriberImage.image = ImageLiterals.subscriberImage
         } else {

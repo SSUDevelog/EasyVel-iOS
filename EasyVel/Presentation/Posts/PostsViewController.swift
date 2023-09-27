@@ -39,6 +39,12 @@ final class PostsViewController: RxBaseViewController<PostsViewModel> {
         self.view = postsView
     }
     
+    init(viewModel: PostsViewModel,
+         isNavigationBarHidden: Bool) {
+        super.init(viewModel: viewModel)
+        self.isNavigationBarHidden = isNavigationBarHidden
+    }
+    
     init(
         viewModel: PostsViewModel,
         posts: [PostDTO],

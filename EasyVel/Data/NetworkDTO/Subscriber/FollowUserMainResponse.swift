@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct SubscriberUserMainResponse: Codable {
+struct FollowUserMainResponse: Codable {
     let userMainUrl: String?
 }

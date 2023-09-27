@@ -35,13 +35,13 @@ final class TabBarController: UITabBarController {
 
     // MARK: - viewModel properties
     
-    let listViewModel = SubscriberViewModel(service: DefaultSubscriberService.shared)
+    let listViewModel = FollowViewModel(service: DefaultFollowService.shared)
     let scrapStorageViewModel = ScrapStorageViewModel()
     
     // MARK: - viewController properties
     
     let homeVC = HomeViewController()
-    lazy var listVC = SubscriberViewController(viewModel: listViewModel)
+    lazy var listVC = FollowViewController(viewModel: listViewModel)
     lazy var storageVC = ScrapStorageViewController(viewModel: scrapStorageViewModel)
     let settingViewModel = SettingViewModel(service: DefaultAuthService.shared)
     lazy var settingVC = SettingViewController(viewModel: settingViewModel)
@@ -95,6 +95,13 @@ final class TabBarController: UITabBarController {
             object: nil
         )
         
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(updateFollowVC),
+            name: Notification.Name("updateFollowVC"),
+            object: nil
+        )
+        
         
     }
     
@@ -125,6 +132,11 @@ final class TabBarController: UITabBarController {
         self.homeVC.requestGetTagAPI()
     }
     
+    @objc
+    private func updateFollowVC() {
+        self.listViewModel.refreshFollowList.accept(true)
+    }
+    
     private func setUpTabBar(){
         self.tabBar.tintColor = .brandColor
         self.tabBar.unselectedItemTintColor = .gray300
@@ -143,7 +155,7 @@ final class TabBarController: UITabBarController {
         homeVC.tabBarItem = UITabBarItem(title: "홈",
                                                image: ImageLiterals.home,
                                                selectedImage: ImageLiterals.homeFill)
-        listVC.tabBarItem = UITabBarItem(title: "팔로우",
+        listVC.tabBarItem = UITabBarItem(title: "팔로워",
                                                image: ImageLiterals.list,
                                                selectedImage: ImageLiterals.listFill)
         storageVC.tabBarItem = UITabBarItem(title: "스크랩",
