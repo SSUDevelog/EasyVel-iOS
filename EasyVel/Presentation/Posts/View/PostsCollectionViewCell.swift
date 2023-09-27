@@ -149,24 +149,15 @@ final class PostsCollectionViewCell: BaseCollectionViewCell {
 extension PostsCollectionViewCell {
     func loadPost(_ model: PostModel) {
         let post = model.post
-        
         self.post = model
+        self.post?.isScrapped.toggle()
         self.scrapButton.setImage(model.isScrapped ? ImageLiterals.bookMarkFill : ImageLiterals.bookMark, for: .normal)
         self.titleLabel.setLineHeight(multiple: 1.3, with: post.title ?? "")
         self.summaryLabel.setLineHeight(multiple: 1.44, with: post.summary ?? "")
         self.detailView.bind(name: post.name ?? "", date: post.date ?? "")
         self.tagStackView.tagList = post.tag ?? []
-        
         if let urlString = post.img, let url = URL(string: urlString) {
             self.imageView.kf.setImage(with: url)
         }
-    }
-
-    func bind(viewModel: PostsViewModel) {
-        scrapButtonObservable.drive(onNext: { [weak self] post in
-            self?.post?.isScrapped.toggle()
-            guard let post = post else { return }
-            viewModel.scrapPost(post)
-        }).disposed(by: self.disposeBag)
     }
 }

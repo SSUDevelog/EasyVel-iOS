@@ -70,6 +70,7 @@ final class PostsViewModel: BaseViewModel {
                 return postDTOs ?? []
             }
             .map { posts -> [PostModel] in
+                LoadingView.hideLoading()
                 return posts.map { postDTO in
                     let storagePost = self.convertPostDtoToStoragePost(input: postDTO)
                     let isScrapped = self.isPostScrapped(post: storagePost)

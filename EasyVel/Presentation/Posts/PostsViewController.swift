@@ -41,6 +41,7 @@ final class PostsViewController: RxBaseViewController<PostsViewModel> {
     
     init(viewModel: PostsViewModel,
          isNavigationBarHidden: Bool) {
+        self.postsViewModel = viewModel
         super.init(viewModel: viewModel)
         self.isNavigationBarHidden = isNavigationBarHidden
     }
@@ -72,12 +73,10 @@ final class PostsViewController: RxBaseViewController<PostsViewModel> {
         
         output.postList
             .drive(self.postsView.collectionView.rx.items) { collectionView, item, post in
-                LoadingView.hideLoading()
-                self.postsView.collectionView.refreshControl?.endRefreshing()
-                
                 let cell: PostsCollectionViewCell = collectionView.dequeueReusableCell(forIndexPath: .init(item: item, section: 0))
                 cell.loadPost(post)
-//                cell.bind(viewModel: self.postsViewModel)
+                self.bind(cell: cell)
+                self.postsView.collectionView.refreshControl?.endRefreshing()
                 return cell
             }.disposed(by: disposeBag)
         
@@ -95,5 +94,13 @@ final class PostsViewController: RxBaseViewController<PostsViewModel> {
     
     private func showEmptyView(when isPostEmpty: Bool) {
         self.postsView.keywordsPostsViewExceptionView.isHidden = !isPostEmpty
+    }
+    
+    private func bind(cell: PostsCollectionViewCell) {
+        cell.scrapButtonObservable
+            .drive(onNext: { [weak self] post in
+                guard let post = post else { return }
+                self?.postsViewModel.scrapPost(post)
+            }).disposed(by: cell.disposeBag)
     }
 }
