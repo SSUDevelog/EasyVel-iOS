@@ -30,7 +30,6 @@ final class PostSearchViewController: RxBaseViewController<PostSearchViewModel> 
     private lazy var recentSearchTagCollectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
     
     private let popularSearchTagTableView = UITableView()
-    private let tapGesture = UITapGestureRecognizer()
     private let searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: 280, height: 0))
     
     
@@ -82,8 +81,7 @@ final class PostSearchViewController: RxBaseViewController<PostSearchViewModel> 
         
         setTableView()
         setCollectionView()
-        setTagGesture()
-        setKeyBoardNotification()
+        //dismissKeyboardWhenTappedAround()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -161,12 +159,6 @@ final class PostSearchViewController: RxBaseViewController<PostSearchViewModel> 
             })
             .disposed(by: disposeBag)
         
-        tapGesture.rx.event
-            .subscribe(onNext: { [weak self] _ in
-                self?.searchBar.resignFirstResponder()
-            })
-            .disposed(by: disposeBag)
-        
         deleteButton.rx.tap
             .subscribe(onNext: { [weak self] _ in
                 self?.viewModel?.deleteAllCurrentSearchTagInput.accept(Void())
@@ -227,10 +219,6 @@ final class PostSearchViewController: RxBaseViewController<PostSearchViewModel> 
         return viewController
     }
     
-    private func setTagGesture() {
-        view.addGestureRecognizer(tapGesture)
-    }
-    
     private func setEmptyRecentSearchTagExcaptionLabel(
         isCurrentSearchTagListEmpty: Bool
     ) {
@@ -285,6 +273,12 @@ extension PostSearchViewController: UITableViewDataSource, UITableViewDelegate {
         cell.configCell(self.popularSearchTagList[indexPath.row], indexPath.row + 1)
         return cell
     }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let tag = popularSearchTagList[indexPath.row]
+        let postsVC = KeywordPostsVCFactory().create(tag: tag, isNavigationBarHidden: false)
+        navigationController?.pushViewController(postsVC, animated: true)
+    }
 }
 
 extension PostSearchViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -299,34 +293,6 @@ extension PostSearchViewController: UICollectionViewDelegate, UICollectionViewDa
         cell.configCell(currentSearchTagList[indexPath.row])
         return cell
     }
-}
-
-// MARK: - keyboard height
-
-extension PostSearchViewController {
-    private func setKeyBoardNotification() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(keyboardWillShow),
-            name: UIResponder.keyboardWillShowNotification,
-            object: nil
-        )
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(self.keyboardWillHide),
-            name: UIResponder.keyboardWillHideNotification, object: nil
-        )
-    }
     
-    @objc
-    func keyboardWillShow(_ notification: Notification) {
-        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            let keyboardRectangle = keyboardFrame.cgRectValue
-            keyboardHeight = keyboardRectangle.height
-        }
-    }
     
-    @objc func keyboardWillHide(_ notification: Notification) {
-        keyboardHeight = 0.0
-    }
 }

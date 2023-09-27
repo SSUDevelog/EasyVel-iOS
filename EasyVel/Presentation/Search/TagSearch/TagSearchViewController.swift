@@ -134,7 +134,8 @@ final class TagSearchViewController: RxBaseViewController<TagSearchViewModel> {
         let input = TagSearchViewModel.Input(
             searchBarDidEditEvent: searchBar.searchTextField.rx.text.orEmpty.asObservable(),
             searchTextFieldDidEnd: searchBar.searchTextField.rx.controlEvent(.editingDidEnd).asObservable(),
-            myTagCellDidTap: myTagCollectionView.rx.modelSelected(String.self).asObservable()
+            myTagCellDidTap: myTagCollectionView.rx.modelSelected(String.self).asObservable(),
+            popularTagCellDidTap: popularTagTableView.rx.modelSelected(String.self).asObservable()
         )
         
         viewModel.transform(input)
@@ -180,6 +181,15 @@ final class TagSearchViewController: RxBaseViewController<TagSearchViewModel> {
                 let alertVC = VelogAlertViewController(alertType: .deleteTag,
                                                        delegate: self)
                 self.present(alertVC, animated: false)
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.presentTagPostsViewController
+            .asDriver(onErrorJustReturn: String())
+            .drive { [weak self] tag in
+                guard let self else { return }
+                let postsVC = KeywordPostsVCFactory().create(tag: tag, isNavigationBarHidden: false)
+                navigationController?.pushViewController(postsVC, animated: true)
             }
             .disposed(by: disposeBag)
         
