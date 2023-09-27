@@ -9,6 +9,6 @@ import Foundation
 
 struct PostModel: Identifiable, Hashable {
     let id: UUID
-    let post: PostDTO?
-    var isScrapped: Bool
+    let post: PostDTO
+    var isScrapped: Bool = false
 }

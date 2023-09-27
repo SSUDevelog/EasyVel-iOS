@@ -13,23 +13,21 @@ import RxCocoa
 
 final class PostsCollectionViewCell: BaseCollectionViewCell {
     
-    static let identifier = "PostsCollectionViewCell"
+    static let reuseIdentifier = "PostsCollectionViewCell"
     
     // MARK: - Property
     
     var post: PostModel?
-    var isScrapped: Bool? {
-        didSet {
-            configureScrapButton()
-        }
-    }
     
+    var postScrapped: Observable<PostModel>?
     var scrapButtonObservable: Driver<PostModel?> {
         return scrapButton.rx.tap
             .map { return self.post }
             .asDriver(onErrorJustReturn: nil)
     }
     
+    var disposeBag = DisposeBag()
+
     // MARK: - UI Property
     
     private let imageView: UIImageView = {
@@ -55,9 +53,10 @@ final class PostsCollectionViewCell: BaseCollectionViewCell {
     private let detailView = PostDetailView()
     lazy var scrapButton: UIButton = {
         let button = UIButton()
-        button.addAction(UIAction { _ in
-            // TODO: action ?
-        }, for: .touchUpInside)
+//        button.setImage(isScrapped ? ImageLiterals.bookMarkFill : ImageLiterals.bookMark,for: .normal)
+//        button.addAction(UIAction { _ in
+//
+//        }, for: .touchUpInside)
         return button
     }()
     private let tagScrollView: UIScrollView = {
@@ -71,8 +70,7 @@ final class PostsCollectionViewCell: BaseCollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        
-        
+        self.disposeBag = DisposeBag()
     }
     
     // MARK: - Setting
@@ -142,31 +140,33 @@ final class PostsCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - Custom Method
     
-    private func configureScrapButton() {
-        guard let isScrapped = isScrapped else { return }
-        self.post?.isScrapped = isScrapped
-        self.scrapButton.setImage(isScrapped ? ImageLiterals.bookMarkFill : ImageLiterals.bookMark, for: .normal)
-    }
+    
+    
     
 }
 
+
 extension PostsCollectionViewCell {
-    func loadPost(_ postModel: PostModel, _ indexPath: IndexPath) {
-        guard let post = postModel.post else { return }
-        self.post = postModel
+    func loadPost(_ model: PostModel) {
+        let post = model.post
+        
+        self.post = model
+        self.scrapButton.setImage(model.isScrapped ? ImageLiterals.bookMarkFill : ImageLiterals.bookMark, for: .normal)
         self.titleLabel.setLineHeight(multiple: 1.3, with: post.title ?? "")
         self.summaryLabel.setLineHeight(multiple: 1.44, with: post.summary ?? "")
-        self.isScrapped = postModel.isScrapped
+        self.detailView.bind(name: post.name ?? "", date: post.date ?? "")
+        self.tagStackView.tagList = post.tag ?? []
         
-        if let urlString = post.img,
-           let url = URL(string: urlString),
-           let name = post.name,
-           let date = post.date,
-           let tagList = post.tag {
+        if let urlString = post.img, let url = URL(string: urlString) {
             self.imageView.kf.setImage(with: url)
-            self.detailView.bind(name: name,
-                                 date: date)
-            self.tagStackView.tagList = tagList
         }
+    }
+
+    func bind(viewModel: PostsViewModel) {
+        scrapButtonObservable.drive(onNext: { [weak self] post in
+            self?.post?.isScrapped.toggle()
+            guard let post = post else { return }
+            viewModel.scrapPost(post)
+        }).disposed(by: self.disposeBag)
     }
 }

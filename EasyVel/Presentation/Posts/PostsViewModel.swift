@@ -108,8 +108,7 @@ extension PostsViewModel {
     func scrapPost(
         _ model: PostModel
     ) {
-        guard let post = model.post else { return }
-        let storagePost = convertPostDtoToStoragePost(input: post)
+        let storagePost = convertPostDtoToStoragePost(input: model.post)
         if isPostScrapped(post: storagePost) {
             guard let url = storagePost.url else { return }
             self.realm.deletePost(url: url)
