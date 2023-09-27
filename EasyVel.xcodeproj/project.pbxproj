@@ -14,8 +14,6 @@
 		3E06F8CD2A990BBD001302F4 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E06F8CC2A990BBC001302F4 /* UIViewController+Extension.swift */; };
 		3E06F8CF2A99E1E9001302F4 /* PostsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E06F8CE2A99E1E9001302F4 /* PostsViewModel.swift */; };
 		3E61EE8A2AA818E9004F25DB /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E61EE892AA818E9004F25DB /* Array+Extension.swift */; };
-		3E7B1ABA2A8774FF00EE7739 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3E7B1AB92A8774FF00EE7739 /* Debug.xcconfig */; };
-		3E7B1ABC2A87751700EE7739 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3E7B1ABB2A87751700EE7739 /* Release.xcconfig */; };
 		3E7B1AC02A87E90500EE7739 /* PostsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7B1ABF2A87E90500EE7739 /* PostsCollectionViewCell.swift */; };
 		3E9663562ABC241700EC884D /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9663552ABC241700EC884D /* PostModel.swift */; };
 		3E96635A2ABC745F00EC884D /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9663592ABC745F00EC884D /* UILabel+Extension.swift */; };
@@ -130,9 +128,7 @@
 		91487F4329FD8AC9009CFECF /* FollowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91487F4229FD8AC9009CFECF /* FollowViewModel.swift */; };
 		91487F4D29FD9858009CFECF /* TagSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91487F4C29FD9858009CFECF /* TagSearchViewController.swift */; };
 		91487F5229FDA143009CFECF /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91487F5129FDA143009CFECF /* SettingTableViewCell.swift */; };
-		91487F5D29FDA2C0009CFECF /* PostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91487F5C29FDA2C0009CFECF /* PostsViewController.swift */; };
 		914D8DCE2A02417C00516B4C /* FollowSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914D8DCD2A02417C00516B4C /* FollowSearchViewModel.swift */; };
-		914D8DD12A028AED00516B4C /* PostsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914D8DD02A028AED00516B4C /* PostsViewModel.swift */; };
 		914D8DD92A02B22A00516B4C /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914D8DD82A02B22A00516B4C /* WebViewController.swift */; };
 		915861852A2DFA6D00461F9A /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = 915861842A2DFA6D00461F9A /* RxBlocking */; };
 		915861872A2DFA6D00461F9A /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 915861862A2DFA6D00461F9A /* RxCocoa */; };
@@ -199,11 +195,11 @@
 		3E06F8CC2A990BBC001302F4 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		3E06F8CE2A99E1E9001302F4 /* PostsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsViewModel.swift; sourceTree = "<group>"; };
 		3E61EE892AA818E9004F25DB /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
-		3E7B1AB92A8774FF00EE7739 /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
-		3E7B1ABB2A87751700EE7739 /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		3E7B1ABF2A87E90500EE7739 /* PostsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsCollectionViewCell.swift; sourceTree = "<group>"; };
 		3E9663552ABC241700EC884D /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
 		3E9663592ABC745F00EC884D /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
+		3EE425142AC46A6200DE5FA5 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		3EE425152AC46A7100DE5FA5 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		7CB706D12A32062500083EC6 /* PostSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSearchViewController.swift; sourceTree = "<group>"; };
 		7CB706D32A32064900083EC6 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		7CB706D52A32067900083EC6 /* SearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -314,9 +310,7 @@
 		91487F4229FD8AC9009CFECF /* FollowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowViewModel.swift; sourceTree = "<group>"; };
 		91487F4C29FD9858009CFECF /* TagSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagSearchViewController.swift; sourceTree = "<group>"; };
 		91487F5129FDA143009CFECF /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
-		914D8DD02A028AED00516B4C /* PostsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsViewModel.swift; sourceTree = "<group>"; };
 		914D8DCD2A02417C00516B4C /* FollowSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowSearchViewModel.swift; sourceTree = "<group>"; };
-		91487F5C29FDA2C0009CFECF /* PostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsViewController.swift; sourceTree = "<group>"; };
 		914D8DD82A02B22A00516B4C /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		9158618C2A2E04BF00461F9A /* ScrapPostAddInFolderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapPostAddInFolderProtocol.swift; sourceTree = "<group>"; };
 		916227D72A44569500118018 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
@@ -522,9 +516,9 @@
 			isa = PBXGroup;
 			children = (
 				91487ECF29FC380C009CFECF /* Info.plist */,
-				3E7B1AB92A8774FF00EE7739 /* Debug.xcconfig */,
-				3E7B1ABB2A87751700EE7739 /* Release.xcconfig */,
 				87F25EEA2A84385800E03C32 /* Config.swift */,
+				3EE425142AC46A6200DE5FA5 /* Debug.xcconfig */,
+				3EE425152AC46A7100DE5FA5 /* Release.xcconfig */,
 			);
 			path = Configuration;
 			sourceTree = "<group>";
@@ -1147,7 +1141,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1420;
-				LastUpgradeCheck = 1420;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					91487EBD29FC380A009CFECF = {
 						CreatedOnToolsVersion = 14.2;
@@ -1192,11 +1186,9 @@
 				91A5C6552A41CC5F0078D8A9 /* Pretendard-Light.otf in Resources */,
 				91A5C6512A41CC480078D8A9 /* Pretendard-Regular.otf in Resources */,
 				91A5C64D2A41CC480078D8A9 /* Pretendard-ExtraBold.otf in Resources */,
-				3E7B1ABA2A8774FF00EE7739 /* Debug.xcconfig in Resources */,
 				91A5C64E2A41CC480078D8A9 /* Pretendard-SemiBold.otf in Resources */,
 				91487ECE29FC380C009CFECF /* LaunchScreen.storyboard in Resources */,
 				91487ECB29FC380C009CFECF /* Assets.xcassets in Resources */,
-				3E7B1ABC2A87751700EE7739 /* Release.xcconfig in Resources */,
 				91A5C6572A41CC660078D8A9 /* Pretendard-Medium.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1386,6 +1378,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -1418,6 +1411,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1447,6 +1441,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -1479,6 +1474,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1500,7 +1496,6 @@
 		};
 		91487ED329FC380C009CFECF /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3E7B1AB92A8774FF00EE7739 /* Debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1539,7 +1534,6 @@
 		};
 		91487ED429FC380C009CFECF /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3E7B1ABB2A87751700EE7739 /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
