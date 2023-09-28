@@ -51,14 +51,7 @@ final class PostsCollectionViewCell: BaseCollectionViewCell {
         return label
     }()
     private let detailView = PostDetailView()
-    lazy var scrapButton: UIButton = {
-        let button = UIButton()
-//        button.setImage(isScrapped ? ImageLiterals.bookMarkFill : ImageLiterals.bookMark,for: .normal)
-//        button.addAction(UIAction { _ in
-//
-//        }, for: .touchUpInside)
-        return button
-    }()
+    private let scrapButton = UIButton()
     private let tagScrollView: UIScrollView = {
         let view = UIScrollView()
         view.showsHorizontalScrollIndicator = false
