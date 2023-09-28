@@ -82,21 +82,34 @@ final class PostsViewController: BaseViewController {
     func bindViewModel() {
         let reload = postsView.refreshControl.rx.controlEvent(.valueChanged)
             .asObservable()
-        let viewWillAppear = self.rx.methodInvoked(#selector(self.viewWillAppear(_:)))
+        let viewDidLoad = self.rx.methodInvoked(#selector(self.viewDidLoad))
             .map { _ in () }
             .asObservable()
-        let postTrigger = Observable.merge(reload, viewWillAppear)
+        let viewWillAppear = self.rx.methodInvoked(#selector(self.viewWillAppear(_:)))
+            .map { [weak self] _ -> [PostDTO] in
+                guard let posts = self?.posts else { return [] }
+                return posts
+            }
+            .asObservable()
         
-        let input = PostsViewModel.Input(postTrigger)
+        let postFetchTrigger = Observable.merge(reload, viewDidLoad)
+        let postReloadTrigger = Observable.merge(viewWillAppear)
+        
+        let input = PostsViewModel.Input(postFetchTrigger, postReloadTrigger)
         let output = self.postsViewModel.transform(input: input)
         
         output.postList.drive(onNext: { [weak self] posts in
-            self?.loadSnapshotData(with: posts)
+            self?.posts = posts.map { $0.post }
+            self?.loadSnapshot(with: posts, andAnimation: true)
             self?.postsView.collectionView.refreshControl?.endRefreshing()
         }).disposed(by: disposeBag)
         
         output.isPostListEmpty.drive(onNext: { [weak self] isEmpty in
             self?.showEmptyView(when: isEmpty)
+        }).disposed(by: disposeBag)
+        
+        output.reloadedPostList.drive(onNext: { [weak self] posts in
+            self?.loadSnapshot(with: posts, andAnimation: false)
         }).disposed(by: disposeBag)
     }
     
@@ -155,12 +168,13 @@ extension PostsViewController {
         self.postsDataSource.apply(self.postsSnapshot)
     }
     
-    func loadSnapshotData(
-        with incomingPosts: [PostModel]
+    func loadSnapshot(
+        with incomingPosts: [PostModel],
+        andAnimation isAnimated: Bool
     ) {
         let previousPosts = self.postsSnapshot.itemIdentifiers(inSection: .main)
         self.postsSnapshot.deleteItems(previousPosts)
         self.postsSnapshot.appendItems(incomingPosts, toSection: .main)
-        self.postsDataSource.apply(self.postsSnapshot)
+        self.postsDataSource.apply(self.postsSnapshot, animatingDifferences: isAnimated)
     }
 }

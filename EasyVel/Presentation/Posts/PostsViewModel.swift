@@ -24,21 +24,27 @@ final class PostsViewModel: BaseViewModel {
     // MARK: - Input
     
     struct Input {
-        let postTrigger: Observable<Void>
+        let fetchTrigger: Observable<Void>
+        let reloadTrigger: Observable<[PostDTO]>
         
-        init(_ postTrigger: Observable<Void>) {
-            self.postTrigger = postTrigger
+        init(_ fetchTrigger: Observable<Void>,
+             _ reloadTrigger: Observable<[PostDTO]>) {
+            self.fetchTrigger = fetchTrigger
+            self.reloadTrigger = reloadTrigger
         }
     }
     
     struct Output {
         let postList: Driver<[PostModel]>
         let isPostListEmpty: Driver<Bool>
+        let reloadedPostList: Driver<[PostModel]>
         
         init(_ postList: Driver<[PostModel]>,
-             _ isPostListEmpty: Driver<Bool>) {
+             _ isPostListEmpty: Driver<Bool>,
+             _ reload: Driver<[PostModel]>) {
             self.postList = postList
             self.isPostListEmpty = isPostListEmpty
+            self.reloadedPostList = reload
         }
     }
     
@@ -50,7 +56,6 @@ final class PostsViewModel: BaseViewModel {
     ) {
         self.viewType = viewType
         self.tag = tag
-        
         super.init()
     }
     
@@ -61,7 +66,7 @@ final class PostsViewModel: BaseViewModel {
     // MARK: - Custom Functions
     
     func transform(input: Input) -> Output {
-        let postList = input.postTrigger
+        let postList = input.fetchTrigger
             .startWith(LoadingView.showLoading())
             .flatMapLatest { _ -> Observable<[PostDTO]?> in
                 self.getPosts()
@@ -71,11 +76,7 @@ final class PostsViewModel: BaseViewModel {
             }
             .map { posts -> [PostModel] in
                 LoadingView.hideLoading()
-                return posts.map { postDTO in
-                    let storagePost = self.convertPostDtoToStoragePost(input: postDTO)
-                    let isScrapped = self.isPostScrapped(post: storagePost)
-                    return PostModel(id: UUID(), post: postDTO, isScrapped: isScrapped)
-                }
+                return posts.map { self.convertPostDtoToPostModel(post: $0) }
             }
             .asDriver(onErrorJustReturn: [])
         
@@ -83,7 +84,13 @@ final class PostsViewModel: BaseViewModel {
             .map { $0.isEmpty }
             .asDriver(onErrorJustReturn: true)
         
-        return Output(postList, isPostListEmpty)
+        let reloadedPostList = input.reloadTrigger
+            .map { posts -> [PostModel] in
+                return posts.map { self.convertPostDtoToPostModel(post: $0) }
+            }
+            .asDriver(onErrorJustReturn: [])
+        
+        return Output(postList, isPostListEmpty, reloadedPostList)
     }
     
 }
@@ -102,6 +109,14 @@ extension PostsViewModel {
             title: input.title ?? "",
             url: input.url ?? ""
         )
+    }
+    
+    private func convertPostDtoToPostModel(
+        post: PostDTO
+    ) -> PostModel {
+        let storagePost = self.convertPostDtoToStoragePost(input: post)
+        let isScrapped = self.isPostScrapped(post: storagePost)
+        return PostModel(id: UUID(), post: post, isScrapped: isScrapped)
     }
     
     // 스크랩 한 뒤 스크롤하면 스크랩이 죽어있음

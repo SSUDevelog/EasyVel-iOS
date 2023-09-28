@@ -22,7 +22,10 @@ final class PostsCollectionViewCell: BaseCollectionViewCell {
     var postScrapped: Observable<PostModel>?
     var scrapButtonObservable: Driver<PostModel?> {
         return scrapButton.rx.tap
-            .map { return self.post }
+            .map { [weak self] in
+                self?.post?.isScrapped.toggle()
+                return self?.post
+            }
             .asDriver(onErrorJustReturn: nil)
     }
     
@@ -143,7 +146,6 @@ extension PostsCollectionViewCell {
     func loadPost(_ model: PostModel) {
         let post = model.post
         self.post = model
-        self.post?.isScrapped.toggle()
         self.scrapButton.setImage(model.isScrapped ? ImageLiterals.bookMarkFill : ImageLiterals.bookMark, for: .normal)
         self.titleLabel.setLineHeight(multiple: 1.3, with: post.title ?? "")
         self.summaryLabel.setLineHeight(multiple: 1.44, with: post.summary ?? "")
