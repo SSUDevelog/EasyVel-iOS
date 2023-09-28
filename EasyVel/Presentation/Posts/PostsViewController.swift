@@ -75,12 +75,13 @@ final class PostsViewController: BaseViewController {
         self.navigationBarIsHidden(self.isNavigationBarHidden)
         self.setDataSource()
         self.bindViewModel()
+        self.bindNavigation()
     }
     
     // MARK: - Setting
     
     func bindViewModel() {
-        let reload = postsView.refreshControl.rx.controlEvent(.valueChanged)
+        let reload = self.postsView.refreshControl.rx.controlEvent(.valueChanged)
             .asObservable()
         let viewDidLoad = self.rx.methodInvoked(#selector(self.viewDidLoad))
             .map { _ in () }
@@ -118,6 +119,13 @@ final class PostsViewController: BaseViewController {
                 self?.updateSnapshot(with: scrappedPost)
             }).disposed(by: cell.disposeBag)
     }
+    
+    private func bindNavigation() {
+        self.postsView.collectionView.rx.itemSelected
+            .subscribe(onNext: { [weak self] indexPath in
+                self?.pushToWebView(of: indexPath)
+            }).disposed(by: disposeBag)
+    }
 }
 
 // MARK: - Custom Method
@@ -125,6 +133,13 @@ final class PostsViewController: BaseViewController {
 extension PostsViewController {
     private func showEmptyView(when isPostEmpty: Bool) {
         self.postsView.keywordsPostsViewExceptionView.isHidden = !isPostEmpty
+    }
+    
+    private func pushToWebView(of indexPath: IndexPath) {
+        guard let postURL = self.postList?[indexPath.item].url else { return }
+        let webViewModel = WebViewModel(url: postURL, service: DefaultFollowService.shared)
+        let webViewController = WebViewController(viewModel: webViewModel)
+        self.navigationController?.pushViewController(webViewController, animated: true)
     }
 }
 
