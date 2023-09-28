@@ -59,10 +59,6 @@ final class PostsViewModel: BaseViewModel {
         super.init()
     }
     
-    deinit {
-        print("🗑️🗑️ deinitialized 🗑️🗑️")
-    }
-    
     // MARK: - Custom Functions
     
     func transform(input: Input) -> Output {
@@ -116,10 +112,8 @@ extension PostsViewModel {
     ) -> PostModel {
         let storagePost = self.convertPostDtoToStoragePost(input: post)
         let isScrapped = self.isPostScrapped(post: storagePost)
-        return PostModel(id: UUID(), post: post, isScrapped: isScrapped)
+        return PostModel(post: post, isScrapped: isScrapped)
     }
-    
-    // 스크랩 한 뒤 스크롤하면 스크랩이 죽어있음
     
     func scrapPost(
         _ model: PostModel
