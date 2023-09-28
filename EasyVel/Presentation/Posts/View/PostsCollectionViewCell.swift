@@ -19,11 +19,11 @@ final class PostsCollectionViewCell: BaseCollectionViewCell {
     
     var post: PostModel?
     
-    var postScrapped: Observable<PostModel>?
     var scrapButtonObservable: Driver<PostModel?> {
         return scrapButton.rx.tap
             .map { [weak self] in
                 self?.post?.isScrapped.toggle()
+                self?.updateScrapButton()
                 return self?.post
             }
             .asDriver(onErrorJustReturn: nil)
@@ -136,9 +136,13 @@ final class PostsCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - Custom Method
     
-    
-    
-    
+    private func updateScrapButton() {
+        guard let isScrapped = post?.isScrapped else { return }
+        self.scrapButton.setImage(
+            isScrapped ? ImageLiterals.bookMarkFill : ImageLiterals.bookMark,
+            for: .normal
+        )
+    }
 }
 
 
