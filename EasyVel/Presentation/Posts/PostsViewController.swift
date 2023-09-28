@@ -29,7 +29,7 @@ final class PostsViewController: BaseViewController {
     
     // MARK: - Property
     
-    private var posts: [PostDTO]?
+    private var postList: [PostDTO]?
     private var isNavigationBarHidden: Bool = false
     
     // MARK: - UI Property
@@ -56,7 +56,7 @@ final class PostsViewController: BaseViewController {
     
     init(viewModel: PostsViewModel, posts: [PostDTO], isNavigationBarHidden: Bool) {
         self.postsViewModel = viewModel
-        self.posts = posts
+        self.postList = posts
         self.isNavigationBarHidden = isNavigationBarHidden
         super.init(nibName: nil, bundle: nil)
     }
@@ -86,20 +86,17 @@ final class PostsViewController: BaseViewController {
             .map { _ in () }
             .asObservable()
         let viewWillAppear = self.rx.methodInvoked(#selector(self.viewWillAppear(_:)))
-            .map { [weak self] _ -> [PostDTO] in
-                guard let posts = self?.posts else { return [] }
-                return posts
-            }
+            .map { [weak self] _ -> [PostDTO] in return self?.postList ?? [] }
             .asObservable()
         
         let postFetchTrigger = Observable.merge(reload, viewDidLoad)
         let postReloadTrigger = Observable.merge(viewWillAppear)
         
         let input = PostsViewModel.Input(postFetchTrigger, postReloadTrigger)
-        let output = self.postsViewModel.transform(input: input)
+        let output = postsViewModel.transform(input: input)
         
         output.postList.drive(onNext: { [weak self] posts in
-            self?.posts = posts.map { $0.post }
+            self?.postList = posts.map { $0.post }
             self?.loadSnapshot(with: posts, andAnimation: true)
             self?.postsView.collectionView.refreshControl?.endRefreshing()
         }).disposed(by: disposeBag)
@@ -113,26 +110,25 @@ final class PostsViewController: BaseViewController {
         }).disposed(by: disposeBag)
     }
     
-    // MARK: - Action Helper
-    
-    
-    
-    // MARK: - Custom Method
-    
-    private func showEmptyView(when isPostEmpty: Bool) {
-        self.postsView.keywordsPostsViewExceptionView.isHidden = !isPostEmpty
-    }
-    
     private func bind(cell: PostsCollectionViewCell) {
         cell.scrapButtonObservable
             .drive(onNext: { [weak self] post in
-                guard let post = post else { return }
-                self?.postsViewModel.scrapPost(post)
+                guard let scrappedPost = post else { return }
+                self?.postsViewModel.scrapPost(scrappedPost)
+                self?.updateSnapshot(with: scrappedPost)
             }).disposed(by: cell.disposeBag)
     }
 }
 
-// MARK: - DatatSource
+// MARK: - Custom Method
+
+extension PostsViewController {
+    private func showEmptyView(when isPostEmpty: Bool) {
+        self.postsView.keywordsPostsViewExceptionView.isHidden = !isPostEmpty
+    }
+}
+
+// MARK: - DataSource
 
 extension PostsViewController {
     private func setDataSource() {
@@ -176,5 +172,17 @@ extension PostsViewController {
         self.postsSnapshot.deleteItems(previousPosts)
         self.postsSnapshot.appendItems(incomingPosts, toSection: .main)
         self.postsDataSource.apply(self.postsSnapshot, animatingDifferences: isAnimated)
+    }
+    
+    func updateSnapshot(
+        with incomingPost: PostModel
+    ) {
+        let currentPosts = self.postsSnapshot.itemIdentifiers(inSection: .main)
+        var newPosts = currentPosts
+        guard let index = currentPosts.map({ $0.post }).firstIndex(of: incomingPost.post) else { return }
+        newPosts[index] = incomingPost
+        self.postsSnapshot.deleteItems(currentPosts)
+        self.postsSnapshot.appendItems(newPosts, toSection: .main)
+        self.postsDataSource.apply(self.postsSnapshot, animatingDifferences: false)
     }
 }
