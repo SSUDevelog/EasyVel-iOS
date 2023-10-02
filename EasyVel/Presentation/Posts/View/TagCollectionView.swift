@@ -38,6 +38,8 @@ final class TagCollectionView: UICollectionView, UIScrollViewDelegate {
         self.layer.masksToBounds = true
         self.clipsToBounds = true
         self.isScrollEnabled = true
+        self.showsHorizontalScrollIndicator = false
+        self.bounces = false
     }
 }
 

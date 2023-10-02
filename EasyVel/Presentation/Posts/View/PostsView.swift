@@ -16,7 +16,6 @@ final class PostsView: BaseUIView {
     let collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
         collectionView.backgroundColor = .gray100
-        collectionView.register(cell: PostsCollectionViewCell.self)
         return collectionView
     }()
     let keywordsPostsViewExceptionView: UIImageView = {
