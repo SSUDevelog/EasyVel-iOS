@@ -155,6 +155,10 @@ extension PostsViewController {
         let cellRegistration = UICollectionView.CellRegistration<PostCell, PostModel> { cell, _, post in
             cell.loadPost(post)
             self.bind(cell: cell)
+            
+            if let urlString = post.post.img, let url = URL(string: urlString) {
+                cell.imageView.kf.setImage(with: url)
+            }
         }
         
         return DataSource(

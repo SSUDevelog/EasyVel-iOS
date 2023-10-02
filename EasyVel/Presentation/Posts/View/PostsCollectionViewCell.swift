@@ -33,7 +33,7 @@ final class PostsCollectionViewCell: BaseCollectionViewCell {
 
     // MARK: - UI Property
     
-    private let imageView: UIImageView = {
+    let imageView: UIImageView = {
         let view = UIImageView()
         view.contentMode = .scaleAspectFill
         view.roundCorners(cornerRadius: 8, maskedCorners: [.layerMaxXMinYCorner, .layerMinXMinYCorner])
@@ -63,10 +63,9 @@ final class PostsCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - Life Cycle
     
-    
-    
     override func prepareForReuse() {
         super.prepareForReuse()
+        self.imageView.image = nil
         self.disposeBag = DisposeBag()
     }
     
@@ -151,12 +150,6 @@ extension PostsCollectionViewCell {
         self.titleLabel.setLineHeight(multiple: 1.3, with: post.title ?? "")
         self.summaryLabel.setLineHeight(multiple: 1.44, with: post.summary ?? "")
         self.detailView.bind(name: post.name ?? "", date: post.date ?? "")
-        
-        if let urlString = post.img, urlString != TextLiterals.noneText, let url = URL(string: urlString) {
-            self.imageView.kf.setImage(with: url)
-        } else {
-            self.imageView.isHidden = true
-        }
         
         guard let tags = post.tag else { return }
         let tagList = tags.map { TagModel(tag: $0) }
