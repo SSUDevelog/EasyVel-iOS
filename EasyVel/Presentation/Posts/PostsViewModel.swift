@@ -25,26 +25,20 @@ final class PostsViewModel: BaseViewModel {
     
     struct Input {
         let fetchTrigger: Observable<Void>
-        let reloadTrigger: Observable<[PostDTO]>
         
-        init(_ fetchTrigger: Observable<Void>,
-             _ reloadTrigger: Observable<[PostDTO]>) {
+        init(_ fetchTrigger: Observable<Void>) {
             self.fetchTrigger = fetchTrigger
-            self.reloadTrigger = reloadTrigger
         }
     }
     
     struct Output {
         let postList: Driver<[PostModel]>
         let isPostListEmpty: Driver<Bool>
-        let reloadedPostList: Driver<[PostModel]>
         
         init(_ postList: Driver<[PostModel]>,
-             _ isPostListEmpty: Driver<Bool>,
-             _ reload: Driver<[PostModel]>) {
+             _ isPostListEmpty: Driver<Bool>) {
             self.postList = postList
             self.isPostListEmpty = isPostListEmpty
-            self.reloadedPostList = reload
         }
     }
     
@@ -80,13 +74,7 @@ final class PostsViewModel: BaseViewModel {
             .map { $0.isEmpty }
             .asDriver(onErrorJustReturn: true)
         
-        let reloadedPostList = input.reloadTrigger
-            .map { posts -> [PostModel] in
-                return posts.map { self.convertPostDtoToPostModel(post: $0) }
-            }
-            .asDriver(onErrorJustReturn: [])
-        
-        return Output(postList, isPostListEmpty, reloadedPostList)
+        return Output(postList, isPostListEmpty)
     }
     
 }

@@ -13,11 +13,7 @@ final class PostTagStackView: UIStackView {
     
     // MARK: - Property
     
-    var tagList: [String] = [] {
-        didSet {
-            render()
-        }
-    }
+    var tagList: [String] = []
     
     // MARK: - Life Cycle
     
@@ -34,16 +30,35 @@ final class PostTagStackView: UIStackView {
     
     // MARK: - Setting
     
-    private func render() {
-        tagList.forEach { tag in
-            let tagLabel = PostTagLabel()
-            tagLabel.text = tag
-            self.addArrangedSubview(tagLabel)
-        }
-    }
+//    private func render() {
+//        self.tagList.forEach { tag in
+//            let tagLabel = PostTagLabel()
+//            tagLabel.text = tag
+//            self.addArrangedSubview(tagLabel)
+//        }
+//    }
     
     private func configUI() {
         self.spacing = 8
         self.axis = .horizontal
+    }
+}
+
+extension PostTagStackView {
+    func configureTags(_ tags: [String]) {
+        var currentTags = [String]()
+        self.arrangedSubviews.forEach { label in
+            guard let label = label as? UILabel,
+                  let text = label.text
+            else { return }
+            currentTags.append(text)
+        }
+        
+        let newTags = tags.filter { !currentTags.contains($0) }
+        newTags.forEach { tag in
+            let tagLabel = PostTagLabel()
+            tagLabel.text = tag
+            self.addArrangedSubview(tagLabel)
+        }
     }
 }

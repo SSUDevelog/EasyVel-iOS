@@ -17,14 +17,14 @@ final class PostsCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - Property
     
-    var post: PostModel?
+    var postModel: PostModel?
     
     var scrapButtonObservable: Driver<PostModel?> {
         return scrapButton.rx.tap
             .map { [weak self] in
-                self?.post?.isScrapped.toggle()
+                self?.postModel?.isScrapped.toggle()
                 self?.updateScrapButton()
-                return self?.post
+                return self?.postModel
             }
             .asDriver(onErrorJustReturn: nil)
     }
@@ -64,6 +64,8 @@ final class PostsCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - Life Cycle
     
+    
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         self.disposeBag = DisposeBag()
@@ -83,8 +85,8 @@ final class PostsCollectionViewCell: BaseCollectionViewCell {
         )
         
         imageView.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.horizontalEdges.equalToSuperview()
+            $0.top.horizontalEdges.equalToSuperview()
+            $0.height.greaterThanOrEqualTo(46)
             $0.height.equalTo(125)
         }
         
@@ -137,7 +139,7 @@ final class PostsCollectionViewCell: BaseCollectionViewCell {
     // MARK: - Custom Method
     
     private func updateScrapButton() {
-        guard let isScrapped = post?.isScrapped else { return }
+        guard let isScrapped = postModel?.isScrapped else { return }
         self.scrapButton.setImage(
             isScrapped ? ImageLiterals.bookMarkFill : ImageLiterals.bookMark,
             for: .normal
@@ -148,15 +150,19 @@ final class PostsCollectionViewCell: BaseCollectionViewCell {
 
 extension PostsCollectionViewCell {
     func loadPost(_ model: PostModel) {
+        let postModel = model
         let post = model.post
-        self.post = model
-        self.scrapButton.setImage(model.isScrapped ? ImageLiterals.bookMarkFill : ImageLiterals.bookMark, for: .normal)
+        
+        self.postModel = model
+        self.scrapButton.setImage(postModel.isScrapped ? ImageLiterals.bookMarkFill : ImageLiterals.bookMark, for: .normal)
         self.titleLabel.setLineHeight(multiple: 1.3, with: post.title ?? "")
         self.summaryLabel.setLineHeight(multiple: 1.44, with: post.summary ?? "")
         self.detailView.bind(name: post.name ?? "", date: post.date ?? "")
-        self.tagStackView.tagList = post.tag ?? []
-        if let urlString = post.img, let url = URL(string: urlString) {
+        self.tagStackView.configureTags(post.tag ?? [])
+        if let urlString = post.img, urlString != TextLiterals.noneText, let url = URL(string: urlString) {
             self.imageView.kf.setImage(with: url)
+        } else {
+            self.imageView.isHidden = true
         }
     }
 }

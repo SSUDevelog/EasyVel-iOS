@@ -74,11 +74,20 @@ final class PostsViewController: BaseViewController {
         super.viewDidLoad()
         self.navigationBarIsHidden(self.isNavigationBarHidden)
         self.setDataSource()
+        self.bind()
         self.bindViewModel()
         self.bindNavigation()
     }
     
     // MARK: - Setting
+    
+    private func bind() {
+        let viewWillAppear = self.rx.methodInvoked(#selector(self.viewWillAppear(_:)))
+        viewWillAppear.bind(onNext: { [weak self] _ in
+            guard let snapshot = self?.postsSnapshot else { return }
+            self?.postsDataSource.applySnapshotUsingReloadData(snapshot)
+        }).disposed(by: disposeBag)
+    }
     
     func bindViewModel() {
         let reload = self.postsView.refreshControl.rx.controlEvent(.valueChanged)
@@ -86,14 +95,9 @@ final class PostsViewController: BaseViewController {
         let viewDidLoad = self.rx.methodInvoked(#selector(self.viewDidLoad))
             .map { _ in () }
             .asObservable()
-        let viewWillAppear = self.rx.methodInvoked(#selector(self.viewWillAppear(_:)))
-            .map { [weak self] _ -> [PostDTO] in return self?.postList ?? [] }
-            .asObservable()
-        
         let postFetchTrigger = Observable.merge(reload, viewDidLoad)
-        let postReloadTrigger = Observable.merge(viewWillAppear)
         
-        let input = PostsViewModel.Input(postFetchTrigger, postReloadTrigger)
+        let input = PostsViewModel.Input(postFetchTrigger)
         let output = postsViewModel.transform(input: input)
         
         output.postList.drive(onNext: { [weak self] posts in
@@ -104,10 +108,6 @@ final class PostsViewController: BaseViewController {
         
         output.isPostListEmpty.drive(onNext: { [weak self] isEmpty in
             self?.showEmptyView(when: isEmpty)
-        }).disposed(by: disposeBag)
-        
-        output.reloadedPostList.drive(onNext: { [weak self] posts in
-            self?.loadSnapshot(with: posts, andAnimation: false)
         }).disposed(by: disposeBag)
     }
     
