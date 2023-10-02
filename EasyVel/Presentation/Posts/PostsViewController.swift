@@ -152,21 +152,20 @@ extension PostsViewController {
     }
     
     private func createDataSource() -> DataSource {
-        let cellRegistration = UICollectionView.CellRegistration<PostCell, PostModel> { cell, indexPath, post in
+        let cellRegistration = UICollectionView.CellRegistration<PostCell, PostModel> { cell, _, post in
             cell.loadPost(post)
             self.bind(cell: cell)
         }
         
         return DataSource(
-            collectionView: postsView.collectionView,
-            cellProvider: { collectionView, indexPath, item in
-                return collectionView.dequeueConfiguredReusableCell(
-                    using: cellRegistration,
-                    for: indexPath,
-                    item: item
-                )
-            }
-        )
+            collectionView: postsView.collectionView
+        ) { collectionView, indexPath, item in
+            return collectionView.dequeueConfiguredReusableCell(
+                using: cellRegistration,
+                for: indexPath,
+                item: item
+            )
+        }
     }
 }
 

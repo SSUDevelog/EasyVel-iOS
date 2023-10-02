@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3E06F8C52A95F0B3001302F4 /* PostTagStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E06F8C42A95F0B3001302F4 /* PostTagStackView.swift */; };
 		3E06F8C72A96247F001302F4 /* PostDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E06F8C62A96247F001302F4 /* PostDetailView.swift */; };
 		3E06F8C92A962BB4001302F4 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E06F8C82A962BB4001302F4 /* UIImage+Extension.swift */; };
 		3E06F8CB2A98A49A001302F4 /* PostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E06F8CA2A98A49A001302F4 /* PostsViewController.swift */; };
@@ -24,6 +23,8 @@
 		3EE425172AC46D6500DE5FA5 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 3EE425162AC46D6500DE5FA5 /* Realm */; };
 		3EE425192AC46D6500DE5FA5 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3EE425182AC46D6500DE5FA5 /* RealmSwift */; };
 		3EE4251C2AC4751C00DE5FA5 /* FollowSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE4251B2AC4751C00DE5FA5 /* FollowSearchViewModel.swift */; };
+		3EE425202ACADFCE00DE5FA5 /* TagCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE4251F2ACADFCE00DE5FA5 /* TagCollectionView.swift */; };
+		3EE425222ACAE00B00DE5FA5 /* TagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE425212ACAE00B00DE5FA5 /* TagCollectionViewCell.swift */; };
 		7CB706D22A32062500083EC6 /* PostSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB706D12A32062500083EC6 /* PostSearchViewController.swift */; };
 		7CB706D42A32064900083EC6 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB706D32A32064900083EC6 /* SearchTableViewCell.swift */; };
 		7CB706D62A32067900083EC6 /* SearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB706D52A32067900083EC6 /* SearchCollectionViewCell.swift */; };
@@ -178,7 +179,6 @@
 		91BFF2F82A27833C00F5D13E /* PostScrapButtonDidTapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BFF2F72A27833C00F5D13E /* PostScrapButtonDidTapped.swift */; };
 		91CC1D2C2A0A7D40006BF786 /* JoinGroupRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CC1D2B2A0A7D40006BF786 /* JoinGroupRequest.swift */; };
 		91CC1D4C2A0AD7C2006BF786 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CC1D4B2A0AD7C2006BF786 /* LoadingView.swift */; };
-		91CCEA3C2A0D017A001362AD /* PostTagLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CCEA3B2A0D017A001362AD /* PostTagLabel.swift */; };
 		91CCEA602A0E9CC9001362AD /* Haptic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CCEA5F2A0E9CC9001362AD /* Haptic.swift */; };
 		91DEF3DD2A017774001B6A9D /* TagSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91DEF3DC2A017774001B6A9D /* TagSearchViewModel.swift */; };
 		91E442872A10F385008CB516 /* RxBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E442862A10F385008CB516 /* RxBaseViewController.swift */; };
@@ -194,7 +194,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3E06F8C42A95F0B3001302F4 /* PostTagStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTagStackView.swift; sourceTree = "<group>"; };
 		3E06F8C62A96247F001302F4 /* PostDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailView.swift; sourceTree = "<group>"; };
 		3E06F8C82A962BB4001302F4 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		3E06F8CA2A98A49A001302F4 /* PostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsViewController.swift; sourceTree = "<group>"; };
@@ -207,6 +206,8 @@
 		3EE425142AC46A6200DE5FA5 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		3EE425152AC46A7100DE5FA5 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		3EE4251B2AC4751C00DE5FA5 /* FollowSearchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowSearchViewModel.swift; sourceTree = "<group>"; };
+		3EE4251F2ACADFCE00DE5FA5 /* TagCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionView.swift; sourceTree = "<group>"; };
+		3EE425212ACAE00B00DE5FA5 /* TagCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionViewCell.swift; sourceTree = "<group>"; };
 		7CB706D12A32062500083EC6 /* PostSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSearchViewController.swift; sourceTree = "<group>"; };
 		7CB706D32A32064900083EC6 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		7CB706D52A32067900083EC6 /* SearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -355,7 +356,6 @@
 		91BFF2F72A27833C00F5D13E /* PostScrapButtonDidTapped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostScrapButtonDidTapped.swift; sourceTree = "<group>"; };
 		91CC1D2B2A0A7D40006BF786 /* JoinGroupRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinGroupRequest.swift; sourceTree = "<group>"; };
 		91CC1D4B2A0AD7C2006BF786 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
-		91CCEA3B2A0D017A001362AD /* PostTagLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTagLabel.swift; sourceTree = "<group>"; };
 		91CCEA5F2A0E9CC9001362AD /* Haptic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptic.swift; sourceTree = "<group>"; };
 		91DEF3DC2A017774001B6A9D /* TagSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagSearchViewModel.swift; sourceTree = "<group>"; };
 		91E442862A10F385008CB516 /* RxBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxBaseViewController.swift; sourceTree = "<group>"; };
@@ -555,7 +555,6 @@
 		87F25EEE2A8439F200E03C32 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				91CCEA3B2A0D017A001362AD /* PostTagLabel.swift */,
 				91487F1829FC549C009CFECF /* NoNetworkView.swift */,
 				9166BE942A498B1700FFC026 /* Toast.swift */,
 				91CC1D4B2A0AD7C2006BF786 /* LoadingView.swift */,
@@ -952,10 +951,11 @@
 		91487F5E29FDA2F0009CFECF /* View */ = {
 			isa = PBXGroup;
 			children = (
-				3E06F8C42A95F0B3001302F4 /* PostTagStackView.swift */,
 				913442282A0001EC000E1ED1 /* PostsView.swift */,
 				3E7B1ABF2A87E90500EE7739 /* PostsCollectionViewCell.swift */,
 				3E06F8C62A96247F001302F4 /* PostDetailView.swift */,
+				3EE4251F2ACADFCE00DE5FA5 /* TagCollectionView.swift */,
+				3EE425212ACAE00B00DE5FA5 /* TagCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1271,10 +1271,10 @@
 				877ED7CB2A4AD2EC00D80464 /* PostDTO.swift in Sources */,
 				91487EFE29FC3BD0009CFECF /* ImageLiterals.swift in Sources */,
 				9134422329FFF59D000E1ED1 /* SettingTableView.swift in Sources */,
-				3E06F8C52A95F0B3001302F4 /* PostTagStackView.swift in Sources */,
 				9134421129FFDB5D000E1ED1 /* SearchUserResponse.swift in Sources */,
 				9128B05A2A23CC9000FB1252 /* ScrapStorageViewModel.swift in Sources */,
 				9109505A2A5011DD00D04D41 /* VersionTargetType.swift in Sources */,
+				3EE425202ACADFCE00DE5FA5 /* TagCollectionView.swift in Sources */,
 				9134421329FFDBE8000E1ED1 /* GetSubscriberPostResponse.swift in Sources */,
 				3E7B1AC02A87E90500EE7739 /* PostsCollectionViewCell.swift in Sources */,
 				917BA3522A050903000409B7 /* RealmStoragePost.swift in Sources */,
@@ -1305,7 +1305,6 @@
 				91487EC429FC380A009CFECF /* SceneDelegate.swift in Sources */,
 				91E4428B2A10F3C7008CB516 /* BaseViewModel.swift in Sources */,
 				8765EFF42A29ECDE00EF6733 /* String+Extension.swift in Sources */,
-				91CCEA3C2A0D017A001362AD /* PostTagLabel.swift in Sources */,
 				9134422729FFF9BC000E1ED1 /* FollowView.swift in Sources */,
 				91487F2229FC5F2A009CFECF /* TabBarController.swift in Sources */,
 				917BA3332A03D8F7000409B7 /* StorageView.swift in Sources */,
@@ -1372,6 +1371,7 @@
 				913441EA29FFD649000E1ED1 /* BaseTargetType.swift in Sources */,
 				91487EF429FC3AD8009CFECF /* BaseUIView.swift in Sources */,
 				9134420B29FFDA71000E1ED1 /* SignOutResponse.swift in Sources */,
+				3EE425222ACAE00B00DE5FA5 /* TagCollectionViewCell.swift in Sources */,
 				9128B0262A236D2800FB1252 /* ScrapPopUpView.swift in Sources */,
 				914D8DD92A02B22A00516B4C /* WebViewController.swift in Sources */,
 				91ED17892A00E58D00158787 /* FollowService.swift in Sources */,

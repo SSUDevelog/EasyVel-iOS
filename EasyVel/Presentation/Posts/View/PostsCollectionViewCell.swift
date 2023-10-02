@@ -55,12 +55,11 @@ final class PostsCollectionViewCell: BaseCollectionViewCell {
     }()
     private let detailView = PostDetailView()
     private let scrapButton = UIButton()
-    private let tagScrollView: UIScrollView = {
-        let view = UIScrollView()
-        view.showsHorizontalScrollIndicator = false
+    private let tagCollectionView: TagCollectionView = {
+        let view = TagCollectionView()
+        view.backgroundColor = .clear
         return view
     }()
-    private let tagStackView = PostTagStackView()
     
     // MARK: - Life Cycle
     
@@ -80,8 +79,7 @@ final class PostsCollectionViewCell: BaseCollectionViewCell {
             summaryLabel,
             detailView,
             scrapButton,
-            tagScrollView,
-            tagStackView
+            tagCollectionView
         )
         
         imageView.snp.makeConstraints {
@@ -111,16 +109,11 @@ final class PostsCollectionViewCell: BaseCollectionViewCell {
             $0.top.trailing.equalToSuperview().inset(4)
         }
         
-        tagScrollView.snp.makeConstraints {
+        tagCollectionView.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(12)
             $0.trailing.equalTo(scrapButton.snp.leading).offset(-12)
             $0.top.equalToSuperview().inset(10)
             $0.height.equalTo(28)
-        }
-        
-        tagScrollView.addSubview(tagStackView)
-        tagStackView.snp.makeConstraints {
-            $0.edges.height.equalToSuperview()
         }
     }
     
@@ -158,11 +151,15 @@ extension PostsCollectionViewCell {
         self.titleLabel.setLineHeight(multiple: 1.3, with: post.title ?? "")
         self.summaryLabel.setLineHeight(multiple: 1.44, with: post.summary ?? "")
         self.detailView.bind(name: post.name ?? "", date: post.date ?? "")
-        self.tagStackView.configureTags(post.tag ?? [])
+        
         if let urlString = post.img, urlString != TextLiterals.noneText, let url = URL(string: urlString) {
             self.imageView.kf.setImage(with: url)
         } else {
             self.imageView.isHidden = true
         }
+        
+        guard let tags = post.tag else { return }
+        let tagList = tags.map { TagModel(tag: $0) }
+        self.tagCollectionView.loadSnapshot(with: tagList)
     }
 }
