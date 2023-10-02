@@ -35,9 +35,6 @@ final class TagCollectionView: UICollectionView, UIScrollViewDelegate {
     }
     
     private func configUI() {
-        self.layer.masksToBounds = true
-        self.clipsToBounds = true
-        self.isScrollEnabled = true
         self.showsHorizontalScrollIndicator = false
         self.bounces = false
     }
