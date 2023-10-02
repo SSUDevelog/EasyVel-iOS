@@ -104,10 +104,12 @@ final class PostsViewController: BaseViewController {
             self?.postList = posts.map { $0.post }
             self?.loadSnapshot(with: posts, andAnimation: true)
             self?.postsView.collectionView.refreshControl?.endRefreshing()
+            LoadingView.hideLoading()
         }).disposed(by: disposeBag)
         
         output.isPostListEmpty.drive(onNext: { [weak self] isEmpty in
             self?.showEmptyView(when: isEmpty)
+            LoadingView.hideLoading()
         }).disposed(by: disposeBag)
     }
     

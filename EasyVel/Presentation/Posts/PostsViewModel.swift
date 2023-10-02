@@ -65,7 +65,6 @@ final class PostsViewModel: BaseViewModel {
                 return postDTOs ?? []
             }
             .map { posts -> [PostModel] in
-                LoadingView.hideLoading()
                 return posts.map { self.convertPostDtoToPostModel(post: $0) }
             }
             .asDriver(onErrorJustReturn: [])

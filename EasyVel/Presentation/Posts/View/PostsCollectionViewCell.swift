@@ -84,7 +84,7 @@ final class PostsCollectionViewCell: BaseCollectionViewCell {
         imageView.snp.makeConstraints {
             $0.top.horizontalEdges.equalToSuperview()
             $0.height.greaterThanOrEqualTo(46)
-            $0.height.equalTo(125)
+            $0.height.lessThanOrEqualTo(125)
         }
         
         titleLabel.snp.makeConstraints {
