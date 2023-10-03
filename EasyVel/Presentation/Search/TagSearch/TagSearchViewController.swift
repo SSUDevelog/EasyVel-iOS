@@ -189,7 +189,7 @@ final class TagSearchViewController: RxBaseViewController<TagSearchViewModel> {
             .drive { [weak self] tag in
                 guard let self else { return }
                 let postsVC = KeywordPostsVCFactory().create(tag: tag)
-                navigationController?.pushViewController(postsVC, animated: true)
+                self.navigationController?.pushViewController(postsVC, animated: true)
             }
             .disposed(by: disposeBag)
         
