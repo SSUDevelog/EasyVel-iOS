@@ -273,21 +273,18 @@ extension PostSearchViewController {
         flowLayout.estimatedItemSize.height = 30
         flowLayout.minimumInteritemSpacing = 10
         flowLayout.sectionInset = .init(top: 0, left: 20, bottom: 0, right: 20)
-        
     }
     
     @objc
     func keyboardWillShow(_ notification: NSNotification) {
         self.popularSearchTagTableView.isUserInteractionEnabled = false
         self.recentSearchTagCollectionView.isUserInteractionEnabled = false
-        
     }
     
     @objc
     func keyboardWillHide(_ notification: NSNotification) {
         self.popularSearchTagTableView.isUserInteractionEnabled = true
         self.recentSearchTagCollectionView.isUserInteractionEnabled = true
-        
     }
 }
 
