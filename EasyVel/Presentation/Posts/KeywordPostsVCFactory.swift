@@ -11,13 +11,12 @@ final class KeywordPostsVCFactory {
     
     // MARK: - home에서 ViewController 만들 때 사용
     
-    func create(tag: String,
-                isNavigationBarHidden: Bool = true) -> PostsViewController {
-        let vc = PostsViewController(viewModel: PostsViewModel(viewType: .keyword,
-                                                               tag: tag,
-                                                               service: DefaultPostService.shared),
-                                     isNavigationBarHidden: isNavigationBarHidden)
-        vc.title = tag
+    func create(
+        tag: String
+    ) -> PostsViewController {
+        let vc = PostsViewController(
+            viewModel: PostsViewModel(viewType: .keyword, tag: tag)
+        )
         return vc
     }
     
@@ -31,9 +30,8 @@ final class KeywordPostsVCFactory {
         postDTOList: [PostDTO]
     ) -> PostsViewController {
         let vc = PostsViewController(
-            viewModel: PostsViewModel(viewType: .keyword, tag: tag,service: DefaultPostService.shared),
-            isNavigationBarHidden: isNavigationBarHidden,
-            posts: postDTOList
+            viewModel: PostsViewModel(viewType: .keyword, tag: tag),
+            posts: postDTOList, isNavigationBarHidden: isNavigationBarHidden
         )
         return vc
     }

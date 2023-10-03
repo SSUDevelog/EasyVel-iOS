@@ -9,14 +9,14 @@ import Foundation
 
 import Moya
 
-final class DefaultSubscriberService: BaseNetworkService, SubscriberService {
+final class DefaultFollowService: BaseNetworkService, FollowService {
     
-    static let shared = DefaultSubscriberService()
+    static let shared = DefaultFollowService()
     private override init() {}
     
     let provider = MoyaProvider<SubscriberTargetType>(plugins: [MoyaLoggerPlugin()])
     
-    func addSubscriber(
+    func addFollow(
         fcmToken: String,
         name: String,
         completion: @escaping (NetworkResult<Any>) -> Void
@@ -30,42 +30,42 @@ final class DefaultSubscriberService: BaseNetworkService, SubscriberService {
         }
     }
     
-    func getSubscriber(
+    func getFollowList(
         completion: @escaping (NetworkResult<Any>) -> Void
     ) {
-        provider.request(.getSubscriber) { result in
+        provider.request(.getFollowList) { result in
             self.disposeNetwork(result,
-                                dataModel: [SubscriberListResponse].self, completion: completion)
+                                dataModel: [FollowListResponse].self, completion: completion)
         }
     }
     
-    func searchSubscriber(
+    func searchUser(
         name: String,
         completion: @escaping (NetworkResult<Any>) -> Void
     ) {
-        provider.request(.searchSubscriber(name: name)) { result in
+        provider.request(.searchUser(name: name)) { result in
             self.disposeNetwork(result,
-                                dataModel: SearchSubscriberResponse.self, completion: completion)
+                                dataModel: SearchUserResponse.self, completion: completion)
         }
     }
     
-    func deleteSubscriber(
+    func deleteFollow(
         targetName: String,
         completion: @escaping (NetworkResult<Any>) -> Void
     ) {
-        provider.request(.deleteSubscriber(targetName: targetName)) { result in
+        provider.request(.deleteFollow(targetName: targetName)) { result in
             self.disposeNetwork(result,
-                                dataModel: UnSubscribeResponse.self, completion: completion)
+                                dataModel: UnFollowResponse.self, completion: completion)
         }
     }
     
-    func getSubscriberUserMain(
+    func getFollowUserMain(
         name: String,
         completion: @escaping (NetworkResult<Any>) -> Void
     ) {
         provider.request(.getSubscriberUserMain(name: name)) { result in
             self.disposeNetwork(result,
-                                dataModel: SubscriberUserMainResponse.self, completion: completion)
+                                dataModel: FollowUserMainResponse.self, completion: completion)
         }
     }
 }

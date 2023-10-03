@@ -1,133 +1,90 @@
 //
-//  KeywordsPostsViewModel.swift
-//  VelogOnMobile
+//  PostsViewModel.swift
+//  EasyVel
 //
-//  Created by 홍준혁 on 2023/05/03.
+//  Created by 이성민 on 2023/08/26.
 //
 
 import Foundation
 
-import RealmSwift
-import RxRelay
 import RxSwift
+import RxCocoa
+import RxRelay
 
 final class PostsViewModel: BaseViewModel {
     
-    enum ViewType {
-        case trend
-        case follow
-        case keyword
-    }
+    // MARK: - Properties
     
     let realm = RealmService()
-    let service: PostService
+    let service = DefaultPostService.shared
     
-    private var viewType: ViewType = .trend
+    private var viewType: ViewType
     private var tag: String
-
+    
     // MARK: - Input
     
-    var cellScrapButtonDidTap = PublishRelay<(StoragePost, Bool)>()
-    var tableViewReload = PublishRelay<Void>()
-
-    // MARK: - Output
+    struct Input {
+        let postTrigger: Observable<Void>
+        
+        init(_ postTrigger: Observable<Void>) {
+            self.postTrigger = postTrigger
+        }
+    }
     
-    var postsListOutput = PublishRelay<[PostDTO]>()
-    var isPostsEmptyOutput = PublishRelay<Bool>()
-    var postsListDidScrapOutput = PublishRelay<[Bool]>()
+    struct Output {
+        let postList: Driver<[PostModel]>
+        let isPostListEmpty: Driver<Bool>
+        
+        init(_ postList: Driver<[PostModel]>,
+             _ isPostListEmpty: Driver<Bool>) {
+            self.postList = postList
+            self.isPostListEmpty = isPostListEmpty
+        }
+    }
+    
+    // MARK: - Initialize
     
     init(
         viewType: ViewType,
-         tag: String = "",
-        service: PostService
+        tag: String = ""
     ) {
         self.viewType = viewType
         self.tag = tag
-        self.service = service
+        
         super.init()
-        
-        makeOutput()
     }
     
-    private func makeOutput() {
-        viewWillAppear
+    // MARK: - Custom Functions
+    
+    func transform(input: Input) -> Output {
+        let postList = input.postTrigger
             .startWith(LoadingView.showLoading())
-            .flatMapLatest( { _ -> Observable<[PostDTO]?> in
-                //MARK: - fix me  Rx와 참조 관련 공부 후 리팩
-                //guard let self = self else { return Observable.empty() }
-                
-                switch self.viewType {
-                case .trend:
-                    return self.getTrendPosts()
-                case .follow:
-                    return self.getSubscriberPosts()
-                case .keyword:
-                    return self.getOneTagPosts(tag: self.tag)
-                }
-                
-            })
-            .map { [weak self] dto -> ([PostDTO], [Bool]) in
-                let posts = dto ?? []
-                let storagePosts = posts.map { self?.convertPostDtoToStoragePost(input: $0) }
-                let isScrapList = storagePosts.map {
-                    self?.checkIsUniquePost(post: $0 ?? StoragePost(img: "", name: "", summary: "", title: "", url: "")) ?? false
-                }
-                return (posts, isScrapList)
+            .flatMapLatest { _ -> Observable<[PostDTO]?> in
+                self.getPosts()
             }
-            .subscribe(onNext: { [weak self] postList, isScrapList in
-                self?.isPostsEmptyOutput.accept(postList.isEmpty)
-                self?.postsListOutput.accept(postList)
-                self?.postsListDidScrapOutput.accept(isScrapList)
+            .map { postDTO -> [PostModel] in
+                guard let postDTO = postDTO else {
+                    LoadingView.hideLoading()
+                    return [PostModel]()
+                }
                 LoadingView.hideLoading()
-            })
-            .disposed(by: disposeBag)
-        
-        cellScrapButtonDidTap
-            .subscribe(onNext: { [weak self] storagePost, isScrapped in
-                LoadingView.hideLoading()
-                if isScrapped == false {
-                    self?.realm.addPost(
-                        item: storagePost,
-                        folderName: TextLiterals.allPostsScrapFolderText
-                    )
-                } else {
-                    self?.realm.deletePost(url: storagePost.url ?? String())
-                }
-            })
-            .disposed(by: disposeBag)
-        
-        tableViewReload
-            .startWith(LoadingView.showLoading())
-            .flatMapLatest( { [weak self] _  -> Observable<[PostDTO]?> in
-                guard let self = self else { return Observable.empty() }
-                switch self.viewType {
-                case .trend:
-                    return self.getTrendPosts()
-                case .follow:
-                    return self.getSubscriberPosts()
-                case .keyword:
-                    return self.getOneTagPosts(tag: self.tag)
-                }
-            })
-            .map { [weak self] dto -> ([PostDTO], [Bool]) in
-                let posts = dto ?? []
-                let storagePosts = posts.map { self?.convertPostDtoToStoragePost(input: $0) }
-                let isScrapList = storagePosts.map {
-                    self?.checkIsUniquePost(post: $0 ?? StoragePost(img: "", name: "", summary: "", title: "", url: "")) ?? false
-                }
-                return (posts, isScrapList)
+                return postDTO.map { PostModel(id: UUID(), post: $0) }
             }
-            .subscribe(onNext: { [weak self] postList, isScrapList in
-                self?.isPostsEmptyOutput.accept(postList.isEmpty)
-                self?.postsListOutput.accept(postList)
-                self?.postsListDidScrapOutput.accept(isScrapList)
-                LoadingView.hideLoading()
-            })
-            .disposed(by: disposeBag)
+            .asDriver(onErrorJustReturn: [])
+        
+        let isPostListEmpty = postList
+            .map { $0.isEmpty }
+            .asDriver(onErrorJustReturn: true)
+        
+        return Output(postList, isPostListEmpty)
     }
     
-    // MARK: - func
+}
 
+// MARK: - func
+
+extension PostsViewModel {
+    
     private func convertPostDtoToStoragePost(
         input: PostDTO
     ) -> StoragePost {
@@ -145,11 +102,24 @@ final class PostsViewModel: BaseViewModel {
     ) -> Bool {
         return realm.checkUniquePost(input: post)
     }
+    
+    private func getPosts() -> Observable<[PostDTO]?> {
+        switch viewType {
+        case .trend:
+            return self.getTrendPosts()
+        case .follow:
+            return self.getSubscriberPosts()
+        case .keyword:
+            return self.getOneTagPosts(tag: self.tag)
+        }
+    }
+    
 }
 
-// MARK: - API
+// MARK: - api
 
-private extension PostsViewModel {
+extension PostsViewModel {
+    
     func getOneTagPosts(tag: String) -> Observable<[PostDTO]?> {
         return Observable.create { observer in
             self.service.getOneTagPosts(tag: tag) { [weak self] result in
@@ -221,4 +191,5 @@ private extension PostsViewModel {
             return Disposables.create()
         }
     }
+    
 }

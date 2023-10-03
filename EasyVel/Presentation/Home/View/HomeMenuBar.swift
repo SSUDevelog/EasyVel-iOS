@@ -149,7 +149,7 @@ private extension HomeMenuBar {
         
         layoutIfNeeded()
         
-        tintLine.snp.remakeConstraints { $0
+        tintLine.snp.remakeConstraints { 
             $0.bottom.equalTo(underLine).offset(-1)
             $0.leading.equalToSuperview().offset(leading)
             $0.width.equalTo(menuSizes[index])

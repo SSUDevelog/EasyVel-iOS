@@ -27,12 +27,14 @@ enum ImageLiterals {
     // MARK: - icon
     
     static var searchIcon: UIImage { .load(name: "search") }
+    static var searchGray: UIImage { .load(name: "search.gray") }
     static var plusFolder: UIImage { .load(name: "plusFolder") }
     static var activePlusFolder: UIImage { .load(name: "activePlusFolder") }
     static var scrapFolderIcon: UIImage { .load(name: "scrapFolderIcon") }
     static var plusIcon: UIImage { .load(name: "plus") }
-    static var subscriberAddIcon: UIImage { .load(name: "addIcon" )}
-    static var subscriberImage: UIImage { .load(name: "subscriberImage" )}
+    static var subscriberAddIcon: UIImage { .load(name: "addIcon" ) }
+    static var subscriberImage: UIImage { .load(name: "subscriberImage") }
+    static var defaultProfileImage: UIImage { .load(name: "subscriberImage").resizeImage(to: .init(width: 20, height: 20))! }
     static var tagPlusIcon: UIImage { .load(name: "tagPlusIcon") }
     static var xMarkIcon: UIImage { .load(name: "xmark") }
     static var viewPopButtonIcon: UIImage { .load(name: "viewPopButtonIcon") }
@@ -47,6 +49,7 @@ enum ImageLiterals {
     static var subscriberListException: UIImage { .load(name: "subscriberListException") }
     static var serverFailImage: UIImage { .load(name: "serverFailImage") }
     static var webViewException: UIImage { .load(name: "webViewException") }
+    static var notFoundUser: UIImage { .load(name: "notFoundUser")}
 }
 
 extension UIImage {

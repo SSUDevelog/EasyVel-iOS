@@ -1,5 +1,5 @@
 //
-//  KeywordsTableView.swift
+//  ListTableView.swift
 //  VelogOnMobile
 //
 //  Created by 홍준혁 on 2023/04/30.
@@ -9,11 +9,10 @@ import UIKit
 
 import SnapKit
 
-final class PostsTableView: UITableView {
+final class FollowTableView: UITableView {
     
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
-        
         setupTableView()
     }
     
@@ -22,7 +21,12 @@ final class PostsTableView: UITableView {
     }
 
     private func setupTableView() {
-        register(PostsTableViewCell.self, forCellReuseIdentifier: PostsTableViewCell.identifier)
+        register(cell: FollowTableViewCell.self)
+        separatorStyle = .none
         showsVerticalScrollIndicator = true
+        isHidden = true
+        rowHeight = 62
+        backgroundColor = .gray100
+        contentInset.top = 20
     }
 }

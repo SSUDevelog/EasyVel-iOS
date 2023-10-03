@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct UnSubscribeResponse: Codable {
+struct UnFollowResponse: Codable {
     let msg: String?
     let success: Bool?
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PostDTO: Codable {
+struct PostDTO: Codable, Hashable {
     let comment: Int?
     let date: String?
     let img: String?

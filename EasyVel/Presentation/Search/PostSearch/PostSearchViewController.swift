@@ -311,7 +311,7 @@ extension PostSearchViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let tag = popularSearchTagList[indexPath.row]
-        let postsVC = KeywordPostsVCFactory().create(tag: tag, isNavigationBarHidden: false)
+        let postsVC = KeywordPostsVCFactory().create(tag: tag)
         navigationController?.pushViewController(postsVC, animated: true)
     }
 }
