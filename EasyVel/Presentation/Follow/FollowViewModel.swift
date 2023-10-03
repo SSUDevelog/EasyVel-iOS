@@ -52,7 +52,7 @@ final class FollowViewModel: BaseViewModel {
         deleteFollowEvent
             .subscribe(onNext: { [weak self] _ in
                 guard let self = self,
-                      let tempDeleteSubscriber = tempDeleteFollow else { return }
+                      let tempDeleteSubscriber = self.tempDeleteFollow else { return }
                 if let followList = self.followList {
                     let reloadFollowList = followList.filter {
                         $0.name != tempDeleteSubscriber
