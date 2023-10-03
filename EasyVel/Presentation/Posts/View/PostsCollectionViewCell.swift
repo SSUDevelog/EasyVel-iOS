@@ -83,8 +83,7 @@ final class PostsCollectionViewCell: BaseCollectionViewCell {
         
         imageView.snp.makeConstraints {
             $0.top.horizontalEdges.equalToSuperview()
-            $0.height.greaterThanOrEqualTo(46)
-            $0.height.lessThanOrEqualTo(125)
+            $0.height.equalTo(125)
         }
         
         titleLabel.snp.makeConstraints {
@@ -150,6 +149,12 @@ extension PostsCollectionViewCell {
         self.titleLabel.setLineHeight(multiple: 1.3, with: post.title ?? "")
         self.summaryLabel.setLineHeight(multiple: 1.44, with: post.summary ?? "")
         self.detailView.bind(name: post.name ?? "", date: post.date ?? "")
+        
+        if let urlString = post.img, let url = URL(string: urlString) {
+            self.imageView.kf.setImage(with: url)
+        } else {
+            self.imageView.backgroundColor = .gray200
+        }
         
         guard let tags = post.tag else { return }
         let tagList = tags.map { TagModel(tag: $0) }
