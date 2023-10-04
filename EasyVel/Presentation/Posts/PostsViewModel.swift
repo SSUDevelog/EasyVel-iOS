@@ -24,10 +24,10 @@ final class PostsViewModel: BaseViewModel {
     // MARK: - Input
     
     struct Input {
-        let postTrigger: Observable<Void>
+        let fetchTrigger: Observable<Void>
         
-        init(_ postTrigger: Observable<Void>) {
-            self.postTrigger = postTrigger
+        init(_ fetchTrigger: Observable<Void>) {
+            self.fetchTrigger = fetchTrigger
         }
     }
     
@@ -50,25 +50,22 @@ final class PostsViewModel: BaseViewModel {
     ) {
         self.viewType = viewType
         self.tag = tag
-        
         super.init()
     }
     
     // MARK: - Custom Functions
     
     func transform(input: Input) -> Output {
-        let postList = input.postTrigger
+        let postList = input.fetchTrigger
             .startWith(LoadingView.showLoading())
             .flatMapLatest { _ -> Observable<[PostDTO]?> in
                 self.getPosts()
             }
-            .map { postDTO -> [PostModel] in
-                guard let postDTO = postDTO else {
-                    LoadingView.hideLoading()
-                    return [PostModel]()
-                }
-                LoadingView.hideLoading()
-                return postDTO.map { PostModel(id: UUID(), post: $0) }
+            .map { postDTOs -> [PostDTO] in
+                return postDTOs ?? []
+            }
+            .map { posts -> [PostModel] in
+                return posts.map { self.convertPostDtoToPostModel(post: $0) }
             }
             .asDriver(onErrorJustReturn: [])
         
@@ -97,10 +94,30 @@ extension PostsViewModel {
         )
     }
     
-    private func checkIsUniquePost(
+    private func convertPostDtoToPostModel(
+        post: PostDTO
+    ) -> PostModel {
+        let storagePost = self.convertPostDtoToStoragePost(input: post)
+        let isScrapped = self.isPostScrapped(post: storagePost)
+        return PostModel(post: post, isScrapped: isScrapped)
+    }
+    
+    func scrapPost(
+        _ model: PostModel
+    ) {
+        let storagePost = convertPostDtoToStoragePost(input: model.post)
+        if isPostScrapped(post: storagePost) {
+            guard let url = storagePost.url else { return }
+            self.realm.deletePost(url: url)
+        } else {
+            self.realm.addPost(item: storagePost, folderName: TextLiterals.allPostsScrapFolderText)
+        }
+    }
+    
+    private func isPostScrapped(
         post: StoragePost
     ) -> Bool {
-        return realm.checkUniquePost(input: post)
+        return realm.containsPost(input: post)
     }
     
     private func getPosts() -> Observable<[PostDTO]?> {

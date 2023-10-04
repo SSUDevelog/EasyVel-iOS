@@ -17,7 +17,7 @@ enum ViewType {
     case keyword
 }
 
-final class PostsViewController: RxBaseViewController<PostsViewModel> {
+final class PostsViewController: BaseViewController {
     
     typealias PostCell = PostsCollectionViewCell
     typealias DataSource = UICollectionViewDiffableDataSource<Section, PostModel>
@@ -29,10 +29,13 @@ final class PostsViewController: RxBaseViewController<PostsViewModel> {
     
     // MARK: - Property
     
-    private var posts: [PostDTO]?
-    private var isNavigationBarHidden: Bool?
+    private var postList: [PostDTO]?
+    private var isNavigationBarHidden: Bool = false
     
     // MARK: - UI Property
+    
+    private let postsViewModel: PostsViewModel
+    private let disposeBag = DisposeBag()
     
     private let postsView = PostsView()
     private var postsDataSource: DataSource!
@@ -40,96 +43,131 @@ final class PostsViewController: RxBaseViewController<PostsViewModel> {
     
     // MARK: - Life Cycle
     
-    override init(
-        viewModel: PostsViewModel
-    ) {
-        super.init(viewModel: viewModel)
-        self.view = postsView
+    init(viewModel: PostsViewModel) {
+        self.postsViewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
     }
     
-    init(viewModel: PostsViewModel,
-         isNavigationBarHidden: Bool) {
-        super.init(viewModel: viewModel)
+    init(viewModel: PostsViewModel, isNavigationBarHidden: Bool) {
+        self.postsViewModel = viewModel
         self.isNavigationBarHidden = isNavigationBarHidden
+        super.init(nibName: nil, bundle: nil)
     }
     
-    init(
-        viewModel: PostsViewModel,
-        posts: [PostDTO],
-        isNavigationBarHidden: Bool
-    ) {
-        super.init(viewModel: viewModel)
-        self.posts = posts
+    init(viewModel: PostsViewModel, posts: [PostDTO], isNavigationBarHidden: Bool) {
+        self.postsViewModel = viewModel
+        self.postList = posts
         self.isNavigationBarHidden = isNavigationBarHidden
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func loadView() {
         self.view = postsView
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        navigationBarIsHidden(isNavigationBarHidden ?? true)
+        self.navigationBarIsHidden(self.isNavigationBarHidden)
+        self.setDataSource()
+        self.bind()
+        self.bindViewModel()
+        self.bindNavigation()
     }
     
     // MARK: - Setting
     
-    override func bind(viewModel: PostsViewModel) {
-        self.confiugreDataSource()
-        
-        let reload = postsView.refreshControl.rx
-            .controlEvent(.valueChanged)
+    private func bind() {
+        let viewWillAppear = self.rx.methodInvoked(#selector(self.viewWillAppear(_:)))
+        viewWillAppear.bind(onNext: { [weak self] _ in
+            guard let snapshot = self?.postsSnapshot else { return }
+            self?.postsDataSource.applySnapshotUsingReloadData(snapshot)
+        }).disposed(by: disposeBag)
+    }
+    
+    func bindViewModel() {
+        let reload = self.postsView.refreshControl.rx.controlEvent(.valueChanged)
             .asObservable()
-        let viewWillAppear = viewModel.viewWillAppear
+        let viewDidLoad = self.rx.methodInvoked(#selector(self.viewDidLoad))
+            .map { _ in () }
             .asObservable()
-        let postTrigger = Observable.merge(reload, viewWillAppear)
-
-        let input = PostsViewModel.Input(postTrigger)
-        let output = viewModel.transform(input: input)
+        let postFetchTrigger = Observable.merge(reload, viewDidLoad)
         
-        output.postList.drive(onNext: { [weak self] data in
-            self?.loadSnapshotData(with: data)
-            self?.postsView.refreshControl.endRefreshing()
+        let input = PostsViewModel.Input(postFetchTrigger)
+        let output = postsViewModel.transform(input: input)
+        
+        output.postList.drive(onNext: { [weak self] posts in
+            self?.postList = posts.map { $0.post }
+            self?.loadSnapshot(with: posts, andAnimation: true)
+            self?.postsView.collectionView.refreshControl?.endRefreshing()
+            LoadingView.hideLoading()
         }).disposed(by: disposeBag)
         
         output.isPostListEmpty.drive(onNext: { [weak self] isEmpty in
             self?.showEmptyView(when: isEmpty)
+            LoadingView.hideLoading()
         }).disposed(by: disposeBag)
     }
     
-    // MARK: - Action Helper
+    private func bind(cell: PostsCollectionViewCell) {
+        cell.scrapButtonObservable
+            .drive(onNext: { [weak self] post in
+                guard let scrappedPost = post else { return }
+                self?.postsViewModel.scrapPost(scrappedPost)
+                self?.updateSnapshot(with: scrappedPost)
+            }).disposed(by: cell.disposeBag)
+    }
     
-    
-    
-    // MARK: - Custom Method
-    
+    private func bindNavigation() {
+        self.postsView.collectionView.rx.itemSelected
+            .subscribe(onNext: { [weak self] indexPath in
+                self?.pushToWebView(of: indexPath)
+            }).disposed(by: disposeBag)
+    }
+}
+
+// MARK: - Custom Method
+
+extension PostsViewController {
     private func showEmptyView(when isPostEmpty: Bool) {
         self.postsView.keywordsPostsViewExceptionView.isHidden = !isPostEmpty
     }
     
+    private func pushToWebView(of indexPath: IndexPath) {
+        guard let postURL = self.postList?[indexPath.item].url else { return }
+        let webViewModel = WebViewModel(url: postURL, service: DefaultFollowService.shared)
+        let webViewController = WebViewController(viewModel: webViewModel)
+        self.navigationController?.pushViewController(webViewController, animated: true)
+    }
 }
 
-// MARK: - DatatSource
+// MARK: - DataSource
 
 extension PostsViewController {
-    private func confiugreDataSource() {
+    private func setDataSource() {
         self.postsDataSource = createDataSource()
         self.configureSnapshot()
     }
     
     private func createDataSource() -> DataSource {
-        let cellRegistration = UICollectionView.CellRegistration<PostCell, PostModel> { cell, indexPath, post in
-            cell.loadPost(post, indexPath)
+        let cellRegistration = UICollectionView.CellRegistration<PostCell, PostModel> { cell, _, post in
+            cell.loadPost(post)
+            self.bind(cell: cell)
         }
         
         return DataSource(
-            collectionView: postsView.collectionView,
-            cellProvider: { collectionView, indexPath, item in
-                return collectionView.dequeueConfiguredReusableCell(
-                    using: cellRegistration,
-                    for: indexPath,
-                    item: item
-                )
-            }
-        )
+            collectionView: postsView.collectionView
+        ) { collectionView, indexPath, item in
+            return collectionView.dequeueConfiguredReusableCell(
+                using: cellRegistration,
+                for: indexPath,
+                item: item
+            )
+        }
     }
 }
 
@@ -142,10 +180,25 @@ extension PostsViewController {
         self.postsDataSource.apply(self.postsSnapshot)
     }
     
-    func loadSnapshotData(
-        with incomingPosts: [PostModel]
+    func loadSnapshot(
+        with incomingPosts: [PostModel],
+        andAnimation isAnimated: Bool
     ) {
+        let previousPosts = self.postsSnapshot.itemIdentifiers(inSection: .main)
+        self.postsSnapshot.deleteItems(previousPosts)
         self.postsSnapshot.appendItems(incomingPosts, toSection: .main)
-        self.postsDataSource.apply(self.postsSnapshot)
+        self.postsDataSource.apply(self.postsSnapshot, animatingDifferences: isAnimated)
+    }
+    
+    func updateSnapshot(
+        with incomingPost: PostModel
+    ) {
+        let currentPosts = self.postsSnapshot.itemIdentifiers(inSection: .main)
+        var newPosts = currentPosts
+        guard let index = currentPosts.map({ $0.post }).firstIndex(of: incomingPost.post) else { return }
+        newPosts[index] = incomingPost
+        self.postsSnapshot.deleteItems(currentPosts)
+        self.postsSnapshot.appendItems(newPosts, toSection: .main)
+        self.postsDataSource.apply(self.postsSnapshot, animatingDifferences: false)
     }
 }
