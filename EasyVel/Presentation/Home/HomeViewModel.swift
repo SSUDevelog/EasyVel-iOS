@@ -27,7 +27,7 @@ final class HomeViewModel {
     // MARK: - Input
     
     struct Input {
-        let viewWillAppearEvent: Observable<Void>
+        let viewDidLoadEvent: Observable<Void>
         let updateHomeEvent: Observable<Void>
     }
     
@@ -41,7 +41,7 @@ final class HomeViewModel {
         
         let output = Output()
         
-        Observable.merge(input.viewWillAppearEvent, input.updateHomeEvent)
+        Observable.merge(input.viewDidLoadEvent, input.updateHomeEvent)
             .subscribe(with: self, onNext: { owner, _ in
                 owner.requestGetTagAPI(output: output)
             })

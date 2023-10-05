@@ -43,6 +43,10 @@ final class HomeViewController: BaseViewController {
     init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+        
+        delegate()
+        bindUI()
+        bindViewModel()
     }
     
     override func loadView() {
@@ -59,14 +63,6 @@ final class HomeViewController: BaseViewController {
         pageViewController.didMove(toParent: self)
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        delegate()
-        
-        bindUI()
-        bindViewModel()
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -103,7 +99,7 @@ final class HomeViewController: BaseViewController {
     func bindViewModel() {
         
         let input = HomeViewModel.Input(
-            viewWillAppearEvent: rx.viewWillAppear.asObservable(),
+            viewDidLoadEvent: rx.viewDidLoad.asObservable(),
             updateHomeEvent: updateHomeEvent.asObservable()
         )
         
