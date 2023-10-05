@@ -7,22 +7,23 @@
 
 import UIKit
 
+import RxCocoa
+import RxSwift
 import SnapKit
 
 final class HomeViewController: BaseViewController {
     
     //MARK: - Properties
     
+    private let rootView = HomeView()
+    private let viewModel: HomeViewModel
+    private let disposeBag = DisposeBag()
+    
+    let updateHomeEvent = PublishRelay<Void>()
+    
     private var currentIndex: Int = 1 {
         didSet {
             changeViewController(before: oldValue, after: currentIndex)
-        }
-    }
-    
-    private var tags: [String] = [] {
-        didSet {
-            menuBar.dataBind(tags: tags)
-            setPageViewController()
         }
     }
     
@@ -34,42 +35,37 @@ final class HomeViewController: BaseViewController {
     }()
     
     private var dataSourceViewController: [UIViewController] = []
-
     
     //MARK: - UI Components
     
-    private let navigationView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .white
-        return view
-    }()
-    
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = TextLiterals.homeViewControllerHeadTitle
-        label.font = .display
-        return label
-    }()
-    
-    lazy var searchButton: UIButton = {
-        let button = UIButton()
-        button.setImage(ImageLiterals.searchIcon, for: .normal)
-        button.addTarget(self, action: #selector(moveToSearchPostViewController), for: .touchUpInside)
-        return button
-    }()
-    
-    private let menuBar = HomeMenuBar()
-    
     //MARK: - Life Cycle
+    
+    init(viewModel: HomeViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    override func loadView() {
+        self.view = rootView
+        
+        addChild(pageViewController)
+        view.addSubview(pageViewController.view)
+        
+        pageViewController.view.snp.makeConstraints {
+            $0.top.equalTo(rootView.menuBar.snp.bottom)
+            $0.horizontalEdges.equalToSuperview()
+            $0.bottom.equalToSuperview()
+        }
+        pageViewController.didMove(toParent: self)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         delegate()
-        style()
-        hierarchy()
-        layout()
-        requestGetTagAPI()
+        
+        bindUI()
+        bindViewModel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -83,61 +79,45 @@ final class HomeViewController: BaseViewController {
         navigationController?.navigationBar.isHidden = false
     }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
     //MARK: - Custom Method
     
     private func delegate() {
-        menuBar.delegate = self
+        rootView.menuBar.delegate = self
         pageViewController.dataSource = self
         pageViewController.delegate = self
     }
     
-    private func style() {
-        view.backgroundColor = .gray100
+    private func bindUI() {
+        rootView.searchButton.rx.tap
+            .subscribe(with: self, onNext: { owner, _ in
+                owner.moveToSearchPostViewController()
+            })
+            .disposed(by: disposeBag)
     }
     
-    private func hierarchy() {
-        addChild(pageViewController)
-        view.addSubviews(navigationView, menuBar)
-        view.addSubview(pageViewController.view)
+    func bindViewModel() {
         
-        navigationView.addSubviews(titleLabel, searchButton)
+        let input = HomeViewModel.Input(
+            viewWillAppearEvent: rx.viewWillAppear.asObservable(),
+            updateHomeEvent: updateHomeEvent.asObservable()
+        )
+        
+        let output = viewModel.transform(input: input, disposeBag: disposeBag)
+        
+        output.tags
+            .subscribe(with: self, onNext: { owner, tags in
+                owner.rootView.menuBar.dataBind(tags: tags)
+                owner.setPageViewController(tags: tags)
+            })
+            .disposed(by: disposeBag)
     }
     
-    private func layout() {
-        // view
-        navigationView.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(132)
-        }
-        
-        menuBar.snp.makeConstraints {
-            $0.top.equalTo(navigationView.snp.bottom)
-            $0.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(40)
-        }
-        
-        pageViewController.view.snp.makeConstraints { 
-            $0.top.equalTo(menuBar.snp.bottom)
-            $0.horizontalEdges.equalToSuperview()
-            $0.bottom.equalToSuperview()
-        }
-        pageViewController.didMove(toParent: self)
-        
-        // naviagtionView
-        titleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(76)
-            $0.leading.equalToSuperview().inset(17)
-        }
-        
-        searchButton.snp.makeConstraints {
-            $0.centerY.equalTo(titleLabel)
-            $0.trailing.equalToSuperview().inset(22)
-            $0.size.equalTo(30)
-        }
-    }
-    
-    private func setPageViewController() {
+    private func setPageViewController(tags: [String]) {
         let factory = KeywordPostsVCFactory()
         dataSourceViewController = [
             UIViewController(),
@@ -162,21 +142,7 @@ final class HomeViewController: BaseViewController {
                                               direction: direction,
                                               animated: true,
                                               completion: nil)
-        menuBar.selectedItem = newIndex
-    }
-    
-    //TODO: - MVVM 리팩시 ViewModel이 담당
-    func requestGetTagAPI() {
-        DefaultTagService.shared.getTag { result in
-            switch result {
-            case .success(let response):
-                guard let response = response as? [String] else { return }
-                self.tags = response
-            default :
-                ServerFailViewController.show()
-                return
-            }
-        }
+        rootView.menuBar.selectedItem = newIndex
     }
     
     //MARK: - Action Method
