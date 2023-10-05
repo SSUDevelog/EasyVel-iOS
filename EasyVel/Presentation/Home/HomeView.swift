@@ -19,8 +19,9 @@ final class HomeView: UIView {
     
     let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = TextLiterals.homeViewControllerHeadTitle
+        label.text = TextLiterals.easyVel
         label.font = .display
+        label.textColor = .brandColor
         return label
     }()
     
@@ -72,7 +73,7 @@ final class HomeView: UIView {
         // naviagtionView
         titleLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(76)
-            $0.leading.equalToSuperview().inset(17)
+            $0.centerX.equalToSuperview()
         }
         
         searchButton.snp.makeConstraints {

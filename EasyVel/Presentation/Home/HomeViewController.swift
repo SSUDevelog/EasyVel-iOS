@@ -113,8 +113,11 @@ final class HomeViewController: BaseViewController {
             .disposed(by: disposeBag)
     }
     
+    //MARK: - Custom Method
+    
     private func setPageViewController(tags: [String]) {
         let factory = KeywordPostsVCFactory()
+        
         dataSourceViewController = [
             UIViewController(),
             PostsViewController(viewModel: .init(viewType: .trend)),
