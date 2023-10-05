@@ -13,17 +13,27 @@ import RxCocoa
 
 final class PostsCollectionViewCell: BaseCollectionViewCell {
     
-    static let identifier = "PostsCollectionViewCell"
+    static let reuseIdentifier = "PostsCollectionViewCell"
     
     // MARK: - Property
     
-    var cellScrapObservable: Observable<(IndexPath, Bool)>?
-    var post: PostDTO?
-    var isScrapped: Bool = false
+    var postModel: PostModel?
     
+    var scrapButtonObservable: Driver<PostModel?> {
+        return scrapButton.rx.tap
+            .map { [weak self] in
+                self?.postModel?.isScrapped.toggle()
+                self?.updateScrapButton()
+                return self?.postModel
+            }
+            .asDriver(onErrorJustReturn: nil)
+    }
+    
+    var disposeBag = DisposeBag()
+
     // MARK: - UI Property
     
-    private let imageView: UIImageView = {
+    let imageView: UIImageView = {
         let view = UIImageView()
         view.contentMode = .scaleAspectFill
         view.roundCorners(cornerRadius: 8, maskedCorners: [.layerMaxXMinYCorner, .layerMinXMinYCorner])
@@ -44,24 +54,20 @@ final class PostsCollectionViewCell: BaseCollectionViewCell {
         return label
     }()
     private let detailView = PostDetailView()
-    lazy var scrapButton: UIButton = {
-        let button = UIButton()
-        button.setImage(isScrapped ? ImageLiterals.bookMarkFill : ImageLiterals.bookMark,for: .normal)
-        button.addAction(UIAction { _ in
-            
-        }, for: .touchUpInside)
-        return button
-    }()
-    private let tagScrollView: UIScrollView = {
-        let view = UIScrollView()
-        view.showsHorizontalScrollIndicator = false
+    private let scrapButton = UIButton()
+    private let tagCollectionView: TagCollectionView = {
+        let view = TagCollectionView()
+        view.backgroundColor = .clear
         return view
     }()
-    private let tagStackView = PostTagStackView()
     
     // MARK: - Life Cycle
     
-    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.imageView.image = nil
+        self.disposeBag = DisposeBag()
+    }
     
     // MARK: - Setting
     
@@ -72,13 +78,11 @@ final class PostsCollectionViewCell: BaseCollectionViewCell {
             summaryLabel,
             detailView,
             scrapButton,
-            tagScrollView,
-            tagStackView
+            tagCollectionView
         )
         
         imageView.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.horizontalEdges.equalToSuperview()
+            $0.top.horizontalEdges.equalToSuperview()
             $0.height.equalTo(125)
         }
         
@@ -103,16 +107,11 @@ final class PostsCollectionViewCell: BaseCollectionViewCell {
             $0.top.trailing.equalToSuperview().inset(4)
         }
         
-        tagScrollView.snp.makeConstraints {
+        tagCollectionView.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(12)
             $0.trailing.equalTo(scrapButton.snp.leading).offset(-12)
             $0.top.equalToSuperview().inset(10)
             $0.height.equalTo(28)
-        }
-        
-        tagScrollView.addSubview(tagStackView)
-        tagStackView.snp.makeConstraints {
-            $0.edges.height.equalToSuperview()
         }
     }
     
@@ -130,27 +129,35 @@ final class PostsCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - Custom Method
     
-    
-    
-    
+    private func updateScrapButton() {
+        guard let isScrapped = postModel?.isScrapped else { return }
+        self.scrapButton.setImage(
+            isScrapped ? ImageLiterals.bookMarkFill : ImageLiterals.bookMark,
+            for: .normal
+        )
+    }
 }
 
+
 extension PostsCollectionViewCell {
-    func loadPost(_ model: PostModel, _ indexPath: IndexPath) {
-        guard let post = model.post else { return }
-        self.post = post
+    func loadPost(_ model: PostModel) {
+        let postModel = model
+        let post = model.post
+        
+        self.postModel = model
+        self.scrapButton.setImage(postModel.isScrapped ? ImageLiterals.bookMarkFill : ImageLiterals.bookMark, for: .normal)
         self.titleLabel.setLineHeight(multiple: 1.3, with: post.title ?? "")
         self.summaryLabel.setLineHeight(multiple: 1.44, with: post.summary ?? "")
+        self.detailView.bind(name: post.name ?? "", date: post.date ?? "")
         
-        if let urlString = post.img,
-           let url = URL(string: urlString),
-           let name = post.name,
-           let date = post.date,
-           let tagList = post.tag {
+        if let urlString = post.img, let url = URL(string: urlString) {
             self.imageView.kf.setImage(with: url)
-            self.detailView.bind(name: name,
-                                 date: date)
-            self.tagStackView.tagList = tagList
+        } else {
+            self.imageView.backgroundColor = .gray200
         }
+        
+        guard let tags = post.tag else { return }
+        let tagList = tags.map { TagModel(tag: $0) }
+        self.tagCollectionView.loadSnapshot(with: tagList)
     }
 }

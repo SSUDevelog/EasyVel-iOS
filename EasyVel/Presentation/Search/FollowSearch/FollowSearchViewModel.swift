@@ -59,7 +59,7 @@ final class FollowSearchViewModel: BaseViewModel {
                         //guard let error = error as? SearchFollowError else { return }
                         self.searchUserOutput.accept((false, nil))
                     })
-                    .disposed(by: disposeBag)
+                    .disposed(by: self.disposeBag)
                 
             })
             .disposed(by: disposeBag)

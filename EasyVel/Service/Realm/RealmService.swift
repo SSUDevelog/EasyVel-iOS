@@ -242,16 +242,11 @@ final class RealmService {
         }
     }
     
-    func checkUniquePost(
+    func containsPost(
         input: StoragePost
     ) -> Bool {
         let posts = convertToStoragePost(input: getPosts())
-        for item in posts {
-            if input == item {
-                return false
-            }
-        }
-        return true
+        return posts.contains(input)
     }
     
     func checkUniqueFolder(

@@ -13,11 +13,10 @@ final class PostsView: BaseUIView {
     
     // MARK: - UI Property
     
-    lazy var collectionView: UICollectionView = {
-        let view = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
-        view.backgroundColor = .gray100
-        view.refreshControl = refreshControl
-        return view
+    let collectionView: UICollectionView = {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
+        collectionView.backgroundColor = .gray100
+        return collectionView
     }()
     let keywordsPostsViewExceptionView: UIImageView = {
         let imageView = UIImageView()
@@ -48,6 +47,9 @@ final class PostsView: BaseUIView {
     
     override func configUI() {
         self.backgroundColor = .white
+        
+        self.collectionView.collectionViewLayout = self.createLayout()
+        self.collectionView.refreshControl = self.refreshControl
     }
 }
 

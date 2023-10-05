@@ -7,16 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3E06F8C52A95F0B3001302F4 /* PostTagStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E06F8C42A95F0B3001302F4 /* PostTagStackView.swift */; };
 		3E06F8C72A96247F001302F4 /* PostDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E06F8C62A96247F001302F4 /* PostDetailView.swift */; };
 		3E06F8C92A962BB4001302F4 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E06F8C82A962BB4001302F4 /* UIImage+Extension.swift */; };
 		3E06F8CB2A98A49A001302F4 /* PostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E06F8CA2A98A49A001302F4 /* PostsViewController.swift */; };
 		3E06F8CD2A990BBD001302F4 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E06F8CC2A990BBC001302F4 /* UIViewController+Extension.swift */; };
 		3E06F8CF2A99E1E9001302F4 /* PostsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E06F8CE2A99E1E9001302F4 /* PostsViewModel.swift */; };
+		3E0D9BE12AC445D100811AE7 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 3E0D9BE02AC445D100811AE7 /* Realm */; };
+		3E0D9BE32AC445D100811AE7 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3E0D9BE22AC445D100811AE7 /* RealmSwift */; };
+		3E0D9BE52AC446BD00811AE7 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 3E0D9BE42AC446BD00811AE7 /* Realm */; };
+		3E0D9BE72AC446BD00811AE7 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3E0D9BE62AC446BD00811AE7 /* RealmSwift */; };
 		3E61EE8A2AA818E9004F25DB /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E61EE892AA818E9004F25DB /* Array+Extension.swift */; };
 		3E7B1AC02A87E90500EE7739 /* PostsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7B1ABF2A87E90500EE7739 /* PostsCollectionViewCell.swift */; };
 		3E9663562ABC241700EC884D /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9663552ABC241700EC884D /* PostModel.swift */; };
 		3E96635A2ABC745F00EC884D /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9663592ABC745F00EC884D /* UILabel+Extension.swift */; };
+		3EE425172AC46D6500DE5FA5 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 3EE425162AC46D6500DE5FA5 /* Realm */; };
+		3EE425192AC46D6500DE5FA5 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3EE425182AC46D6500DE5FA5 /* RealmSwift */; };
+		3EE4251C2AC4751C00DE5FA5 /* FollowSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE4251B2AC4751C00DE5FA5 /* FollowSearchViewModel.swift */; };
+		3EE425202ACADFCE00DE5FA5 /* TagCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE4251F2ACADFCE00DE5FA5 /* TagCollectionView.swift */; };
+		3EE425222ACAE00B00DE5FA5 /* TagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE425212ACAE00B00DE5FA5 /* TagCollectionViewCell.swift */; };
 		7CB706D22A32062500083EC6 /* PostSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB706D12A32062500083EC6 /* PostSearchViewController.swift */; };
 		7CB706D42A32064900083EC6 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB706D32A32064900083EC6 /* SearchTableViewCell.swift */; };
 		7CB706D62A32067900083EC6 /* SearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB706D52A32067900083EC6 /* SearchCollectionViewCell.swift */; };
@@ -130,7 +138,6 @@
 		91487F4329FD8AC9009CFECF /* FollowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91487F4229FD8AC9009CFECF /* FollowViewModel.swift */; };
 		91487F4D29FD9858009CFECF /* TagSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91487F4C29FD9858009CFECF /* TagSearchViewController.swift */; };
 		91487F5229FDA143009CFECF /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91487F5129FDA143009CFECF /* SettingTableViewCell.swift */; };
-		914D8DCE2A02417C00516B4C /* FollowSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914D8DCD2A02417C00516B4C /* FollowSearchViewModel.swift */; };
 		914D8DD92A02B22A00516B4C /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914D8DD82A02B22A00516B4C /* WebViewController.swift */; };
 		915861852A2DFA6D00461F9A /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = 915861842A2DFA6D00461F9A /* RxBlocking */; };
 		915861872A2DFA6D00461F9A /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 915861862A2DFA6D00461F9A /* RxCocoa */; };
@@ -174,7 +181,6 @@
 		91BFF2F82A27833C00F5D13E /* PostScrapButtonDidTapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BFF2F72A27833C00F5D13E /* PostScrapButtonDidTapped.swift */; };
 		91CC1D2C2A0A7D40006BF786 /* JoinGroupRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CC1D2B2A0A7D40006BF786 /* JoinGroupRequest.swift */; };
 		91CC1D4C2A0AD7C2006BF786 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CC1D4B2A0AD7C2006BF786 /* LoadingView.swift */; };
-		91CCEA3C2A0D017A001362AD /* PostTagLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CCEA3B2A0D017A001362AD /* PostTagLabel.swift */; };
 		91CCEA602A0E9CC9001362AD /* Haptic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CCEA5F2A0E9CC9001362AD /* Haptic.swift */; };
 		91DEF3DD2A017774001B6A9D /* TagSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91DEF3DC2A017774001B6A9D /* TagSearchViewModel.swift */; };
 		91E442872A10F385008CB516 /* RxBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E442862A10F385008CB516 /* RxBaseViewController.swift */; };
@@ -190,7 +196,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3E06F8C42A95F0B3001302F4 /* PostTagStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTagStackView.swift; sourceTree = "<group>"; };
 		3E06F8C62A96247F001302F4 /* PostDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailView.swift; sourceTree = "<group>"; };
 		3E06F8C82A962BB4001302F4 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		3E06F8CA2A98A49A001302F4 /* PostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsViewController.swift; sourceTree = "<group>"; };
@@ -202,6 +207,9 @@
 		3E9663592ABC745F00EC884D /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		3EE425142AC46A6200DE5FA5 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		3EE425152AC46A7100DE5FA5 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		3EE4251B2AC4751C00DE5FA5 /* FollowSearchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowSearchViewModel.swift; sourceTree = "<group>"; };
+		3EE4251F2ACADFCE00DE5FA5 /* TagCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionView.swift; sourceTree = "<group>"; };
+		3EE425212ACAE00B00DE5FA5 /* TagCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionViewCell.swift; sourceTree = "<group>"; };
 		7CB706D12A32062500083EC6 /* PostSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSearchViewController.swift; sourceTree = "<group>"; };
 		7CB706D32A32064900083EC6 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		7CB706D52A32067900083EC6 /* SearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -314,7 +322,6 @@
 		91487F4229FD8AC9009CFECF /* FollowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowViewModel.swift; sourceTree = "<group>"; };
 		91487F4C29FD9858009CFECF /* TagSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagSearchViewController.swift; sourceTree = "<group>"; };
 		91487F5129FDA143009CFECF /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
-		914D8DCD2A02417C00516B4C /* FollowSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowSearchViewModel.swift; sourceTree = "<group>"; };
 		914D8DD82A02B22A00516B4C /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		9158618C2A2E04BF00461F9A /* ScrapPostAddInFolderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapPostAddInFolderProtocol.swift; sourceTree = "<group>"; };
 		916227D72A44569500118018 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
@@ -353,7 +360,6 @@
 		91BFF2F72A27833C00F5D13E /* PostScrapButtonDidTapped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostScrapButtonDidTapped.swift; sourceTree = "<group>"; };
 		91CC1D2B2A0A7D40006BF786 /* JoinGroupRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinGroupRequest.swift; sourceTree = "<group>"; };
 		91CC1D4B2A0AD7C2006BF786 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
-		91CCEA3B2A0D017A001362AD /* PostTagLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTagLabel.swift; sourceTree = "<group>"; };
 		91CCEA5F2A0E9CC9001362AD /* Haptic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptic.swift; sourceTree = "<group>"; };
 		91DEF3DC2A017774001B6A9D /* TagSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagSearchViewModel.swift; sourceTree = "<group>"; };
 		91E442862A10F385008CB516 /* RxBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxBaseViewController.swift; sourceTree = "<group>"; };
@@ -374,13 +380,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EE425172AC46D6500DE5FA5 /* Realm in Frameworks */,
 				915861892A2DFA6D00461F9A /* RxRelay in Frameworks */,
 				915861872A2DFA6D00461F9A /* RxCocoa in Frameworks */,
+				3EE425192AC46D6500DE5FA5 /* RealmSwift in Frameworks */,
 				917BA34C2A050861000409B7 /* Realm in Frameworks */,
+				3E0D9BE72AC446BD00811AE7 /* RealmSwift in Frameworks */,
 				91487F0E29FC4656009CFECF /* Kingfisher in Frameworks */,
+				3E0D9BE12AC445D100811AE7 /* Realm in Frameworks */,
 				917BA34E2A050861000409B7 /* RealmSwift in Frameworks */,
+				3E0D9BE52AC446BD00811AE7 /* Realm in Frameworks */,
 				915861852A2DFA6D00461F9A /* RxBlocking in Frameworks */,
 				91487EDA29FC3921009CFECF /* Moya in Frameworks */,
+				3E0D9BE32AC445D100811AE7 /* RealmSwift in Frameworks */,
 				91487ED729FC38CC009CFECF /* SnapKit in Frameworks */,
 				9158618B2A2DFA6D00461F9A /* RxSwift in Frameworks */,
 			);
@@ -394,6 +406,13 @@
 			children = (
 			);
 			path = Notification;
+			sourceTree = "<group>";
+		};
+		3EE4251A2AC4744600DE5FA5 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		7CB706C62A3202EB00083EC6 /* PostSearch */ = {
@@ -533,7 +552,6 @@
 		87F25EEE2A8439F200E03C32 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				91CCEA3B2A0D017A001362AD /* PostTagLabel.swift */,
 				91487F1829FC549C009CFECF /* NoNetworkView.swift */,
 				9166BE942A498B1700FFC026 /* Toast.swift */,
 				91CC1D4B2A0AD7C2006BF786 /* LoadingView.swift */,
@@ -743,6 +761,7 @@
 				91487EC029FC380A009CFECF /* EasyVel */,
 				91487EBF29FC380A009CFECF /* Products */,
 				91E442A22A110190008CB516 /* Frameworks */,
+				3EE4251A2AC4744600DE5FA5 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -872,9 +891,9 @@
 		91487F2B29FD07F7009CFECF /* FollowSearch */ = {
 			isa = PBXGroup;
 			children = (
+				3EE4251B2AC4751C00DE5FA5 /* FollowSearchViewModel.swift */,
 				91487F2E29FD1A66009CFECF /* FollowSearchView.swift */,
 				91487F2C29FD0812009CFECF /* FollowSearchViewController.swift */,
-				914D8DCD2A02417C00516B4C /* FollowSearchViewModel.swift */,
 			);
 			path = FollowSearch;
 			sourceTree = "<group>";
@@ -930,10 +949,11 @@
 		91487F5E29FDA2F0009CFECF /* View */ = {
 			isa = PBXGroup;
 			children = (
-				3E06F8C42A95F0B3001302F4 /* PostTagStackView.swift */,
 				913442282A0001EC000E1ED1 /* PostsView.swift */,
 				3E7B1ABF2A87E90500EE7739 /* PostsCollectionViewCell.swift */,
 				3E06F8C62A96247F001302F4 /* PostDetailView.swift */,
+				3EE4251F2ACADFCE00DE5FA5 /* TagCollectionView.swift */,
+				3EE425212ACAE00B00DE5FA5 /* TagCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1126,6 +1146,12 @@
 				915861862A2DFA6D00461F9A /* RxCocoa */,
 				915861882A2DFA6D00461F9A /* RxRelay */,
 				9158618A2A2DFA6D00461F9A /* RxSwift */,
+				3E0D9BE02AC445D100811AE7 /* Realm */,
+				3E0D9BE22AC445D100811AE7 /* RealmSwift */,
+				3E0D9BE42AC446BD00811AE7 /* Realm */,
+				3E0D9BE62AC446BD00811AE7 /* RealmSwift */,
+				3EE425162AC46D6500DE5FA5 /* Realm */,
+				3EE425182AC46D6500DE5FA5 /* RealmSwift */,
 			);
 			productName = VelogOnMobile;
 			productReference = 91487EBE29FC380A009CFECF /* EasyVel.app */;
@@ -1244,10 +1270,10 @@
 				877ED7CB2A4AD2EC00D80464 /* PostDTO.swift in Sources */,
 				91487EFE29FC3BD0009CFECF /* ImageLiterals.swift in Sources */,
 				9134422329FFF59D000E1ED1 /* SettingTableView.swift in Sources */,
-				3E06F8C52A95F0B3001302F4 /* PostTagStackView.swift in Sources */,
 				9134421129FFDB5D000E1ED1 /* SearchUserResponse.swift in Sources */,
 				9128B05A2A23CC9000FB1252 /* ScrapStorageViewModel.swift in Sources */,
 				9109505A2A5011DD00D04D41 /* VersionTargetType.swift in Sources */,
+				3EE425202ACADFCE00DE5FA5 /* TagCollectionView.swift in Sources */,
 				9134421329FFDBE8000E1ED1 /* GetSubscriberPostResponse.swift in Sources */,
 				3E7B1AC02A87E90500EE7739 /* PostsCollectionViewCell.swift in Sources */,
 				917BA3522A050903000409B7 /* RealmStoragePost.swift in Sources */,
@@ -1279,7 +1305,6 @@
 				91487EC429FC380A009CFECF /* SceneDelegate.swift in Sources */,
 				91E4428B2A10F3C7008CB516 /* BaseViewModel.swift in Sources */,
 				8765EFF42A29ECDE00EF6733 /* String+Extension.swift in Sources */,
-				91CCEA3C2A0D017A001362AD /* PostTagLabel.swift in Sources */,
 				9134422729FFF9BC000E1ED1 /* FollowView.swift in Sources */,
 				91487F2229FC5F2A009CFECF /* TabBarController.swift in Sources */,
 				917BA3332A03D8F7000409B7 /* StorageView.swift in Sources */,
@@ -1319,6 +1344,7 @@
 				916227D82A44569500118018 /* UITextField+Extension.swift in Sources */,
 				917BA3882A07C541000409B7 /* SubscriberSearchProtocol.swift in Sources */,
 				913441EE29FFD6E3000E1ED1 /* NetworkResult.swift in Sources */,
+				3EE4251C2AC4751C00DE5FA5 /* FollowSearchViewModel.swift in Sources */,
 				87DC47912A5713F4007823CB /* SplashViewController.swift in Sources */,
 				916E29AE2A3EE90F006F5FE9 /* SignInViewModel.swift in Sources */,
 				9158618D2A2E04BF00461F9A /* ScrapPostAddInFolderProtocol.swift in Sources */,
@@ -1334,7 +1360,6 @@
 				916E29B42A406952006F5FE9 /* AccessTokenDTO.swift in Sources */,
 				91487F1729FC5481009CFECF /* NetworkMonitor.swift in Sources */,
 				917BA3352A03E14A000409B7 /* StorageHeadView.swift in Sources */,
-				914D8DCE2A02417C00516B4C /* FollowSearchViewModel.swift in Sources */,
 				9128B0522A23CA5E00FB1252 /* ScrapStorageCollectionViewDataSource.swift in Sources */,
 				9128B04E2A23C96500FB1252 /* UICollectionView+Extension.swift in Sources */,
 				9128B03F2A237E1800FB1252 /* ScrapFolderBottomSheetDataSource.swift in Sources */,
@@ -1346,6 +1371,7 @@
 				913441EA29FFD649000E1ED1 /* BaseTargetType.swift in Sources */,
 				91487EF429FC3AD8009CFECF /* BaseUIView.swift in Sources */,
 				9134420B29FFDA71000E1ED1 /* SignOutResponse.swift in Sources */,
+				3EE425222ACAE00B00DE5FA5 /* TagCollectionViewCell.swift in Sources */,
 				9128B0262A236D2800FB1252 /* ScrapPopUpView.swift in Sources */,
 				914D8DD92A02B22A00516B4C /* WebViewController.swift in Sources */,
 				91ED17892A00E58D00158787 /* FollowService.swift in Sources */,
@@ -1376,6 +1402,7 @@
 /* Begin XCBuildConfiguration section */
 		91487ED029FC380C009CFECF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3EE425142AC46A6200DE5FA5 /* Debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -1439,6 +1466,7 @@
 		};
 		91487ED129FC380C009CFECF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3EE425152AC46A7100DE5FA5 /* Release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -1523,7 +1551,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.JuneHyeokHong.VelogOnMobile;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "please,,,please,,,";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = EasyVel_SW_JE_SM;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -1561,7 +1589,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.JuneHyeokHong.VelogOnMobile;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "please,,,please,,,";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = EasyVel_SW_JE_SM;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -1638,6 +1666,30 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3E0D9BE02AC445D100811AE7 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Realm;
+		};
+		3E0D9BE22AC445D100811AE7 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = RealmSwift;
+		};
+		3E0D9BE42AC446BD00811AE7 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Realm;
+		};
+		3E0D9BE62AC446BD00811AE7 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = RealmSwift;
+		};
+		3EE425162AC46D6500DE5FA5 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Realm;
+		};
+		3EE425182AC46D6500DE5FA5 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = RealmSwift;
+		};
 		91487ED629FC38CC009CFECF /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 91487ED529FC38CC009CFECF /* XCRemoteSwiftPackageReference "SnapKit" */;
