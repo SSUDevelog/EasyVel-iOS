@@ -25,6 +25,11 @@
 		3EE4251C2AC4751C00DE5FA5 /* FollowSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE4251B2AC4751C00DE5FA5 /* FollowSearchViewModel.swift */; };
 		3EE425202ACADFCE00DE5FA5 /* TagCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE4251F2ACADFCE00DE5FA5 /* TagCollectionView.swift */; };
 		3EE425222ACAE00B00DE5FA5 /* TagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE425212ACAE00B00DE5FA5 /* TagCollectionViewCell.swift */; };
+		3EFB49A02ACED675006E3846 /* NewStorageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFB499F2ACED675006E3846 /* NewStorageViewModel.swift */; };
+		3EFB49A22ACED68C006E3846 /* NewStorageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFB49A12ACED68C006E3846 /* NewStorageViewController.swift */; };
+		3EFB4A332AD396E2006E3846 /* NewStoragePostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFB4A322AD396E2006E3846 /* NewStoragePostView.swift */; };
+		3EFB4A352AD39757006E3846 /* NewStorageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFB4A342AD39757006E3846 /* NewStorageCollectionViewCell.swift */; };
+		3EFB4A372AD3B53E006E3846 /* StorageCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFB4A362AD3B53E006E3846 /* StorageCollectionViewHeader.swift */; };
 		7CB706D22A32062500083EC6 /* PostSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB706D12A32062500083EC6 /* PostSearchViewController.swift */; };
 		7CB706D42A32064900083EC6 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB706D32A32064900083EC6 /* SearchTableViewCell.swift */; };
 		7CB706D62A32067900083EC6 /* SearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB706D52A32067900083EC6 /* SearchCollectionViewCell.swift */; };
@@ -208,6 +213,11 @@
 		3EE4251B2AC4751C00DE5FA5 /* FollowSearchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowSearchViewModel.swift; sourceTree = "<group>"; };
 		3EE4251F2ACADFCE00DE5FA5 /* TagCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionView.swift; sourceTree = "<group>"; };
 		3EE425212ACAE00B00DE5FA5 /* TagCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionViewCell.swift; sourceTree = "<group>"; };
+		3EFB499F2ACED675006E3846 /* NewStorageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewStorageViewModel.swift; sourceTree = "<group>"; };
+		3EFB49A12ACED68C006E3846 /* NewStorageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewStorageViewController.swift; sourceTree = "<group>"; };
+		3EFB4A322AD396E2006E3846 /* NewStoragePostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewStoragePostView.swift; sourceTree = "<group>"; };
+		3EFB4A342AD39757006E3846 /* NewStorageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewStorageCollectionViewCell.swift; sourceTree = "<group>"; };
+		3EFB4A362AD3B53E006E3846 /* StorageCollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageCollectionViewHeader.swift; sourceTree = "<group>"; };
 		7CB706D12A32062500083EC6 /* PostSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSearchViewController.swift; sourceTree = "<group>"; };
 		7CB706D32A32064900083EC6 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		7CB706D52A32067900083EC6 /* SearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -998,6 +1008,8 @@
 				917BA3362A03E325000409B7 /* View */,
 				917BA3302A03D8EF000409B7 /* StorageViewController.swift */,
 				917BA3442A050631000409B7 /* StorageViewModel.swift */,
+				3EFB499F2ACED675006E3846 /* NewStorageViewModel.swift */,
+				3EFB49A12ACED68C006E3846 /* NewStorageViewController.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -1009,6 +1021,9 @@
 				917BA3342A03E14A000409B7 /* StorageHeadView.swift */,
 				917BA33E2A03E8A1000409B7 /* StorageTableView.swift */,
 				917BA3402A03E8FE000409B7 /* StorageTableViewCell.swift */,
+				3EFB4A322AD396E2006E3846 /* NewStoragePostView.swift */,
+				3EFB4A342AD39757006E3846 /* NewStorageCollectionViewCell.swift */,
+				3EFB4A362AD3B53E006E3846 /* StorageCollectionViewHeader.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1235,6 +1250,7 @@
 				91ED178D2A00E5A600158787 /* AuthService.swift in Sources */,
 				916E29B12A3EEE60006F5FE9 /* SignInView.swift in Sources */,
 				91487F1029FC4736009CFECF /* UIStackView+Extension.swift in Sources */,
+				3EFB49A22ACED68C006E3846 /* NewStorageViewController.swift in Sources */,
 				9134423A2A004B9B000E1ED1 /* DefaultFollowService.swift in Sources */,
 				91487EEF29FC3A4D009CFECF /* SettingViewController.swift in Sources */,
 				9128B04A2A23C59700FB1252 /* ScrapStorageView.swift in Sources */,
@@ -1245,6 +1261,7 @@
 				3E06F8CB2A98A49A001302F4 /* PostsViewController.swift in Sources */,
 				9109505C2A5013C100D04D41 /* VersionService.swift in Sources */,
 				877ED7C32A4AAED500D80464 /* HomeMenuCollectionViewCell.swift in Sources */,
+				3EFB4A352AD39757006E3846 /* NewStorageCollectionViewCell.swift in Sources */,
 				9109505E2A50140C00D04D41 /* DefaultVersionService.swift in Sources */,
 				913442302A004352000E1ED1 /* SubscriberTargetType.swift in Sources */,
 				87DC47932A5713FB007823CB /* SplashViewModel.swift in Sources */,
@@ -1311,6 +1328,7 @@
 				91487EF629FC3AEF009CFECF /* BaseTableViewCell.swift in Sources */,
 				9134421529FFDC9C000E1ED1 /* UnSubsribeResponse.swift in Sources */,
 				87DC47992A572ECF007823CB /* UserRepository.swift in Sources */,
+				3EFB49A02ACED675006E3846 /* NewStorageViewModel.swift in Sources */,
 				87DC47882A556867007823CB /* VelogAlertViewController.swift in Sources */,
 				9134420529FFD965000E1ED1 /* SignInResponse.swift in Sources */,
 				913441F429FFD742000E1ED1 /* TagTargetType.swift in Sources */,
@@ -1329,6 +1347,7 @@
 				913442402A004BB1000E1ED1 /* DefaultNotificationService.swift in Sources */,
 				87DC479E2A59B1F6007823CB /* SignInUseCase.swift in Sources */,
 				91487F4329FD8AC9009CFECF /* FollowViewModel.swift in Sources */,
+				3EFB4A332AD396E2006E3846 /* NewStoragePostView.swift in Sources */,
 				9128B0432A23B50500FB1252 /* ReusableView.swift in Sources */,
 				91ED179A2A00F00800158787 /* BaseNetworkService.swift in Sources */,
 				917BA3412A03E8FE000409B7 /* StorageTableViewCell.swift in Sources */,
@@ -1371,6 +1390,7 @@
 				913441EA29FFD649000E1ED1 /* BaseTargetType.swift in Sources */,
 				91487EF429FC3AD8009CFECF /* BaseUIView.swift in Sources */,
 				9134420B29FFDA71000E1ED1 /* SignOutResponse.swift in Sources */,
+				3EFB4A372AD3B53E006E3846 /* StorageCollectionViewHeader.swift in Sources */,
 				3EE425222ACAE00B00DE5FA5 /* TagCollectionViewCell.swift in Sources */,
 				9128B0262A236D2800FB1252 /* ScrapPopUpView.swift in Sources */,
 				914D8DD92A02B22A00516B4C /* WebViewController.swift in Sources */,
