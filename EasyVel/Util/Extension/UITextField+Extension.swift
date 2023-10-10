@@ -15,4 +15,17 @@ extension UITextField {
         self.leftView = paddingView
         self.leftViewMode = ViewMode.always
     }
+    
+    func addRightButton(
+        image: UIImage,
+        action: UIAction,
+        at mode: UITextField.ViewMode
+    ) {
+        let rightButton = UIButton()
+        rightButton.setImage(image, for: .normal)
+        rightButton.frame = .init(x: 0, y: 0, width: 16, height: 16)
+        rightButton.addAction(action, for: .touchUpInside)
+        self.rightView = rightButton
+        self.rightViewMode = mode
+    }
 }
