@@ -189,4 +189,8 @@ enum TextLiterals {
     //MARK: - Exception
     
     static let unknownError = "알 수 없는 오류가 발생했습니다."
+    
+    // MARK: - Alert
+    
+    static let existingFolder = "이미 있는 폴더명입니다. 다시 만들어주세요."
 }
