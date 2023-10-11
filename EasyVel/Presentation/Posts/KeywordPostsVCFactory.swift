@@ -20,6 +20,17 @@ final class KeywordPostsVCFactory {
         return vc
     }
     
+    func create(
+        tag: String,
+        isNavigationBarHidden: Bool
+    ) -> PostsViewController {
+        let vc = PostsViewController(
+            viewModel: PostsViewModel(viewType: .keyword, tag: tag),
+            isNavigationBarHidden: isNavigationBarHidden
+        )
+        return vc
+    }
+    
     
     
     // MARK: - search tagPost에서 ViewController 만들 때 사용

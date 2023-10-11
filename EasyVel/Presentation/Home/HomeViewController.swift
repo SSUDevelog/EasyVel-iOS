@@ -125,7 +125,7 @@ final class HomeViewController: BaseViewController {
         ]
         
         for tag in tags {
-            let vc = factory.create(tag: tag)
+            let vc = factory.create(tag: tag, isNavigationBarHidden: true)
             dataSourceViewController.append(vc)
         }
         
