@@ -40,7 +40,7 @@ final class TabBarController: UITabBarController {
     
     // MARK: - viewController properties
     
-    let homeVC = HomeViewController()
+    let homeVC = HomeViewController(viewModel: HomeViewModel(service: DefaultTagService.shared))
     lazy var listVC = FollowViewController(viewModel: listViewModel)
     lazy var storageVC = ScrapStorageViewController(viewModel: scrapStorageViewModel)
     let settingViewModel = SettingViewModel(service: DefaultAuthService.shared)
@@ -129,7 +129,7 @@ final class TabBarController: UITabBarController {
     
     @objc
     private func updateHomeVC() {
-        self.homeVC.requestGetTagAPI()
+        self.homeVC.updateHomeEvent.accept(Void())
     }
     
     @objc

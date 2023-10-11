@@ -20,7 +20,7 @@ final class SettingView: BaseUIView {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = TextLiterals.settingTitleLabelText
-        label.textColor = .gray700
+        label.textColor = .gray500
         label.font = .display
         return label
     }()
@@ -53,8 +53,8 @@ final class SettingView: BaseUIView {
         }
         
         titleLabel.snp.makeConstraints {
-            $0.top.equalTo(safeAreaLayoutGuide).offset(32)
-            $0.leading.equalToSuperview().offset(20)
+            $0.top.equalToSuperview().inset(76)
+            $0.centerX.equalToSuperview()
         }
         
         vertiLineView.snp.makeConstraints {

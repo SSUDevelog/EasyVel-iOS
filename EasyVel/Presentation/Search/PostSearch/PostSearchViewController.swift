@@ -308,7 +308,9 @@ extension PostSearchViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let tag = popularSearchTagList[indexPath.row]
-        let postsVC = KeywordPostsVCFactory().create(tag: tag)
+        let postsVC = KeywordPostsVCFactory().create(tag: tag,
+                                                     isNavigationBarHidden: false,
+                                                     postDTOList: [])
         navigationController?.pushViewController(postsVC, animated: true)
     }
 }
@@ -325,4 +327,18 @@ extension PostSearchViewController: UICollectionViewDelegate, UICollectionViewDa
         cell.configCell(currentSearchTagList[indexPath.row])
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let tag = popularSearchTagList[indexPath.row]
+        let postsVC = KeywordPostsVCFactory().create(tag: tag,
+                                                     isNavigationBarHidden: false,
+                                                     postDTOList: [])
+        navigationController?.pushViewController(postsVC, animated: true)
+     
+    }
+    
+    
+    
+    
+    
 }
