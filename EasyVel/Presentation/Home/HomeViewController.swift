@@ -120,8 +120,8 @@ final class HomeViewController: BaseViewController {
         
         dataSourceViewController = [
             UIViewController(),
-            PostsViewController(viewModel: .init(viewType: .trend)),
-            PostsViewController(viewModel: .init(viewType: .follow))
+            PostsViewController(viewModel: .init(viewType: .trend), isNavigationBarHidden: true),
+            PostsViewController(viewModel: .init(viewType: .follow), isNavigationBarHidden: true)
         ]
         
         for tag in tags {

@@ -79,7 +79,7 @@ final class HomeView: UIView {
         searchButton.snp.makeConstraints {
             $0.centerY.equalTo(titleLabel)
             $0.trailing.equalToSuperview().inset(22)
-            $0.size.equalTo(30)
+            $0.size.equalTo(42)
         }
     }
 }

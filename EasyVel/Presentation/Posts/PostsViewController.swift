@@ -80,10 +80,12 @@ final class PostsViewController: BaseViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationBarIsHidden(self.isNavigationBarHidden)
-    }
-    
+            super.viewWillAppear(animated)
+            if isNavigationBarHidden == false {
+                navigationController?.navigationBar.isHidden = false
+            }
+        }
+
     // MARK: - Setting
     
     private func bind() {
