@@ -72,11 +72,16 @@ final class PostsViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationBarIsHidden(self.isNavigationBarHidden)
+        
         self.setDataSource()
         self.bind()
         self.bindViewModel()
         self.bindNavigation()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationBarIsHidden(self.isNavigationBarHidden)
     }
     
     // MARK: - Setting
