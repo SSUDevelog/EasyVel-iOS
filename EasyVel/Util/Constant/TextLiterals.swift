@@ -13,7 +13,7 @@ enum TextLiterals {
     
     // MARK: - Home
     
-    static let homeViewControllerHeadTitle: String = "Home"
+    static let easyVel: String = "EasyVel"
     
     // MARK: - storage
     
