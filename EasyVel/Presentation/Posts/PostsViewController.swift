@@ -209,3 +209,19 @@ extension PostsViewController {
         self.postsDataSource.apply(self.postsSnapshot, animatingDifferences: false)
     }
 }
+
+//MARK: - PostScrapButtonDidTapped
+
+extension PostsViewController: PostScrapButtonDidTapped {
+    func scrapButtonDidTapped(
+        storagePost: StoragePost,
+        isScrapped: Bool,
+        cellIndex: Int
+    ) {
+        isScrapPostsList?[cellIndex] = isScrapped
+        // MARK: - fix me, viewModel 주입 방법 수정
+        
+        let viewModel = PostsViewModel(viewType: .keyword, service: DefaultPostService.shared)
+        viewModel.cellScrapButtonDidTap.accept((storagePost, isScrapped))
+    }
+}

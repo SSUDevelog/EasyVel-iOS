@@ -55,7 +55,7 @@ final class ScrapStorageCollectionViewCell: BaseCollectionViewCell {
         
         folderNameLabel.snp.makeConstraints {
             $0.top.equalTo(folderIcon.snp.bottom).offset(8)
-            $0.leading.equalToSuperview().offset(16)
+            $0.horizontalEdges.equalToSuperview().inset(16)
         }
         
         postCount.snp.makeConstraints {
