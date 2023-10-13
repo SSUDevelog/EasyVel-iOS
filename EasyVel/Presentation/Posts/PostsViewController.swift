@@ -218,10 +218,10 @@ extension PostsViewController: PostScrapButtonDidTapped {
         isScrapped: Bool,
         cellIndex: Int
     ) {
-        isScrapPostsList?[cellIndex] = isScrapped
-        // MARK: - fix me, viewModel 주입 방법 수정
-        
-        let viewModel = PostsViewModel(viewType: .keyword, service: DefaultPostService.shared)
-        viewModel.cellScrapButtonDidTap.accept((storagePost, isScrapped))
+//        isScrapPostsList?[cellIndex] = isScrapped
+//        // MARK: - fix me, viewModel 주입 방법 수정
+//        
+//        let viewModel = PostsViewModel(viewType: .keyword, service: DefaultPostService.shared)
+//        viewModel.cellScrapButtonDidTap.accept((storagePost, isScrapped))
     }
 }

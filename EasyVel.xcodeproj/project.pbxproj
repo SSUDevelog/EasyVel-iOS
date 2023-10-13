@@ -891,9 +891,9 @@
 		91487F2B29FD07F7009CFECF /* FollowSearch */ = {
 			isa = PBXGroup;
 			children = (
-				3EE4251B2AC4751C00DE5FA5 /* FollowSearchViewModel.swift */,
 				91487F2E29FD1A66009CFECF /* FollowSearchView.swift */,
 				91487F2C29FD0812009CFECF /* FollowSearchViewController.swift */,
+				3EE4251B2AC4751C00DE5FA5 /* FollowSearchViewModel.swift */,
 			);
 			path = FollowSearch;
 			sourceTree = "<group>";
