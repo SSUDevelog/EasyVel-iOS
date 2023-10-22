@@ -30,7 +30,19 @@ final class PostSearchViewController: RxBaseViewController<PostSearchViewModel> 
     private lazy var recentSearchTagCollectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
     
     private let popularSearchTagTableView = UITableView()
-    private let searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: 280, height: 0))
+    
+    private lazy var searchBar: UISearchBar = {
+        let searchBar = UISearchBar()
+        searchBar.placeholder = TextLiterals.postSearchViewSearchBarPlaceholderText
+        searchBar.searchTextField.backgroundColor = .gray100
+        searchBar.searchTextField.textColor = .gray500
+        searchBar.setImage(ImageLiterals.searchGray,
+                           for: .search,
+                           state: .normal)
+        searchBar.delegate = self
+        searchBar.searchTextField.returnKeyType = .done
+        return searchBar
+    }()
     
     private let searchBarLineView: UIView = {
         let view = UIView()
@@ -95,13 +107,30 @@ final class PostSearchViewController: RxBaseViewController<PostSearchViewModel> 
         
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        searchBar.searchTextField.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.equalToSuperview().inset(59)
+            $0.trailing.equalToSuperview().inset(20)
+            $0.height.equalTo(44)
+        }
+        view.layoutIfNeeded()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        searchBar.searchTextField.becomeFirstResponder()
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.searchBar.endEditing(true)
     }
     
     override func setupNavigationBar() {
         super.setupNavigationBar()
-        searchBar.placeholder = TextLiterals.postSearchViewSearchBarPlaceholderText
+        
         self.navigationItem.titleView = searchBar
     }
     
@@ -340,5 +369,14 @@ extension PostSearchViewController: UICollectionViewDelegate, UICollectionViewDa
     
     
     
+    
+}
+
+extension PostSearchViewController: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        searchBar.text = ""
+    }
     
 }
