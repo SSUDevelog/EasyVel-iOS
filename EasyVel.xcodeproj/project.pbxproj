@@ -31,6 +31,7 @@
 		87187C022A4DF7E200BF05F7 /* MyTagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87187C012A4DF7E200BF05F7 /* MyTagCollectionViewCell.swift */; };
 		87187C042A4DF7F200BF05F7 /* PopularTagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87187C032A4DF7F200BF05F7 /* PopularTagTableViewCell.swift */; };
 		8745835E2A42184B00954274 /* KeywordPostsVCFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8745835D2A42184B00954274 /* KeywordPostsVCFactory.swift */; };
+		874A13FD2AE4D425000ED2C1 /* RxGesture in Frameworks */ = {isa = PBXBuildFile; productRef = 874A13FC2AE4D425000ED2C1 /* RxGesture */; };
 		8764A62C2ACEB705007D4B0A /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8764A62B2ACEB705007D4B0A /* HomeView.swift */; };
 		8764A62E2ACEB895007D4B0A /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8764A62D2ACEB895007D4B0A /* HomeViewModel.swift */; };
 		8764A6302ACEBB2E007D4B0A /* Reactive+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8764A62F2ACEBB2E007D4B0A /* Reactive+.swift */; };
@@ -382,6 +383,7 @@
 			files = (
 				3EE425172AC46D6500DE5FA5 /* Realm in Frameworks */,
 				915861892A2DFA6D00461F9A /* RxRelay in Frameworks */,
+				874A13FD2AE4D425000ED2C1 /* RxGesture in Frameworks */,
 				915861872A2DFA6D00461F9A /* RxCocoa in Frameworks */,
 				3EE425192AC46D6500DE5FA5 /* RealmSwift in Frameworks */,
 				917BA34C2A050861000409B7 /* Realm in Frameworks */,
@@ -1152,6 +1154,7 @@
 				3E0D9BE62AC446BD00811AE7 /* RealmSwift */,
 				3EE425162AC46D6500DE5FA5 /* Realm */,
 				3EE425182AC46D6500DE5FA5 /* RealmSwift */,
+				874A13FC2AE4D425000ED2C1 /* RxGesture */,
 			);
 			productName = VelogOnMobile;
 			productReference = 91487EBE29FC380A009CFECF /* EasyVel.app */;
@@ -1187,6 +1190,7 @@
 				91487F0C29FC4656009CFECF /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				917BA34A2A050861000409B7 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				915861832A2DFA6D00461F9A /* XCRemoteSwiftPackageReference "RxSwift" */,
+				874A13FB2AE4D425000ED2C1 /* XCRemoteSwiftPackageReference "RxGesture" */,
 			);
 			productRefGroup = 91487EBF29FC380A009CFECF /* Products */;
 			projectDirPath = "";
@@ -1623,6 +1627,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		874A13FB2AE4D425000ED2C1 /* XCRemoteSwiftPackageReference "RxGesture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxGesture.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 		91487ED529FC38CC009CFECF /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -1689,6 +1701,11 @@
 		3EE425182AC46D6500DE5FA5 /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = RealmSwift;
+		};
+		874A13FC2AE4D425000ED2C1 /* RxGesture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 874A13FB2AE4D425000ED2C1 /* XCRemoteSwiftPackageReference "RxGesture" */;
+			productName = RxGesture;
 		};
 		91487ED629FC38CC009CFECF /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;

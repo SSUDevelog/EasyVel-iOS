@@ -18,7 +18,7 @@ final class TagSearchViewController: RxBaseViewController<TagSearchViewModel> {
     //MARK: - UI Components
     
     private lazy var searchBar: UISearchBar = {
-        let searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: 280, height: 0))
+        let searchBar = UISearchBar()
         searchBar.placeholder = TextLiterals.tagSearchPlaceholderText
         searchBar.searchTextField.textColor = .gray500
         searchBar.setImage(ImageLiterals.tagPlusIcon,
