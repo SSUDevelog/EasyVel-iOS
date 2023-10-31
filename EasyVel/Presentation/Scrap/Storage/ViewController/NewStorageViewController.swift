@@ -32,7 +32,7 @@ final class NewStorageViewController: BaseViewController {
     
     var storageFolderName: String
     
-    private var changeFolderNameAlert: FolderNameAlertView?
+    private var changeFolderNameAlert: UIView?
     private var deleteFolderBottomSheet: UIView?
     
     // MARK: - Life Cycle
@@ -176,7 +176,6 @@ extension NewStorageViewController {
 extension NewStorageViewController {
     
     private func showChageFolderNameAlert() {
-        self.changeFolderNameAlert = FolderNameAlertView(alertType: .change)
         
     }
     

@@ -30,7 +30,6 @@
 		3EFB4A332AD396E2006E3846 /* NewStoragePostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFB4A322AD396E2006E3846 /* NewStoragePostView.swift */; };
 		3EFB4A352AD39757006E3846 /* NewStorageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFB4A342AD39757006E3846 /* NewStorageCollectionViewCell.swift */; };
 		3EFB4A372AD3B53E006E3846 /* StorageCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFB4A362AD3B53E006E3846 /* StorageCollectionViewHeader.swift */; };
-		3EFB4A422AD4D940006E3846 /* FolderNameAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFB4A412AD4D940006E3846 /* FolderNameAlertView.swift */; };
 		7CB706D22A32062500083EC6 /* PostSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB706D12A32062500083EC6 /* PostSearchViewController.swift */; };
 		7CB706D42A32064900083EC6 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB706D32A32064900083EC6 /* SearchTableViewCell.swift */; };
 		7CB706D62A32067900083EC6 /* SearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB706D52A32067900083EC6 /* SearchCollectionViewCell.swift */; };
@@ -222,7 +221,6 @@
 		3EFB4A322AD396E2006E3846 /* NewStoragePostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewStoragePostView.swift; sourceTree = "<group>"; };
 		3EFB4A342AD39757006E3846 /* NewStorageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewStorageCollectionViewCell.swift; sourceTree = "<group>"; };
 		3EFB4A362AD3B53E006E3846 /* StorageCollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageCollectionViewHeader.swift; sourceTree = "<group>"; };
-		3EFB4A412AD4D940006E3846 /* FolderNameAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderNameAlertView.swift; sourceTree = "<group>"; };
 		7CB706D12A32062500083EC6 /* PostSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSearchViewController.swift; sourceTree = "<group>"; };
 		7CB706D32A32064900083EC6 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		7CB706D52A32067900083EC6 /* SearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -1042,7 +1040,6 @@
 				3EFB4A322AD396E2006E3846 /* NewStoragePostView.swift */,
 				3EFB4A342AD39757006E3846 /* NewStorageCollectionViewCell.swift */,
 				3EFB4A362AD3B53E006E3846 /* StorageCollectionViewHeader.swift */,
-				3EFB4A412AD4D940006E3846 /* FolderNameAlertView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1282,7 +1279,6 @@
 				3E06F8CB2A98A49A001302F4 /* PostsViewController.swift in Sources */,
 				9109505C2A5013C100D04D41 /* VersionService.swift in Sources */,
 				877ED7C32A4AAED500D80464 /* HomeMenuCollectionViewCell.swift in Sources */,
-				3EFB4A422AD4D940006E3846 /* FolderNameAlertView.swift in Sources */,
 				3EFB4A352AD39757006E3846 /* NewStorageCollectionViewCell.swift in Sources */,
 				9109505E2A50140C00D04D41 /* DefaultVersionService.swift in Sources */,
 				913442302A004352000E1ED1 /* SubscriberTargetType.swift in Sources */,
