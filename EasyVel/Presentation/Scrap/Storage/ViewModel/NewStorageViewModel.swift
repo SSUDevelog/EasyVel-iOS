@@ -16,14 +16,13 @@ final class NewStorageViewModel: BaseViewModel {
     // MARK: - Properties
     
     let realm = RealmService()
-    var folderName: String?
     
     // MARK: - Input & Output
     
     struct Input {
-        let fetchPostTrigger: Driver<String?>
+        let fetchPostTrigger: Driver<String>
         
-        init(_ fetchPostTrigger: Driver<String?>) {
+        init(_ fetchPostTrigger: Driver<String>) {
             self.fetchPostTrigger = fetchPostTrigger
         }
     }
@@ -38,15 +37,13 @@ final class NewStorageViewModel: BaseViewModel {
     
     // MARK: - Initialize
     
-    
-    
     // MARK: - Transform
     
     func transform(_ input: Input) -> Output {
         let storagePosts = input.fetchPostTrigger
             .map { [weak self] folderName -> [StoragePost] in
                 guard let self = self else { return [] }
-                return self.getRealmStoragePosts(from: folderName ?? "모든 게시글")
+                return self.getRealmStoragePosts(from: folderName)
             }
             .asDriver()
         

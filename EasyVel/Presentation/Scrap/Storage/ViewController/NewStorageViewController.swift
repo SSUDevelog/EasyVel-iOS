@@ -30,15 +30,19 @@ final class NewStorageViewController: BaseViewController {
     private var storageDataSource: DataSource!
     private var storageSnapshot: Snapshot!
     
-    private var storageFolderName: String?
+    var storageFolderName: String
     
     private var changeFolderNameAlert: FolderNameAlertView?
     private var deleteFolderBottomSheet: UIView?
     
     // MARK: - Life Cycle
     
-    init(viewModel: NewStorageViewModel) {
+    init(
+        viewModel: NewStorageViewModel,
+        folderName: String
+    ) {
         self.viewModel = viewModel
+        self.storageFolderName = folderName
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -56,11 +60,21 @@ final class NewStorageViewController: BaseViewController {
         super.viewDidLoad()
         self.setDataSource()
         self.setSnapshot()
+        self.bind()
         self.bindViewModel()
+        self.storageView.configureNavigationTitle(to: self.storageFolderName)
         self.navigationController?.navigationBar.isHidden = false
     }
     
     // MARK: - Setting
+    
+    private func bind() {
+        self.storageView.backButton.rx.tap
+            .subscribe(onNext: {
+                self.navigationController?.popViewController(animated: true)
+            })
+            .disposed(by: disposeBag)
+    }
     
     private func bindViewModel() {
         let fetchPostTrigger = self.rx.methodInvoked(#selector(self.viewWillAppear(_:)))
