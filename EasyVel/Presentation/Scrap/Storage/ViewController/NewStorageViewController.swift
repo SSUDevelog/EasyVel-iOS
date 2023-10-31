@@ -30,10 +30,10 @@ final class NewStorageViewController: BaseViewController {
     private var storageDataSource: DataSource!
     private var storageSnapshot: Snapshot!
     
-//    private var storageFolder: String?
+    private var storageFolderName: String?
     
-    private var changeNameAlert: UIAlertController?
-    private var deleteFolrderAlert: UIAlertController?
+    private var changeFolderNameAlert: FolderNameAlertView?
+    private var deleteFolderBottomSheet: UIView?
     
     // MARK: - Life Cycle
     
@@ -56,29 +56,44 @@ final class NewStorageViewController: BaseViewController {
         super.viewDidLoad()
         self.setDataSource()
         self.setSnapshot()
+        self.bindViewModel()
+        self.navigationController?.navigationBar.isHidden = false
     }
     
     // MARK: - Setting
     
     private func bindViewModel() {
         let fetchPostTrigger = self.rx.methodInvoked(#selector(self.viewWillAppear(_:)))
+            .map { _ in return self.storageFolderName }
             .asDriver(onErrorDriveWith: Driver.empty())
         
-    }
-    
-    private func bindHeader(_ header: UICollectionReusableView) {
-        guard let header = header as? StorageCollectionViewHeader else { return }
-        header.changeNameButtonTrigger
-            .drive(onNext: { [weak self] in
-                guard let self = self else { return }
-                self.showRenameFolderAlert()
-            }).disposed(by: self.disposeBag)
-    }
-    
-    private func bindCell(_ cell: UICollectionViewCell) {
+        let input = NewStorageViewModel.Input(fetchPostTrigger)
+        let output = self.viewModel.transform(input)
         
+        output.storagePosts
+            .drive(with: self) { owner, posts in
+                owner.loadSnapshot(with: posts)
+            }.disposed(by: self.disposeBag)
     }
     
+    private func bindCell(_ cell: Cell) {
+        cell.deleteStoragePostTrigger
+            .drive(with: self) { owner, url in
+                owner.viewModel.deleteRealmStoragePost(of: url)
+            }.disposed(by: self.disposeBag)
+    }
+    
+    private func bindHeader(_ header: Header) {
+        header.changeNameButtonTrigger
+            .drive(with: self) { owner, _ in
+                owner.showChageFolderNameAlert()
+            }.disposed(by: self.disposeBag)
+        
+        header.deleteFolderButtonTrigger
+            .drive(with: self) { owner, _ in
+                
+            }.disposed(by: self.disposeBag)
+    }
 }
 
 // MARK: - DataSource
@@ -86,24 +101,17 @@ final class NewStorageViewController: BaseViewController {
 extension NewStorageViewController {
     
     private func setDataSource() {
-        self.storageDataSource = createDataSource()
-        self.storageDataSource.supplementaryViewProvider = { [weak self] collectionView, _, indexPath in
-            return self?.createHeader(
-                collectionView: collectionView,
-                indexPath: indexPath
-            )
-        }
+        self.configureDataSource()
+        self.configureDataSourceHeader()
     }
     
-    private func createDataSource() -> DataSource {
+    private func configureDataSource() {
         let cellRegsitration = UICollectionView.CellRegistration<Cell, StoragePost> { [weak self] cell, _, post in
             cell.loadPost(post)
             self?.bindCell(cell)
         }
         
-        return DataSource(
-            collectionView: self.storageView.collectionView
-        ) { collectionView, indexPath, post in
+        self.storageDataSource = DataSource(collectionView: self.storageView.collectionView) { collectionView, indexPath, post in
             return collectionView.dequeueConfiguredReusableCell(
                 using: cellRegsitration,
                 for: indexPath,
@@ -112,17 +120,19 @@ extension NewStorageViewController {
         }
     }
     
-    private func createHeader(
-        collectionView: UICollectionView,
-        indexPath: IndexPath
-    ) -> UICollectionReusableView {
-        guard let header = collectionView.dequeueReusableSupplementaryView(
-            ofKind: UICollectionView.elementKindSectionHeader,
-            withReuseIdentifier: StorageCollectionViewHeader.reuseIdentifier,
-            for: indexPath
-        ) as? StorageCollectionViewHeader else { return UICollectionReusableView() }
-        self.bindHeader(header)
-        return header
+    private func configureDataSourceHeader() {
+        let headerRegistration = UICollectionView.SupplementaryRegistration<Header>(
+            elementKind: UICollectionView.elementKindSectionHeader
+        ) { [weak self] header, _, _ in
+            self?.bindHeader(header)
+        }
+        
+        self.storageDataSource.supplementaryViewProvider = { _, _, indexPath in
+            return self.storageView.collectionView.dequeueConfiguredReusableSupplementary(
+                using: headerRegistration,
+                for: indexPath
+            )
+        }
     }
 }
 
@@ -132,8 +142,11 @@ extension NewStorageViewController {
     
     private func setSnapshot() {
         self.storageSnapshot = Snapshot()
+        self.storageSnapshot.appendSections([.main])
+        self.storageDataSource.apply(self.storageSnapshot)
     }
     
+    // TODO: 실제 동작 확인해보기
     private func loadSnapshot(
         with storagePosts: [StoragePost]
     ) {
@@ -148,20 +161,10 @@ extension NewStorageViewController {
 
 extension NewStorageViewController {
     
-    private func showRenameFolderAlert() {
-        self.changeNameAlert = UIAlertController(
-            title: TextLiterals.folderNameChangeToastTitle,
-            message: nil,
-            preferredStyle: .alert
-        )
-        changeNameAlert?.addTextField()
+    private func showChageFolderNameAlert() {
+        self.changeFolderNameAlert = FolderNameAlertView(alertType: .change)
+        
     }
     
-    private func showDeleteFolderAlert() {
-        self.deleteFolrderAlert = UIAlertController(
-            title: TextLiterals.deleteFolderActionSheetTitle,
-            message: TextLiterals.deleteFolderActionSheetMessage,
-            preferredStyle: .actionSheet
-        )
-    }
+    
 }

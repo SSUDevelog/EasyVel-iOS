@@ -21,33 +21,18 @@ final class NewStorageViewModel: BaseViewModel {
     // MARK: - Input & Output
     
     struct Input {
-        let fetchPostTrigger: Driver<String>
-        let renameFolderTrigger: PublishRelay<([StoragePost], String)>
-        let deleteFolderTrigger: PublishRelay<Void>
-        let deletePostTrigger: PublishRelay<String>
+        let fetchPostTrigger: Driver<String?>
         
-        init(_ fetchPostTrigger: Driver<String>,
-             _ renameFolderTrigger: PublishRelay<([StoragePost], String)>,
-             _ deleteFolderTrigger: PublishRelay<Void>,
-             _ deletePostTrigger: PublishRelay<String>) {
+        init(_ fetchPostTrigger: Driver<String?>) {
             self.fetchPostTrigger = fetchPostTrigger
-            self.renameFolderTrigger = renameFolderTrigger
-            self.deleteFolderTrigger = deleteFolderTrigger
-            self.deletePostTrigger = deletePostTrigger
         }
     }
     
     struct Output {
         let storagePosts: Driver<[StoragePost]>
-        let isStorageEmpty: Driver<Bool>
-        let changedFolderName: Driver<String?>
         
-        init(_ storagePosts: Driver<[StoragePost]>,
-             _ isStorageEmpty: Driver<Bool>,
-             _ changedFolderName: Driver<String?>) {
+        init(_ storagePosts: Driver<[StoragePost]>) {
             self.storagePosts = storagePosts
-            self.isStorageEmpty = isStorageEmpty
-            self.changedFolderName = changedFolderName
         }
     }
     
@@ -58,50 +43,18 @@ final class NewStorageViewModel: BaseViewModel {
     // MARK: - Transform
     
     func transform(_ input: Input) -> Output {
-        
-        
         let storagePosts = input.fetchPostTrigger
-            
-        
-//            .subscribe(with: self) { (owner, name) -> [StoragePost] in
-//                owner.folderName = name
-//                return owner.getRealmStoragePosts(from: name)
-//            }.disposed(by: disposeBag)
-        
-        
-//            .map { [weak self] name -> [StoragePost] in
-//                self?.folderName = name
-//                return self?.getRealmStoragePosts(from: name) ?? []
-//            }
-//            .asDriver(onErrorJustReturn: [])
-        
-        let isStorageEmpty = storagePosts
-            .map { $0.isEmpty }
-            .asDriver(onErrorJustReturn: true)
-        
-        let changedFolderName = input.renameFolderTrigger
-            .map { [weak self] (storagePosts, newName) -> String? in
-                guard newName != "", let prevName = self?.folderName else { return nil }
-                guard let isUnique = self?.isFolderNameUnique(newName) else { return nil }
-                if isUnique {
-                    self?.realm.changeFolderNameInStorage(
-                        input: storagePosts,
-                        oldFolderName: prevName,
-                        newFolderName: newName
-                    )
-                    return newName
-                } else {
-                    return nil
-                }
+            .map { [weak self] folderName -> [StoragePost] in
+                guard let self = self else { return [] }
+                return self.getRealmStoragePosts(from: folderName ?? "모든 게시글")
             }
-            .asDriver(onErrorJustReturn: self.folderName)
+            .asDriver()
         
-        return Output(storagePosts, isStorageEmpty, changedFolderName)
+        return Output(storagePosts)
     }
-    
 }
 
-// MARK: - Functions
+// MARK: - Realm Functions
 
 extension NewStorageViewModel {
     
@@ -109,6 +62,10 @@ extension NewStorageViewModel {
         let realmPosts = self.realm.getFolderPosts(folderName: name)
         let storagePosts = self.realm.convertToStoragePost(input: realmPosts)
         return storagePosts
+    }
+    
+    func deleteRealmStoragePost(of url: String) {
+        self.realm.deletePost(url: url)
     }
     
     private func isFolderNameUnique(_ newName: String) -> Bool {

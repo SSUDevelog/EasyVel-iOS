@@ -21,7 +21,7 @@ final class NewStorageCollectionViewCell: BaseCollectionViewCell {
     var post: StoragePost?
     var disposeBag = DisposeBag()
     
-    var deleteButtonObservable: Driver<String> {
+    var deleteStoragePostTrigger: Driver<String> {
         return self.deleteButton.rx.tap
             .map { return self.post?.url ?? "" }
             .asDriver(onErrorJustReturn: String())

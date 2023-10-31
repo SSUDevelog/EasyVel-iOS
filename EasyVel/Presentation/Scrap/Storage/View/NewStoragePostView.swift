@@ -11,21 +11,13 @@ final class NewStoragePostView: BaseUIView {
     
     // MARK: - Property
     
-    let collectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
-        collectionView.backgroundColor = .clear
-        return collectionView
-    }()
-    private let emptyView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = ImageLiterals.emptyPostsList
-        imageView.isHidden = true
-        return imageView
-    }()
-    
     // MARK: - UI Property
     
-    
+    let collectionView: UICollectionView = {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
+        collectionView.backgroundColor = .gray100
+        return collectionView
+    }()
     
     // MARK: - Life Cycle
     
@@ -42,8 +34,12 @@ final class NewStoragePostView: BaseUIView {
     
     override func configUI() {
         self.backgroundColor = .gray200
-        
         self.collectionView.collectionViewLayout = createLayout()
+        self.collectionView.register(
+            StorageCollectionViewHeader.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+            withReuseIdentifier: StorageCollectionViewHeader.reuseIdentifier
+        )
     }
     
 }
@@ -81,7 +77,7 @@ extension NewStoragePostView {
         let header = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: headerSize,
             elementKind: UICollectionView.elementKindSectionHeader,
-            alignment: .trailing
+            alignment: .top
         )
         return header
     }

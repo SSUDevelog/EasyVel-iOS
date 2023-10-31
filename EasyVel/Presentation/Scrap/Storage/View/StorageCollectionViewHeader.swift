@@ -26,16 +26,22 @@ final class StorageCollectionViewHeader: UICollectionReusableView {
     
     private let changeNameButton: UIButton = {
         let button = UIButton()
-        return button
-    }()
-    private let deleteFolderButton: UIButton = {
-        let button = UIButton()
+        button.setTitle("이름 변경", for: .normal)
+        button.setTitleColor(.gray300, for: .normal)
+        button.titleLabel?.font = .body_2_B
         return button
     }()
     private let separator: UIView = {
-        let view = UIView(frame: .init(x: 0, y: 0, width: 1, height: 16))
-        
+        let view = UIView()
+        view.backgroundColor = .gray200
         return view
+    }()
+    private let deleteFolderButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("폴더 삭제", for: .normal)
+        button.setTitleColor(.gray300, for: .normal)
+        button.titleLabel?.font = .body_2_B
+        return button
     }()
     private lazy var buttonStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [changeNameButton, separator, deleteFolderButton])
@@ -59,6 +65,11 @@ final class StorageCollectionViewHeader: UICollectionReusableView {
     // MARK: - Setting
     
     private func render() {
+        separator.snp.makeConstraints {
+            $0.width.equalTo(1)
+            $0.height.equalTo(16)
+        }
+        
         self.addSubview(buttonStackView)
         buttonStackView.snp.makeConstraints {
             $0.trailing.centerY.equalToSuperview()
