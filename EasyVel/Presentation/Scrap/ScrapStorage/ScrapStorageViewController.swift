@@ -15,7 +15,6 @@ final class ScrapStorageViewController: RxBaseViewController<ScrapStorageViewMod
     
     let scrapView = ScrapStorageView()
     private lazy var dataSource = ScrapStorageCollectionViewDataSource(collectionView: scrapView.scrapCollectionView)
-    private var scrapCollectionViewDidScroll = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,18 +53,6 @@ final class ScrapStorageViewController: RxBaseViewController<ScrapStorageViewMod
             })
             .disposed(by: disposeBag)
         
-        scrapView.scrapCollectionView.rx.contentOffset
-            .subscribe(onNext: { [weak self] contentOffset in
-                let scrollY = contentOffset.y
-                if scrollY > 5 && self?.scrapCollectionViewDidScroll == false {
-                    self?.scrapView.scrapCollectionViewStartScroll()
-                    self?.scrapCollectionViewDidScroll.toggle()
-                } else if scrollY < 2 && self?.scrapCollectionViewDidScroll == true {
-                    self?.scrapView.scrapCollectionViewEndScroll()
-                    self?.scrapCollectionViewDidScroll.toggle()
-                }
-            })
-            .disposed(by: disposeBag)
     }
     
     private func bindOutput(_ viewModel: ScrapStorageViewModel) {

@@ -18,8 +18,9 @@ final class TagSearchViewController: RxBaseViewController<TagSearchViewModel> {
     //MARK: - UI Components
     
     private lazy var searchBar: UISearchBar = {
-        let searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: 280, height: 0))
+        let searchBar = UISearchBar()
         searchBar.placeholder = TextLiterals.tagSearchPlaceholderText
+        searchBar.searchTextField.backgroundColor = .gray100
         searchBar.searchTextField.textColor = .gray500
         searchBar.setImage(ImageLiterals.tagPlusIcon,
                            for: .search,
@@ -122,8 +123,25 @@ final class TagSearchViewController: RxBaseViewController<TagSearchViewModel> {
         super.viewWillAppear(animated)
         
         setNaviagtionBar()
-        
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        searchBar.searchTextField.becomeFirstResponder()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        searchBar.searchTextField.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.equalToSuperview().inset(59)
+            $0.trailing.equalToSuperview().inset(20)
+            $0.height.equalTo(44)
+        }
+        view.layoutIfNeeded()
+    }
+    
     
     //MARK: - Bind
     

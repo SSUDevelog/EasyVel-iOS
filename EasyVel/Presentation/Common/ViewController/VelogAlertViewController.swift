@@ -9,6 +9,8 @@ import UIKit
 
 import SnapKit
 import RxSwift
+import RxCocoa
+import RxGesture
 
 enum AlertType {
     case deleteTag
@@ -16,23 +18,43 @@ enum AlertType {
     case signOut
     case withdrawal
     
-    var title: String {
+    var title: String? {
+        switch self {
+        case .signOut:
+            return "로그아웃"
+        case .withdrawal:
+            return "회원탈퇴"
+        default:
+            return nil
+        }
+    }
+    
+    var description: String {
         switch self {
         case .deleteTag:
             return "정말 태그를 삭제하시겠습니까?"
         case .unsubscribe:
             return "정말 팔로우를 취소하시겠습니까?"
         case .signOut:
-            return TextLiterals.signOutAlertMessage
+            return "정말 로그아웃 하시겠습니까?"
         case .withdrawal:
-            return TextLiterals.withdrawalAlertMessage
+            return "정말 탈퇴하시겠습니까?"
+        }
+    }
+    
+    var subDescription: String? {
+        switch self {
+        case .withdrawal:
+            return "※ 회원님의 데이터가 사라집니다."
+        default:
+            return nil
         }
     }
     
     var canel: String {
         switch self {
         case .deleteTag, .unsubscribe, .signOut, .withdrawal:
-            return "아니오"
+            return "아니요"
         }
     }
     
@@ -40,14 +62,29 @@ enum AlertType {
         switch self {
         case .deleteTag:
             return "삭제"
-        case .unsubscribe:
+        default:
             return "네"
-        case .signOut:
-            return "로그아웃"
-        case .withdrawal:
-            return "회원 탈퇴"
         }
     }
+    
+    var hasAlertImage: Bool {
+        switch self {
+        case .deleteTag, .unsubscribe:
+            return true
+        default:
+            return false
+        }
+    }
+    
+    var height: CGFloat {
+        switch self {
+        case .withdrawal:
+            return 196
+        default:
+            return 188
+        }
+    }
+    
 }
 
 protocol VelogAlertViewControllerDelegate: AnyObject {
@@ -61,6 +98,7 @@ final class VelogAlertViewController: UIViewController {
     private var alertType: AlertType
     
     private weak var delegate: VelogAlertViewControllerDelegate?
+    private let disposeBag = DisposeBag()
     
     //MARK: - UI Components
     
@@ -68,17 +106,13 @@ final class VelogAlertViewController: UIViewController {
     private let dimmedView = UIView()
     private let alertImageView = UIImageView()
     private let titleLabel = UILabel()
+    private let descriptionLabel = UILabel()
+    private let subDescriptionLabel = UILabel()
     private let cancelButton = UIButton()
     private let yesButton = UIButton()
     
-    //MARK: - tap Gesture
-    
-    private let dismissTapGesture = UITapGestureRecognizer()
-    
-    //MARK: - Observer
-    
-    private lazy var dissmissTapObservable = dismissTapGesture.rx.event.asObservable()
-    private let disposeBag = DisposeBag()
+    private lazy var descriptionStackView = UIStackView(arrangedSubviews: [descriptionLabel,
+                                                                subDescriptionLabel])
     
     //MARK: - Life Cycle
     
@@ -98,50 +132,62 @@ final class VelogAlertViewController: UIViewController {
         super.viewDidLoad()
         
         bind()
-        setTapGesture()
-        target()
         
         style()
         hierarchy()
         layout()
-        updateUI()
+        updateUI(alertType)
     }
     
     //MARK: - Custom Method
     
     private func bind() {
-        dissmissTapObservable
-            .subscribe(onNext: { [weak self] _ in
-                self?.dismiss(animated: false)
+        dimmedView.rx.tapGesture()
+            .when(.recognized)
+            .asDriver(onErrorJustReturn: .init())
+            .drive(with: self, onNext: { owner, _ in
+                owner.dismiss(animated: false)
             })
             .disposed(by: disposeBag)
-    }
-    
-    private func target() {
-        yesButton.addTarget(self, action: #selector(yesButtonDidTap), for: .touchUpInside)
-        cancelButton.addTarget(self, action: #selector(cancelButtonDidTap), for: .touchUpInside)
-    }
-    
-    private func setTapGesture() {
-        dimmedView.addGestureRecognizer(dismissTapGesture)
+        
+        yesButton.rx.tap
+            .asDriver(onErrorJustReturn: Void())
+            .drive(with: self, onNext: { owner, _ in
+                owner.dismiss(animated: false)
+                owner.delegate?.yesButtonDidTap(owner.alertType)
+            })
+            .disposed(by: disposeBag)
+        
+        cancelButton.rx.tap
+            .asDriver(onErrorJustReturn: Void())
+            .drive(with: self, onNext: { owner, _ in
+                owner.dismiss(animated: false)
+            })
+            .disposed(by: disposeBag)
+        
     }
     
     private func style() {
         view.backgroundColor = .clear
         
-        
         alertView.backgroundColor = .white
         alertView.makeRounded(radius: 14)
         alertView.alpha = 1
         
-        alertImageView.image = ImageLiterals.alertIcon
-        alertImageView.contentMode = .scaleAspectFit
-        
         dimmedView.backgroundColor = .black
         dimmedView.alpha = 0.45
         
-        titleLabel.font = .body_2_M
-        titleLabel.textColor = .gray500
+        alertImageView.image = ImageLiterals.alertIcon
+        alertImageView.contentMode = .scaleAspectFit
+        
+        titleLabel.font = .subhead
+        titleLabel.textColor = .gray700
+        
+        descriptionLabel.font = .body_2_M
+        descriptionLabel.textColor = .gray500
+        
+        subDescriptionLabel.font = .caption_1_M
+        subDescriptionLabel.textColor = .error
         
         cancelButton.backgroundColor = .gray100
         cancelButton.setTitleColor(.gray300, for: .normal)
@@ -154,19 +200,28 @@ final class VelogAlertViewController: UIViewController {
         yesButton.titleLabel?.textAlignment = .center
         yesButton.titleLabel?.font = .body_2_M
         yesButton.makeRounded(radius: 4)
+        
+        descriptionStackView.axis = .vertical
+        descriptionStackView.spacing = 4
+        descriptionStackView.alignment = .center
+        descriptionStackView.distribution = .fillEqually
     }
     
     private func hierarchy() {
         view.addSubviews(dimmedView,alertView)
-        alertView.addSubviews(alertImageView, titleLabel, cancelButton, yesButton)
+        alertView.addSubviews(alertImageView,
+                              titleLabel,
+                              descriptionStackView,
+                              cancelButton,
+                              yesButton)
     }
     
     private func layout() {
         alertView.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.centerX.equalToSuperview()
-            $0.width.equalTo(299)
-            $0.height.equalTo(180)
+            $0.width.equalTo(300)
+            $0.height.equalTo(alertType.height)
         }
         
         dimmedView.snp.makeConstraints {
@@ -181,8 +236,13 @@ final class VelogAlertViewController: UIViewController {
         }
         
         titleLabel.snp.makeConstraints {
-            $0.top.equalTo(alertImageView.snp.bottom).offset(16)
+            $0.top.equalToSuperview().inset(26)
             $0.centerX.equalToSuperview()
+        }
+        
+        descriptionStackView.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.centerY.equalToSuperview().offset(-6)
         }
         
         cancelButton.snp.makeConstraints {
@@ -200,21 +260,15 @@ final class VelogAlertViewController: UIViewController {
         }
     }
     
-    private func updateUI() {
-        titleLabel.text = alertType.title
-        cancelButton.setTitle(alertType.canel, for: .normal)
-        yesButton.setTitle(alertType.yes, for: .normal)
-    }
-    
-    //MARK: - Action Method
-    
-    @objc func yesButtonDidTap() {
-        dismiss(animated: false)
-        delegate?.yesButtonDidTap(alertType)
-    }
-    
-    @objc func cancelButtonDidTap() {
-        self.dismiss(animated: false)
+    private func updateUI(_ type: AlertType) {
+        titleLabel.text = type.title
+        descriptionLabel.text = type.description
+        subDescriptionLabel.text = type.subDescription
+        cancelButton.setTitle(type.canel, for: .normal)
+        yesButton.setTitle(type.yes, for: .normal)
+        
+        alertImageView.isHidden = !type.hasAlertImage
+        subDescriptionLabel.isHidden = (type.subDescription == nil)   
     }
 }
 

@@ -11,12 +11,9 @@ import SnapKit
 
 final class FollowSearchView: BaseUIView {
     
-    
-    let tapGesture = UITapGestureRecognizer()
-    
     //MARK: - UI Components
         
-    let contentView: UIView = {
+    let userContentView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
         view.makeRounded(radius: 16)
@@ -65,11 +62,6 @@ final class FollowSearchView: BaseUIView {
     
     
     //MARK: - Life Cycle
-
-    override func render() {
-        contentView.addGestureRecognizer(tapGesture)
-
-    }
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -83,9 +75,9 @@ final class FollowSearchView: BaseUIView {
     override func configUI() {
         self.backgroundColor = .gray100
         
-        addSubviews(contentView, notFoundImageView)
+        addSubviews(userContentView, notFoundImageView)
         
-        contentView.addSubviews(imageView,
+        userContentView.addSubviews(imageView,
                                 nameLabel,
                                 introduceLabel,
                                 followButton)
@@ -96,7 +88,7 @@ final class FollowSearchView: BaseUIView {
             $0.horizontalEdges.equalToSuperview().inset(110)
         }
         
-        contentView.snp.makeConstraints {
+        userContentView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(144)
             $0.horizontalEdges.equalToSuperview().inset(20)
         }

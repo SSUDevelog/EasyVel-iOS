@@ -9,16 +9,21 @@ import UIKit
 
 import RxSwift
 import RxCocoa
+import RxGesture
 
 import Kingfisher
 
 final class FollowSearchViewController: RxBaseViewController<FollowSearchViewModel> {
     
+    
+    //MARK: - UI Components
+    
     private let searchView = FollowSearchView()
     
     private lazy var searchBar: UISearchBar = {
-        let searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: 280, height: 0))
+        let searchBar = UISearchBar()
         searchBar.placeholder = TextLiterals.followSearchPlaceholderText
+        searchBar.searchTextField.backgroundColor = .gray100
         searchBar.searchTextField.textColor = .gray500
         searchBar.setImage(ImageLiterals.searchGray,
                            for: .search,
@@ -29,8 +34,18 @@ final class FollowSearchViewController: RxBaseViewController<FollowSearchViewMod
         return searchBar
     }()
     
+    //MARK: - Life Cycle
+
+    override func render() {
+        self.view = searchView
+        navigationItem.titleView = searchBar
+        
+    
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -38,19 +53,34 @@ final class FollowSearchViewController: RxBaseViewController<FollowSearchViewMod
         setNaviagtionBar()
     }
     
-    override func render() {
-        self.view = searchView
-        
-        navigationItem.titleView = searchBar
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        searchBar.searchTextField.becomeFirstResponder()
     }
-
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        searchBar.searchTextField.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.equalToSuperview().inset(59)
+            $0.trailing.equalToSuperview().inset(20)
+            $0.height.equalTo(44)
+        }
+        view.layoutIfNeeded()
+    }
+    
+    //MARK: - Custom Method
+    
     override func bind(viewModel: FollowSearchViewModel) {
         super.bind(viewModel: viewModel)
         
-        searchView.tapGesture.rx.event.bind { recognizer in
-            viewModel.userDidTap.accept(Void())
-        }
-        .disposed(by: disposeBag)
+        searchView.userContentView.rx.tapGesture()
+            .when(.recognized)
+            .bind { _ in
+                viewModel.userDidTap.accept(Void())
+            }
+            .disposed(by: disposeBag)
         
         searchView.followButton.rx.tap
             .bind { [weak self] _ in
@@ -71,7 +101,7 @@ final class FollowSearchViewController: RxBaseViewController<FollowSearchViewMod
             .drive { [weak self] (isSuccess, response) in
                 self?.searchView.followButton.isSelected = false //TODO: 서버가 response에 follow여부 알려주면 해당값으로 치환
                 self?.searchView.notFoundImageView.isHidden = isSuccess
-                self?.searchView.contentView.isHidden = !isSuccess
+                self?.searchView.userContentView.isHidden = !isSuccess
                 guard isSuccess else { return }
                 self?.searchView.nameLabel.text = response?.userName
                 self?.searchView.introduceLabel.text = response?.profileURL
@@ -99,20 +129,9 @@ final class FollowSearchViewController: RxBaseViewController<FollowSearchViewMod
                 self?.navigationController?.pushViewController(webViewController, animated: true)
             }
             .disposed(by: disposeBag)
-            
-
-        
         
     }
     
-    private func delayCompletable(_ seconds: TimeInterval) -> Observable<Void> {
-        return Observable<Void>.just(())
-                .delay(.seconds(Int(seconds)), scheduler: MainScheduler.instance)
-    }
-    
-}
-
-private extension FollowSearchViewController {
 }
 
 extension FollowSearchViewController: UISearchBarDelegate {

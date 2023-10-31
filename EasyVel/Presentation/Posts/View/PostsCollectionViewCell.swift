@@ -153,7 +153,7 @@ extension PostsCollectionViewCell {
         if let urlString = post.img, let url = URL(string: urlString) {
             self.imageView.kf.setImage(with: url)
         } else {
-            self.imageView.backgroundColor = .gray200
+            self.imageView.image = UIImage(named: "default.post")
         }
         
         guard let tags = post.tag else { return }
