@@ -64,6 +64,14 @@ final class TabBarController: UITabBarController {
 //        self.resetDB()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        tabBar.frame.size.height = 96
+        tabBar.frame.origin.y = view.frame.height - 96
+
+    }
+    
     private func setLayout() {
         view.addSubview(scrapPopUpView)
         
@@ -142,6 +150,20 @@ final class TabBarController: UITabBarController {
         self.tabBar.unselectedItemTintColor = .gray300
         self.tabBar.isTranslucent = false
         self.tabBar.backgroundColor = .white
+        self.tabBar.itemSpacing = 100
+        
+        let line = UIView()
+        line.backgroundColor = .gray200
+        
+        
+        tabBar.addSubviews(line)
+        line.snp.makeConstraints {
+            $0.top.equalTo(tabBar)
+            $0.horizontalEdges.equalToSuperview()
+            $0.height.equalTo(1)
+        }
+        
+        
 
         homeVC.title = TextLiterals.homeViewControllerTitle
         listVC.title = TextLiterals.listViewControllerTitle

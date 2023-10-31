@@ -29,6 +29,10 @@ extension UIColor {
     static var gray700: UIColor {
         return UIColor(hex: "#212529")
     }
+    
+    static var error: UIColor {
+        return UIColor(hex: "#FF4D4D")
+    }
 }
 
 extension UIColor {

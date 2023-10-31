@@ -58,6 +58,7 @@ final class ScrapStorageView: BaseUIView {
         collectionView.register(cell: ScrapStorageCollectionViewCell.self)
         collectionView.showsVerticalScrollIndicator = true
         collectionView.backgroundColor = .gray100
+        collectionView.alwaysBounceVertical = true
         return collectionView
     }()
     
