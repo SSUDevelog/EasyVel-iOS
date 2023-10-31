@@ -16,6 +16,7 @@
 		3E0D9BE32AC445D100811AE7 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3E0D9BE22AC445D100811AE7 /* RealmSwift */; };
 		3E0D9BE52AC446BD00811AE7 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 3E0D9BE42AC446BD00811AE7 /* Realm */; };
 		3E0D9BE72AC446BD00811AE7 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3E0D9BE62AC446BD00811AE7 /* RealmSwift */; };
+		3E3F45872AF173B400B9D6AA /* DeleteFolderBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3F45862AF173B400B9D6AA /* DeleteFolderBottomSheet.swift */; };
 		3E61EE8A2AA818E9004F25DB /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E61EE892AA818E9004F25DB /* Array+Extension.swift */; };
 		3E7B1AC02A87E90500EE7739 /* PostsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7B1ABF2A87E90500EE7739 /* PostsCollectionViewCell.swift */; };
 		3E9663562ABC241700EC884D /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9663552ABC241700EC884D /* PostModel.swift */; };
@@ -207,6 +208,7 @@
 		3E06F8CA2A98A49A001302F4 /* PostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsViewController.swift; sourceTree = "<group>"; };
 		3E06F8CC2A990BBC001302F4 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		3E06F8CE2A99E1E9001302F4 /* PostsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsViewModel.swift; sourceTree = "<group>"; };
+		3E3F45862AF173B400B9D6AA /* DeleteFolderBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteFolderBottomSheet.swift; sourceTree = "<group>"; };
 		3E61EE892AA818E9004F25DB /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		3E7B1ABF2A87E90500EE7739 /* PostsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsCollectionViewCell.swift; sourceTree = "<group>"; };
 		3E9663552ABC241700EC884D /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
@@ -1040,6 +1042,7 @@
 				3EFB4A322AD396E2006E3846 /* NewStoragePostView.swift */,
 				3EFB4A342AD39757006E3846 /* NewStorageCollectionViewCell.swift */,
 				3EFB4A362AD3B53E006E3846 /* StorageCollectionViewHeader.swift */,
+				3E3F45862AF173B400B9D6AA /* DeleteFolderBottomSheet.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1411,6 +1414,7 @@
 				91487EF429FC3AD8009CFECF /* BaseUIView.swift in Sources */,
 				9134420B29FFDA71000E1ED1 /* SignOutResponse.swift in Sources */,
 				3EFB4A372AD3B53E006E3846 /* StorageCollectionViewHeader.swift in Sources */,
+				3E3F45872AF173B400B9D6AA /* DeleteFolderBottomSheet.swift in Sources */,
 				3EE425222ACAE00B00DE5FA5 /* TagCollectionViewCell.swift in Sources */,
 				9128B0262A236D2800FB1252 /* ScrapPopUpView.swift in Sources */,
 				914D8DD92A02B22A00516B4C /* WebViewController.swift in Sources */,

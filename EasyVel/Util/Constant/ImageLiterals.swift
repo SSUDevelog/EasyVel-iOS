@@ -40,6 +40,7 @@ enum ImageLiterals {
     static var viewPopButtonIcon: UIImage { .load(name: "viewPopButtonIcon") }
     static var alertIcon: UIImage { .load(name: "alert") }
     static var clearIcon: UIImage { .load(name: "closeCircle") }
+    static var closeIcon: UIImage { .load(name: "closeIcon") }
     
     // MARK: - Exception
     
