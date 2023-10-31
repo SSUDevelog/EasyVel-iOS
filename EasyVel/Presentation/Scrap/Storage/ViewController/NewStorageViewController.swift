@@ -105,7 +105,7 @@ final class NewStorageViewController: BaseViewController {
         
         header.deleteFolderButtonTrigger
             .drive(with: self) { owner, _ in
-                
+                owner.showDeleteFolderBottomSheet()
             }.disposed(by: self.disposeBag)
     }
 }
@@ -179,5 +179,8 @@ extension NewStorageViewController {
         
     }
     
+    private func showDeleteFolderBottomSheet() {
+        
+    }
     
 }
