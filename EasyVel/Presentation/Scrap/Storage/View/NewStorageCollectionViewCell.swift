@@ -19,11 +19,16 @@ final class NewStorageCollectionViewCell: BaseCollectionViewCell {
     static let identifier = "NewStorageCollectionViewCell"
     
     var post: StoragePost?
+    var isScrapped: Bool = true
     var disposeBag = DisposeBag()
     
     var deleteStoragePostTrigger: Driver<String> {
-        return self.deleteButton.rx.tap
-            .map { return self.post?.url ?? "" }
+        return self.scrapButton.rx.tap
+            .map {
+                self.isScrapped.toggle()
+                self.updateScrapButton()
+                return self.post?.url ?? ""
+            }
             .asDriver(onErrorJustReturn: String())
     }
     
@@ -37,6 +42,7 @@ final class NewStorageCollectionViewCell: BaseCollectionViewCell {
     }()
     private let titleLabel: UILabel = {
         let label = UILabel()
+        label.setLineHeight(multiple: 1.3)
         label.textColor = .gray700
         label.font = .subhead
         label.numberOfLines = 2
@@ -44,6 +50,7 @@ final class NewStorageCollectionViewCell: BaseCollectionViewCell {
     }()
     private let summaryLabel: UILabel = {
         let label = UILabel()
+        label.setLineHeight(multiple: 1.44)
         label.font = .body_1_M
         label.textColor = .gray500
         label.numberOfLines = 3
@@ -61,11 +68,9 @@ final class NewStorageCollectionViewCell: BaseCollectionViewCell {
         label.font = .caption_1_M
         return label
     }()
-    private let deleteButton: UIButton = {
+    private let scrapButton: UIButton = {
         let button = UIButton()
-        button.setTitle(TextLiterals.storageViewPostDeleteButtonText, for: .normal)
-        button.setTitleColor(.error, for: .normal)
-        button.titleLabel?.font = .caption_1_M
+        button.setImage(ImageLiterals.bookMarkFill, for: .normal)
         return button
     }()
     
@@ -97,20 +102,18 @@ final class NewStorageCollectionViewCell: BaseCollectionViewCell {
         self.contentView.addSubview(authorImageView)
         authorImageView.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(20)
-            $0.top.equalTo(summaryLabel.snp.bottom).offset(10)
-            $0.bottom.equalToSuperview().inset(26)
+            $0.top.equalTo(summaryLabel.snp.bottom).offset(12)
+            $0.bottom.equalToSuperview().inset(16)
         }
         self.contentView.addSubview(authorLabel)
         authorLabel.snp.makeConstraints {
             $0.leading.equalTo(authorImageView.snp.trailing).offset(6)
             $0.centerY.equalTo(authorImageView)
         }
-        self.contentView.addSubview(deleteButton)
-        deleteButton.snp.makeConstraints {
-            $0.trailing.equalToSuperview().inset(20)
-            $0.centerY.equalTo(authorImageView)
-            $0.height.equalTo(24)
-            $0.width.equalTo(37)
+        self.contentView.addSubview(scrapButton)
+        scrapButton.snp.makeConstraints {
+            $0.height.width.equalTo(44)
+            $0.top.trailing.equalToSuperview().inset(4)
         }
     }
     
@@ -128,6 +131,15 @@ final class NewStorageCollectionViewCell: BaseCollectionViewCell {
 }
 
 extension NewStorageCollectionViewCell {
+    private func updateScrapButton() {
+        self.scrapButton.setImage(
+            self.isScrapped ? ImageLiterals.bookMarkFill : ImageLiterals.bookMark,
+            for: .normal
+        )
+    }
+}
+
+extension NewStorageCollectionViewCell {
     func loadPost(_ post: StoragePost) {
         self.post = post
         
@@ -141,6 +153,8 @@ extension NewStorageCollectionViewCell {
         
         if let urlString = post.img, let url = URL(string: urlString) {
             self.postImageView.kf.setImage(with: url)
+        } else {
+            self.postImageView.image = UIImage(named: "default.post")
         }
     }
 }
