@@ -180,7 +180,9 @@ extension NewStorageViewController {
     }
     
     private func showDeleteFolderBottomSheet() {
-        
+        guard let baseView = self.view as? NewStoragePostView else { return }
+        let bottomSheet = DeleteFolderBottomSheet()
+        baseView.showBottomSheet(bottomSheet)
     }
     
 }

@@ -31,9 +31,12 @@ final class DeleteFolderBottomSheet: BaseUIView {
     
     private let descriptionLabel: UILabel = {
         let label = UILabel()
+        label.setLineHeight(multiple: 1.44)
         label.text = TextLiterals.deleteFolderActionSheetMessage
         label.font = .body_1_M
         label.textColor = .gray300
+        label.numberOfLines = 2
+        label.textAlignment = .center
         return label
     }()
     
@@ -41,15 +44,19 @@ final class DeleteFolderBottomSheet: BaseUIView {
         let button = UIButton()
         button.backgroundColor = .gray100
         button.setTitle(TextLiterals.deleteFolderActionSheetCancelActionText, for: .normal)
-        button.titleLabel?.textColor = .gray300
+        button.titleLabel?.font = .body_1_B
+        button.titleLabel?.textColor = .black
+        button.makeRounded(radius: 5)
         return button
     }()
     
     private let deleteButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .brandColor
-        button.setTitle(TextLiterals.deleteFolderActionSheetCancelActionText, for: .normal)
+        button.setTitle(TextLiterals.deleteFolderActionSheetOkActionText, for: .normal)
+        button.titleLabel?.font = .body_1_B
         button.titleLabel?.textColor = .white
+        button.makeRounded(radius: 5)
         return button
     }()
     
@@ -57,6 +64,7 @@ final class DeleteFolderBottomSheet: BaseUIView {
         let stackView = UIStackView(arrangedSubviews: [cancelButton, deleteButton])
         stackView.axis = .horizontal
         stackView.spacing = 13
+        stackView.distribution = .fillEqually
         return stackView
     }()
     
@@ -86,19 +94,18 @@ final class DeleteFolderBottomSheet: BaseUIView {
         self.addSubview(buttonStackView)
         buttonStackView.snp.makeConstraints {
             $0.horizontalEdges.equalToSuperview().inset(20)
-            $0.top.equalTo(self.descriptionLabel).offset(24)
+            $0.top.equalTo(self.descriptionLabel.snp.bottom).offset(24)
             $0.bottom.equalToSuperview().inset(47)
+            $0.height.equalTo(44)
         }
     }
     
-    override func configUI() {}
-    
-    // MARK: - Action Helper
-    
-    
-    
-    // MARK: - Custom Method
-    
-    
+    override func configUI() {
+        self.backgroundColor = .white
+        self.makeRounded(radius: 12)
+    }
+}
+
+extension DeleteFolderBottomSheet {
     
 }

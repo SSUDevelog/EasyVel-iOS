@@ -136,3 +136,21 @@ extension NewStoragePostView {
         self.navigationTitleLabel.text = title
     }
 }
+
+extension NewStoragePostView {
+    
+    func showBottomSheet(_ bottomSheet: UIView) {
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = .black.withAlphaComponent(0.45)
+        
+        self.addSubview(backgroundView)
+        backgroundView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        
+        self.addSubview(bottomSheet)
+        bottomSheet.snp.makeConstraints {
+            $0.bottom.horizontalEdges.equalToSuperview()
+        }
+    }
+}
