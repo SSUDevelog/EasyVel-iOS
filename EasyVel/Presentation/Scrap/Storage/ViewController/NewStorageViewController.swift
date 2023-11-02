@@ -9,6 +9,7 @@ import UIKit
 
 import RxSwift
 import RxCocoa
+import SnapKit
 
 final class NewStorageViewController: BaseViewController {
     
@@ -72,21 +73,33 @@ final class NewStorageViewController: BaseViewController {
         self.storageView.backButton.rx.tap
             .subscribe(onNext: {
                 self.navigationController?.popViewController(animated: true)
-            })
-            .disposed(by: disposeBag)
+            }).disposed(by: self.disposeBag)
+        
+        self.storageView.dismissTrigger
+            .drive(with: self) { owner, _ in
+                self.storageView.dismissDeleteFolderBottomSheet()
+            }.disposed(by: self.disposeBag)
     }
     
     private func bindViewModel() {
         let fetchPostTrigger = self.rx.methodInvoked(#selector(self.viewWillAppear(_:)))
             .map { _ in return self.storageFolderName }
             .asDriver(onErrorDriveWith: Driver.empty())
+        let deleteFolderTrigger = self.storageView.deleteFolderTrigger
+            .map { _ in return self.storageFolderName }
+            .asDriver()
         
-        let input = NewStorageViewModel.Input(fetchPostTrigger)
+        let input = NewStorageViewModel.Input(fetchPostTrigger, deleteFolderTrigger)
         let output = self.viewModel.transform(input)
         
         output.storagePosts
             .drive(with: self) { owner, posts in
                 owner.loadSnapshot(with: posts)
+            }.disposed(by: self.disposeBag)
+        output.folderDeleted
+            .drive(with: self) { owner, _ in
+                owner.storageView.dismissDeleteFolderBottomSheet()
+                owner.navigationController?.popViewController(animated: true)
             }.disposed(by: self.disposeBag)
     }
     
@@ -104,10 +117,21 @@ final class NewStorageViewController: BaseViewController {
             }.disposed(by: self.disposeBag)
         
         header.deleteFolderButtonTrigger
+            .debug()
             .drive(with: self) { owner, _ in
-                owner.showDeleteFolderBottomSheet()
+                owner.storageView.showDeleteFolderBottomSheet()
             }.disposed(by: self.disposeBag)
     }
+    
+//    private func bindBottomSheet(
+//        _ backgroundView: UIView,
+//        _ bottomSheet: DeleteFolderBottomSheet
+//    ) {
+//        bottomSheet.closeButton.rx.tap.subscribe(
+//            onNext: { self.dismissDeleteFolderBottomSheet(backgroundView, bottomSheet) },
+//            onDisposed: { print("✏️✏️✏️✏️✏️✏️") }
+//        ).disposed(by: self.disposeBag)
+//    }
 }
 
 // MARK: - DataSource
@@ -179,10 +203,81 @@ extension NewStorageViewController {
         
     }
     
-    private func showDeleteFolderBottomSheet() {
-        guard let baseView = self.view as? NewStoragePostView else { return }
-        let bottomSheet = DeleteFolderBottomSheet()
-        baseView.showBottomSheet(bottomSheet)
-    }
+}
+
+// MARK: - Bottom Sheet
+
+extension NewStorageViewController {
+    
     
 }
+
+//extension NewStorageViewController {
+//
+//    private func configureDeleteFolderBottomSheet() {
+//        let backgroundView = UIView()
+//        backgroundView.backgroundColor = .black.withAlphaComponent(0)
+//        let bottomSheet = DeleteFolderBottomSheet()
+//        let disposeBag = DisposeBag()
+//
+//        bindBottomSheet(backgroundView, bottomSheet, disposeBag)
+//        renderDeleteFolderBottomSheet(backgroundView, bottomSheet)
+//        showDeleteFolderBottomSheet(backgroundView, bottomSheet)
+//    }
+//
+//    private func renderDeleteFolderBottomSheet(
+//        _ backgroundView: UIView,
+//        _ bottomSheet: DeleteFolderBottomSheet
+//    ) {
+//        self.view.addSubview(backgroundView)
+//        backgroundView.snp.makeConstraints {
+//            $0.edges.equalToSuperview()
+//        }
+//
+//        backgroundView.addSubview(bottomSheet)
+//        bottomSheet.snp.makeConstraints {
+//            $0.top.equalTo(self.view.snp.bottom)
+//            $0.horizontalEdges.equalToSuperview()
+//        }
+//    }
+//
+//    private func showDeleteFolderBottomSheet(
+//        _ backgroundView: UIView,
+//        _ bottomSheet: DeleteFolderBottomSheet
+//    ) {
+//        UIView.animate(withDuration: 0.2) {
+//            backgroundView.backgroundColor = .black.withAlphaComponent(0.45)
+//            bottomSheet.transform = .init(translationX: 0, y: -238)
+//        }
+//    }
+//
+//    private func dismissDeleteFolderBottomSheet(
+//        _ backgroundView: UIView,
+//        _ bottomSheet: DeleteFolderBottomSheet
+//    ) {
+//        UIView.animate(withDuration: 0.2, animations: {
+//            backgroundView.backgroundColor = .black.withAlphaComponent(0)
+//            bottomSheet.transform = .identity
+//        }, completion: { _ in
+//            backgroundView.removeFromSuperview()
+//            bottomSheet.removeFromSuperview()
+//            self.disposeBag
+//        })
+//    }
+//
+//    private func bindBottomSheet(
+//        _ backgroundView: UIView,
+//        _ bottomSheet: DeleteFolderBottomSheet,
+//        _ disposeBag: DisposeBag
+//    ) {
+//        bottomSheet.closeButton.rx.tap
+//            .subscribe(
+//                onNext: {
+//                    self.dismissDeleteFolderBottomSheet(backgroundView, bottomSheet)
+//                }, onDisposed: {
+//                    print("disposed")
+//                })
+//
+//
+//    }
+//}

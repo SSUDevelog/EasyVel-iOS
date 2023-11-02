@@ -7,11 +7,28 @@
 
 import UIKit
 
+import RxCocoa
+
 final class NewStoragePostView: BaseUIView {
     
     // MARK: - Property
     
     var title: String?
+    
+    var dismissTrigger: Driver<Void> {
+        let closeButtonTrigger = self.bottomSheet.closeButton.rx.tap.asDriver()
+        let cancelButtonTrigger = self.bottomSheet.cancelButton.rx.tap.asDriver()
+        return Driver.merge([
+            closeButtonTrigger,
+            cancelButtonTrigger
+        ])
+    }
+    
+    var deleteFolderTrigger: Driver<String?> {
+        return bottomSheet.deleteButton.rx.tap
+            .map { return self.title }
+            .asDriver(onErrorJustReturn: nil)
+    }
     
     // MARK: - UI Property
     
@@ -41,6 +58,13 @@ final class NewStoragePostView: BaseUIView {
         collectionView.backgroundColor = .gray100
         return collectionView
     }()
+    
+    lazy var backgroundView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .black.withAlphaComponent(0)
+        return view
+    }()
+    lazy var bottomSheet = DeleteFolderBottomSheet()
     
     // MARK: - Life Cycle
     
@@ -139,18 +163,38 @@ extension NewStoragePostView {
 
 extension NewStoragePostView {
     
-    func showBottomSheet(_ bottomSheet: UIView) {
-        let backgroundView = UIView()
-        backgroundView.backgroundColor = .black.withAlphaComponent(0.45)
-        
+    func showDeleteFolderBottomSheet() {
+        self.renderDeleteFolderBottomSheet()
+        self.animateDeleteFolderBottomSheet()
+    }
+    
+    private func renderDeleteFolderBottomSheet() {
         self.addSubview(backgroundView)
         backgroundView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
         
-        self.addSubview(bottomSheet)
+        backgroundView.addSubview(bottomSheet)
         bottomSheet.snp.makeConstraints {
-            $0.bottom.horizontalEdges.equalToSuperview()
+            $0.top.equalTo(self.snp.bottom)
+            $0.horizontalEdges.equalToSuperview()
         }
+    }
+    
+    private func animateDeleteFolderBottomSheet() {
+        UIView.animate(withDuration: 0.2) {
+            self.backgroundView.backgroundColor = .black.withAlphaComponent(0.45)
+            self.bottomSheet.transform = .init(translationX: 0, y: -238)
+        }
+    }
+    
+    func dismissDeleteFolderBottomSheet() {
+        UIView.animate(withDuration: 0.2, animations: {
+            self.backgroundView.backgroundColor = .black.withAlphaComponent(0)
+            self.bottomSheet.transform = .identity
+        }, completion: { _ in
+            self.backgroundView.removeFromSuperview()
+            self.bottomSheet.removeFromSuperview()
+        })
     }
 }

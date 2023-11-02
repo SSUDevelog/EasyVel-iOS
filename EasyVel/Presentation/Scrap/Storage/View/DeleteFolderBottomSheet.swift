@@ -7,8 +7,6 @@
 
 import UIKit
 
-import SnapKit
-
 final class DeleteFolderBottomSheet: BaseUIView {
     
     // MARK: - Property
@@ -40,7 +38,7 @@ final class DeleteFolderBottomSheet: BaseUIView {
         return label
     }()
     
-    private let cancelButton: UIButton = {
+    let cancelButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .gray100
         button.setTitle(TextLiterals.deleteFolderActionSheetCancelActionText, for: .normal)
@@ -50,7 +48,7 @@ final class DeleteFolderBottomSheet: BaseUIView {
         return button
     }()
     
-    private let deleteButton: UIButton = {
+    let deleteButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .brandColor
         button.setTitle(TextLiterals.deleteFolderActionSheetOkActionText, for: .normal)

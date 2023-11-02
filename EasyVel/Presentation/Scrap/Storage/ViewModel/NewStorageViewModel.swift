@@ -21,17 +21,23 @@ final class NewStorageViewModel: BaseViewModel {
     
     struct Input {
         let fetchPostTrigger: Driver<String>
+        let deleteFolderTrigger: Driver<String>
         
-        init(_ fetchPostTrigger: Driver<String>) {
+        init(_ fetchPostTrigger: Driver<String>,
+             _ deleteFolderTrigger: Driver<String>) {
             self.fetchPostTrigger = fetchPostTrigger
+            self.deleteFolderTrigger = deleteFolderTrigger
         }
     }
     
     struct Output {
         let storagePosts: Driver<[StoragePost]>
+        let folderDeleted: Driver<Void>
         
-        init(_ storagePosts: Driver<[StoragePost]>) {
+        init(_ storagePosts: Driver<[StoragePost]>,
+             _ folderDeleted: Driver<Void>) {
             self.storagePosts = storagePosts
+            self.folderDeleted = folderDeleted
         }
     }
     
@@ -45,9 +51,14 @@ final class NewStorageViewModel: BaseViewModel {
                 guard let self = self else { return [] }
                 return self.getRealmStoragePosts(from: folderName)
             }
-            .asDriver()
         
-        return Output(storagePosts)
+        let folderDeleted = input.deleteFolderTrigger
+            .map { [weak self] folderName in
+                guard let self = self else { return }
+                self.deleteStorageFolder(of: folderName)
+            }
+        
+        return Output(storagePosts, folderDeleted)
     }
 }
 
@@ -67,5 +78,9 @@ extension NewStorageViewModel {
     
     private func isFolderNameUnique(_ newName: String) -> Bool {
         return self.realm.checkUniqueFolderName(newFolderName: newName)
+    }
+    
+    private func deleteStorageFolder(of name: String) {
+        return self.realm.deleteFolder(folderName: name)
     }
 }
