@@ -91,7 +91,7 @@ final class TabBarController: UITabBarController {
         )
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(scrapBookButtonTapped),
+            selector: #selector(goToScrapButtonDidTap),
             name: Notification.Name("MoveToScrapStorage"),
             object: nil
         )
@@ -210,11 +210,11 @@ extension TabBarController: UITabBarControllerDelegate {
 
 extension TabBarController: ScrapPopUpDelegate {
     @objc
-    func scrapBookButtonTapped() {
+    func goToScrapButtonDidTap() {
         selectedIndex = 2
     }
     
-    func folderButtonTapped(scrapPost: StoragePost) {
+    func putInFolderButtonDidTap(scrapPost: StoragePost) {
         let viewModel = ScrapFolderBottomSheetViewModel()
         viewModel.selectedScrapPostAddInFolder.accept(scrapPost)
         let folderViewController = ScrapFolderBottomSheetViewController(viewModel: viewModel)

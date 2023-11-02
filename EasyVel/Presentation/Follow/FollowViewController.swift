@@ -18,12 +18,6 @@ final class FollowViewController: RxBaseViewController<FollowViewModel> {
     override func render() {
         self.view = rootView
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        setNotification()
-    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -45,8 +39,6 @@ final class FollowViewController: RxBaseViewController<FollowViewModel> {
                 viewModel.followTableViewCellDidTap.accept(data.name)
             }
             .disposed(by: disposeBag)
-            
-            
     }
     
     private func bindOutput(_ viewModel: FollowViewModel) {
@@ -123,35 +115,17 @@ final class FollowViewController: RxBaseViewController<FollowViewModel> {
         self.navigationController?.pushViewController(webViewController, animated: true)
     }
     
-    private func setNotification() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(scrollToTop),
-            name: Notification.Name("scrollToTop"),
-            object: nil
-        )
-    }
-    
-    @objc
-    private func scrollToTop() {
-        rootView.followTableView.setContentOffset( .init(x: 0, y: -20), animated: true)
-    }
-
 }
 
 extension FollowViewController: FollowTableViewCellDelegate {
     func unsubscribeButtonDidTap(name: String) {
         viewModel?.unfollowButtonDidTap.accept(name)
     }
-    
-    
 }
 
 extension FollowViewController: VelogAlertViewControllerDelegate {
     func yesButtonDidTap(_ alertType: AlertType) {
         viewModel?.deleteFollowEvent.accept(())
     }
-    
-    
 }
 

@@ -42,14 +42,15 @@ enum ImageLiterals {
     
     // MARK: - Exception
     
-    static var emptyAlarm: UIImage { .load(name: "emptyAlarm") }
-    static var emptyPostsList: UIImage { .load(name: "emptyPostsList") }
-    static var emptyKeywordList: UIImage { .load(name: "emptyKeywordList") }
-    static var networkFail: UIImage { .load(name: "networkFail") }
-    static var subscriberListException: UIImage { .load(name: "subscriberListException") }
-    static var serverFailImage: UIImage { .load(name: "serverFailImage") }
-    static var webViewException: UIImage { .load(name: "webViewException") }
-    static var notFoundUser: UIImage { .load(name: "notFoundUser")}
+    static var emptyAlarm: UIImage { .load(name: "empty_alarm") }
+    static var emptyPosts: UIImage { .load(name: "empty_posts") }
+    static var emptyKeywords: UIImage { .load(name: "empty_keywords") }
+    static var emptyFoundUser: UIImage { .load(name: "empty_founduser") }
+    static var emptyFollower: UIImage { .load(name: "empty_follower") }
+    
+    static var failServer: UIImage { .load(name: "fail_server") }
+    static var failWeb: UIImage { .load(name: "fail_web") }
+    static var failNetwork: UIImage { .load(name: "fail_network") }
 }
 
 extension UIImage {

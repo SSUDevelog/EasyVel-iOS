@@ -24,16 +24,15 @@ final class PostsViewModel: BaseViewModel {
     // MARK: - Input
     
     struct Input {
-        let fetchTrigger: Observable<Void>
-        
-        init(_ fetchTrigger: Observable<Void>) {
-            self.fetchTrigger = fetchTrigger
-        }
+        let viewDidLoadEvent: Observable<Void>
+        let refreshEvent: Observable<Void>
+        let scrapButtonDidTap: Observable<PostModel>
     }
     
     struct Output {
         let postList: Driver<[PostModel]>
         let isPostListEmpty: Driver<Bool>
+        let suceessScrap: Driver<Void>
         
         init(_ postList: Driver<[PostModel]>,
              _ isPostListEmpty: Driver<Bool>) {
@@ -56,7 +55,8 @@ final class PostsViewModel: BaseViewModel {
     // MARK: - Custom Functions
     
     func transform(input: Input) -> Output {
-        let postList = input.fetchTrigger
+        let postList = Observable<Void>.merge(input.viewDidLoadEvent,
+                                              input.refreshEvent)
             .startWith(LoadingView.showLoading())
             .flatMapLatest { _ -> Observable<[PostDTO]?> in
                 self.getPosts()
@@ -65,7 +65,7 @@ final class PostsViewModel: BaseViewModel {
                 return postDTOs ?? []
             }
             .map { posts -> [PostModel] in
-                return posts.map { self.convertPostDtoToPostModel(post: $0) }
+                return posts.map { $0.toPostModel(isScrapped: <#T##Bool#>) }
             }
             .asDriver(onErrorJustReturn: [])
         
@@ -73,7 +73,12 @@ final class PostsViewModel: BaseViewModel {
             .map { $0.isEmpty }
             .asDriver(onErrorJustReturn: true)
         
-        return Output(postList, isPostListEmpty)
+        let successScrap = input.scrapButtonDidTap
+            .flatMapLatest { post -> Observable<Void> in
+                self.scrapPost(post)
+            }
+        
+        return Output(postList, isPostListEmpty, s)
     }
     
 }
@@ -81,31 +86,12 @@ final class PostsViewModel: BaseViewModel {
 // MARK: - func
 
 extension PostsViewModel {
+
     
-    private func convertPostDtoToStoragePost(
-        input: PostDTO
-    ) -> StoragePost {
-        return StoragePost(
-            img: input.img ?? "",
-            name: input.name ?? "",
-            summary: input.summary ?? "",
-            title: input.title ?? "",
-            url: input.url ?? ""
-        )
-    }
-    
-    private func convertPostDtoToPostModel(
-        post: PostDTO
-    ) -> PostModel {
-        let storagePost = self.convertPostDtoToStoragePost(input: post)
-        let isScrapped = self.isPostScrapped(post: storagePost)
-        return PostModel(post: post, isScrapped: isScrapped)
-    }
-    
-    func scrapPost(
+    private func scrapPost(
         _ model: PostModel
     ) {
-        let storagePost = convertPostDtoToStoragePost(input: model.post)
+        let storagePost = model.post.toStoragePost()
         if isPostScrapped(post: storagePost) {
             guard let url = storagePost.url else { return }
             self.realm.deletePost(url: url)

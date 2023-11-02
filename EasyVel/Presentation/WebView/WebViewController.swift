@@ -56,7 +56,7 @@ final class WebViewController: RxBaseViewController<WebViewModel> {
     
     private let webViewExceptionView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = ImageLiterals.webViewException
+        imageView.image = ImageLiterals.failWeb
         imageView.isHidden = true
         return imageView
     }()
@@ -156,7 +156,7 @@ final class WebViewController: RxBaseViewController<WebViewModel> {
             })
             .disposed(by: disposeBag)
         
-        scrapPopUpView.addToFolderButton.rx.tap
+        scrapPopUpView.putInFolderButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 if let postData = self?.postData {
                     self?.folderButtonTapped(scrapPost: postData)
@@ -164,7 +164,7 @@ final class WebViewController: RxBaseViewController<WebViewModel> {
             })
             .disposed(by: disposeBag)
         
-        scrapPopUpView.moveToStorageButton.rx.tap
+        scrapPopUpView.goToStorageButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.navigationController?.popViewController(animated: true)
                 NotificationCenter.default.post(

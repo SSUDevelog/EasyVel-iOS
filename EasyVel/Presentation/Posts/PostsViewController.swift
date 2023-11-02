@@ -31,6 +31,7 @@ final class PostsViewController: BaseViewController {
     
     private var postList: [PostDTO]?
     private var isNavigationBarHidden: Bool = false
+    private let scrapButtonDidTap = PublishRelay<Void>()
     
     // MARK: - UI Property
     
@@ -97,14 +98,13 @@ final class PostsViewController: BaseViewController {
     }
     
     func bindViewModel() {
-        let reload = self.postsView.refreshControl.rx.controlEvent(.valueChanged)
-            .asObservable()
-        let viewDidLoad = self.rx.methodInvoked(#selector(self.viewDidLoad))
-            .map { _ in () }
-            .asObservable()
-        let postFetchTrigger = Observable.merge(reload, viewDidLoad)
         
-        let input = PostsViewModel.Input(postFetchTrigger)
+        let input = PostsViewModel.Input(
+            viewDidLoadEvent: rx.viewDidLoad.asObservable(),
+            refreshEvent: postsView.refreshControl.rx.controlEvent(.valueChanged).asObservable(),
+            scrapButtonDidTap: scrapButtonDidTap.asObservable()
+        )
+        
         let output = postsViewModel.transform(input: input)
         
         output.postList.drive(onNext: { [weak self] posts in
