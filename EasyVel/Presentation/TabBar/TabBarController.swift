@@ -49,8 +49,6 @@ final class TabBarController: UITabBarController {
     
     // MARK: - view properties
     
-    let scrapPopUpView = ScrapPopUpView(storagePost: StoragePost(img: nil, name: nil, summary: nil, title: nil, url: nil))
-    
     // MARK: Life Cycle
     
     override func viewDidLoad() {
@@ -59,7 +57,6 @@ final class TabBarController: UITabBarController {
         getLatestVersion()
         setUpTabBar()
         setDelegate()
-        setLayout()
         setNotificationCenter()
 //        self.resetDB()
     }
@@ -72,7 +69,7 @@ final class TabBarController: UITabBarController {
 
     }
     
-    private func setLayout() {
+    private func setLayout(scrapPopUpView: UIView) {
         view.addSubview(scrapPopUpView)
         
         scrapPopUpView.snp.makeConstraints {
@@ -115,17 +112,26 @@ final class TabBarController: UITabBarController {
     
     @objc
     private func handleNotification(_ notification: Notification) {
-        if let data = notification.userInfo?["data"] as? StoragePost {
-            scrapPopUpView.getPostData(post: data)
+        
+        guard let data = notification.userInfo?["data"] as? StoragePost else {
+            return
         }
+        
+        let scrapPopUpView = ScrapPopUpView(storagePost: data)
+        scrapPopUpView.delegate = self
+        setLayout(scrapPopUpView: scrapPopUpView)
+        
+        self.view.layoutIfNeeded()
+        
         scrapPopUpView.snp.updateConstraints {
             $0.bottom.equalToSuperview()
         }
+        
         UIView.animate(withDuration: 0.5) {
             self.view.layoutIfNeeded()
         } completion: { _ in
             DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
-                self.scrapPopUpView.snp.updateConstraints {
+                scrapPopUpView.snp.updateConstraints {
                     $0.bottom.equalToSuperview().offset(83)
                 }
                 UIView.animate(withDuration: 0.5) {
@@ -193,7 +199,6 @@ final class TabBarController: UITabBarController {
 
     private func setDelegate() {
         delegate = self
-        scrapPopUpView.delegate = self
     }
 }
 

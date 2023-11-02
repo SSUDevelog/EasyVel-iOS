@@ -81,14 +81,14 @@ final class ScrapPopUpView: BaseUIView {
         
         putInFolderButton.snp.makeConstraints {
             $0.top.equalToSuperview().inset(9)
-            $0.height.equalTo(30)
+            $0.height.equalTo(32)
             $0.width.equalTo(88)
             $0.trailing.equalToSuperview().inset(20)
         }
         
         goToStorageButton.snp.makeConstraints {
             $0.top.equalToSuperview().inset(9)
-            $0.height.equalTo(30)
+            $0.height.equalTo(32)
             $0.width.equalTo(72)
             $0.trailing.equalTo(putInFolderButton.snp.leading).offset(-10)
         }

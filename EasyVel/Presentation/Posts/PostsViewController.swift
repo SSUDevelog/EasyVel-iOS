@@ -128,7 +128,7 @@ final class PostsViewController: BaseViewController {
         output.successScrap
             .asDriver(onErrorJustReturn: StoragePost())
             .drive(with: self) { owner, post in
-                NotificationCenter.default.post(name: Notification.Name("ScrapButtonTappedNotification"), object: post)
+                NotificationCenter.default.post(name: Notification.Name("ScrapButtonTappedNotification"), object: nil, userInfo: ["data" : post])
             }
             .disposed(by: disposeBag)
     }

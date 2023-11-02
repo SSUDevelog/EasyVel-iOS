@@ -30,7 +30,7 @@ enum ImageLiterals {
     static var searchGray: UIImage { .load(name: "search.gray") }
     static var plusFolder: UIImage { .load(name: "plusFolder") }
     static var activePlusFolder: UIImage { .load(name: "activePlusFolder") }
-    static var scrapFolderIcon: UIImage { .load(name: "scrapFolderIcon") }
+    static var folderGreen: UIImage { .load(name: "folder.green") }
     static var plusIcon: UIImage { .load(name: "plus") }
     static var subscriberAddIcon: UIImage { .load(name: "addIcon" ) }
     static var subscriberImage: UIImage { .load(name: "subscriberImage") }
