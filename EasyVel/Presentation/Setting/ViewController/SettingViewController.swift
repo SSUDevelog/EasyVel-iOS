@@ -91,7 +91,8 @@ final class SettingViewController: RxBaseViewController<SettingViewModel> {
         let signInVM = SignInViewModel(
             useCase: DefaultSignInUseCase(
                 repository: DefaultUserRepository(
-                    service: DefaultAuthService.shared
+                    realmService: RealmService(),
+                    authService: DefaultAuthService.shared
                 )
             )
         )

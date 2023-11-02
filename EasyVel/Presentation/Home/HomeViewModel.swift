@@ -22,8 +22,6 @@ final class HomeViewModel {
         self.service = service
     }
     
-    
-    
     // MARK: - Input
     
     struct Input {

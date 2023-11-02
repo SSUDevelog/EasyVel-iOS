@@ -146,7 +146,6 @@ final class HomeViewController: BaseViewController {
     
     //MARK: - Action Method
     
-    @objc
     private func moveToSearchPostViewController() {
         let postSearchViewModel = PostSearchViewModel()
         let searchPostViewController = PostSearchViewController(viewModel: postSearchViewModel)
