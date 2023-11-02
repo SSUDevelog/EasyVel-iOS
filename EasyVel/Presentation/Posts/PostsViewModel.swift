@@ -78,7 +78,7 @@ final class PostsViewModel: BaseViewModel {
                 self.scrapPost(post)
             }
         
-        return Output(postList, isPostListEmpty, s)
+        return Output(postList, isPostListEmpty, successScrap)
     }
     
 }
