@@ -11,7 +11,7 @@ import RxSwift
 import RxRelay
 import RxCocoa
 
-enum ViewType {
+enum PostsViewType {
     case trend
     case follow
     case keyword
@@ -31,7 +31,7 @@ final class PostsViewController: BaseViewController {
     
     private var postList: [PostDTO]?
     private var isNavigationBarHidden: Bool = false
-    private let scrapButtonDidTap = PublishRelay<Void>()
+    private let scrapButtonDidTap = PublishRelay<PostModel>()
     
     // MARK: - UI Property
     
@@ -90,8 +90,7 @@ final class PostsViewController: BaseViewController {
     // MARK: - Setting
     
     private func bind() {
-        let viewWillAppear = self.rx.methodInvoked(#selector(self.viewWillAppear(_:)))
-        viewWillAppear.bind(onNext: { [weak self] _ in
+        rx.viewWillAppear.bind(onNext: { [weak self] _ in
             guard let snapshot = self?.postsSnapshot else { return }
             self?.postsDataSource.applySnapshotUsingReloadData(snapshot)
         }).disposed(by: disposeBag)
@@ -124,7 +123,7 @@ final class PostsViewController: BaseViewController {
         cell.scrapButtonObservable
             .drive(onNext: { [weak self] post in
                 guard let scrappedPost = post else { return }
-                self?.postsViewModel.scrapPost(scrappedPost)
+                self?.scrapButtonDidTap.accept(scrappedPost)
                 self?.updateSnapshot(with: scrappedPost)
             }).disposed(by: cell.disposeBag)
     }

@@ -101,12 +101,12 @@ final class ScrapPopUpView: BaseUIView {
 
 private extension ScrapPopUpView {
     @objc
-    func scrapBookButtonTapped() {
+    func goToScrapButtonDidTap() {
         delegate?.goToScrapButtonDidTap()
     }
     
     @objc
-    func folderButtonTapped() {
+    func putInFolderButtonDidTap() {
         delegate?.putInFolderButtonDidTap(scrapPost: storagePost)
     }
 }

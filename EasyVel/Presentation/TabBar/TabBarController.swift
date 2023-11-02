@@ -49,7 +49,7 @@ final class TabBarController: UITabBarController {
     
     // MARK: - view properties
     
-    let scrapPopUpView = ScrapPopUpView()
+    let scrapPopUpView = ScrapPopUpView(storagePost: StoragePost(img: nil, name: nil, summary: nil, title: nil, url: nil))
     
     // MARK: Life Cycle
     

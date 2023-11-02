@@ -9,17 +9,18 @@ import Foundation
 
 import RxSwift
 import RxCocoa
-import RxRelay
 
-final class PostsViewModel: BaseViewModel {
+final class PostsViewModel: ViewModelType {
     
     // MARK: - Properties
     
-    let realm = RealmService()
-    let service = DefaultPostService.shared
-    
-    private var viewType: ViewType
+    private let repository: PostRepository
+    private var viewType: PostsViewType
     private var tag: String
+    
+    var disposeBag = DisposeBag()
+    
+    //MARK: - Life Cycle
     
     // MARK: - Input
     
@@ -32,24 +33,27 @@ final class PostsViewModel: BaseViewModel {
     struct Output {
         let postList: Driver<[PostModel]>
         let isPostListEmpty: Driver<Bool>
-        let suceessScrap: Driver<Void>
+        let successScrap: Driver<Void>
         
         init(_ postList: Driver<[PostModel]>,
-             _ isPostListEmpty: Driver<Bool>) {
+             _ isPostListEmpty: Driver<Bool>,
+             _ successScrap: Driver<Void>) {
             self.postList = postList
             self.isPostListEmpty = isPostListEmpty
+            self.successScrap = successScrap
         }
     }
     
     // MARK: - Initialize
     
     init(
-        viewType: ViewType,
+        repository: PostRepository,
+        viewType: PostsViewType,
         tag: String = ""
     ) {
+        self.repository = repository
         self.viewType = viewType
         self.tag = tag
-        super.init()
     }
     
     // MARK: - Custom Functions
@@ -58,14 +62,22 @@ final class PostsViewModel: BaseViewModel {
         let postList = Observable<Void>.merge(input.viewDidLoadEvent,
                                               input.refreshEvent)
             .startWith(LoadingView.showLoading())
-            .flatMapLatest { _ -> Observable<[PostDTO]?> in
-                self.getPosts()
-            }
-            .map { postDTOs -> [PostDTO] in
-                return postDTOs ?? []
+            .flatMapLatest { [weak self] _ -> Observable<[PostDTO]> in
+                guard let self else { return .just([])}
+                switch self.viewType {
+                case .trend:
+                    return self.repository.getTrendPosts()
+                case .follow:
+                    return self.repository.getSubscriberPosts()
+                case .keyword:
+                    return self.repository.getOneTagPosts(tag: tag)
+                }
             }
             .map { posts -> [PostModel] in
-                return posts.map { $0.toPostModel(isScrapped: <#T##Bool#>) }
+                return posts.map {
+                    let isScrappedPost = self.repository.isScrappedPost($0)
+                    return $0.toPostModel(isScrapped: isScrappedPost)
+                }
             }
             .asDriver(onErrorJustReturn: [])
         
@@ -73,126 +85,21 @@ final class PostsViewModel: BaseViewModel {
             .map { $0.isEmpty }
             .asDriver(onErrorJustReturn: true)
         
+        input.scrapButtonDidTap
+            .bind(with: self) { owner, postModel in
+                owner.repository.scrapPost(postModel)
+            }
+            .disposed(by: disposeBag)
+            
+        
         let successScrap = input.scrapButtonDidTap
             .flatMapLatest { post -> Observable<Void> in
-                self.scrapPost(post)
+                self.repository.scrapPost(post)
+                return Observable<Void>.just(Void())
             }
+            .asDriver(onErrorJustReturn: Void())
         
         return Output(postList, isPostListEmpty, successScrap)
-    }
-    
-}
-
-// MARK: - func
-
-extension PostsViewModel {
-
-    
-    private func scrapPost(
-        _ model: PostModel
-    ) {
-        let storagePost = model.post.toStoragePost()
-        if isPostScrapped(post: storagePost) {
-            guard let url = storagePost.url else { return }
-            self.realm.deletePost(url: url)
-        } else {
-            self.realm.addPost(item: storagePost, folderName: TextLiterals.allPostsScrapFolderText)
-        }
-    }
-    
-    private func isPostScrapped(
-        post: StoragePost
-    ) -> Bool {
-        return realm.containsPost(input: post)
-    }
-    
-    private func getPosts() -> Observable<[PostDTO]?> {
-        switch viewType {
-        case .trend:
-            return self.getTrendPosts()
-        case .follow:
-            return self.getSubscriberPosts()
-        case .keyword:
-            return self.getOneTagPosts(tag: self.tag)
-        }
-    }
-    
-}
-
-// MARK: - api
-
-extension PostsViewModel {
-    
-    func getOneTagPosts(tag: String) -> Observable<[PostDTO]?> {
-        return Observable.create { observer in
-            self.service.getOneTagPosts(tag: tag) { [weak self] result in
-                switch result {
-                case .success(let response):
-                    guard let posts = response as? [PostDTO] else {
-                        self?.serverFailOutput.accept(true)
-                        observer.onError(NSError(domain: "ParsingError", code: 0, userInfo: nil))
-                        return
-                    }
-                    observer.onNext(posts)
-                    observer.onCompleted()
-                case .requestErr(_):
-                    self?.serverFailOutput.accept(true)
-                    observer.onError(NSError(domain: "requestErr", code: 0, userInfo: nil))
-                default:
-                    self?.serverFailOutput.accept(true)
-                    observer.onError(NSError(domain: "UnknownError", code: 0, userInfo: nil))
-                }
-            }
-            return Disposables.create()
-        }
-    }
-    
-    func getTrendPosts() -> Observable<[PostDTO]?> {
-        return Observable.create { observer in
-            self.service.getTrendPosts() { [weak self] result in
-                switch result {
-                case .success(let response):
-                    guard let posts = response as? TrendPostResponse else {
-                        self?.serverFailOutput.accept(true)
-                        observer.onError(NSError(domain: "ParsingError", code: 0, userInfo: nil))
-                        return
-                    }
-                    observer.onNext(posts.trendPostDtos)
-                    observer.onCompleted()
-                case .requestErr(_):
-                    self?.serverFailOutput.accept(true)
-                    observer.onError(NSError(domain: "requestErr", code: 0, userInfo: nil))
-                default:
-                    self?.serverFailOutput.accept(true)
-                    observer.onError(NSError(domain: "UnknownError", code: 0, userInfo: nil))
-                }
-            }
-            return Disposables.create()
-        }
-    }
-    
-    func getSubscriberPosts() -> Observable<[PostDTO]?> {
-        return Observable.create { observer in
-            self.service.getSubscriberPosts() { [weak self] result in
-                switch result {
-                case .success(let response):
-                    guard let posts = response as? GetSubscriberPostResponse else {
-                        self?.serverFailOutput.accept(true)
-                        observer.onError(NSError(domain: "ParsingError", code: 0, userInfo: nil))
-                        return
-                    }
-                    observer.onNext(posts.subscribePostDtoList)
-                    observer.onCompleted()
-                case .requestErr(_):
-                    self?.serverFailOutput.accept(true)
-                    observer.onError(NSError(domain: "requestErr", code: 0, userInfo: nil))
-                default:
-                    self?.serverFailOutput.accept(true)
-                    observer.onError(NSError(domain: "UnknownError", code: 0, userInfo: nil))
-                }
-            }
-            return Disposables.create()
-        }
     }
     
 }

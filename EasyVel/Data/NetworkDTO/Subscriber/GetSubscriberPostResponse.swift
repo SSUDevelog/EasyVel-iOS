@@ -8,5 +8,5 @@
 import Foundation
 
 struct GetSubscriberPostResponse: Codable {
-    let subscribePostDtoList: [PostDTO]?
+    let subscribePostDtoList: [PostDTO]
 }

@@ -111,7 +111,6 @@ final class FollowViewController: RxBaseViewController<FollowViewModel> {
             service: DefaultFollowService.shared
         )
         let webViewController = WebViewController(viewModel: webViewModel)
-        webViewController.isPostWebView = false
         self.navigationController?.pushViewController(webViewController, animated: true)
     }
     

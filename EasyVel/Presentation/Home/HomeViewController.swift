@@ -116,12 +116,12 @@ final class HomeViewController: BaseViewController {
     //MARK: - Custom Method
     
     private func setPageViewController(tags: [String]) {
-        let factory = KeywordPostsVCFactory()
+        let factory = PostsVCFactory()
         
         dataSourceViewController = [
             UIViewController(),
-            PostsViewController(viewModel: .init(viewType: .trend), isNavigationBarHidden: true),
-            PostsViewController(viewModel: .init(viewType: .follow), isNavigationBarHidden: true)
+            factory.createTrend(),
+            factory.createFollow()
         ]
         
         for tag in tags {
