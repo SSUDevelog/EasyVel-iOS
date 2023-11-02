@@ -19,8 +19,10 @@ enum PostRepositoryError: Error {
 protocol PostRepository {
     
     // local
-    func scrapPost(_ model: PostModel)
+    func scrapPost(_ postModel: PostModel)
+    func unscrapPost(_ postModel: PostModel)
     func isScrappedPost(_ postDTO: PostDTO) -> Bool
+    
     
     // remote
     func getOneTagPosts(tag: String) -> Observable<[PostDTO]>
@@ -47,21 +49,18 @@ final class DefaultPostRepository: PostRepository {
     
     //MARK: - Realm
     
-    func scrapPost(
-        _ model: PostModel
-    ) {
-        let storagePost = model.post.toStoragePost()
-        if realmService.containsPost(input: storagePost) {
-            guard let url = storagePost.url else { return }
-            self.realmService.deletePost(url: url)
-        } else {
-            self.realmService.addPost(item: storagePost, folderName: TextLiterals.allPostsScrapFolderText)
-        }
+    func scrapPost(_ postModel: PostModel) {
+        let storagePost = postModel.post.toStoragePost()
+        self.realmService.addPost(item: storagePost, folderName: TextLiterals.allPostsScrapFolderText)
     }
     
-    func isScrappedPost(
-        _ postDTO: PostDTO
-    ) -> Bool {
+    func unscrapPost(_ postModel: PostModel) {
+        let storagePost = postModel.post.toStoragePost()
+        guard let url = storagePost.url else { return }
+        self.realmService.deletePost(url: url)   
+    }
+    
+    func isScrappedPost(_ postDTO: PostDTO) -> Bool {
         let storagePost = postDTO.toStoragePost()
         return realmService.containsPost(input: storagePost)
     }

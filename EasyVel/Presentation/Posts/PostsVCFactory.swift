@@ -13,8 +13,7 @@ final class PostsVCFactory {
         let repository = DefaultPostRepository(postService: DefaultPostService(),
                                                realmService: RealmService())
         let vc = PostsViewController(
-            viewModel: PostsViewModel(repository: DefaultPostRepository(postService: DefaultPostService(),
-                                                                        realmService: RealmService()),
+            viewModel: PostsViewModel(repository: repository,
                                       viewType: .trend),
             isNavigationBarHidden: true)
         
@@ -25,8 +24,7 @@ final class PostsVCFactory {
         let repository = DefaultPostRepository(postService: DefaultPostService(),
                                                realmService: RealmService())
         let vc = PostsViewController(
-            viewModel: PostsViewModel(repository: DefaultPostRepository(postService: DefaultPostService(),
-                                                                        realmService: RealmService()),
+            viewModel: PostsViewModel(repository: repository,
                                       viewType: .follow),
             isNavigationBarHidden: true)
         

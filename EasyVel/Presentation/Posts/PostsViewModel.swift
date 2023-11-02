@@ -18,9 +18,6 @@ final class PostsViewModel: ViewModelType {
     private var viewType: PostsViewType
     private var tag: String
     
-    var disposeBag = DisposeBag()
-    
-    //MARK: - Life Cycle
     
     // MARK: - Input
     
@@ -31,17 +28,9 @@ final class PostsViewModel: ViewModelType {
     }
     
     struct Output {
-        let postList: Driver<[PostModel]>
-        let isPostListEmpty: Driver<Bool>
-        let successScrap: Driver<Void>
-        
-        init(_ postList: Driver<[PostModel]>,
-             _ isPostListEmpty: Driver<Bool>,
-             _ successScrap: Driver<Void>) {
-            self.postList = postList
-            self.isPostListEmpty = isPostListEmpty
-            self.successScrap = successScrap
-        }
+        let postList = PublishRelay<[PostModel]>()
+        let isPostListEmpty = PublishRelay<Bool>()
+        let successScrap = PublishRelay<StoragePost>()
     }
     
     // MARK: - Initialize
@@ -58,9 +47,12 @@ final class PostsViewModel: ViewModelType {
     
     // MARK: - Custom Functions
     
-    func transform(input: Input) -> Output {
-        let postList = Observable<Void>.merge(input.viewDidLoadEvent,
-                                              input.refreshEvent)
+    func transform(input: Input, disposeBag: DisposeBag) -> Output {
+        
+        let output = Output()
+        
+        Observable<Void>.merge(input.viewDidLoadEvent,
+                               input.refreshEvent)
             .startWith(LoadingView.showLoading())
             .flatMapLatest { [weak self] _ -> Observable<[PostDTO]> in
                 guard let self else { return .just([])}
@@ -73,33 +65,32 @@ final class PostsViewModel: ViewModelType {
                     return self.repository.getOneTagPosts(tag: tag)
                 }
             }
-            .map { posts -> [PostModel] in
-                return posts.map {
-                    let isScrappedPost = self.repository.isScrappedPost($0)
-                    return $0.toPostModel(isScrapped: isScrappedPost)
+            .subscribe(with: self, onNext: { owner, postDTOs in
+                guard !postDTOs.isEmpty else {
+                    output.isPostListEmpty.accept(true)
+                    return
                 }
-            }
-            .asDriver(onErrorJustReturn: [])
-        
-        let isPostListEmpty = postList
-            .map { $0.isEmpty }
-            .asDriver(onErrorJustReturn: true)
-        
-        input.scrapButtonDidTap
-            .bind(with: self) { owner, postModel in
-                owner.repository.scrapPost(postModel)
-            }
+                
+                let postModels = postDTOs.map { $0.toPostModel(isScrapped: owner.repository.isScrappedPost($0)) }
+                output.postList.accept(postModels)
+            },onError: { owner, error in
+                output.isPostListEmpty.accept(true)
+            })
             .disposed(by: disposeBag)
             
         
-        let successScrap = input.scrapButtonDidTap
-            .flatMapLatest { post -> Observable<Void> in
-                self.repository.scrapPost(post)
-                return Observable<Void>.just(Void())
-            }
-            .asDriver(onErrorJustReturn: Void())
+        input.scrapButtonDidTap
+            .subscribe(with: self, onNext: { owner, postModel in
+                if postModel.isScrapped {
+                    owner.repository.scrapPost(postModel)
+                    output.successScrap.accept(postModel.post.toStoragePost())
+                } else {
+                    owner.repository.unscrapPost(postModel)
+                }
+            })
+            .disposed(by: disposeBag)
         
-        return Output(postList, isPostListEmpty, successScrap)
+        return output
     }
     
 }
