@@ -14,6 +14,8 @@ final class StorageCollectionViewHeader: UICollectionReusableView {
     
     // MARK: - Property
     
+    var disposeBag = DisposeBag()
+    
     var changeNameButtonTrigger: Driver<Void> {
         return self.changeNameButton.rx.tap.asDriver()
     }

@@ -14,7 +14,6 @@ import SnapKit
 final class NewStorageViewController: BaseViewController {
     
     typealias Cell = NewStorageCollectionViewCell
-    typealias EmptyCell = EmptyStorageViewCell
     typealias Header = StorageCollectionViewHeader
     typealias DataSource = UICollectionViewDiffableDataSource<Section, StoragePost>
     typealias Snapshot = NSDiffableDataSourceSnapshot<Section, StoragePost>
@@ -81,10 +80,15 @@ final class NewStorageViewController: BaseViewController {
             .drive(with: self) { owner, _ in
                 self.storageView.dismissDeleteFolderBottomSheet()
             }.disposed(by: self.disposeBag)
+        
+        self.rx.methodInvoked(#selector(self.viewWillDisappear(_:)))
+            .subscribe(with: self) { owner, _ in
+                owner.viewModel.deleteRealmStoragePosts()
+            }.disposed(by: self.disposeBag)
     }
     
     private func bindViewModel() {
-        let fetchPostTrigger = self.rx.methodInvoked(#selector(self.viewDidAppear(_:)))
+        let fetchPostTrigger = self.rx.methodInvoked(#selector(self.viewWillAppear(_:)))
             .map { _ in return self.storageFolderName }
             .asDriver(onErrorDriveWith: Driver.empty())
         let deleteFolderTrigger = self.storageView.deleteFolderTrigger
@@ -109,21 +113,21 @@ final class NewStorageViewController: BaseViewController {
     private func bindCell(_ cell: Cell) {
         cell.deleteStoragePostTrigger
             .drive(with: self) { owner, url in
-                owner.viewModel.deleteRealmStoragePost(of: url)
-            }.disposed(by: self.disposeBag)
+                owner.viewModel.manageScrappedPost(of: url)
+            }.disposed(by: cell.disposeBag)
     }
     
     private func bindHeader(_ header: Header) {
         header.changeNameButtonTrigger
             .drive(with: self) { owner, _ in
                 owner.showChageFolderNameAlert()
-            }.disposed(by: self.disposeBag)
+            }.disposed(by: header.disposeBag)
         
         header.deleteFolderButtonTrigger
             .debug()
             .drive(with: self) { owner, _ in
                 owner.storageView.showDeleteFolderBottomSheet()
-            }.disposed(by: self.disposeBag)
+            }.disposed(by: header.disposeBag)
     }
 }
 

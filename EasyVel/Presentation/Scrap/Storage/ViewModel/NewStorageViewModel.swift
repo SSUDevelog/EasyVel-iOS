@@ -17,6 +17,8 @@ final class NewStorageViewModel: BaseViewModel {
     
     let realm = RealmService()
     
+    private var unScrappedPostURLs: [String] = []
+    
     // MARK: - Input & Output
     
     struct Input {
@@ -72,8 +74,19 @@ extension NewStorageViewModel {
         return storagePosts
     }
     
-    func deleteRealmStoragePost(of url: String) {
-        self.realm.deletePost(url: url)
+    func manageScrappedPost(of url: String) {
+        if self.unScrappedPostURLs.contains(url) {
+            guard let i = unScrappedPostURLs.firstIndex(of: url) else { return }
+            unScrappedPostURLs.remove(at: i)
+        } else {
+            unScrappedPostURLs.append(url)
+        }
+    }
+    
+    func deleteRealmStoragePosts() {
+        self.unScrappedPostURLs.forEach { url in
+            self.realm.deletePost(url: url)
+        }
     }
     
     private func isFolderNameUnique(_ newName: String) -> Bool {
