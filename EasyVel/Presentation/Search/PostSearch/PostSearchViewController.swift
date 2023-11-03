@@ -261,7 +261,7 @@ final class PostSearchViewController: RxBaseViewController<PostSearchViewModel> 
         tag: String,
         postDTOList: [PostDTO]
     ) -> UIViewController {
-        let factory = KeywordPostsVCFactory()
+        let factory = PostsVCFactory()
         let viewController = factory.create(
             tag: tag,
             isNavigationBarHidden: false,
@@ -337,7 +337,7 @@ extension PostSearchViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let tag = popularSearchTagList[indexPath.row]
-        let postsVC = KeywordPostsVCFactory().create(tag: tag,
+        let postsVC = PostsVCFactory().create(tag: tag,
                                                      isNavigationBarHidden: false,
                                                      postDTOList: [])
         navigationController?.pushViewController(postsVC, animated: true)
@@ -359,7 +359,7 @@ extension PostSearchViewController: UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let tag = popularSearchTagList[indexPath.row]
-        let postsVC = KeywordPostsVCFactory().create(tag: tag,
+        let postsVC = PostsVCFactory().create(tag: tag,
                                                      isNavigationBarHidden: false,
                                                      postDTOList: [])
         navigationController?.pushViewController(postsVC, animated: true)

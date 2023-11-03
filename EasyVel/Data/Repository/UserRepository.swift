@@ -22,29 +22,32 @@ final class DefaultUserRepository: UserRepository {
     
     //MARK: - Properties
     
-    private let service: AuthService
+    private let realmService: RealmService
+    private let authService: AuthService
     
     //MARK: - Life Cycle
 
-    init(service: AuthService) {
-        self.service = service
+    init(realmService: RealmService,
+         authService: AuthService) {
+        self.realmService = realmService
+        self.authService = authService
     }
     
     //MARK: - Realm
     
     func fetchAccessToken() -> String {
-        RealmService().getAccessToken()
+        realmService.getAccessToken()
     }
     
     func saveAccessToken(_ token: String) {
-        RealmService().setAccessToken(accessToken: token)
+        realmService.setAccessToken(accessToken: token)
     }
     
     //MARK: - Network
     
     func refreshAccessToken(_ token: String) -> Observable<String> {
         return Observable<String>.create { observer in
-            self.service.refreshToken(token: token) { result in
+            self.authService.refreshToken(token: token) { result in
                 switch result {
                 case .success(let data):
                     guard let refreshToken = data as? String else { return
@@ -65,7 +68,7 @@ final class DefaultUserRepository: UserRepository {
     func requestAppleLogin(_ identityToken: String) -> Observable<String> {
         
         return Observable<String>.create { observer in
-            self.service.appleSignIn(identityToken: identityToken) { result in
+            self.authService.appleSignIn(identityToken: identityToken) { result in
                 switch result {
                 case .success(let data):
                     guard let response = data as? SignInResponse else { return

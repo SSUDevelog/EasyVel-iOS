@@ -11,7 +11,7 @@ import RxSwift
 import RxRelay
 import RxCocoa
 
-enum ViewType {
+enum PostsViewType {
     case trend
     case follow
     case keyword
@@ -31,6 +31,7 @@ final class PostsViewController: BaseViewController {
     
     private var postList: [PostDTO]?
     private var isNavigationBarHidden: Bool = false
+    private let scrapButtonDidTap = PublishRelay<PostModel>()
     
     // MARK: - UI Property
     
@@ -43,15 +44,17 @@ final class PostsViewController: BaseViewController {
     
     // MARK: - Life Cycle
     
-    init(viewModel: PostsViewModel) {
-        self.postsViewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    init(viewModel: PostsViewModel, isNavigationBarHidden: Bool) {
+    init(viewModel: PostsViewModel, 
+         isNavigationBarHidden: Bool = false) {
         self.postsViewModel = viewModel
         self.isNavigationBarHidden = isNavigationBarHidden
         super.init(nibName: nil, bundle: nil)
+        
+        
+        self.bind()
+        self.bindViewModel()
+        self.setDataSource()
+        self.bindNavigation()
     }
     
     init(viewModel: PostsViewModel, posts: [PostDTO], isNavigationBarHidden: Bool) {
@@ -59,6 +62,12 @@ final class PostsViewController: BaseViewController {
         self.postList = posts
         self.isNavigationBarHidden = isNavigationBarHidden
         super.init(nibName: nil, bundle: nil)
+        
+        
+        self.bind()
+        self.bindViewModel()
+        self.setDataSource()
+        self.bindNavigation()
     }
     
     @available(*, unavailable)
@@ -72,59 +81,63 @@ final class PostsViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.setDataSource()
-        self.bind()
-        self.bindViewModel()
-        self.bindNavigation()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-            super.viewWillAppear(animated)
-            if isNavigationBarHidden == false {
-                navigationController?.navigationBar.isHidden = false
-            }
+        super.viewWillAppear(animated)
+        if isNavigationBarHidden == false {
+            navigationController?.navigationBar.isHidden = false
         }
-
+    }
+    
     // MARK: - Setting
     
     private func bind() {
-        let viewWillAppear = self.rx.methodInvoked(#selector(self.viewWillAppear(_:)))
-        viewWillAppear.bind(onNext: { [weak self] _ in
+        rx.viewDidLoad.bind(onNext: { [weak self] _ in
             guard let snapshot = self?.postsSnapshot else { return }
             self?.postsDataSource.applySnapshotUsingReloadData(snapshot)
         }).disposed(by: disposeBag)
     }
     
     func bindViewModel() {
-        let reload = self.postsView.refreshControl.rx.controlEvent(.valueChanged)
-            .asObservable()
-        let viewDidLoad = self.rx.methodInvoked(#selector(self.viewDidLoad))
-            .map { _ in () }
-            .asObservable()
-        let postFetchTrigger = Observable.merge(reload, viewDidLoad)
         
-        let input = PostsViewModel.Input(postFetchTrigger)
-        let output = postsViewModel.transform(input: input)
+        let input = PostsViewModel.Input(
+            viewDidLoadEvent: rx.viewDidLoad.asObservable(),
+            refreshEvent: postsView.refreshControl.rx.controlEvent(.valueChanged).asObservable(),
+            scrapButtonDidTap: scrapButtonDidTap.asObservable()
+        )
         
-        output.postList.drive(onNext: { [weak self] posts in
-            self?.postList = posts.map { $0.post }
-            self?.loadSnapshot(with: posts, andAnimation: true)
-            self?.postsView.collectionView.refreshControl?.endRefreshing()
-            LoadingView.hideLoading()
-        }).disposed(by: disposeBag)
+        let output = postsViewModel.transform(input: input, disposeBag: disposeBag)
         
-        output.isPostListEmpty.drive(onNext: { [weak self] isEmpty in
-            self?.showEmptyView(when: isEmpty)
-            LoadingView.hideLoading()
-        }).disposed(by: disposeBag)
+        output.postList
+            .asDriver(onErrorJustReturn: [])
+            .drive(onNext: { [weak self] posts in
+                self?.postList = posts.map { $0.post }
+                self?.loadSnapshot(with: posts, andAnimation: true)
+                self?.postsView.collectionView.refreshControl?.endRefreshing()
+                LoadingView.hideLoading()
+            }).disposed(by: disposeBag)
+        
+        output.isPostListEmpty
+            .asDriver(onErrorJustReturn: true)
+            .drive(onNext: { [weak self] isEmpty in
+                self?.showEmptyView(when: isEmpty)
+                LoadingView.hideLoading()
+            }).disposed(by: disposeBag)
+        
+        output.successScrap
+            .asDriver(onErrorJustReturn: StoragePost())
+            .drive(with: self) { owner, post in
+                NotificationCenter.default.post(name: Notification.Name("ScrapButtonTappedNotification"), object: nil, userInfo: ["data" : post])
+            }
+            .disposed(by: disposeBag)
     }
     
     private func bind(cell: PostsCollectionViewCell) {
         cell.scrapButtonObservable
             .drive(onNext: { [weak self] post in
                 guard let scrappedPost = post else { return }
-                self?.postsViewModel.scrapPost(scrappedPost)
+                self?.scrapButtonDidTap.accept(scrappedPost)
                 self?.updateSnapshot(with: scrappedPost)
             }).disposed(by: cell.disposeBag)
     }
@@ -218,10 +231,10 @@ extension PostsViewController: PostScrapButtonDidTapped {
         isScrapped: Bool,
         cellIndex: Int
     ) {
-//        isScrapPostsList?[cellIndex] = isScrapped
-//        // MARK: - fix me, viewModel 주입 방법 수정
-//        
-//        let viewModel = PostsViewModel(viewType: .keyword, service: DefaultPostService.shared)
-//        viewModel.cellScrapButtonDidTap.accept((storagePost, isScrapped))
+        //        isScrapPostsList?[cellIndex] = isScrapped
+        //        // MARK: - fix me, viewModel 주입 방법 수정
+        //
+        //        let viewModel = PostsViewModel(viewType: .keyword, service: DefaultPostService.shared)
+        //        viewModel.cellScrapButtonDidTap.accept((storagePost, isScrapped))
     }
 }

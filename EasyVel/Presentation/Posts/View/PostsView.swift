@@ -18,12 +18,21 @@ final class PostsView: BaseUIView {
         collectionView.backgroundColor = .gray100
         return collectionView
     }()
+    
     let keywordsPostsViewExceptionView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = ImageLiterals.emptyPostsList
+        imageView.image = ImageLiterals.emptyPosts
         imageView.isHidden = true
         return imageView
     }()
+    
+    let followViewExceptionView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = ImageLiterals.emptyFollower
+        imageView.isHidden = true
+        return imageView
+    }()
+    
     let refreshControl = UIRefreshControl()
     
     // MARK: - Setting

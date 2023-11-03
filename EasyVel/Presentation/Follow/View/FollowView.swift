@@ -14,7 +14,7 @@ final class FollowView: BaseUIView {
     let postsHeadView = FollowHeadView()
     let followViewExceptionView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = ImageLiterals.subscriberListException
+        imageView.image = ImageLiterals.emptyFollower
         imageView.isHidden = true
         return imageView
     }()

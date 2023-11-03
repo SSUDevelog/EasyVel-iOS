@@ -125,7 +125,6 @@ final class FollowSearchViewController: RxBaseViewController<FollowSearchViewMod
                 let webViewModel = WebViewModel(url: url,
                                                 service: DefaultFollowService.shared)
                 let webViewController = WebViewController(viewModel: webViewModel)
-                webViewController.isPostWebView = false
                 self?.navigationController?.pushViewController(webViewController, animated: true)
             }
             .disposed(by: disposeBag)

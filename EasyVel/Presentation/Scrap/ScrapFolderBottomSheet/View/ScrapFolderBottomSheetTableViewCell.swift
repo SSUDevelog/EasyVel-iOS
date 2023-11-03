@@ -30,6 +30,17 @@ final class ScrapFolderBottomSheetTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setLayout()
+        selectionStyle = .none
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.backgroundColor = .gray100
+        contentView.backgroundColor = .white
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 1, 
+                                                                     left: 0,
+                                                                     bottom: 0,
+                                                                     right: 0))
     }
     
     required init?(coder: NSCoder) {

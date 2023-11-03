@@ -13,4 +13,17 @@ struct StoragePost: Codable, Equatable {
     let summary: String?
     let title: String?
     let url: String?
+    
+    init(img: String? = nil,
+         name: String? = nil,
+         summary: String? = nil,
+         title: String? = nil,
+         url: String? = nil)
+    {
+        self.img = img
+        self.name = name
+        self.summary = summary
+        self.title = title
+        self.url = url
+    }
 }
