@@ -13,7 +13,7 @@ final class NewStoragePostView: BaseUIView {
     
     // MARK: - Property
     
-    var title: String?
+    var title: String
     
     var dismissTrigger: Driver<Void> {
         let closeButtonTrigger = self.bottomSheet.closeButton.rx.tap.asDriver()
@@ -39,6 +39,7 @@ final class NewStoragePostView: BaseUIView {
     }()
     private lazy var navigationTitleLabel: UILabel = {
         let label = UILabel()
+        label.text = self.title
         label.textColor = .gray500
         label.font = .body_2_B
         return label
@@ -55,7 +56,7 @@ final class NewStoragePostView: BaseUIView {
     }()
     let collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
-        collectionView.backgroundColor = .gray100
+        collectionView.backgroundColor = .clear
         return collectionView
     }()
     
@@ -66,7 +67,23 @@ final class NewStoragePostView: BaseUIView {
     }()
     lazy var bottomSheet = DeleteFolderBottomSheet()
     
+    lazy var emptyImageView: UIImageView = {
+        let imageView = UIImageView(image: .emptyScrap)
+        imageView.isHidden = true
+        return imageView
+    }()
+    
     // MARK: - Life Cycle
+    
+    init(title: String) {
+        self.title = title
+        super.init(frame: .zero)
+    }
+    
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - Setting
     
@@ -97,6 +114,11 @@ final class NewStoragePostView: BaseUIView {
             $0.height.equalTo(1)
         }
         
+        self.addSubview(emptyImageView)
+        emptyImageView.snp.makeConstraints {
+            $0.center.equalToSuperview()
+        }
+        
         self.addSubview(collectionView)
         collectionView.snp.makeConstraints {
             $0.top.equalTo(navigationBarView.snp.bottom).offset(1)
@@ -105,13 +127,19 @@ final class NewStoragePostView: BaseUIView {
     }
     
     override func configUI() {
-        self.backgroundColor = .gray200
+        self.backgroundColor = .gray100
         self.collectionView.collectionViewLayout = createLayout()
         self.collectionView.register(
             StorageCollectionViewHeader.self,
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
             withReuseIdentifier: StorageCollectionViewHeader.reuseIdentifier
         )
+    }
+}
+
+extension NewStoragePostView {
+    func showEmptyView() {
+        self.emptyImageView.isHidden = false
     }
 }
 
@@ -133,8 +161,13 @@ extension NewStoragePostView {
             
             let section = NSCollectionLayoutSection(group: group)
             section.interGroupSpacing = 20
-            section.boundarySupplementaryItems = [self.createHeader()]
-            section.contentInsets = .init(top: 0, leading: 20, bottom: 24, trailing: 20)
+            
+            if self.title == TextLiterals.allPostsScrapFolderText {
+                section.contentInsets = .init(top: 20, leading: 20, bottom: 24, trailing: 20)
+            } else {
+                section.boundarySupplementaryItems = [self.createHeader()]
+                section.contentInsets = .init(top: 0, leading: 20, bottom: 24, trailing: 20)
+            }
             
             return section
         }
@@ -154,12 +187,7 @@ extension NewStoragePostView {
     }
 }
 
-extension NewStoragePostView {
-    
-    func configureNavigationTitle(to title: String) {
-        self.navigationTitleLabel.text = title
-    }
-}
+// MARK: - Bottom Sheet
 
 extension NewStoragePostView {
     

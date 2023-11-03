@@ -46,6 +46,7 @@ enum ImageLiterals {
     
     static var emptyAlarm: UIImage { .load(name: "emptyAlarm") }
     static var emptyPostsList: UIImage { .load(name: "emptyPostsList") }
+    static var emptyScrap: UIImage { .load(name: "emptyScrap") }
     static var emptyKeywordList: UIImage { .load(name: "emptyKeywordList") }
     static var networkFail: UIImage { .load(name: "networkFail") }
     static var subscriberListException: UIImage { .load(name: "subscriberListException") }
