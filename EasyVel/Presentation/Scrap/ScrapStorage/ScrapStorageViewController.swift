@@ -71,7 +71,7 @@ final class ScrapStorageViewController: RxBaseViewController<ScrapStorageViewMod
                 if alreadyHaveFolderName {
                     self?.showToast(
                         toastText: TextLiterals.alreadyHaveFolderToastText,
-                        backgroundColor: .gray300
+                        backgroundColor: .gray500
                     )
                 }
             })

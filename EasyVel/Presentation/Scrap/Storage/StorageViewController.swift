@@ -102,12 +102,12 @@ final class StorageViewController: RxBaseViewController<StorageViewModel> {
                     self?.storageView.storageHeadView.titleLabel.text = newFolderName
                     self?.showToast(
                         toastText: TextLiterals.folderNameChangeSuccessToastText,
-                        backgroundColor: .brandColor
+                        backgroundColor: .gray500
                     )
                 } else {
                     self?.showToast(
                         toastText: TextLiterals.alreadyHaveFolderToastText,
-                        backgroundColor: .gray300
+                        backgroundColor: .gray500
                     )
                 }
             })

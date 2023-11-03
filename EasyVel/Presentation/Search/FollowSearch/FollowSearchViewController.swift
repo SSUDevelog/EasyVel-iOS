@@ -120,7 +120,7 @@ final class FollowSearchViewController: RxBaseViewController<FollowSearchViewMod
             .asDriver(onErrorJustReturn: nil)
             .drive { [weak self] url in
                 guard let url else {
-                    self?.showToast(toastText: "주소가 올바르지 않습니다.", backgroundColor: .red)
+                    self?.showToast(toastText: "주소가 올바르지 않습니다.", backgroundColor: .gray500)
                     return }
                 let webViewModel = WebViewModel(url: url,
                                                 service: DefaultFollowService.shared)

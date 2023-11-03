@@ -141,7 +141,7 @@ final class WebViewController: RxBaseViewController<WebViewModel> {
                     self?.subscriberButton.backgroundColor = .brandColor
                     self?.showToast(
                         toastText: TextLiterals.addSubscriberToastText,
-                        backgroundColor: .brandColor
+                        backgroundColor: .gray500
                     )
                     self?.viewModel?.didSubscribe.accept(true)
                 } else {
@@ -149,7 +149,7 @@ final class WebViewController: RxBaseViewController<WebViewModel> {
                     self?.subscriberButton.backgroundColor = .white
                     self?.showToast(
                         toastText: TextLiterals.deleteSubscriberToastText,
-                        backgroundColor: .gray300
+                        backgroundColor: .gray500
                     )
                     self?.viewModel?.didSubscribe.accept(false)
                 }
