@@ -66,6 +66,7 @@ final class NewStorageViewController: BaseViewController {
         self.setSnapshot()
         self.bind()
         self.bindViewModel()
+        self.bindNavigation()
     }
     
     // MARK: - Setting
@@ -134,6 +135,36 @@ final class NewStorageViewController: BaseViewController {
             .drive(with: self) { owner, _ in
                 owner.storageView.showDeleteFolderBottomSheet()
             }.disposed(by: header.disposeBag)
+    }
+    
+    private func bindNavigation() {
+        self.storageView.collectionView.rx.itemSelected
+            .bind(with: self, onNext: { owner, indexPath in
+                let collectionView = owner.storageView.collectionView
+                guard let postCell = collectionView.cellForItem(at: indexPath) as? Cell,
+                      let url = postCell.post?.url
+                else { return }
+                owner.pushToWebView(url)
+            }).disposed(by: self.disposeBag)
+        
+        
+//            .bind(with: self) { owner, indexPath in
+//                guard let collectionView = owner.storageView.collectionView,
+//                      let postCell = collectionView.cellForItem(at: indexPath),
+//                      let urlString = postCell.post?.url
+//                else { return }
+//                self?.pushToWebView(of: urlString)
+//            }.disposed(by: disposeBag)
+    }
+}
+
+// MARK: - Custom Method
+
+extension NewStorageViewController {
+    private func pushToWebView(_ url: String) {
+        let webViewModel = WebViewModel(url: url, service: DefaultFollowService.shared)
+        let webViewController = WebViewController(viewModel: webViewModel)
+        self.navigationController?.pushViewController(webViewController, animated: true)
     }
 }
 
