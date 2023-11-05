@@ -19,15 +19,14 @@ final class NewStorageCollectionViewCell: BaseCollectionViewCell {
     static let identifier = "NewStorageCollectionViewCell"
     
     var post: StoragePost?
-    var isScrapped: Bool = true
     var disposeBag = DisposeBag()
     
-    var deleteStoragePostTrigger: Driver<String> {
+    var editPostStatusTrigger: Driver<String> {
         return self.scrapButton.rx.tap
             .map {
-                self.isScrapped.toggle()
-                self.updateScrapButton()
-                return self.post?.url ?? ""
+                self.descrapPost()
+                guard let url = self.post?.url else { return String() }
+                return url
             }
             .asDriver(onErrorJustReturn: String())
     }
@@ -131,30 +130,34 @@ final class NewStorageCollectionViewCell: BaseCollectionViewCell {
 }
 
 extension NewStorageCollectionViewCell {
-    private func updateScrapButton() {
-        self.scrapButton.setImage(
-            self.isScrapped ? ImageLiterals.bookMarkFill : ImageLiterals.bookMark,
-            for: .normal
-        )
-    }
-}
-
-extension NewStorageCollectionViewCell {
-    func loadPost(_ post: StoragePost) {
-        self.post = post
+    
+    private func configurePost() {
+        guard let post = self.post else { return }
         
-        if let title = post.title,
-           let summary = post.summary,
-           let author = post.name {
-            self.titleLabel.text = title
-            self.summaryLabel.text = summary
-            self.authorLabel.text = author
-        }
+        guard let title = post.title,
+              let summary = post.summary,
+              let author = post.name
+        else { return }
+        
+        self.titleLabel.text = title
+        self.summaryLabel.text = summary
+        self.authorLabel.text = author
         
         if let urlString = post.img, let url = URL(string: urlString) {
             self.postImageView.kf.setImage(with: url)
         } else {
             self.postImageView.image = UIImage(named: "default.post")
         }
+    }
+    
+    private func descrapPost() {
+        self.scrapButton.setImage(.bookmark, for: .normal)
+    }
+}
+
+extension NewStorageCollectionViewCell {
+    func loadPost(_ post: StoragePost) {
+        self.post = post
+        self.configurePost()
     }
 }

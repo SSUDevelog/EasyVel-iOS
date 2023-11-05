@@ -43,6 +43,22 @@ final class NewStorageViewModel: BaseViewModel {
         }
     }
     
+    struct CellInput {
+        let editPostStatusTrigger: Driver<(String, String)>
+        
+        init(_ editPostStatusTrigger: Driver<(String, String)>) {
+            self.editPostStatusTrigger = editPostStatusTrigger
+        }
+    }
+    
+    struct CellOutput {
+        let newPosts: Driver<[StoragePost]>
+        
+        init(_ newPosts: Driver<[StoragePost]>) {
+            self.newPosts = newPosts
+        }
+    }
+    
     // MARK: - Initialize
     
     // MARK: - Transform
@@ -62,6 +78,17 @@ final class NewStorageViewModel: BaseViewModel {
         
         return Output(storagePosts, folderDeleted)
     }
+    
+    func transformCell(_ input: CellInput) -> CellOutput {
+        let newStoragePosts = input.editPostStatusTrigger
+            .map { [weak self] (url, folderName) -> [StoragePost] in
+                guard let self = self else { return [] }
+                self.realm.deletePost(url: url)
+                return self.getRealmStoragePosts(from: folderName)
+            }
+        
+        return CellOutput(newStoragePosts)
+    }
 }
 
 // MARK: - Realm Functions
@@ -71,22 +98,7 @@ extension NewStorageViewModel {
     private func getRealmStoragePosts(from name: String) -> [StoragePost] {
         let realmPosts = self.realm.getFolderPosts(folderName: name)
         let storagePosts = self.realm.convertToStoragePost(input: realmPosts)
-        return storagePosts
-    }
-    
-    func manageScrappedPost(of url: String) {
-        if self.unScrappedPostURLs.contains(url) {
-            guard let i = unScrappedPostURLs.firstIndex(of: url) else { return }
-            unScrappedPostURLs.remove(at: i)
-        } else {
-            unScrappedPostURLs.append(url)
-        }
-    }
-    
-    func deleteRealmStoragePosts() {
-        self.unScrappedPostURLs.forEach { url in
-            self.realm.deletePost(url: url)
-        }
+        return storagePosts.reversed()
     }
     
     private func isFolderNameUnique(_ newName: String) -> Bool {

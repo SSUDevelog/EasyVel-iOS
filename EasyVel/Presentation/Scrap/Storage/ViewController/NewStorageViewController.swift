@@ -61,11 +61,11 @@ final class NewStorageViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.setDataSource()
         self.setSnapshot()
         self.bind()
         self.bindViewModel()
-        self.navigationController?.navigationBar.isHidden = false
     }
     
     // MARK: - Setting
@@ -79,11 +79,6 @@ final class NewStorageViewController: BaseViewController {
         self.storageView.dismissTrigger
             .drive(with: self) { owner, _ in
                 self.storageView.dismissDeleteFolderBottomSheet()
-            }.disposed(by: self.disposeBag)
-        
-        self.rx.methodInvoked(#selector(self.viewWillDisappear(_:)))
-            .subscribe(with: self) { owner, _ in
-                owner.viewModel.deleteRealmStoragePosts()
             }.disposed(by: self.disposeBag)
     }
     
@@ -111,10 +106,21 @@ final class NewStorageViewController: BaseViewController {
     }
     
     private func bindCell(_ cell: Cell) {
-        cell.deleteStoragePostTrigger
-            .drive(with: self) { owner, url in
-                owner.viewModel.manageScrappedPost(of: url)
-            }.disposed(by: cell.disposeBag)
+        let editStorageStatusTrigger = cell.editPostStatusTrigger
+            .map { [weak self] postURL -> (String, String) in
+                guard let self = self else { return (String(), String()) }
+                return (postURL, self.storageFolderName)
+            }
+            .asDriver()
+        
+        let input = NewStorageViewModel.CellInput(editStorageStatusTrigger)
+        let output = self.viewModel.transformCell(input)
+        
+        output.newPosts.drive(
+            with: self,
+            onNext: { owner, storagePosts in
+                owner.loadSnapshot(with: storagePosts)
+            }).disposed(by: cell.disposeBag)
     }
     
     private func bindHeader(_ header: Header) {
@@ -181,7 +187,6 @@ extension NewStorageViewController {
         self.storageDataSource.apply(self.storageSnapshot)
     }
     
-    // TODO: 실제 동작 확인해보기
     private func loadSnapshot(
         with storagePosts: [StoragePost]
     ) {
@@ -197,7 +202,7 @@ extension NewStorageViewController {
 extension NewStorageViewController {
     
     private func showChageFolderNameAlert() {
-        
+        // TODO: 알러트 추가
     }
     
 }
