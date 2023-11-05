@@ -131,7 +131,6 @@ final class NewStorageViewController: BaseViewController {
             }.disposed(by: header.disposeBag)
         
         header.deleteFolderButtonTrigger
-            .debug()
             .drive(with: self) { owner, _ in
                 owner.storageView.showDeleteFolderBottomSheet()
             }.disposed(by: header.disposeBag)
@@ -146,15 +145,6 @@ final class NewStorageViewController: BaseViewController {
                 else { return }
                 owner.pushToWebView(url)
             }).disposed(by: self.disposeBag)
-        
-        
-//            .bind(with: self) { owner, indexPath in
-//                guard let collectionView = owner.storageView.collectionView,
-//                      let postCell = collectionView.cellForItem(at: indexPath),
-//                      let urlString = postCell.post?.url
-//                else { return }
-//                self?.pushToWebView(of: urlString)
-//            }.disposed(by: disposeBag)
     }
 }
 

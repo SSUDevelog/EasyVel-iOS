@@ -42,8 +42,8 @@ final class DeleteFolderBottomSheet: BaseUIView {
         let button = UIButton()
         button.backgroundColor = .gray100
         button.setTitle(TextLiterals.deleteFolderActionSheetCancelActionText, for: .normal)
+        button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = .body_1_B
-        button.titleLabel?.textColor = .black
         button.makeRounded(radius: 5)
         return button
     }()
@@ -52,8 +52,8 @@ final class DeleteFolderBottomSheet: BaseUIView {
         let button = UIButton()
         button.backgroundColor = .brandColor
         button.setTitle(TextLiterals.deleteFolderActionSheetOkActionText, for: .normal)
+        button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = .body_1_B
-        button.titleLabel?.textColor = .white
         button.makeRounded(radius: 5)
         return button
     }()
@@ -102,8 +102,4 @@ final class DeleteFolderBottomSheet: BaseUIView {
         self.backgroundColor = .white
         self.makeRounded(radius: 12)
     }
-}
-
-extension DeleteFolderBottomSheet {
-    
 }
