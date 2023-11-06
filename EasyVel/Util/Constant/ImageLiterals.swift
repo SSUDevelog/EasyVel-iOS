@@ -49,6 +49,7 @@ enum ImageLiterals {
     static var emptyKeywords: UIImage { .load(name: "empty_keywords") }
     static var emptyFoundUser: UIImage { .load(name: "empty_founduser") }
     static var emptyFollower: UIImage { .load(name: "empty_follower") }
+    static var emptyScrap: UIImage { .load(name: "empty_scrap") }
     
     static var failServer: UIImage { .load(name: "fail_server") }
     static var failWeb: UIImage { .load(name: "fail_web") }
