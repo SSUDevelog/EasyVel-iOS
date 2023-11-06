@@ -15,7 +15,7 @@ final class StorageView: BaseUIView {
     let storageHeadView = StorageHeadView()
     let storageViewExceptionView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = ImageLiterals.emptyPostsList
+        imageView.image = ImageLiterals.emptyPosts
         imageView.isHidden = true
         return imageView
     }()

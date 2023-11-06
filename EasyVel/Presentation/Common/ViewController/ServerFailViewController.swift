@@ -11,7 +11,7 @@ import SnapKit
 
 final class ServerFailViewController: BaseViewController {
     
-    let serverFailImage: UIImageView = UIImageView(image: ImageLiterals.serverFailImage)
+    let serverFailImage: UIImageView = UIImageView(image: ImageLiterals.failServer)
     
     override func render() {
         view.addSubview(serverFailImage)

@@ -13,7 +13,7 @@ final class NoNetworkView: BaseUIView {
     
     private let networkfailImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = ImageLiterals.networkFail
+        imageView.image = ImageLiterals.failNetwork
         return imageView
     }()
     
