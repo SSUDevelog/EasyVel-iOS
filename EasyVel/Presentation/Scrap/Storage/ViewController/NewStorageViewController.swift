@@ -96,7 +96,8 @@ final class NewStorageViewController: BaseViewController {
         output.folderDeleted
             .drive(with: self) { owner, _ in
                 owner.storageView.dismissDeleteFolderBottomSheet()
-                owner.navigationController?.popViewController(animated: true)
+//                owner.navigationController?.popViewController(animated: true)
+                owner.showToastOnParentViewController(type: .folderDeleted)
             }.disposed(by: self.disposeBag)
     }
     
@@ -111,6 +112,11 @@ final class NewStorageViewController: BaseViewController {
             with: self,
             onNext: { owner, storagePosts in
                 owner.loadSnapshot(with: storagePosts)
+                Toast.show(
+                    toastText: TextLiterals.postDescrappedToast,
+                    toastBackgroundColor: .gray500,
+                    controller: self
+                )
             }).disposed(by: cell.disposeBag)
     }
     
@@ -145,6 +151,12 @@ extension NewStorageViewController {
         let webViewModel = WebViewModel(url: url, service: DefaultFollowService.shared)
         let webViewController = WebViewController(viewModel: webViewModel)
         self.navigationController?.pushViewController(webViewController, animated: true)
+    }
+    
+    private func showToastOnParentViewController(type: ToastType) {
+        guard let parent = self.parent else { return }
+        self.navigationController?.popViewController(animated: true)
+        self.showToast(of: type, on: parent)
     }
 }
 
