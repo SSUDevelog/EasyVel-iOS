@@ -19,12 +19,17 @@ final class NewStorageCollectionViewCell: BaseCollectionViewCell {
     static let identifier = "NewStorageCollectionViewCell"
     
     var post: StoragePost?
+    var isScrapped: Bool = true {
+        didSet {
+            self.scrapButton.setImage(isScrapped ? .bookmarkFill : .bookmark, for: .normal)
+        }
+    }
     var disposeBag = DisposeBag()
     
     var editPostStatusTrigger: Driver<String> {
         return self.scrapButton.rx.tap
             .map {
-                self.descrapPost()
+                self.isScrapped.toggle()
                 guard let url = self.post?.url else { return String() }
                 return url
             }
@@ -69,8 +74,7 @@ final class NewStorageCollectionViewCell: BaseCollectionViewCell {
     }()
     private let scrapButton: UIButton = {
         let button = UIButton()
-        button.setImage(.bookmarkFill, for: .normal)
-        button.setImage(.bookmark, for: .selected)
+        button.setImage(ImageLiterals.bookMarkFill, for: .normal)
         return button
     }()
     
@@ -78,6 +82,7 @@ final class NewStorageCollectionViewCell: BaseCollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        self.isScrapped = true
         self.disposeBag = DisposeBag()
     }
     
@@ -149,10 +154,6 @@ extension NewStorageCollectionViewCell {
         } else {
             self.postImageView.image = UIImage(named: "default.post")
         }
-    }
-    
-    private func descrapPost() {
-        self.scrapButton.isSelected = true
     }
 }
 

@@ -35,11 +35,10 @@ final class ScrapStorageViewController: RxBaseViewController<ScrapStorageViewMod
                 let cell = self?.scrapView.scrapCollectionView.cellForItem(at: indexPath) as? ScrapStorageCollectionViewCell
                 let folderName = cell?.folderNameLabel.text ?? TextLiterals.allPostsScrapFolderText
                 let storageView = NewStoragePostView(title: folderName)
-                let storageViewModel = NewStorageViewModel()
+                let storageViewModel = NewStorageViewModel(folderName: folderName)
                 let storageViewController = NewStorageViewController(
                     view: storageView,
-                    viewModel: storageViewModel,
-                    folderName: folderName
+                    viewModel: storageViewModel
                 )
                 self?.navigationController?.pushViewController(storageViewController, animated: true)
             }

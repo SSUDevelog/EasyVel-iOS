@@ -24,10 +24,9 @@ final class NewStoragePostView: BaseUIView {
         ])
     }
     
-    var deleteFolderTrigger: Driver<String?> {
+    var deleteFolderTrigger: Driver<Void> {
         return bottomSheet.deleteButton.rx.tap
-            .map { return self.title }
-            .asDriver(onErrorJustReturn: nil)
+            .asDriver()
     }
     
     // MARK: - UI Property

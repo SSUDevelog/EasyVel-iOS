@@ -31,8 +31,6 @@ final class NewStorageViewController: BaseViewController {
     private var storageDataSource: DataSource!
     private var storageSnapshot: Snapshot!
     
-    var storageFolderName: String
-    
     private var changeFolderNameAlert: UIView?
     private var deleteFolderBottomSheet: UIView?
     
@@ -40,12 +38,10 @@ final class NewStorageViewController: BaseViewController {
     
     init(
         view: NewStoragePostView,
-        viewModel: NewStorageViewModel,
-        folderName: String
+        viewModel: NewStorageViewModel
     ) {
         self.storageView = view
         self.viewModel = viewModel
-        self.storageFolderName = folderName
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -84,11 +80,9 @@ final class NewStorageViewController: BaseViewController {
     }
     
     private func bindViewModel() {
-        let fetchPostTrigger = self.rx.methodInvoked(#selector(self.viewWillAppear(_:)))
-            .map { _ in return self.storageFolderName }
-            .asDriver(onErrorDriveWith: Driver.empty())
+        let fetchPostTrigger = self.rx.viewWillAppear
+            .asDriver()
         let deleteFolderTrigger = self.storageView.deleteFolderTrigger
-            .map { _ in return self.storageFolderName }
             .asDriver()
         
         let input = NewStorageViewModel.Input(fetchPostTrigger, deleteFolderTrigger)
@@ -108,10 +102,6 @@ final class NewStorageViewController: BaseViewController {
     
     private func bindCell(_ cell: Cell) {
         let editStorageStatusTrigger = cell.editPostStatusTrigger
-            .map { [weak self] postURL -> (String, String) in
-                guard let self = self else { return (String(), String()) }
-                return (postURL, self.storageFolderName)
-            }
             .asDriver()
         
         let input = NewStorageViewModel.CellInput(editStorageStatusTrigger)

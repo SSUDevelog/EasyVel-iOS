@@ -17,16 +17,17 @@ final class NewStorageViewModel: BaseViewModel {
     
     let realm = RealmService()
     
+    private var folderName: String
     private var unScrappedPostURLs: [String] = []
     
     // MARK: - Input & Output
     
     struct Input {
-        let fetchPostTrigger: Driver<String>
-        let deleteFolderTrigger: Driver<String>
+        let fetchPostTrigger: Driver<Void>
+        let deleteFolderTrigger: Driver<Void>
         
-        init(_ fetchPostTrigger: Driver<String>,
-             _ deleteFolderTrigger: Driver<String>) {
+        init(_ fetchPostTrigger: Driver<Void>,
+             _ deleteFolderTrigger: Driver<Void>) {
             self.fetchPostTrigger = fetchPostTrigger
             self.deleteFolderTrigger = deleteFolderTrigger
         }
@@ -44,9 +45,9 @@ final class NewStorageViewModel: BaseViewModel {
     }
     
     struct CellInput {
-        let editPostStatusTrigger: Driver<(String, String)>
+        let editPostStatusTrigger: Driver<String>
         
-        init(_ editPostStatusTrigger: Driver<(String, String)>) {
+        init(_ editPostStatusTrigger: Driver<String>) {
             self.editPostStatusTrigger = editPostStatusTrigger
         }
     }
@@ -61,19 +62,23 @@ final class NewStorageViewModel: BaseViewModel {
     
     // MARK: - Initialize
     
+    init(folderName: String) {
+        self.folderName = folderName
+    }
+    
     // MARK: - Transform
     
     func transform(_ input: Input) -> Output {
         let storagePosts = input.fetchPostTrigger
-            .map { [weak self] folderName -> [StoragePost] in
+            .map { [weak self] _ -> [StoragePost] in
                 guard let self = self else { return [] }
-                return self.getRealmStoragePosts(from: folderName)
+                return self.getRealmStoragePosts(from: self.folderName)
             }
         
         let folderDeleted = input.deleteFolderTrigger
-            .map { [weak self] folderName in
+            .map { [weak self] in
                 guard let self = self else { return }
-                self.deleteStorageFolder(of: folderName)
+                self.deleteStorageFolder(of: self.folderName)
             }
         
         return Output(storagePosts, folderDeleted)
@@ -81,10 +86,10 @@ final class NewStorageViewModel: BaseViewModel {
     
     func transformCell(_ input: CellInput) -> CellOutput {
         let newStoragePosts = input.editPostStatusTrigger
-            .map { [weak self] (url, folderName) -> [StoragePost] in
+            .map { [weak self] url -> [StoragePost] in
                 guard let self = self else { return [] }
                 self.realm.deletePost(url: url)
-                return self.getRealmStoragePosts(from: folderName)
+                return self.getRealmStoragePosts(from: self.folderName)
             }
         
         return CellOutput(newStoragePosts)
