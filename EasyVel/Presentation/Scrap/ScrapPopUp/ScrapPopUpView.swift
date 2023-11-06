@@ -9,16 +9,31 @@ import UIKit
 
 import SnapKit
 
+protocol ScrapPopUpDelegate: AnyObject {
+    func goToScrapButtonDidTap()
+    func putInFolderButtonDidTap(scrapPost: StoragePost)
+}
+
 final class ScrapPopUpView: BaseUIView {
     
     // MARK: - Properties
     
-    var delegate: ScrapPopUpDelegate?
-    var storagePost: StoragePost?
+    weak var delegate: ScrapPopUpDelegate?
+    private var storagePost: StoragePost
     
     // MARK: - UI Components
     
-    private let ScrapLabel: UILabel = {
+    init(storagePost: StoragePost) {
+        self.storagePost = storagePost
+        
+        super.init(frame: .zero)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private let scrapLabel: UILabel = {
         let label = UILabel()
         label.text = TextLiterals.scrapPopUpViewLeftText
         label.textColor = .black
@@ -26,25 +41,25 @@ final class ScrapPopUpView: BaseUIView {
         return label
     }()
     
-    lazy var moveToStorageButton: UIButton = {
+    lazy var goToStorageButton: UIButton = {
         let button = UIButton()
         button.setTitle(TextLiterals.moveToScrapStorageButtonText, for: .normal)
         button.setTitleColor(UIColor.brandColor, for: .normal)
         button.titleLabel?.font = .body_1_B
         button.backgroundColor = .white
         button.makeRoundBorder(cornerRadius: 5, borderWidth: 1, borderColor: .brandColor)
-        button.addTarget(self, action: #selector(scrapBookButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(goToScrapButtonDidTap), for: .touchUpInside)
         return button
     }()
     
-    lazy var addToFolderButton: UIButton = {
+    lazy var putInFolderButton: UIButton = {
         let button = UIButton()
         button.setTitle(TextLiterals.presentScrapFolderBottomSheetButtonText, for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = .body_1_B
         button.backgroundColor = .brandColor
         button.makeRoundBorder(cornerRadius: 5, borderWidth: 1, borderColor: .brandColor)
-        button.addTarget(self, action: #selector(folderButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(putInFolderButtonDidTap), for: .touchUpInside)
         return button
     }()
 
@@ -54,28 +69,28 @@ final class ScrapPopUpView: BaseUIView {
     
     override func configUI() {
         self.addSubviews(
-            ScrapLabel,
-            moveToStorageButton,
-            addToFolderButton
+            scrapLabel,
+            goToStorageButton,
+            putInFolderButton
         )
         
-        ScrapLabel.snp.makeConstraints {
+        scrapLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(20)
             $0.top.equalToSuperview().inset(12)
         }
         
-        addToFolderButton.snp.makeConstraints {
+        putInFolderButton.snp.makeConstraints {
             $0.top.equalToSuperview().inset(9)
-            $0.height.equalTo(30)
+            $0.height.equalTo(32)
             $0.width.equalTo(88)
             $0.trailing.equalToSuperview().inset(20)
         }
         
-        moveToStorageButton.snp.makeConstraints {
+        goToStorageButton.snp.makeConstraints {
             $0.top.equalToSuperview().inset(9)
-            $0.height.equalTo(30)
+            $0.height.equalTo(32)
             $0.width.equalTo(72)
-            $0.trailing.equalTo(addToFolderButton.snp.leading).offset(-10)
+            $0.trailing.equalTo(putInFolderButton.snp.leading).offset(-10)
         }
     }
     
@@ -86,14 +101,12 @@ final class ScrapPopUpView: BaseUIView {
 
 private extension ScrapPopUpView {
     @objc
-    func scrapBookButtonTapped() {
-        delegate?.scrapBookButtonTapped()
+    func goToScrapButtonDidTap() {
+        delegate?.goToScrapButtonDidTap()
     }
     
     @objc
-    func folderButtonTapped() {
-        if let post = storagePost {
-            delegate?.folderButtonTapped(scrapPost: post)
-        }
+    func putInFolderButtonDidTap() {
+        delegate?.putInFolderButtonDidTap(scrapPost: storagePost)
     }
 }

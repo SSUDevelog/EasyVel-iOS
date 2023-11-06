@@ -30,7 +30,7 @@ enum ImageLiterals {
     static var searchGray: UIImage { .load(name: "search.gray") }
     static var plusFolder: UIImage { .load(name: "plusFolder") }
     static var activePlusFolder: UIImage { .load(name: "activePlusFolder") }
-    static var scrapFolderIcon: UIImage { .load(name: "scrapFolderIcon") }
+    static var folderGreen: UIImage { .load(name: "folder.green") }
     static var plusIcon: UIImage { .load(name: "plus") }
     static var subscriberAddIcon: UIImage { .load(name: "addIcon" ) }
     static var subscriberImage: UIImage { .load(name: "subscriberImage") }
@@ -44,15 +44,15 @@ enum ImageLiterals {
     
     // MARK: - Exception
     
-    static var emptyAlarm: UIImage { .load(name: "emptyAlarm") }
-    static var emptyPostsList: UIImage { .load(name: "emptyPostsList") }
-    static var emptyScrap: UIImage { .load(name: "emptyScrap") }
-    static var emptyKeywordList: UIImage { .load(name: "emptyKeywordList") }
-    static var networkFail: UIImage { .load(name: "networkFail") }
-    static var subscriberListException: UIImage { .load(name: "subscriberListException") }
-    static var serverFailImage: UIImage { .load(name: "serverFailImage") }
-    static var webViewException: UIImage { .load(name: "webViewException") }
-    static var notFoundUser: UIImage { .load(name: "notFoundUser")}
+    static var emptyAlarm: UIImage { .load(name: "empty_alarm") }
+    static var emptyPosts: UIImage { .load(name: "empty_posts") }
+    static var emptyKeywords: UIImage { .load(name: "empty_keywords") }
+    static var emptyFoundUser: UIImage { .load(name: "empty_founduser") }
+    static var emptyFollower: UIImage { .load(name: "empty_follower") }
+    
+    static var failServer: UIImage { .load(name: "fail_server") }
+    static var failWeb: UIImage { .load(name: "fail_web") }
+    static var failNetwork: UIImage { .load(name: "fail_network") }
 }
 
 extension UIImage {

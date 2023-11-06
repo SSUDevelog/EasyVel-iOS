@@ -53,6 +53,7 @@ final class ScrapFolderBottomSheetView: BaseUIView {
         button.backgroundColor = .white
         button.layer.cornerRadius = 4
         button.layer.masksToBounds = true
+        button.imageView?.contentMode = .scaleAspectFit
         return button
     }()
     
@@ -66,12 +67,12 @@ final class ScrapFolderBottomSheetView: BaseUIView {
     }()
     
     let folderTableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .grouped)
+        let tableView = UITableView()
         tableView.register(cell: ScrapFolderBottomSheetTableViewCell.self)
         tableView.backgroundColor = .white
         tableView.showsVerticalScrollIndicator = false
         tableView.rowHeight = 46
-        tableView.sectionHeaderHeight = 0
+        tableView.separatorStyle = .none
         return tableView
     }()
     
@@ -81,6 +82,7 @@ final class ScrapFolderBottomSheetView: BaseUIView {
         let textField = UITextField()
         textField.placeholder = TextLiterals.newFolderAddTextFieldPlaceholder
         textField.isHidden = true
+        textField.addLeftPadding(leftPaddingWidth: 10)
         return textField
     }()
     
@@ -130,7 +132,8 @@ final class ScrapFolderBottomSheetView: BaseUIView {
         newFolderButton.snp.makeConstraints {
             $0.top.equalToSuperview().offset(60)
             $0.leading.equalToSuperview().inset(20)
-            $0.height.width.equalTo(26)
+            $0.width.equalTo(36)
+            $0.height.width.equalTo(30)
         }
         
         folderTitleLabel.snp.makeConstraints {
@@ -139,7 +142,7 @@ final class ScrapFolderBottomSheetView: BaseUIView {
         }
         
         folderTableView.snp.makeConstraints {
-            $0.top.equalTo(newFolderButton.snp.bottom)
+            $0.top.equalTo(newFolderButton.snp.bottom).offset(15)
             $0.leading.trailing.bottom.equalToSuperview()
         }
         
@@ -148,13 +151,14 @@ final class ScrapFolderBottomSheetView: BaseUIView {
         newFolderAddTextField.snp.makeConstraints {
             $0.centerY.equalTo(newFolderButton)
             $0.leading.equalTo(newFolderButton.snp.trailing).offset(10)
-            $0.trailing.equalTo(addFolderFinishedButton.snp.leading).offset(30)
+            $0.height.equalTo(32)
         }
         
         addFolderFinishedButton.snp.makeConstraints {
             $0.centerY.equalTo(newFolderButton)
-            $0.height.equalTo(26)
-            $0.width.equalTo(43)
+            $0.height.equalTo(32)
+            $0.width.equalTo(49)
+            $0.leading.equalTo(newFolderAddTextField.snp.trailing).offset(20)
             $0.trailing.equalToSuperview().inset(20)
         }
     }
@@ -164,7 +168,7 @@ final class ScrapFolderBottomSheetView: BaseUIView {
             newFolderAddTextField.isHidden = false
             addFolderFinishedButton.isHidden = false
             folderTitleLabel.isHidden = true
-            newFolderButton.setImage(ImageLiterals.activePlusFolder, for: .normal)
+            newFolderButton.setImage(ImageLiterals.folderGreen, for: .normal)
         } else {
             newFolderAddTextField.isHidden = true
             addFolderFinishedButton.isHidden = true

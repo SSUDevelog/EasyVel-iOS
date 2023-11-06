@@ -11,9 +11,6 @@ import Moya
 
 final class DefaultPostService: BaseNetworkService, PostService {
     
-    static let shared = DefaultPostService()
-    private override init() {}
-    
     let provider = MoyaProvider<PostTargetType>(plugins: [MoyaLoggerPlugin()])
     
     func getSubscriberPosts(

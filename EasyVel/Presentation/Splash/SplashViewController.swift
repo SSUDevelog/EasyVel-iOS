@@ -63,7 +63,8 @@ final class SplashViewController: RxBaseViewController<SplashViewModel> {
                     let signInVM = SignInViewModel(
                         useCase: DefaultSignInUseCase(
                             repository: DefaultUserRepository(
-                                service: DefaultAuthService.shared
+                                realmService: RealmService(),
+                                authService: DefaultAuthService.shared
                             )
                         )
                     )
