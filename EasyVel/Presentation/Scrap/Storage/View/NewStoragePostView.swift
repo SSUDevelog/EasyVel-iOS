@@ -13,7 +13,7 @@ final class NewStoragePostView: BaseUIView {
     
     // MARK: - Property
     
-    var title: String
+    private var title: String
     
     var dismissTrigger: Driver<Void> {
         let closeButtonTrigger = self.bottomSheet.closeButton.rx.tap.asDriver()
