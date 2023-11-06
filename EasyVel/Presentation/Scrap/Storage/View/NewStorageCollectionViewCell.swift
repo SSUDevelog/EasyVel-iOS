@@ -69,7 +69,8 @@ final class NewStorageCollectionViewCell: BaseCollectionViewCell {
     }()
     private let scrapButton: UIButton = {
         let button = UIButton()
-        button.setImage(ImageLiterals.bookMarkFill, for: .normal)
+        button.setImage(.bookmarkFill, for: .normal)
+        button.setImage(.bookmark, for: .selected)
         return button
     }()
     
