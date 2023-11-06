@@ -152,7 +152,7 @@ extension NewStorageCollectionViewCell {
     }
     
     private func descrapPost() {
-        self.scrapButton.setImage(.bookmark, for: .normal)
+        self.scrapButton.isSelected = true
     }
 }
 
