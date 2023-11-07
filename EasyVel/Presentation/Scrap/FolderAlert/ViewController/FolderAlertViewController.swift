@@ -167,19 +167,7 @@ final class FolderAlertViewController: UIViewController {
         titleLabel.font = .subhead
         titleLabel.textColor = .gray700
         titleLabel.text = type?.title
-        
-        
-//        folderTextFiled.layer.borderColor = UIColor.gray200.cgColor
-//        folderTextFiled.layer.borderWidth = 1
-//        folderTextFiled.layer.cornerRadius = 4
-//        folderTextFiled.attributedPlaceholder = NSAttributedString(string: TextLiterals.folderTextFieldPlaceHolder,
-//                                                                   attributes: [.foregroundColor : UIColor.gray200,
-//                                                                                .font: UIFont.caption_1_M
-//                                                                   ])
-//        folderTextFiled.addLeftPadding(leftPaddingWidth: 12)
-//        folderTextFiled.rightView = clearButton
-//        folderTextFiled.rightViewMode = .always
-//        
+     
         errorLabel.font = .caption_1_M
         errorLabel.textColor = .error
         
