@@ -14,16 +14,6 @@ import SnapKit
 
 final class UserWebViewController: RxBaseViewController<UserWebViewModel> {
     
-    // MARK: - Property
-    
-    var popTrigger: Driver<Void> {
-        return self.backButton.rx.tap.asDriver()
-    }
-    
-    var followTrigger: Observable<Void> {
-        return self.followButton.rx.tap.asObservable()
-    }
-    
     // MARK: - UI Property
     
     private let navigationBarView: UIView = {
