@@ -80,12 +80,12 @@ final class NewStorageViewController: BaseViewController {
     }
     
     private func bindViewModel() {
-        let fetchPostTrigger = self.rx.viewWillAppear
+        let viewWillAppear = self.rx.viewWillAppear
             .asDriver()
         let deleteFolderTrigger = self.storageView.deleteFolderTrigger
             .asDriver()
         
-        let input = NewStorageViewModel.Input(fetchPostTrigger, deleteFolderTrigger)
+        let input = NewStorageViewModel.Input(viewWillAppear, deleteFolderTrigger)
         let output = self.viewModel.transform(input)
         
         output.storagePosts
@@ -93,10 +93,10 @@ final class NewStorageViewController: BaseViewController {
                 if posts.isEmpty { self.storageView.showEmptyView() }
                 else { owner.loadSnapshot(with: posts) }
             }.disposed(by: self.disposeBag)
+        
         output.folderDeleted
             .drive(with: self) { owner, _ in
                 owner.storageView.dismissDeleteFolderBottomSheet()
-//                owner.navigationController?.popViewController(animated: true)
                 owner.showToastOnParentViewController(type: .folderDeleted)
             }.disposed(by: self.disposeBag)
     }
@@ -121,15 +121,16 @@ final class NewStorageViewController: BaseViewController {
     }
     
     private func bindHeader(_ header: Header) {
-        header.changeNameButtonTrigger
-            .drive(with: self) { owner, _ in
-                owner.showChageFolderNameAlert()
-            }.disposed(by: header.disposeBag)
+        let changeNameTrigger = header.changeNameButtonTrigger
+            .asDriver()
         
-        header.deleteFolderButtonTrigger
-            .drive(with: self) { owner, _ in
-                owner.storageView.showDeleteFolderBottomSheet()
-            }.disposed(by: header.disposeBag)
+        let input = NewStorageViewModel.HeaderInput(changeNameTrigger)
+        let output = self.viewModel.transformHeader(input)
+        
+        output.showChangeNameAlert
+            .drive(with: self) { owner, folderName in
+                owner.showChageFolderNameAlert(folderName: folderName)
+            }.disposed(by: self.disposeBag)
     }
     
     private func bindNavigation() {
@@ -224,8 +225,20 @@ extension NewStorageViewController {
 
 extension NewStorageViewController {
     
-    private func showChageFolderNameAlert() {
-        // TODO: 알러트 추가
+    private func showChageFolderNameAlert(folderName: String) {
+        let vc = FolderAlertViewController(type: .change, folderName: folderName)
+        vc.modalPresentationStyle = .overFullScreen
+        vc.modalTransitionStyle = .crossDissolve
+        vc.delegate = self
+        self.present(vc, animated: false)
     }
     
+}
+
+// MARK: - FolderViewControllerDelegate
+
+extension NewStorageViewController: FolderViewControllerDelegate {
+    func folderVCDismiss(newFolderName: String) {
+        self.storageView.updateTitle(to: newFolderName)
+    }
 }

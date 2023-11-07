@@ -60,6 +60,22 @@ final class NewStorageViewModel: BaseViewModel {
         }
     }
     
+    struct HeaderInput {
+        let changeNameTrigger: Driver<Void>
+        
+        init(_ changeNameTrigger: Driver<Void>) {
+            self.changeNameTrigger = changeNameTrigger
+        }
+    }
+    
+    struct HeaderOutput {
+        let showChangeNameAlert: Driver<String>
+        
+        init(_ showChangeNameAlert: Driver<String>) {
+            self.showChangeNameAlert = showChangeNameAlert
+        }
+    }
+    
     // MARK: - Initialize
     
     init(folderName: String) {
@@ -93,6 +109,16 @@ final class NewStorageViewModel: BaseViewModel {
             }
         
         return CellOutput(newStoragePosts)
+    }
+    
+    func transformHeader(_ input: HeaderInput) -> HeaderOutput {
+        let showChangeNameAlert = input.changeNameTrigger
+            .map { [weak self] in
+                guard let self = self else { return String() }
+                return self.folderName
+            }
+        
+        return HeaderOutput(showChangeNameAlert)
     }
 }
 
