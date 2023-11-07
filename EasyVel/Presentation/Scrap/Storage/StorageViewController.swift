@@ -192,7 +192,6 @@ extension StorageViewController: UITableViewDelegate {
         guard let url = selectedCell?.url else { return }
         let webViewModel = WebViewModel(url: url, service: DefaultFollowService.shared)
         let webViewController = WebViewController(viewModel: webViewModel)
-        webViewController.isPostWebView = false
         navigationController?.pushViewController(webViewController, animated: true)
     }
 }

@@ -18,18 +18,18 @@ final class WebViewModel: BaseViewModel {
     private let realm = RealmService()
     
     
-    var postWriter: String?
+    var postWriter: String? 
     var storagePost: StoragePost?
     
     // MARK: - Input
     
     let webViewProgressRelay = PublishRelay<Double>()
-    let didSubscribe = PublishRelay<Bool>()
-    let didUnScrap = PublishRelay<String>()
+    let didSubscribe = PublishRelay<Bool>() //TODO: 23.11.2 VC 쪽에서 삭제함. 이유: 개복잡함
+    let didUnScrap = PublishRelay<String>() //TODO: 23.11.2 VC 쪽에서 삭제함. 이유: 개복잡함
     
     // MARK: - Output
     
-    var didSubscribeWriter = PublishRelay<Bool>()
+    var didSubscribeWriter = PublishRelay<Bool>() //TODO: 23.11.2 VC 쪽에서 삭제함. 이유: 개복잡함
     var urlRequestOutput = PublishRelay<URLRequest>()
     var webViewProgressOutput = PublishRelay<Bool>()
     var cannotFoundWebViewURLOutput = PublishRelay<Bool>()
@@ -93,7 +93,7 @@ final class WebViewModel: BaseViewModel {
             })
             .disposed(by: disposeBag)
         
-        didSubscribe
+        didSubscribe //TODO: 23.11.2 VC 쪽에서 삭제함. 이유: 개복잡함
             .subscribe(onNext: { [weak self] response in
                 guard let subscriber = self?.postWriter else { return }
                 if response {
@@ -104,7 +104,7 @@ final class WebViewModel: BaseViewModel {
             })
             .disposed(by: disposeBag)
         
-        didUnScrap
+        didUnScrap //TODO: 23.11.2 VC 쪽에서 삭제함. 이유: 개복잡함
             .subscribe(onNext: { [weak self] unScrapPostUrl in
                 self?.realm.deletePost(url: unScrapPostUrl)
             })

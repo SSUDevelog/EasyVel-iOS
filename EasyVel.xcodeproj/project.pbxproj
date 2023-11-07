@@ -32,8 +32,10 @@
 		7CB706D62A32067900083EC6 /* SearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB706D52A32067900083EC6 /* SearchCollectionViewCell.swift */; };
 		87187C022A4DF7E200BF05F7 /* MyTagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87187C012A4DF7E200BF05F7 /* MyTagCollectionViewCell.swift */; };
 		87187C042A4DF7F200BF05F7 /* PopularTagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87187C032A4DF7F200BF05F7 /* PopularTagTableViewCell.swift */; };
-		8745835E2A42184B00954274 /* KeywordPostsVCFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8745835D2A42184B00954274 /* KeywordPostsVCFactory.swift */; };
+		8745835E2A42184B00954274 /* PostsVCFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8745835D2A42184B00954274 /* PostsVCFactory.swift */; };
 		874A13FD2AE4D425000ED2C1 /* RxGesture in Frameworks */ = {isa = PBXBuildFile; productRef = 874A13FC2AE4D425000ED2C1 /* RxGesture */; };
+		8754E9A42AF3E259008FC6FD /* PostRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8754E9A32AF3E259008FC6FD /* PostRepository.swift */; };
+		8754E9A72AF3F076008FC6FD /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8754E9A62AF3F076008FC6FD /* ViewModelType.swift */; };
 		8764A62C2ACEB705007D4B0A /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8764A62B2ACEB705007D4B0A /* HomeView.swift */; };
 		8764A62E2ACEB895007D4B0A /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8764A62D2ACEB895007D4B0A /* HomeViewModel.swift */; };
 		8764A6302ACEBB2E007D4B0A /* Reactive+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8764A62F2ACEBB2E007D4B0A /* Reactive+.swift */; };
@@ -71,7 +73,6 @@
 		9128B03F2A237E1800FB1252 /* ScrapFolderBottomSheetDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9128B03E2A237E1800FB1252 /* ScrapFolderBottomSheetDataSource.swift */; };
 		9128B0412A23B4E200FB1252 /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9128B0402A23B4E200FB1252 /* UITableView+Extension.swift */; };
 		9128B0432A23B50500FB1252 /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9128B0422A23B50500FB1252 /* ReusableView.swift */; };
-		9128B0462A23BD3800FB1252 /* ScrapPopUpDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9128B0452A23BD3800FB1252 /* ScrapPopUpDelegate.swift */; };
 		9128B04A2A23C59700FB1252 /* ScrapStorageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9128B0492A23C59700FB1252 /* ScrapStorageView.swift */; };
 		9128B04C2A23C7A100FB1252 /* ScrapStorageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9128B04B2A23C7A100FB1252 /* ScrapStorageCollectionViewCell.swift */; };
 		9128B04E2A23C96500FB1252 /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9128B04D2A23C96500FB1252 /* UICollectionView+Extension.swift */; };
@@ -220,7 +221,9 @@
 		7CB706D52A32067900083EC6 /* SearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewCell.swift; sourceTree = "<group>"; };
 		87187C012A4DF7E200BF05F7 /* MyTagCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTagCollectionViewCell.swift; sourceTree = "<group>"; };
 		87187C032A4DF7F200BF05F7 /* PopularTagTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularTagTableViewCell.swift; sourceTree = "<group>"; };
-		8745835D2A42184B00954274 /* KeywordPostsVCFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordPostsVCFactory.swift; sourceTree = "<group>"; };
+		8745835D2A42184B00954274 /* PostsVCFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsVCFactory.swift; sourceTree = "<group>"; };
+		8754E9A32AF3E259008FC6FD /* PostRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRepository.swift; sourceTree = "<group>"; };
+		8754E9A62AF3F076008FC6FD /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		8764A62B2ACEB705007D4B0A /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		8764A62D2ACEB895007D4B0A /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		8764A62F2ACEBB2E007D4B0A /* Reactive+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reactive+.swift"; sourceTree = "<group>"; };
@@ -258,7 +261,6 @@
 		9128B03E2A237E1800FB1252 /* ScrapFolderBottomSheetDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapFolderBottomSheetDataSource.swift; sourceTree = "<group>"; };
 		9128B0402A23B4E200FB1252 /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		9128B0422A23B50500FB1252 /* ReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
-		9128B0452A23BD3800FB1252 /* ScrapPopUpDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapPopUpDelegate.swift; sourceTree = "<group>"; };
 		9128B0492A23C59700FB1252 /* ScrapStorageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapStorageView.swift; sourceTree = "<group>"; };
 		9128B04B2A23C7A100FB1252 /* ScrapStorageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapStorageCollectionViewCell.swift; sourceTree = "<group>"; };
 		9128B04D2A23C96500FB1252 /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
@@ -431,6 +433,14 @@
 			path = PostSearch;
 			sourceTree = "<group>";
 		};
+		8754E9A52AF3F06E008FC6FD /* Type */ = {
+			isa = PBXGroup;
+			children = (
+				8754E9A62AF3F076008FC6FD /* ViewModelType.swift */,
+			);
+			path = Type;
+			sourceTree = "<group>";
+		};
 		8765EFFB2A2A054D00EF6733 /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -520,6 +530,7 @@
 			isa = PBXGroup;
 			children = (
 				87DC47982A572ECF007823CB /* UserRepository.swift */,
+				8754E9A32AF3E259008FC6FD /* PostRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -527,6 +538,7 @@
 		87F25EE62A8435B300E03C32 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				8754E9A52AF3F06E008FC6FD /* Type */,
 				91487EF029FC3AA3009CFECF /* Base */,
 				87F25EEF2A843A0A00E03C32 /* ViewController */,
 				87F25EEE2A8439F200E03C32 /* View */,
@@ -843,7 +855,7 @@
 			children = (
 				91487F5E29FDA2F0009CFECF /* View */,
 				3E06F8CE2A99E1E9001302F4 /* PostsViewModel.swift */,
-				8745835D2A42184B00954274 /* KeywordPostsVCFactory.swift */,
+				8745835D2A42184B00954274 /* PostsVCFactory.swift */,
 				3E06F8CA2A98A49A001302F4 /* PostsViewController.swift */,
 			);
 			path = Posts;
@@ -1031,7 +1043,6 @@
 			isa = PBXGroup;
 			children = (
 				917BA3872A07C541000409B7 /* SubscriberSearchProtocol.swift */,
-				9128B0452A23BD3800FB1252 /* ScrapPopUpDelegate.swift */,
 				91BFF2F72A27833C00F5D13E /* PostScrapButtonDidTapped.swift */,
 				9158618C2A2E04BF00461F9A /* ScrapPostAddInFolderProtocol.swift */,
 			);
@@ -1248,13 +1259,13 @@
 				9134421D29FFEAC9000E1ED1 /* BroadcastResponse.swift in Sources */,
 				917BA3552A0509D8000409B7 /* RealmService.swift in Sources */,
 				91487EFB29FC3B6A009CFECF /* UIColor+Extension.swift in Sources */,
-				9128B0462A23BD3800FB1252 /* ScrapPopUpDelegate.swift in Sources */,
 				8764A62E2ACEB895007D4B0A /* HomeViewModel.swift in Sources */,
 				3E06F8CB2A98A49A001302F4 /* PostsViewController.swift in Sources */,
 				9109505C2A5013C100D04D41 /* VersionService.swift in Sources */,
 				877ED7C32A4AAED500D80464 /* HomeMenuCollectionViewCell.swift in Sources */,
 				9109505E2A50140C00D04D41 /* DefaultVersionService.swift in Sources */,
 				913442302A004352000E1ED1 /* SubscriberTargetType.swift in Sources */,
+				8754E9A42AF3E259008FC6FD /* PostRepository.swift in Sources */,
 				87DC47932A5713FB007823CB /* SplashViewModel.swift in Sources */,
 				91CCEA602A0E9CC9001362AD /* Haptic.swift in Sources */,
 				9134420929FFDA32000E1ED1 /* SignOutRequest.swift in Sources */,
@@ -1267,6 +1278,7 @@
 				9166BE982A49E8F600FFC026 /* ServerFailViewController.swift in Sources */,
 				91487F0029FC3BFE009CFECF /* TextLiterals.swift in Sources */,
 				91487F4D29FD9858009CFECF /* TagSearchViewController.swift in Sources */,
+				8754E9A72AF3F076008FC6FD /* ViewModelType.swift in Sources */,
 				917BA3312A03D8EF000409B7 /* StorageViewController.swift in Sources */,
 				913442362A00491C000E1ED1 /* NotificationTargetType.swift in Sources */,
 				91BFF2F82A27833C00F5D13E /* PostScrapButtonDidTapped.swift in Sources */,
@@ -1334,7 +1346,7 @@
 				87DC47952A572BE5007823CB /* SplashUseCase.swift in Sources */,
 				7CB706D42A32064900083EC6 /* SearchTableViewCell.swift in Sources */,
 				3E06F8C92A962BB4001302F4 /* UIImage+Extension.swift in Sources */,
-				8745835E2A42184B00954274 /* KeywordPostsVCFactory.swift in Sources */,
+				8745835E2A42184B00954274 /* PostsVCFactory.swift in Sources */,
 				91487F3D29FD893D009CFECF /* FollowHeadView.swift in Sources */,
 				8765EFEE2A29E62600EF6733 /* UIFont+Extension.swift in Sources */,
 				9128B04C2A23C7A100FB1252 /* ScrapStorageCollectionViewCell.swift in Sources */,

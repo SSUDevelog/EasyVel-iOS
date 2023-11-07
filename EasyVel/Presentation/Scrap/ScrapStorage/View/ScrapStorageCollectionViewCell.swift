@@ -18,7 +18,7 @@ final class ScrapStorageCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - UI Components
     
-    let folderIcon = UIImageView(image: ImageLiterals.scrapFolderIcon)
+    let folderIcon = UIImageView(image: ImageLiterals.folderGreen)
     
     let folderNameLabel: UILabel = {
         let label = UILabel()

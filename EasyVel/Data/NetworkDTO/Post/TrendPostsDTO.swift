@@ -8,5 +8,5 @@
 import Foundation
 
 struct TrendPostResponse: Codable {
-    let trendPostDtos: [PostDTO]?
+    let trendPostDtos: [PostDTO]
 }

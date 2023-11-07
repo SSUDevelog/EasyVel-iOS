@@ -59,6 +59,7 @@ final class ScrapStorageView: BaseUIView {
         collectionView.showsVerticalScrollIndicator = false
         collectionView.backgroundColor = .gray100
         collectionView.alwaysBounceVertical = true
+        collectionView.contentInset = .init(top: 0, left: 20, bottom: 40, right: 20)
         return collectionView
     }()
     
@@ -111,7 +112,7 @@ final class ScrapStorageView: BaseUIView {
         
         scrapCollectionView.snp.makeConstraints {
             $0.top.equalTo(buttonBackView.snp.bottom)
-            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.leading.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()
         }
     }

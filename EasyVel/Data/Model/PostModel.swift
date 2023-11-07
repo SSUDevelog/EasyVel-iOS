@@ -12,3 +12,4 @@ struct PostModel: Identifiable, Hashable {
     let post: PostDTO
     var isScrapped: Bool = false
 }
+
