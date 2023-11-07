@@ -46,8 +46,7 @@ final class FolderAlertViewController: UIViewController {
     
     private let alertView = UIView()
     private let titleLabel = UILabel()
-    private let folderTextFiled = UITextField()
-    private let clearButton = UIButton()
+    private let folderTextFiled = FolderTextField()
     private let errorLabel = UILabel()
     private var yesButton = UIButton()
     private let noButton = UIButton()
@@ -100,11 +99,9 @@ final class FolderAlertViewController: UIViewController {
             })
             .disposed(by: disposeBag)
         
-        clearButton.rx.tap
+        folderTextFiled.clearButton.rx.tap
             .withLatestFrom(Observable.just(""))
-            .do(onNext: { text in
-                self.errorLabel.text = text
-            })
+            .do(onNext: { self.errorLabel.text = $0 })
             .bind(to: folderTextFiled.rx.text)
             .disposed(by: disposeBag)
         
@@ -144,11 +141,7 @@ final class FolderAlertViewController: UIViewController {
             $0.horizontalEdges.equalToSuperview().inset(20)
             $0.height.equalTo(36)
         }
-        
-        clearButton.snp.makeConstraints {
-            $0.size.equalTo(16)
-        }
-        
+
         errorLabel.snp.makeConstraints {
             $0.top.equalTo(folderTextFiled.snp.bottom).offset(8)
             $0.centerX.equalToSuperview()
@@ -176,19 +169,17 @@ final class FolderAlertViewController: UIViewController {
         titleLabel.text = type?.title
         
         
-        folderTextFiled.layer.borderColor = UIColor.gray200.cgColor
-        folderTextFiled.layer.borderWidth = 1
-        folderTextFiled.layer.cornerRadius = 4
-        folderTextFiled.attributedPlaceholder = NSAttributedString(string: TextLiterals.folderTextFieldPlaceHolder,
-                                                                   attributes: [.foregroundColor : UIColor.gray200,
-                                                                                .font: UIFont.caption_1_M
-                                                                   ])
-        folderTextFiled.addLeftPadding(leftPaddingWidth: 12)
-        folderTextFiled.rightView = clearButton
-        folderTextFiled.rightViewMode = .always
-        
-        clearButton.setImage(.cancel, for: .normal)
-        
+//        folderTextFiled.layer.borderColor = UIColor.gray200.cgColor
+//        folderTextFiled.layer.borderWidth = 1
+//        folderTextFiled.layer.cornerRadius = 4
+//        folderTextFiled.attributedPlaceholder = NSAttributedString(string: TextLiterals.folderTextFieldPlaceHolder,
+//                                                                   attributes: [.foregroundColor : UIColor.gray200,
+//                                                                                .font: UIFont.caption_1_M
+//                                                                   ])
+//        folderTextFiled.addLeftPadding(leftPaddingWidth: 12)
+//        folderTextFiled.rightView = clearButton
+//        folderTextFiled.rightViewMode = .always
+//        
         errorLabel.font = .caption_1_M
         errorLabel.textColor = .error
         
@@ -222,3 +213,5 @@ final class FolderAlertViewController: UIViewController {
         button.makeRounded(radius: 4)
     }
 }
+
+
