@@ -102,7 +102,7 @@ final class PostsViewController: BaseViewController {
     func bindViewModel() {
         
         let input = PostsViewModel.Input(
-            viewDidLoadEvent: rx.viewDidLoad.asObservable(),
+            viewWillAppearEvent: rx.viewWillAppear.asObservable(),
             refreshEvent: postsView.refreshControl.rx.controlEvent(.valueChanged).asObservable(),
             scrapButtonDidTap: scrapButtonDidTap.asObservable()
         )
@@ -113,7 +113,7 @@ final class PostsViewController: BaseViewController {
             .asDriver(onErrorJustReturn: [])
             .drive(onNext: { [weak self] posts in
                 self?.postList = posts.map { $0.post }
-                self?.loadSnapshot(with: posts, andAnimation: true)
+                self?.loadSnapshot(with: posts, andAnimation: false)
                 self?.postsView.collectionView.refreshControl?.endRefreshing()
                 LoadingView.hideLoading()
             }).disposed(by: disposeBag)
@@ -158,9 +158,15 @@ extension PostsViewController {
     }
     
     private func pushToWebView(of indexPath: IndexPath) {
-        guard let postURL = self.postList?[indexPath.item].url else { return }
-        let webViewModel = WebViewModel(url: postURL, service: DefaultFollowService.shared)
-        let webViewController = WebViewController(viewModel: webViewModel)
+        guard let post = self.postList?[indexPath.item] else { return }
+        
+        let webView = WebView()
+        
+        let storagePost = post.toStoragePost()
+        let service = DefaultFollowService.shared
+        let webViewModel = NewWebViewModel(service, storagePost)
+        
+        let webViewController = NewWebViewController(webView, webViewModel)
         self.navigationController?.pushViewController(webViewController, animated: true)
     }
 }

@@ -22,7 +22,7 @@ final class PostsViewModel: ViewModelType {
     // MARK: - Input
     
     struct Input {
-        let viewDidLoadEvent: Observable<Void>
+        let viewWillAppearEvent: Observable<Void>
         let refreshEvent: Observable<Void>
         let scrapButtonDidTap: Observable<PostModel>
     }
@@ -51,7 +51,7 @@ final class PostsViewModel: ViewModelType {
         
         let output = Output()
         
-        Observable<Void>.merge(input.viewDidLoadEvent,
+        Observable<Void>.merge(input.viewWillAppearEvent,
                                input.refreshEvent)
             .startWith(LoadingView.showLoading())
             .flatMapLatest { [weak self] _ -> Observable<[PostDTO]> in
