@@ -37,4 +37,8 @@ extension UIViewController {
                                                object: nil)
         
     }
+    
+    func popViewController(withAnimation isAnimated: Bool) {
+        self.navigationController?.popViewController(animated: isAnimated)
+    }
 }
