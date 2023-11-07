@@ -16,8 +16,6 @@ final class WebView: BaseUIView {
     
     // MARK: - Property
     
-    private let url: String
-    
     var popTrigger: Driver<Void> {
         return self.backButton.rx.tap.asDriver()
     }
@@ -87,16 +85,6 @@ final class WebView: BaseUIView {
     }()
     
     // MARK: - Life Cycle
-    
-    init(url: String) {
-        self.url = url
-        super.init(frame: .zero)
-    }
-    
-    @available(*, unavailable)
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     // MARK: - Setting
     
