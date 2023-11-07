@@ -1,5 +1,5 @@
 //
-//  WebViewModel.swift
+//  UserWebViewModel.swift
 //  VelogOnMobile
 //
 //  Created by 홍준혁 on 2023/05/27.
@@ -10,7 +10,7 @@ import UIKit
 import RxRelay
 import RxSwift
 
-final class WebViewModel: BaseViewModel {
+final class UserWebViewModel: BaseViewModel {
     
     private let realm = RealmService()
     
@@ -118,7 +118,7 @@ final class WebViewModel: BaseViewModel {
 
 // MARK: - api
 
-extension WebViewModel {
+extension UserWebViewModel {
     func addSubscriber(
         name: String
     ) {

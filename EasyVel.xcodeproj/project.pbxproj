@@ -64,7 +64,7 @@
 		9109505C2A5013C100D04D41 /* VersionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9109505B2A5013C100D04D41 /* VersionService.swift */; };
 		9109505E2A50140C00D04D41 /* DefaultVersionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9109505D2A50140C00D04D41 /* DefaultVersionService.swift */; };
 		910C02FB2A4D7BC5005D5797 /* PostSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910C02FA2A4D7BC5005D5797 /* PostSearchViewModel.swift */; };
-		9128AFE52A2117A200FB1252 /* WebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9128AFE42A2117A200FB1252 /* WebViewModel.swift */; };
+		9128AFE52A2117A200FB1252 /* UserWebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9128AFE42A2117A200FB1252 /* UserWebViewModel.swift */; };
 		9128B0262A236D2800FB1252 /* ScrapPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9128B0252A236D2800FB1252 /* ScrapPopUpView.swift */; };
 		9128B0282A236E7600FB1252 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9128B0272A236E7600FB1252 /* UIButton+Extension.swift */; };
 		9128B02A2A23757200FB1252 /* ScrapFolderBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9128B0292A23757200FB1252 /* ScrapFolderBottomSheetView.swift */; };
@@ -143,7 +143,7 @@
 		91487F4329FD8AC9009CFECF /* FollowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91487F4229FD8AC9009CFECF /* FollowViewModel.swift */; };
 		91487F4D29FD9858009CFECF /* TagSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91487F4C29FD9858009CFECF /* TagSearchViewController.swift */; };
 		91487F5229FDA143009CFECF /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91487F5129FDA143009CFECF /* SettingTableViewCell.swift */; };
-		914D8DD92A02B22A00516B4C /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914D8DD82A02B22A00516B4C /* WebViewController.swift */; };
+		914D8DD92A02B22A00516B4C /* UserWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914D8DD82A02B22A00516B4C /* UserWebViewController.swift */; };
 		915861852A2DFA6D00461F9A /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = 915861842A2DFA6D00461F9A /* RxBlocking */; };
 		915861872A2DFA6D00461F9A /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 915861862A2DFA6D00461F9A /* RxCocoa */; };
 		915861892A2DFA6D00461F9A /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 915861882A2DFA6D00461F9A /* RxRelay */; };
@@ -253,7 +253,7 @@
 		9109505B2A5013C100D04D41 /* VersionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionService.swift; sourceTree = "<group>"; };
 		9109505D2A50140C00D04D41 /* DefaultVersionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultVersionService.swift; sourceTree = "<group>"; };
 		910C02FA2A4D7BC5005D5797 /* PostSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSearchViewModel.swift; sourceTree = "<group>"; };
-		9128AFE42A2117A200FB1252 /* WebViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewModel.swift; sourceTree = "<group>"; };
+		9128AFE42A2117A200FB1252 /* UserWebViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserWebViewModel.swift; sourceTree = "<group>"; };
 		9128B0252A236D2800FB1252 /* ScrapPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapPopUpView.swift; sourceTree = "<group>"; };
 		9128B0272A236E7600FB1252 /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 		9128B0292A23757200FB1252 /* ScrapFolderBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapFolderBottomSheetView.swift; sourceTree = "<group>"; };
@@ -331,7 +331,7 @@
 		91487F4229FD8AC9009CFECF /* FollowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowViewModel.swift; sourceTree = "<group>"; };
 		91487F4C29FD9858009CFECF /* TagSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagSearchViewController.swift; sourceTree = "<group>"; };
 		91487F5129FDA143009CFECF /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
-		914D8DD82A02B22A00516B4C /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		914D8DD82A02B22A00516B4C /* UserWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserWebViewController.swift; sourceTree = "<group>"; };
 		9158618C2A2E04BF00461F9A /* ScrapPostAddInFolderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrapPostAddInFolderProtocol.swift; sourceTree = "<group>"; };
 		916227D72A44569500118018 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		916227D92A454FD800118018 /* FollowListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowListResponse.swift; sourceTree = "<group>"; };
@@ -990,8 +990,8 @@
 			isa = PBXGroup;
 			children = (
 				3E923C5C2AF9C7D500694077 /* View */,
-				914D8DD82A02B22A00516B4C /* WebViewController.swift */,
-				9128AFE42A2117A200FB1252 /* WebViewModel.swift */,
+				914D8DD82A02B22A00516B4C /* UserWebViewController.swift */,
+				9128AFE42A2117A200FB1252 /* UserWebViewModel.swift */,
 				3E923C5A2AF9C77000694077 /* PostWebViewController.swift */,
 				3E923C5D2AF9C7F900694077 /* PostWebViewModel.swift */,
 			);
@@ -1311,7 +1311,7 @@
 				3E7B1AC02A87E90500EE7739 /* PostsCollectionViewCell.swift in Sources */,
 				917BA3522A050903000409B7 /* RealmStoragePost.swift in Sources */,
 				916227DA2A454FD800118018 /* FollowListResponse.swift in Sources */,
-				9128AFE52A2117A200FB1252 /* WebViewModel.swift in Sources */,
+				9128AFE52A2117A200FB1252 /* UserWebViewModel.swift in Sources */,
 				877ED7C62A4ACC0900D80464 /* TrendPostsDTO.swift in Sources */,
 				3E61EE8A2AA818E9004F25DB /* Array+Extension.swift in Sources */,
 				9128B0322A23778400FB1252 /* ScrapFolderBottomSheetViewModel.swift in Sources */,
@@ -1409,7 +1409,7 @@
 				9134420B29FFDA71000E1ED1 /* SignOutResponse.swift in Sources */,
 				3EE425222ACAE00B00DE5FA5 /* TagCollectionViewCell.swift in Sources */,
 				9128B0262A236D2800FB1252 /* ScrapPopUpView.swift in Sources */,
-				914D8DD92A02B22A00516B4C /* WebViewController.swift in Sources */,
+				914D8DD92A02B22A00516B4C /* UserWebViewController.swift in Sources */,
 				91ED17892A00E58D00158787 /* FollowService.swift in Sources */,
 				87F287EC2A9DE2A300A53218 /* UIViewController+.swift in Sources */,
 				9128B0562A23CC7400FB1252 /* ScrapStorageViewController.swift in Sources */,

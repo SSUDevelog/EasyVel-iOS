@@ -119,12 +119,12 @@ final class FollowSearchViewController: RxBaseViewController<FollowSearchViewMod
         viewModel.pushToUserWeb
             .asDriver(onErrorJustReturn: (String(), String()))
             .drive { [weak self] userName, url in
-                let webViewModel = WebViewModel(
+                let webViewModel = UserWebViewModel(
                     user: userName,
                     url: url,
                     service: DefaultFollowService.shared
                 )
-                let webViewController = WebViewController(viewModel: webViewModel)
+                let webViewController = UserWebViewController(viewModel: webViewModel)
                 self?.navigationController?.pushViewController(webViewController, animated: true)
             }
             .disposed(by: disposeBag)

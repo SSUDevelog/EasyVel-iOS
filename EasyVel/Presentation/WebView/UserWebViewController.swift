@@ -1,5 +1,5 @@
 //
-//  WebViewController.swift
+//  UserWebViewController.swift
 //  VelogOnMobile
 //
 //  Created by 홍준혁 on 2023/05/04.
@@ -12,7 +12,7 @@ import RxCocoa
 import RxSwift
 import SnapKit
 
-final class WebViewController: RxBaseViewController<WebViewModel> {
+final class UserWebViewController: RxBaseViewController<UserWebViewModel> {
     
     // MARK: - Property
     
@@ -127,7 +127,7 @@ final class WebViewController: RxBaseViewController<WebViewModel> {
         navigationController?.navigationBar.isHidden = true
     }
     
-    override func bind(viewModel: WebViewModel) {
+    override func bind(viewModel: UserWebViewModel) {
         super.bind(viewModel: viewModel)
         bindOutput(viewModel)
         
@@ -150,7 +150,7 @@ final class WebViewController: RxBaseViewController<WebViewModel> {
             .disposed(by: self.disposeBag)
     }
     
-    private func bindOutput(_ viewModel: WebViewModel) {
+    private func bindOutput(_ viewModel: UserWebViewModel) {
         
         viewModel.urlRequestOutput
             .asDriver(onErrorJustReturn: URLRequest(url: URL(fileURLWithPath: "")))
@@ -208,7 +208,7 @@ final class WebViewController: RxBaseViewController<WebViewModel> {
 
 }
 
-extension WebViewController {
+extension UserWebViewController {
     func configureFollowButton(status: Bool) {
         self.followButton.isSelected = status
     }

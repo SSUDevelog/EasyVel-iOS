@@ -107,12 +107,12 @@ final class FollowViewController: RxBaseViewController<FollowViewModel> {
         userName: String,
         userURL: String
     ) {
-        let webViewModel = WebViewModel(
+        let webViewModel = UserWebViewModel(
             user: userName,
             url: userURL,
             service: DefaultFollowService.shared
         )
-        let webViewController = WebViewController(viewModel: webViewModel)
+        let webViewController = UserWebViewController(viewModel: webViewModel)
         self.navigationController?.pushViewController(webViewController, animated: true)
     }
     
