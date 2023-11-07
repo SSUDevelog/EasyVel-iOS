@@ -40,7 +40,7 @@ final class SignInViewController: RxBaseViewController<SignInViewModel> {
                     UIApplication.shared.changeRootViewController(tabNVC)
                 }
                 else {
-                    self.showToast(toastText: "로그인에 실패하였습니다.", backgroundColor: .gray300)
+                    self.showToast(toastText: "로그인에 실패하였습니다.", backgroundColor: .gray500)
                 }
             })
             .disposed(by: disposeBag)
@@ -75,6 +75,6 @@ extension SignInViewController: ASAuthorizationControllerDelegate, ASAuthorizati
     }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-        showToast(toastText: "애플 로그인 오류가 발생했습니다.", backgroundColor: .gray200)
+        showToast(toastText: "애플 로그인 오류가 발생했습니다.", backgroundColor: .gray500)
     }
 }

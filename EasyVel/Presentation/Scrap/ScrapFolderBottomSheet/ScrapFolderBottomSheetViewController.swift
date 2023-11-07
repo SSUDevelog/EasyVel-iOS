@@ -97,7 +97,7 @@ final class ScrapFolderBottomSheetViewController: RxBaseViewController<ScrapFold
             .drive(onNext: { [weak self] isAlreadyHave in
                 self?.showToast(
                     toastText: TextLiterals.alreadyHaveFolderToastText,
-                    backgroundColor: .gray300,
+                    backgroundColor: .gray500,
                     height: Int(self?.keyboardHeight ?? CGFloat())
                 )
             })

@@ -46,7 +46,7 @@ final class Toast {
         
         toastLabel.text = toastText
         toastLabel.textColor = .white
-        toastLabel.font = .body_2_M
+        toastLabel.font = .body_2_B
         toastLabel.textAlignment = .center
         toastLabel.clipsToBounds = true
         toastLabel.numberOfLines = 0
