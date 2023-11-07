@@ -58,11 +58,11 @@ final class PostWebViewController: BaseViewController {
     }
     
     private func bind(viewModel: PostWebViewModel) {
-        let viewDidLoad = self.rx.viewWillAppear.asObservable()
+        let viewWillAppear = self.rx.viewWillAppear.asObservable()
         let followTrigger = self.webView.followTrigger
         let scrapTrigger = self.webView.scrapTrigger
         
-        let input = PostWebViewModel.Input(viewDidLoad, followTrigger, scrapTrigger)
+        let input = PostWebViewModel.Input(viewWillAppear, followTrigger, scrapTrigger)
         let output = viewModel.transform(input: input, disposeBag: self.disposeBag)
         
         output.webRequest
