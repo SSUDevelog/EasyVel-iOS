@@ -1,5 +1,5 @@
 //
-//  WebView.swift
+//  PostWebView.swift
 //  EasyVel
 //
 //  Created by 이성민 on 11/7/23.
@@ -12,7 +12,7 @@ import SnapKit
 import RxCocoa
 import RxSwift
 
-final class WebView: BaseUIView {
+final class PostWebView: BaseUIView {
     
     // MARK: - Property
     
@@ -141,7 +141,7 @@ final class WebView: BaseUIView {
 
 // MARK: - Custom Method
 
-extension WebView {
+extension PostWebView {
     func load(request: URLRequest) {
         self.webView.load(request)
     }

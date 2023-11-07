@@ -1,5 +1,5 @@
 //
-//  NewWebViewModel.swift
+//  PostWebViewModel.swift
 //  EasyVel
 //
 //  Created by 이성민 on 11/7/23.
@@ -10,7 +10,7 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-final class NewWebViewModel: BaseViewModel, ViewModelType {
+final class PostWebViewModel: BaseViewModel, ViewModelType {
     
     // MARK: - Properties
     
@@ -160,7 +160,7 @@ final class NewWebViewModel: BaseViewModel, ViewModelType {
     
 }
 
-extension NewWebViewModel {
+extension PostWebViewModel {
     private func scrap(
         post: StoragePost
     ) {

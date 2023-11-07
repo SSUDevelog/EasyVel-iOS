@@ -160,13 +160,13 @@ extension PostsViewController {
     private func pushToWebView(of indexPath: IndexPath) {
         guard let post = self.postList?[indexPath.item] else { return }
         
-        let webView = WebView()
+        let webView = PostWebView()
         
         let storagePost = post.toStoragePost()
         let service = DefaultFollowService.shared
-        let webViewModel = NewWebViewModel(service, storagePost)
+        let webViewModel = PostWebViewModel(service, storagePost)
         
-        let webViewController = NewWebViewController(webView, webViewModel)
+        let webViewController = PostWebViewController(webView, webViewModel)
         self.navigationController?.pushViewController(webViewController, animated: true)
     }
 }

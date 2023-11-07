@@ -1,5 +1,5 @@
 //
-//  NewWebViewController.swift
+//  PostWebViewController.swift
 //  EasyVel
 //
 //  Created by 이성민 on 11/7/23.
@@ -10,24 +10,24 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-final class NewWebViewController: BaseViewController {
+final class PostWebViewController: BaseViewController {
     
     // MARK: - Property
     
     private let disposeBag = DisposeBag()
     
-    private let webView: WebView
-    private let viewModel: NewWebViewModel
+    private let webView: PostWebView
+    private let viewModel: PostWebViewModel
     
     // MARK: - UI Property
     
     // MARK: - Life Cycle
     
     init(
-        _ webView: WebView,
-        _ viewModel: NewWebViewModel
+        _ view: PostWebView,
+        _ viewModel: PostWebViewModel
     ) {
-        self.webView = webView
+        self.webView = view
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -57,12 +57,12 @@ final class NewWebViewController: BaseViewController {
             }.disposed(by: self.disposeBag)
     }
     
-    private func bind(viewModel: NewWebViewModel) {
+    private func bind(viewModel: PostWebViewModel) {
         let viewDidLoad = self.rx.viewWillAppear.asObservable()
         let followTrigger = self.webView.followTrigger
         let scrapTrigger = self.webView.scrapTrigger
         
-        let input = NewWebViewModel.Input(viewDidLoad, followTrigger, scrapTrigger)
+        let input = PostWebViewModel.Input(viewDidLoad, followTrigger, scrapTrigger)
         let output = viewModel.transform(input: input, disposeBag: self.disposeBag)
         
         output.webRequest
