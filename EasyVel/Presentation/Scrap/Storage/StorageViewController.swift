@@ -12,11 +12,13 @@ import RxCocoa
 
 import SnapKit
 
-final class StorageViewController: RxBaseViewController<StorageViewModel> {
+final class StorageViewController: RxBaseViewController<StorageViewModel>, FolderViewControllerDelegate {
+    
     
     private let storageView = StorageView()
     private var storagePosts: [StoragePost]?
     private var storageTableViewDidScroll = false
+    var folderName: String?
 
     override func render() {
         self.view = storageView
@@ -35,7 +37,12 @@ final class StorageViewController: RxBaseViewController<StorageViewModel> {
         
         storageView.storageHeadView.changeFolderNameButton.rx.tap
             .subscribe(onNext: { [weak self] in
-                self?.changeFolderNameAlert()
+                
+                let vc = FolderAlertViewController(type: .change, folderName: self?.folderName ?? "")
+                vc.modalPresentationStyle = .overFullScreen
+                vc.modalTransitionStyle = .crossDissolve
+                vc.delegate = self
+                self?.present(vc, animated: false)
             })
             .disposed(by: disposeBag)
         
@@ -85,6 +92,7 @@ final class StorageViewController: RxBaseViewController<StorageViewModel> {
         viewModel.folderNameOutput
             .asDriver(onErrorJustReturn: String())
             .drive(onNext: { [weak self] folderName in
+                self?.folderName = folderName
                 if folderName == TextLiterals.allPostsScrapFolderText {
                     self?.storageView.storageHeadView.deleteFolderButton.isHidden = true
                     self?.storageView.storageHeadView.changeFolderNameButton.isHidden = true
@@ -94,25 +102,14 @@ final class StorageViewController: RxBaseViewController<StorageViewModel> {
                 }
             })
             .disposed(by: disposeBag)
-        
-        viewModel.newFolderNameIsUniqueOutput
-            .asDriver(onErrorJustReturn: (String(), Bool()))
-            .drive(onNext: { [weak self] newFolderName, isUniqueName in
-                if isUniqueName {
-                    self?.storageView.storageHeadView.titleLabel.text = newFolderName
-                    self?.showToast(
-                        toastText: TextLiterals.folderNameChangeSuccessToastText,
-                        backgroundColor: .gray500
-                    )
-                } else {
-                    self?.showToast(
-                        toastText: TextLiterals.alreadyHaveFolderToastText,
-                        backgroundColor: .gray500
-                    )
-                }
-            })
-            .disposed(by: disposeBag)
+
     }
+    
+    func folderVCDismiss(newFolderName:String) {
+        self.folderName = newFolderName
+        self.storageView.storageHeadView.titleLabel.text = newFolderName
+    }
+    
     
     func setStorageHeadView(
         headTitle: String
@@ -146,34 +143,7 @@ final class StorageViewController: RxBaseViewController<StorageViewModel> {
         actionSheetController.addAction(actionCancel)
         self.present(actionSheetController, animated: true)
     }
-    
-    private func changeFolderNameAlert() {
-        let alertController = UIAlertController(
-            title: TextLiterals.folderNameChangeToastTitle,
-            message: nil,
-            preferredStyle: .alert
-        )
-        alertController.addTextField()
-        let okAction = UIAlertAction(
-            title: TextLiterals.folderNameChangeToastOkActionText,
-            style: .default
-        ) { [weak self] action in
-            if let folderTextField = alertController.textFields?.first,
-               let changeFolderName = folderTextField.text,
-               let stoagePosts = self?.storagePosts {
-                self?.viewModel?.changeFolderButtonDidTap.accept(
-                    (stoagePosts, changeFolderName)
-                )
-            }
-        }
-        let cancelAction = UIAlertAction(
-            title: TextLiterals.folderNameChangeToastCancelActionText,
-            style: .cancel
-        )
-        alertController.addAction(cancelAction)
-        alertController.addAction(okAction)
-        present(alertController, animated: true)
-    }
+
 }
 
 extension StorageViewController: UITableViewDataSource {

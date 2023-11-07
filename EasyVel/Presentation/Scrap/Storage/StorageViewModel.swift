@@ -21,6 +21,7 @@ final class StorageViewModel: BaseViewModel {
     var deletePostButtonDidTap = PublishRelay<String>()
     var deleteFolderButtonDidTap = PublishRelay<Bool>()
     var changeFolderButtonDidTap = PublishRelay<([StoragePost], String)>()
+    var yesDidTap = PublishRelay<Bool>()
     
     // MARK: - Output
     
@@ -28,6 +29,7 @@ final class StorageViewModel: BaseViewModel {
     var isPostsEmptyOutput = PublishRelay<Bool>()
     var folderNameOutput = PublishRelay<String>()
     var newFolderNameIsUniqueOutput = PublishRelay<(String, Bool)>()
+    var newFolderOutput = PublishRelay<String>()
     
     override init() {
         super.init()
@@ -97,6 +99,21 @@ final class StorageViewModel: BaseViewModel {
                 }
             })
             .disposed(by: disposeBag)
+        
+        yesDidTap
+            .subscribe(onNext: { [weak self] _ in
+                let realmData = self?.getFolderPostInRealm(
+                    folderName: self?.folderName ?? ""
+                )
+                self?.storagePostsOutput.accept(realmData ?? [StoragePost]())
+                let isEmpty = self?.checkStorageEmpty(
+                    storage: realmData ?? [StoragePost]()
+                )
+                self?.isPostsEmptyOutput.accept(isEmpty ?? Bool())
+                self?.folderNameOutput.accept(self?.folderName ?? String())
+            })
+            .disposed(by: disposeBag)
+       
     }
     
     // MARK: - func

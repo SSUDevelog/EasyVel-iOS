@@ -56,7 +56,7 @@ final class ScrapStorageView: BaseUIView {
 
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(cell: ScrapStorageCollectionViewCell.self)
-        collectionView.showsVerticalScrollIndicator = true
+        collectionView.showsVerticalScrollIndicator = false
         collectionView.backgroundColor = .gray100
         collectionView.alwaysBounceVertical = true
         collectionView.contentInset = .init(top: 0, left: 20, bottom: 40, right: 20)

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		098294252AF4FA060011773A /* FolderAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098294242AF4FA060011773A /* FolderAlertViewController.swift */; };
+		098294272AFA12730011773A /* FolderAlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098294262AFA12730011773A /* FolderAlertViewModel.swift */; };
+		0982942D2AFA255F0011773A /* FolderTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0982942C2AFA255F0011773A /* FolderTextField.swift */; };
 		3E06F8C72A96247F001302F4 /* PostDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E06F8C62A96247F001302F4 /* PostDetailView.swift */; };
 		3E06F8C92A962BB4001302F4 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E06F8C82A962BB4001302F4 /* UIImage+Extension.swift */; };
 		3E06F8CB2A98A49A001302F4 /* PostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E06F8CA2A98A49A001302F4 /* PostsViewController.swift */; };
@@ -198,6 +201,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		098294242AF4FA060011773A /* FolderAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderAlertViewController.swift; sourceTree = "<group>"; };
+		098294262AFA12730011773A /* FolderAlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderAlertViewModel.swift; sourceTree = "<group>"; };
+		0982942C2AFA255F0011773A /* FolderTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderTextField.swift; sourceTree = "<group>"; };
 		3E06F8C62A96247F001302F4 /* PostDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailView.swift; sourceTree = "<group>"; };
 		3E06F8C82A962BB4001302F4 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		3E06F8CA2A98A49A001302F4 /* PostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsViewController.swift; sourceTree = "<group>"; };
@@ -405,6 +411,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		098294282AFA25280011773A /* FolderAlert */ = {
+			isa = PBXGroup;
+			children = (
+				0982942B2AFA25450011773A /* ViewController */,
+				0982942A2AFA253E0011773A /* ViewModel */,
+				098294292AFA25380011773A /* View */,
+			);
+			path = FolderAlert;
+			sourceTree = "<group>";
+		};
+		098294292AFA25380011773A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0982942C2AFA255F0011773A /* FolderTextField.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0982942A2AFA253E0011773A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				098294262AFA12730011773A /* FolderAlertViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0982942B2AFA25450011773A /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				098294242AF4FA060011773A /* FolderAlertViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		3EB7982B2AB9BAB9004EC35D /* Notification */ = {
 			isa = PBXGroup;
 			children = (
@@ -1072,6 +1112,7 @@
 		91BFF2EE2A25D53200F5D13E /* Scrap */ = {
 			isa = PBXGroup;
 			children = (
+				098294282AFA25280011773A /* FolderAlert */,
 				9128B0302A23774700FB1252 /* ScrapPopUp */,
 				9128B0242A236D1600FB1252 /* ScrapFolderBottomSheet */,
 				9128B0482A23C58400FB1252 /* ScrapStorage */,
@@ -1288,6 +1329,7 @@
 				9134422329FFF59D000E1ED1 /* SettingTableView.swift in Sources */,
 				9134421129FFDB5D000E1ED1 /* SearchUserResponse.swift in Sources */,
 				9128B05A2A23CC9000FB1252 /* ScrapStorageViewModel.swift in Sources */,
+				098294272AFA12730011773A /* FolderAlertViewModel.swift in Sources */,
 				9109505A2A5011DD00D04D41 /* VersionTargetType.swift in Sources */,
 				3EE425202ACADFCE00DE5FA5 /* TagCollectionView.swift in Sources */,
 				9134421329FFDBE8000E1ED1 /* GetSubscriberPostResponse.swift in Sources */,
@@ -1321,6 +1363,7 @@
 				91487EC429FC380A009CFECF /* SceneDelegate.swift in Sources */,
 				91E4428B2A10F3C7008CB516 /* BaseViewModel.swift in Sources */,
 				8765EFF42A29ECDE00EF6733 /* String+Extension.swift in Sources */,
+				098294252AF4FA060011773A /* FolderAlertViewController.swift in Sources */,
 				9134422729FFF9BC000E1ED1 /* FollowView.swift in Sources */,
 				91487F2229FC5F2A009CFECF /* TabBarController.swift in Sources */,
 				917BA3332A03D8F7000409B7 /* StorageView.swift in Sources */,
@@ -1377,6 +1420,7 @@
 				91487F1729FC5481009CFECF /* NetworkMonitor.swift in Sources */,
 				917BA3352A03E14A000409B7 /* StorageHeadView.swift in Sources */,
 				9128B0522A23CA5E00FB1252 /* ScrapStorageCollectionViewDataSource.swift in Sources */,
+				0982942D2AFA255F0011773A /* FolderTextField.swift in Sources */,
 				9128B04E2A23C96500FB1252 /* UICollectionView+Extension.swift in Sources */,
 				9128B03F2A237E1800FB1252 /* ScrapFolderBottomSheetDataSource.swift in Sources */,
 				91487F3929FD8915009CFECF /* FollowTableViewCell.swift in Sources */,

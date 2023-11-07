@@ -146,6 +146,7 @@ enum TextLiterals {
     static let storageViewChangeFolderNameButtonText: String = "이름 변경"
     
     static let storageViewPostDeleteButtonText: String = "삭제"
+    static let folderTextFieldPlaceHolder: String = "폴더 이름"
     
     // MARK: - post search view
     
