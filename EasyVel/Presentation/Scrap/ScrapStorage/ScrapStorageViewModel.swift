@@ -46,31 +46,31 @@ final class ScrapStorageViewModel: BaseViewModel {
                 self?.storageListOutput.accept((folderList, folderImageList, folderPostsCount))
             })
             .disposed(by: disposeBag)
-
-       yesDidTap
+        
+        yesDidTap
             .subscribe(onNext: { [weak self] _ in
-                    guard let scrapFolderRealmDTO: Results<ScrapStorageDTO> = self?.realm.getFolders() else { return }
-                    let scrapFolder = self?.realm.convertToStorageDTO(input: scrapFolderRealmDTO)
-                    let folderNameList = scrapFolder.map {
-                        $0.map {
-                            $0.folderName
-                        }
+                guard let scrapFolderRealmDTO: Results<ScrapStorageDTO> = self?.realm.getFolders() else { return }
+                let scrapFolder = self?.realm.convertToStorageDTO(input: scrapFolderRealmDTO)
+                let folderNameList = scrapFolder.map {
+                    $0.map {
+                        $0.folderName
                     }
-                    let folderImageList = folderNameList.map {
-                        $0.map {
-                            self?.realm.getFolderImage(folderName: $0 ?? "") ?? String()
-                        }
+                }
+                let folderImageList = folderNameList.map {
+                    $0.map {
+                        self?.realm.getFolderImage(folderName: $0 ?? "") ?? String()
                     }
-                    let folderPostsCount = folderNameList.map {
-                        $0.map {
-                            self?.realm.getFolderPostsCount(folderName: $0 ?? "") ?? Int()
-                        }
+                }
+                let folderPostsCount = folderNameList.map {
+                    $0.map {
+                        self?.realm.getFolderPostsCount(folderName: $0 ?? "") ?? Int()
                     }
-                    if let scrapFolder = scrapFolder,
-                       let folderImageList = folderImageList,
-                       let folderPostsCount = folderPostsCount {
-                        self?.storageListOutput.accept((scrapFolder, folderImageList, folderPostsCount))
-                    }
+                }
+                if let scrapFolder = scrapFolder,
+                   let folderImageList = folderImageList,
+                   let folderPostsCount = folderPostsCount {
+                    self?.storageListOutput.accept((scrapFolder, folderImageList, folderPostsCount))
+                }
             })
             .disposed(by: disposeBag)
     }

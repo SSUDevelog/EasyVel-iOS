@@ -112,6 +112,7 @@ enum TextLiterals {
     static let scrapPopUpViewLeftText: String = "스크랩했습니다."
     static let moveToScrapStorageButtonText: String = "보러가기"
     static let presentScrapFolderBottomSheetButtonText: String = "폴더에 담기"
+    static let postDescrappedToast: String = "스크랩 글이 삭제되었습니다."
     
     // MARK: - scrapFolderBottomSheet
     
@@ -119,6 +120,7 @@ enum TextLiterals {
     static let makeNewFolderButtonText: String = "새 폴더 만들기"
     static let newFolderAddTextFieldPlaceholder: String = "폴더명을 입력하세요."
     static let addFolderFinishedButtonTitleText: String = "완료"
+    static let folderDeletedToast: String = "폴더가 삭제되었습니다."
     
     // MARK: - scrap storage view
     
@@ -190,4 +192,8 @@ enum TextLiterals {
     //MARK: - Exception
     
     static let unknownError = "알 수 없는 오류가 발생했습니다."
+    
+    // MARK: - Alert
+    
+    static let existingFolder = "이미 있는 폴더명입니다. 다시 만들어주세요."
 }

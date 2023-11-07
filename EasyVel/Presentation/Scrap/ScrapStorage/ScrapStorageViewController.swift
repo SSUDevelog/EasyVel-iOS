@@ -42,14 +42,14 @@ final class ScrapStorageViewController: RxBaseViewController<ScrapStorageViewMod
         scrapView.scrapCollectionView.rx.itemSelected
             .subscribe { [weak self] indexPath in
                 let cell = self?.scrapView.scrapCollectionView.cellForItem(at: indexPath) as? ScrapStorageCollectionViewCell
-                let storageViewModel = StorageViewModel()
-                let storageViewController = StorageViewController(viewModel: storageViewModel)
-                if let folderName = cell?.folderNameLabel.text {
-                    storageViewModel.folderName = folderName
-                    storageViewController.setStorageHeadView(
-                        headTitle: folderName
-                    )
-                }
+                let folderName = cell?.folderNameLabel.text ?? TextLiterals.allPostsScrapFolderText
+                // TODO: 확인해보기
+                let storageView = StoragePostView(title: folderName)
+                let storageViewModel = StorageViewModel(folderName: folderName)
+                let storageViewController = StorageViewController(
+                    view: storageView,
+                    viewModel: storageViewModel
+                )
                 self?.navigationController?.pushViewController(storageViewController, animated: true)
             }
             .disposed(by: disposeBag)
@@ -76,6 +76,7 @@ final class ScrapStorageViewController: RxBaseViewController<ScrapStorageViewMod
                     folderImageList: folderImageList,
                     folderPostsCount: folderPostsCount
                 )
+                self?.scrapView.scrapCollectionView.reloadData()
             })
             .disposed(by: disposeBag)
     }
