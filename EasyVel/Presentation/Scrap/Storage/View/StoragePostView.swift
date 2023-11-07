@@ -1,5 +1,5 @@
 //
-//  NewStorageView.swift
+//  StoragePostView.swift
 //  EasyVel
 //
 //  Created by 이성민 on 10/9/23.
@@ -9,7 +9,7 @@ import UIKit
 
 import RxCocoa
 
-final class NewStoragePostView: BaseUIView {
+final class StoragePostView: BaseUIView {
     
     // MARK: - Property
     
@@ -136,7 +136,7 @@ final class NewStoragePostView: BaseUIView {
     }
 }
 
-extension NewStoragePostView {
+extension StoragePostView {
     func showEmptyView() {
         self.emptyImageView.isHidden = false
     }
@@ -164,7 +164,7 @@ extension NewStoragePostView {
 //    }
 //}
 
-extension NewStoragePostView {
+extension StoragePostView {
     
     func createLayout() -> UICollectionViewLayout {
         return UICollectionViewCompositionalLayout { _, _ in
@@ -210,7 +210,7 @@ extension NewStoragePostView {
 
 // MARK: - Bottom Sheet
 
-extension NewStoragePostView {
+extension StoragePostView {
     
     func showDeleteFolderBottomSheet() {
         self.renderDeleteFolderBottomSheet()

@@ -29,10 +29,10 @@
 		3EE4251C2AC4751C00DE5FA5 /* FollowSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE4251B2AC4751C00DE5FA5 /* FollowSearchViewModel.swift */; };
 		3EE425202ACADFCE00DE5FA5 /* TagCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE4251F2ACADFCE00DE5FA5 /* TagCollectionView.swift */; };
 		3EE425222ACAE00B00DE5FA5 /* TagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE425212ACAE00B00DE5FA5 /* TagCollectionViewCell.swift */; };
-		3EFB49A02ACED675006E3846 /* NewStorageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFB499F2ACED675006E3846 /* NewStorageViewModel.swift */; };
-		3EFB49A22ACED68C006E3846 /* NewStorageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFB49A12ACED68C006E3846 /* NewStorageViewController.swift */; };
-		3EFB4A332AD396E2006E3846 /* NewStoragePostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFB4A322AD396E2006E3846 /* NewStoragePostView.swift */; };
-		3EFB4A352AD39757006E3846 /* NewStorageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFB4A342AD39757006E3846 /* NewStorageCollectionViewCell.swift */; };
+		3EFB49A02ACED675006E3846 /* StorageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFB499F2ACED675006E3846 /* StorageViewModel.swift */; };
+		3EFB49A22ACED68C006E3846 /* StorageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFB49A12ACED68C006E3846 /* StorageViewController.swift */; };
+		3EFB4A332AD396E2006E3846 /* StoragePostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFB4A322AD396E2006E3846 /* StoragePostView.swift */; };
+		3EFB4A352AD39757006E3846 /* StorageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFB4A342AD39757006E3846 /* StorageCollectionViewCell.swift */; };
 		3EFB4A372AD3B53E006E3846 /* StorageCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFB4A362AD3B53E006E3846 /* StorageCollectionViewHeader.swift */; };
 		7CB706D22A32062500083EC6 /* PostSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB706D12A32062500083EC6 /* PostSearchViewController.swift */; };
 		7CB706D42A32064900083EC6 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB706D32A32064900083EC6 /* SearchTableViewCell.swift */; };
@@ -165,13 +165,7 @@
 		916E29AE2A3EE90F006F5FE9 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916E29AD2A3EE90F006F5FE9 /* SignInViewModel.swift */; };
 		916E29B12A3EEE60006F5FE9 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916E29B02A3EEE60006F5FE9 /* SignInView.swift */; };
 		916E29B42A406952006F5FE9 /* AccessTokenDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916E29B32A406952006F5FE9 /* AccessTokenDTO.swift */; };
-		917BA3312A03D8EF000409B7 /* StorageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917BA3302A03D8EF000409B7 /* StorageViewController.swift */; };
-		917BA3332A03D8F7000409B7 /* StorageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917BA3322A03D8F7000409B7 /* StorageView.swift */; };
-		917BA3352A03E14A000409B7 /* StorageHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917BA3342A03E14A000409B7 /* StorageHeadView.swift */; };
-		917BA33F2A03E8A1000409B7 /* StorageTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917BA33E2A03E8A1000409B7 /* StorageTableView.swift */; };
-		917BA3412A03E8FE000409B7 /* StorageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917BA3402A03E8FE000409B7 /* StorageTableViewCell.swift */; };
 		917BA3432A0503D5000409B7 /* StoragePost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917BA3422A0503D5000409B7 /* StoragePost.swift */; };
-		917BA3452A050631000409B7 /* StorageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917BA3442A050631000409B7 /* StorageViewModel.swift */; };
 		917BA34C2A050861000409B7 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 917BA34B2A050861000409B7 /* Realm */; };
 		917BA34E2A050861000409B7 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 917BA34D2A050861000409B7 /* RealmSwift */; };
 		917BA3522A050903000409B7 /* RealmStoragePost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917BA3512A050903000409B7 /* RealmStoragePost.swift */; };
@@ -225,10 +219,10 @@
 		3EE4251B2AC4751C00DE5FA5 /* FollowSearchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowSearchViewModel.swift; sourceTree = "<group>"; };
 		3EE4251F2ACADFCE00DE5FA5 /* TagCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionView.swift; sourceTree = "<group>"; };
 		3EE425212ACAE00B00DE5FA5 /* TagCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionViewCell.swift; sourceTree = "<group>"; };
-		3EFB499F2ACED675006E3846 /* NewStorageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewStorageViewModel.swift; sourceTree = "<group>"; };
-		3EFB49A12ACED68C006E3846 /* NewStorageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewStorageViewController.swift; sourceTree = "<group>"; };
-		3EFB4A322AD396E2006E3846 /* NewStoragePostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewStoragePostView.swift; sourceTree = "<group>"; };
-		3EFB4A342AD39757006E3846 /* NewStorageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewStorageCollectionViewCell.swift; sourceTree = "<group>"; };
+		3EFB499F2ACED675006E3846 /* StorageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageViewModel.swift; sourceTree = "<group>"; };
+		3EFB49A12ACED68C006E3846 /* StorageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageViewController.swift; sourceTree = "<group>"; };
+		3EFB4A322AD396E2006E3846 /* StoragePostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoragePostView.swift; sourceTree = "<group>"; };
+		3EFB4A342AD39757006E3846 /* StorageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageCollectionViewCell.swift; sourceTree = "<group>"; };
 		3EFB4A362AD3B53E006E3846 /* StorageCollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageCollectionViewHeader.swift; sourceTree = "<group>"; };
 		7CB706D12A32062500083EC6 /* PostSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSearchViewController.swift; sourceTree = "<group>"; };
 		7CB706D32A32064900083EC6 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
@@ -356,13 +350,7 @@
 		916E29B02A3EEE60006F5FE9 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		916E29B32A406952006F5FE9 /* AccessTokenDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenDTO.swift; sourceTree = "<group>"; };
 		916E29B52A408CC3006F5FE9 /* EasyVel.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EasyVel.entitlements; sourceTree = "<group>"; };
-		917BA3302A03D8EF000409B7 /* StorageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageViewController.swift; sourceTree = "<group>"; };
-		917BA3322A03D8F7000409B7 /* StorageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageView.swift; sourceTree = "<group>"; };
-		917BA3342A03E14A000409B7 /* StorageHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageHeadView.swift; sourceTree = "<group>"; };
-		917BA33E2A03E8A1000409B7 /* StorageTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageTableView.swift; sourceTree = "<group>"; };
-		917BA3402A03E8FE000409B7 /* StorageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageTableViewCell.swift; sourceTree = "<group>"; };
 		917BA3422A0503D5000409B7 /* StoragePost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoragePost.swift; sourceTree = "<group>"; };
-		917BA3442A050631000409B7 /* StorageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageViewModel.swift; sourceTree = "<group>"; };
 		917BA3512A050903000409B7 /* RealmStoragePost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmStoragePost.swift; sourceTree = "<group>"; };
 		917BA3542A0509D8000409B7 /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
 		917BA3872A07C541000409B7 /* SubscriberSearchProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriberSearchProtocol.swift; sourceTree = "<group>"; };
@@ -474,8 +462,7 @@
 		3EFB4A3B2AD444F8006E3846 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				3EFB49A12ACED68C006E3846 /* NewStorageViewController.swift */,
-				917BA3302A03D8EF000409B7 /* StorageViewController.swift */,
+				3EFB49A12ACED68C006E3846 /* StorageViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -483,8 +470,7 @@
 		3EFB4A3C2AD444FB006E3846 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				3EFB499F2ACED675006E3846 /* NewStorageViewModel.swift */,
-				917BA3442A050631000409B7 /* StorageViewModel.swift */,
+				3EFB499F2ACED675006E3846 /* StorageViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1087,12 +1073,8 @@
 		917BA3362A03E325000409B7 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				917BA3322A03D8F7000409B7 /* StorageView.swift */,
-				917BA3342A03E14A000409B7 /* StorageHeadView.swift */,
-				917BA33E2A03E8A1000409B7 /* StorageTableView.swift */,
-				917BA3402A03E8FE000409B7 /* StorageTableViewCell.swift */,
-				3EFB4A322AD396E2006E3846 /* NewStoragePostView.swift */,
-				3EFB4A342AD39757006E3846 /* NewStorageCollectionViewCell.swift */,
+				3EFB4A322AD396E2006E3846 /* StoragePostView.swift */,
+				3EFB4A342AD39757006E3846 /* StorageCollectionViewCell.swift */,
 				3EFB4A362AD3B53E006E3846 /* StorageCollectionViewHeader.swift */,
 				3E3F45862AF173B400B9D6AA /* DeleteFolderBottomSheet.swift */,
 			);
@@ -1322,7 +1304,7 @@
 				91ED178D2A00E5A600158787 /* AuthService.swift in Sources */,
 				916E29B12A3EEE60006F5FE9 /* SignInView.swift in Sources */,
 				91487F1029FC4736009CFECF /* UIStackView+Extension.swift in Sources */,
-				3EFB49A22ACED68C006E3846 /* NewStorageViewController.swift in Sources */,
+				3EFB49A22ACED68C006E3846 /* StorageViewController.swift in Sources */,
 				9134423A2A004B9B000E1ED1 /* DefaultFollowService.swift in Sources */,
 				91487EEF29FC3A4D009CFECF /* SettingViewController.swift in Sources */,
 				9128B04A2A23C59700FB1252 /* ScrapStorageView.swift in Sources */,
@@ -1333,7 +1315,7 @@
 				3E06F8CB2A98A49A001302F4 /* PostsViewController.swift in Sources */,
 				9109505C2A5013C100D04D41 /* VersionService.swift in Sources */,
 				877ED7C32A4AAED500D80464 /* HomeMenuCollectionViewCell.swift in Sources */,
-				3EFB4A352AD39757006E3846 /* NewStorageCollectionViewCell.swift in Sources */,
+				3EFB4A352AD39757006E3846 /* StorageCollectionViewCell.swift in Sources */,
 				9109505E2A50140C00D04D41 /* DefaultVersionService.swift in Sources */,
 				913442302A004352000E1ED1 /* SubscriberTargetType.swift in Sources */,
 				8754E9A42AF3E259008FC6FD /* PostRepository.swift in Sources */,
@@ -1350,7 +1332,6 @@
 				91487F0029FC3BFE009CFECF /* TextLiterals.swift in Sources */,
 				91487F4D29FD9858009CFECF /* TagSearchViewController.swift in Sources */,
 				8754E9A72AF3F076008FC6FD /* ViewModelType.swift in Sources */,
-				917BA3312A03D8EF000409B7 /* StorageViewController.swift in Sources */,
 				913442362A00491C000E1ED1 /* NotificationTargetType.swift in Sources */,
 				91BFF2F82A27833C00F5D13E /* PostScrapButtonDidTapped.swift in Sources */,
 				91BE70662A5D7B9B008886DD /* SettingPolicyViewController.swift in Sources */,
@@ -1376,7 +1357,6 @@
 				877ED7C62A4ACC0900D80464 /* TrendPostsDTO.swift in Sources */,
 				3E61EE8A2AA818E9004F25DB /* Array+Extension.swift in Sources */,
 				9128B0322A23778400FB1252 /* ScrapFolderBottomSheetViewModel.swift in Sources */,
-				917BA3452A050631000409B7 /* StorageViewModel.swift in Sources */,
 				913441FB29FFD8AC000E1ED1 /* SignInRequest.swift in Sources */,
 				913442342A004795000E1ED1 /* SignTargetType.swift in Sources */,
 				916227DE2A46C6E900118018 /* FollowUserMainResponse.swift in Sources */,
@@ -1402,11 +1382,10 @@
 				098294252AF4FA060011773A /* FolderAlertViewController.swift in Sources */,
 				9134422729FFF9BC000E1ED1 /* FollowView.swift in Sources */,
 				91487F2229FC5F2A009CFECF /* TabBarController.swift in Sources */,
-				917BA3332A03D8F7000409B7 /* StorageView.swift in Sources */,
 				91487EF629FC3AEF009CFECF /* BaseTableViewCell.swift in Sources */,
 				9134421529FFDC9C000E1ED1 /* UnSubsribeResponse.swift in Sources */,
 				87DC47992A572ECF007823CB /* UserRepository.swift in Sources */,
-				3EFB49A02ACED675006E3846 /* NewStorageViewModel.swift in Sources */,
+				3EFB49A02ACED675006E3846 /* StorageViewModel.swift in Sources */,
 				87DC47882A556867007823CB /* VelogAlertViewController.swift in Sources */,
 				9134420529FFD965000E1ED1 /* SignInResponse.swift in Sources */,
 				913441F429FFD742000E1ED1 /* TagTargetType.swift in Sources */,
@@ -1425,14 +1404,12 @@
 				913442402A004BB1000E1ED1 /* DefaultNotificationService.swift in Sources */,
 				87DC479E2A59B1F6007823CB /* SignInUseCase.swift in Sources */,
 				91487F4329FD8AC9009CFECF /* FollowViewModel.swift in Sources */,
-				3EFB4A332AD396E2006E3846 /* NewStoragePostView.swift in Sources */,
+				3EFB4A332AD396E2006E3846 /* StoragePostView.swift in Sources */,
 				9128B0432A23B50500FB1252 /* ReusableView.swift in Sources */,
 				91ED179A2A00F00800158787 /* BaseNetworkService.swift in Sources */,
-				917BA3412A03E8FE000409B7 /* StorageTableViewCell.swift in Sources */,
 				9128B0412A23B4E200FB1252 /* UITableView+Extension.swift in Sources */,
 				913441F929FFD776000E1ED1 /* SignUpRequest.swift in Sources */,
 				91487F1929FC549C009CFECF /* NoNetworkView.swift in Sources */,
-				917BA33F2A03E8A1000409B7 /* StorageTableView.swift in Sources */,
 				91ED178F2A00E5B100158787 /* NotificationService.swift in Sources */,
 				9134420729FFD9F9000E1ED1 /* SignUpResponse.swift in Sources */,
 				91ED178B2A00E59900158787 /* PostService.swift in Sources */,
@@ -1456,7 +1433,6 @@
 				91487F2D29FD0812009CFECF /* FollowSearchViewController.swift in Sources */,
 				916E29B42A406952006F5FE9 /* AccessTokenDTO.swift in Sources */,
 				91487F1729FC5481009CFECF /* NetworkMonitor.swift in Sources */,
-				917BA3352A03E14A000409B7 /* StorageHeadView.swift in Sources */,
 				9128B0522A23CA5E00FB1252 /* ScrapStorageCollectionViewDataSource.swift in Sources */,
 				0982942D2AFA255F0011773A /* FolderTextField.swift in Sources */,
 				9128B04E2A23C96500FB1252 /* UICollectionView+Extension.swift in Sources */,

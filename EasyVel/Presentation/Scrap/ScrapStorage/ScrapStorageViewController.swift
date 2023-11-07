@@ -44,9 +44,9 @@ final class ScrapStorageViewController: RxBaseViewController<ScrapStorageViewMod
                 let cell = self?.scrapView.scrapCollectionView.cellForItem(at: indexPath) as? ScrapStorageCollectionViewCell
                 let folderName = cell?.folderNameLabel.text ?? TextLiterals.allPostsScrapFolderText
                 // TODO: 확인해보기
-                let storageView = NewStoragePostView(title: folderName)
-                let storageViewModel = NewStorageViewModel(folderName: folderName)
-                let storageViewController = NewStorageViewController(
+                let storageView = StoragePostView(title: folderName)
+                let storageViewModel = StorageViewModel(folderName: folderName)
+                let storageViewController = StorageViewController(
                     view: storageView,
                     viewModel: storageViewModel
                 )

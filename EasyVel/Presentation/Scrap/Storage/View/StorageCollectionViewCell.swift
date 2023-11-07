@@ -12,11 +12,11 @@ import SnapKit
 import RxSwift
 import RxCocoa
 
-final class NewStorageCollectionViewCell: BaseCollectionViewCell {
+final class StorageCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - Property
     
-    static let identifier = "NewStorageCollectionViewCell"
+    static let identifier = "StorageCollectionViewCell"
     
     var post: StoragePost?
     var disposeBag = DisposeBag()
@@ -131,7 +131,7 @@ final class NewStorageCollectionViewCell: BaseCollectionViewCell {
     }
 }
 
-extension NewStorageCollectionViewCell {
+extension StorageCollectionViewCell {
     
     private func configurePost() {
         guard let post = self.post else { return }
@@ -153,7 +153,7 @@ extension NewStorageCollectionViewCell {
     }
 }
 
-extension NewStorageCollectionViewCell {
+extension StorageCollectionViewCell {
     func loadPost(_ post: StoragePost) {
         self.post = post
         self.configurePost()
