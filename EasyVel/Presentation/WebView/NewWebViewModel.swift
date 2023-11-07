@@ -106,7 +106,6 @@ final class NewWebViewModel: BaseViewModel, ViewModelType {
             .asDriver(onErrorJustReturn: false)
         
         let isScrapped = input.viewWillAppear
-//            .subscribe(on: backgroundQueue)
             .map { [weak self] _ -> Bool in
                 guard let self = self else { return false }
                 
@@ -118,7 +117,6 @@ final class NewWebViewModel: BaseViewModel, ViewModelType {
             .asDriver(onErrorJustReturn: false)
         
         let followTriggerReceived = input.followTrigger
-//            .subscribe(on: backgroundQueue)
             .map { [weak self] _ -> Bool? in
                 guard let self = self else { return nil }
                 
@@ -137,7 +135,6 @@ final class NewWebViewModel: BaseViewModel, ViewModelType {
             .asDriver(onErrorJustReturn: nil)
         
         let scrapTriggerReceived = input.scrapTrigger
-//            .subscribe(on: ConcurrentDispatchQueueScheduler(queue: .global()))
             .map { [weak self] _ -> Bool? in
                 guard let self = self else { return nil }
                 
