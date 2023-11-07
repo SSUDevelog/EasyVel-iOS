@@ -12,38 +12,37 @@ import RxSwift
 
 final class WebViewModel: BaseViewModel {
     
-    let service: FollowService
-    
-    private var urlString: String = ""
     private let realm = RealmService()
     
+    private let user: String
+    private let urlString: String
+    private let service: FollowService
     
-    var postWriter: String? 
-    var storagePost: StoragePost?
+    private var isFollowing: Bool?
     
     // MARK: - Input
     
     let webViewProgressRelay = PublishRelay<Double>()
-    let didSubscribe = PublishRelay<Bool>() //TODO: 23.11.2 VC 쪽에서 삭제함. 이유: 개복잡함
-    let didUnScrap = PublishRelay<String>() //TODO: 23.11.2 VC 쪽에서 삭제함. 이유: 개복잡함
+    let subscribeTrigger = PublishRelay<Void>()
     
     // MARK: - Output
     
-    var didSubscribeWriter = PublishRelay<Bool>() //TODO: 23.11.2 VC 쪽에서 삭제함. 이유: 개복잡함
+    var wasSubscribed = PublishRelay<Bool>()  // viewWillAppear 시 이미 subscribe 되어 있는지 확인
+    var didSubscribe = PublishRelay<Bool>()  // subscrbieTrigger 들어왔을 시 이미 subscribe -> 취소 / 아니면 subscribe
     var urlRequestOutput = PublishRelay<URLRequest>()
     var webViewProgressOutput = PublishRelay<Bool>()
     var cannotFoundWebViewURLOutput = PublishRelay<Bool>()
     
     init(
+        user: String,
         url: String,
         service: FollowService
     ) {
+        self.user = user
         self.service = service
         self.urlString = url
-        
         super.init()
-        
-        makeOutput()
+        self.makeOutput()
     }
     
     private func makeOutput() {
@@ -66,22 +65,20 @@ final class WebViewModel: BaseViewModel {
             .disposed(by: disposeBag)
         
         viewWillAppear
-            .flatMapLatest( { [weak self] _ -> Observable<[FollowListResponse]> in
+            .flatMapLatest { [weak self] _ -> Observable<[FollowListResponse]> in
                 guard let self = self else { return Observable.empty() }
                 return self.getSubscriberList()
-            })
+            }
             .map { subscriberList -> [String] in
                 return subscriberList.map { $0.name }
             }
-            .subscribe(onNext: { [weak self] subscriberNameList in
-                guard let didPostWriterSubscribe = self?.didPostWriterSubscribe(
-                    subscriberList: Set<String>(subscriberNameList),
-                    postWriter: self?.postWriter ?? String()
-                ) else { return }
-                self?.didSubscribeWriter.accept(didPostWriterSubscribe)
+            .subscribe(onNext: { [weak self] subscriberList in
+                guard let user = self?.user else { return }
+                let isSubscribed = subscriberList.contains(user)
+                self?.isFollowing = isSubscribed
+                self?.wasSubscribed.accept(isSubscribed)
             })
             .disposed(by: disposeBag)
-        
         
         webViewProgressRelay
             .subscribe(onNext: { [weak self] progress in
@@ -93,20 +90,20 @@ final class WebViewModel: BaseViewModel {
             })
             .disposed(by: disposeBag)
         
-        didSubscribe //TODO: 23.11.2 VC 쪽에서 삭제함. 이유: 개복잡함
-            .subscribe(onNext: { [weak self] response in
-                guard let subscriber = self?.postWriter else { return }
-                if response {
-                    self?.addSubscriber(name: subscriber)
+        subscribeTrigger
+            .debug()
+            .subscribe(onNext: { [weak self] in
+                guard let self = self,
+                      let isFollowing = self.isFollowing
+                else { return }
+                
+                if isFollowing {
+                    self.deleteSubscriber(name: self.user)
+                    self.didSubscribe.accept(false)
                 } else {
-                    self?.deleteSubscriber(name: subscriber)
+                    self.addSubscriber(name: self.user)
+                    self.didSubscribe.accept(true)
                 }
-            })
-            .disposed(by: disposeBag)
-        
-        didUnScrap //TODO: 23.11.2 VC 쪽에서 삭제함. 이유: 개복잡함
-            .subscribe(onNext: { [weak self] unScrapPostUrl in
-                self?.realm.deletePost(url: unScrapPostUrl)
             })
             .disposed(by: disposeBag)
     }

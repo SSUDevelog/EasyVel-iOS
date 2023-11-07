@@ -22,7 +22,7 @@ final class FollowViewModel: BaseViewModel {
 
     var followListOutput = PublishRelay<[FollowListResponse]>()
     var isFollowEmptyOutput = PublishRelay<Bool>()
-    var followUserMainURLOutput = PublishRelay<String>()
+    var followUserInfoOutput = PublishRelay<(String, String)>()
     var presentUnfollowAlertOutput = PublishRelay<Bool>()
     
     // MARK: - Input
@@ -74,13 +74,13 @@ final class FollowViewModel: BaseViewModel {
             .disposed(by: disposeBag)
         
         followTableViewCellDidTap
-            .subscribe(onNext: { [weak self] subscriberName in
+            .subscribe(onNext: { [weak self] userName in
                 guard let self = self else { return }
                 self.getSubscriberUserMainURL(
-                    name: subscriberName
+                    name: userName
                 ) { [weak self] subscriberUserMainURLString in
                     guard let userMainURL = subscriberUserMainURLString.userMainUrl else { return }
-                    self?.followUserMainURLOutput.accept(userMainURL)
+                    self?.followUserInfoOutput.accept((userName, userMainURL))
                 }
             })
             .disposed(by: disposeBag)

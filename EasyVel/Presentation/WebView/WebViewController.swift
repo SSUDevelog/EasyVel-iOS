@@ -20,12 +20,8 @@ final class WebViewController: RxBaseViewController<WebViewModel> {
         return self.backButton.rx.tap.asDriver()
     }
     
-    var followTrigger: Driver<Void> {
-        return self.followButton.rx.tap.asDriver()
-    }
-    
-    var scrapTrigger: Driver<Void> {
-        return self.scrapButton.rx.tap.asDriver()
+    var followTrigger: Observable<Void> {
+        return self.followButton.rx.tap.asObservable()
     }
     
     // MARK: - UI Property
@@ -33,6 +29,12 @@ final class WebViewController: RxBaseViewController<WebViewModel> {
     private let navigationBarView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
+        return view
+    }()
+    
+    private let navigationLineView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .gray200
         return view
     }()
     
@@ -46,13 +48,12 @@ final class WebViewController: RxBaseViewController<WebViewModel> {
         let button = UIButton()
         button.makeRoundBorder(cornerRadius: 8, borderWidth: 2, borderColor: .brandColor)
         button.setTitle(TextLiterals.navigationBarSubscribeButtonText, for: .normal)
-        return button
-    }()
-    
-    private let scrapButton: UIButton = {
-        let button = UIButton()
-        button.setImage(.bookmark, for: .normal)
-        button.setImage(.bookmarkFill, for: .selected)
+        button.titleLabel?.font = .body_1_B
+        
+        button.setTitleColor(.brandColor, for: .normal)
+        button.setBackgroundColor(.white, for: .normal)
+        button.setTitleColor(.white, for: .selected)
+        button.setBackgroundColor(.brandColor, for: .selected)
         return button
     }()
     
@@ -73,10 +74,46 @@ final class WebViewController: RxBaseViewController<WebViewModel> {
     }()
     
     override func render() {
-        view = webView
         view.addSubviews(
+            navigationBarView,
+            navigationLineView,
+            webView,
             webViewExceptionView
         )
+        
+        navigationBarView.addSubviews(
+            backButton,
+            followButton
+        )
+        
+        navigationBarView.snp.makeConstraints {
+            $0.top.horizontalEdges.equalToSuperview()
+            $0.height.equalTo(130)
+        }
+        
+        navigationLineView.snp.makeConstraints {
+            $0.top.equalTo(self.navigationBarView.snp.bottom)
+            $0.horizontalEdges.equalToSuperview()
+            $0.height.equalTo(1)
+        }
+        
+        backButton.snp.makeConstraints {
+            $0.size.equalTo(44)
+            $0.leading.equalToSuperview().inset(3)
+            $0.bottom.equalToSuperview().inset(18)
+        }
+        
+        followButton.snp.makeConstraints {
+            $0.trailing.equalToSuperview().inset(16)
+            $0.centerY.equalTo(self.backButton)
+            $0.height.equalTo(32)
+            $0.width.equalTo(61)
+        }
+        
+        webView.snp.makeConstraints {
+            $0.top.equalTo(self.navigationLineView.snp.bottom)
+            $0.horizontalEdges.bottom.equalToSuperview()
+        }
         
         webViewExceptionView.snp.makeConstraints {
             $0.height.equalTo(202)
@@ -87,7 +124,7 @@ final class WebViewController: RxBaseViewController<WebViewModel> {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.isHidden = false
+        navigationController?.navigationBar.isHidden = true
     }
     
     override func bind(viewModel: WebViewModel) {
@@ -99,6 +136,18 @@ final class WebViewController: RxBaseViewController<WebViewModel> {
             .distinctUntilChanged()
             .bind(to: viewModel.webViewProgressRelay)
             .disposed(by: disposeBag)
+        
+        backButton.rx.tap
+            .asDriver()
+            .drive(with: self) { owner, _ in
+                owner.popViewController(withAnimation: true)
+            }
+            .disposed(by: self.disposeBag)
+        
+        followButton.rx.tap
+            .debug()
+            .bind(to: viewModel.subscribeTrigger)
+            .disposed(by: self.disposeBag)
     }
     
     private func bindOutput(_ viewModel: WebViewModel) {
@@ -129,6 +178,38 @@ final class WebViewController: RxBaseViewController<WebViewModel> {
                 }
             })
             .disposed(by: disposeBag)
+        
+        viewModel.wasSubscribed
+            .asDriver(onErrorJustReturn: false)
+            .drive(
+                with: self,
+                onNext: { owner, wasSubscribed in
+                    owner.configureFollowButton(status: wasSubscribed)
+                }
+            )
+            .disposed(by: self.disposeBag)
+        
+        viewModel.didSubscribe
+            .debug()
+            .subscribe(
+                with: self,
+                onNext: { owner, didSubscribe in
+                    owner.configureFollowButton(status: didSubscribe)
+                    owner.showToast(
+                        toastText: didSubscribe ? TextLiterals.addSubscriberToastText : TextLiterals.deleteSubscriberToastText,
+                        backgroundColor: .gray500)
+                },
+                onError: { owner, error  in
+                    
+                }
+            )
+            .disposed(by: self.disposeBag)
     }
 
+}
+
+extension WebViewController {
+    func configureFollowButton(status: Bool) {
+        self.followButton.isSelected = status
+    }
 }

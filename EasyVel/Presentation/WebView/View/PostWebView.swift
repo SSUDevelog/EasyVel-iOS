@@ -126,7 +126,7 @@ final class PostWebView: BaseUIView {
         
         self.addSubview(webView)
         webView.snp.makeConstraints {
-            $0.top.equalTo(navigationBarView.snp.bottom)
+            $0.top.equalTo(self.navigationLineView.snp.bottom)
             $0.horizontalEdges.bottom.equalToSuperview()
         }
         

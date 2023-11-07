@@ -64,10 +64,10 @@ final class FollowViewController: RxBaseViewController<FollowViewModel> {
             })
             .disposed(by: disposeBag)
         
-        viewModel.followUserMainURLOutput
-            .asDriver(onErrorJustReturn: String())
-            .drive(onNext: { [weak self] followUserMainURL in
-                self?.pushSubscriberUserMainViewController(userMainURL: followUserMainURL)
+        viewModel.followUserInfoOutput
+            .asDriver(onErrorJustReturn: (String(), String()))
+            .drive(onNext: { [weak self] userName, userURL in
+                self?.pushSubscriberUserMainViewController(userName: userName, userURL: userURL)
             })
             .disposed(by: disposeBag)
         
@@ -104,10 +104,12 @@ final class FollowViewController: RxBaseViewController<FollowViewModel> {
     }
     
     private func pushSubscriberUserMainViewController(
-        userMainURL: String
+        userName: String,
+        userURL: String
     ) {
         let webViewModel = WebViewModel(
-            url: userMainURL,
+            user: userName,
+            url: userURL,
             service: DefaultFollowService.shared
         )
         let webViewController = WebViewController(viewModel: webViewModel)
