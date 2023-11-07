@@ -51,7 +51,6 @@ final class StorageViewController: BaseViewController {
     }
     
     override func loadView() {
-        super.loadView()
         self.view = storageView
     }
     
@@ -66,6 +65,10 @@ final class StorageViewController: BaseViewController {
     }
     
     // MARK: - Setting
+    
+    override func render() {}
+    
+    override func configUI() {}
     
     private func bind() {
         self.storageView.backButton.rx.tap
