@@ -32,7 +32,7 @@ enum TextLiterals {
     
     static let myTag: String = "내 태그"
     static let popularTag = "인기 태그"
-    static let addTagSuccessText: String = "키워드가 추가되었습니다."
+    static let addTagSuccessText: String = "태그가 추가되었습니다."
     static let addTagRequestErrText: String = "이미 추가된 관심 키워드입니다."
     static let tagTitleLabelText: String = "Add Keyword"
     static let tagSearchPlaceholderText: String = "태그를 추가해보세요."
