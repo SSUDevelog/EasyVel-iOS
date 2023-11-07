@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		098294252AF4FA060011773A /* FolderAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098294242AF4FA060011773A /* FolderAlertViewController.swift */; };
+		098294272AFA12730011773A /* FolderAlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098294262AFA12730011773A /* FolderAlertViewModel.swift */; };
 		3E06F8C72A96247F001302F4 /* PostDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E06F8C62A96247F001302F4 /* PostDetailView.swift */; };
 		3E06F8C92A962BB4001302F4 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E06F8C82A962BB4001302F4 /* UIImage+Extension.swift */; };
 		3E06F8CB2A98A49A001302F4 /* PostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E06F8CA2A98A49A001302F4 /* PostsViewController.swift */; };
@@ -197,6 +199,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		098294242AF4FA060011773A /* FolderAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderAlertViewController.swift; sourceTree = "<group>"; };
+		098294262AFA12730011773A /* FolderAlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderAlertViewModel.swift; sourceTree = "<group>"; };
 		3E06F8C62A96247F001302F4 /* PostDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailView.swift; sourceTree = "<group>"; };
 		3E06F8C82A962BB4001302F4 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		3E06F8CA2A98A49A001302F4 /* PostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsViewController.swift; sourceTree = "<group>"; };
@@ -566,6 +570,8 @@
 			children = (
 				9166BE972A49E8F600FFC026 /* ServerFailViewController.swift */,
 				87DC47872A556867007823CB /* VelogAlertViewController.swift */,
+				098294242AF4FA060011773A /* FolderAlertViewController.swift */,
+				098294262AFA12730011773A /* FolderAlertViewModel.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1276,6 +1282,7 @@
 				9134422329FFF59D000E1ED1 /* SettingTableView.swift in Sources */,
 				9134421129FFDB5D000E1ED1 /* SearchUserResponse.swift in Sources */,
 				9128B05A2A23CC9000FB1252 /* ScrapStorageViewModel.swift in Sources */,
+				098294272AFA12730011773A /* FolderAlertViewModel.swift in Sources */,
 				9109505A2A5011DD00D04D41 /* VersionTargetType.swift in Sources */,
 				3EE425202ACADFCE00DE5FA5 /* TagCollectionView.swift in Sources */,
 				9134421329FFDBE8000E1ED1 /* GetSubscriberPostResponse.swift in Sources */,
@@ -1309,6 +1316,7 @@
 				91487EC429FC380A009CFECF /* SceneDelegate.swift in Sources */,
 				91E4428B2A10F3C7008CB516 /* BaseViewModel.swift in Sources */,
 				8765EFF42A29ECDE00EF6733 /* String+Extension.swift in Sources */,
+				098294252AF4FA060011773A /* FolderAlertViewController.swift in Sources */,
 				9134422729FFF9BC000E1ED1 /* FollowView.swift in Sources */,
 				91487F2229FC5F2A009CFECF /* TabBarController.swift in Sources */,
 				917BA3332A03D8F7000409B7 /* StorageView.swift in Sources */,
