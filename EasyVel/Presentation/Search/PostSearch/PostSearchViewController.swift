@@ -232,7 +232,7 @@ final class PostSearchViewController: RxBaseViewController<PostSearchViewModel> 
                 if searchPostResponse.isEmpty {
                     self?.showToast(
                         toastText: "검색 결과가 없어요.",
-                        backgroundColor: .gray300,
+                        backgroundColor: .gray500,
                         height: Int(self?.keyboardHeight ?? CGFloat())
                     )
                 } else {

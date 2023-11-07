@@ -187,7 +187,7 @@ final class TagSearchViewController: RxBaseViewController<TagSearchViewModel> {
             .drive { [weak self] isSuccess, message in
                 guard let self = self else { return }
                 let toastColor: UIColor = isSuccess ? .brandColor : .gray300
-                self.showToast(toastText: message, backgroundColor: toastColor)
+                self.showToast(toastText: message, backgroundColor: .gray500)
                 self.collectionViewScrollToEnd()
             }
             .disposed(by: disposeBag)
@@ -216,7 +216,7 @@ final class TagSearchViewController: RxBaseViewController<TagSearchViewModel> {
             .drive { [weak self] isSuccess, message in
                 guard let self = self else { return }
                 let toastColor: UIColor = isSuccess ? .brandColor : .gray300
-                self.showToast(toastText: message, backgroundColor: toastColor)
+                self.showToast(toastText: message, backgroundColor: .gray500)
                 self.collectionViewScrollToEnd()
             }
             .disposed(by: disposeBag)
