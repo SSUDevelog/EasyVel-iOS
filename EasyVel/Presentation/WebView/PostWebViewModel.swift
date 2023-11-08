@@ -44,13 +44,13 @@ final class PostWebViewModel: BaseViewModel, ViewModelType {
         let isFollowing: Driver<Bool>
         let isScrapped: Driver<Bool>
         let followTriggerReceived: Driver<Bool?>
-        let scrapTriggerReceived: Driver<Bool?>
+        let scrapTriggerReceived: Driver<(StoragePost, Bool)?>
         
         init(_ webRequest: Driver<URLRequest?>,
              _ isFollowing: Driver<Bool>,
              _ isScrapped: Driver<Bool>,
              _ followTriggerReceived: Driver<Bool?>,
-             _ scrapTriggerReceived: Driver<Bool?>) {
+             _ scrapTriggerReceived: Driver<(StoragePost, Bool)?>) {
             self.webRequest = webRequest
             self.isFollowing = isFollowing
             self.isScrapped = isScrapped
@@ -135,7 +135,7 @@ final class PostWebViewModel: BaseViewModel, ViewModelType {
             .asDriver(onErrorJustReturn: nil)
         
         let scrapTriggerReceived = input.scrapTrigger
-            .map { [weak self] _ -> Bool? in
+            .map { [weak self] _ -> (StoragePost, Bool)? in
                 guard let self = self else { return nil }
                 
                 guard let isScrapped = self.isScrapped,
@@ -144,10 +144,15 @@ final class PostWebViewModel: BaseViewModel, ViewModelType {
                 
                 if isScrapped {
                     self.realm.deletePost(url: url)
-                    return false
+                    self.isScrapped = !isScrapped
+                    return (self.storagePost, false)
                 } else {
-                    NotificationCenter.default.post(name: Notification.Name("ScrapButtonTappedNotification"), object: nil, userInfo: ["data" : self.storagePost])
-                    return true
+                    self.realm.addPost(
+                        item: self.storagePost,
+                        folderName: TextLiterals.allPostsScrapFolderText
+                    )
+                    self.isScrapped = !isScrapped
+                    return (self.storagePost, true)
                 }
             }
             .asDriver(onErrorJustReturn: nil)
