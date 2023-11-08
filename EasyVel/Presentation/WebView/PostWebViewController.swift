@@ -95,9 +95,13 @@ final class PostWebViewController: BaseViewController {
             }.disposed(by: self.disposeBag)
         
         output.scrapTriggerReceived
-            .drive(with: self) { owner, didScrap in
-                guard let didScrap = didScrap else { return }
-                self.webView.configureScrapButton(status: didScrap)
+            .drive(with: self) { owner, info in
+                guard let info = info else { return }
+                self.webView.configureScrapButton(status: info.1)
+                
+                if info.1 {
+                    NotificationCenter.default.post(name: Notification.Name("ScrapButtonTappedNotification"), object: nil, userInfo: ["data" : info.0])
+                }
             }.disposed(by: self.disposeBag)
     }
     
