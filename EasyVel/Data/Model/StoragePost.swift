@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct StoragePost: Codable, Equatable {
+struct StoragePost: Codable, Equatable, Hashable {
     let img: String?
     let name: String?
     let summary: String?
@@ -18,8 +18,7 @@ struct StoragePost: Codable, Equatable {
          name: String? = nil,
          summary: String? = nil,
          title: String? = nil,
-         url: String? = nil)
-    {
+         url: String? = nil) {
         self.img = img
         self.name = name
         self.summary = summary

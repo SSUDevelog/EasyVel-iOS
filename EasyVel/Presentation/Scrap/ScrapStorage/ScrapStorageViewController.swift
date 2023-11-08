@@ -11,7 +11,8 @@ import SnapKit
 import RxSwift
 import RxRelay
 
-final class ScrapStorageViewController: RxBaseViewController<ScrapStorageViewModel> {
+final class ScrapStorageViewController: RxBaseViewController<ScrapStorageViewModel>, FolderViewControllerDelegate {
+    
     
     let scrapView = ScrapStorageView()
     private lazy var dataSource = ScrapStorageCollectionViewDataSource(collectionView: scrapView.scrapCollectionView)
@@ -26,6 +27,14 @@ final class ScrapStorageViewController: RxBaseViewController<ScrapStorageViewMod
         view = scrapView
     }
 
+    func folderVCDismiss(newFolderName: String) {
+
+        if let viewModel = self.viewModel {
+            viewModel.yesDidTap.accept(true)
+            bindOutput(viewModel)
+        }
+    }
+    
     override func bind(viewModel: ScrapStorageViewModel) {
         super.bind(viewModel: viewModel)
         bindOutput(viewModel)
@@ -33,27 +42,32 @@ final class ScrapStorageViewController: RxBaseViewController<ScrapStorageViewMod
         scrapView.scrapCollectionView.rx.itemSelected
             .subscribe { [weak self] indexPath in
                 let cell = self?.scrapView.scrapCollectionView.cellForItem(at: indexPath) as? ScrapStorageCollectionViewCell
-                let storageViewModel = StorageViewModel()
-                let storageViewController = StorageViewController(viewModel: storageViewModel)
-                if let folderName = cell?.folderNameLabel.text {
-                    storageViewModel.folderName = folderName
-                    storageViewController.setStorageHeadView(
-                        headTitle: folderName
-                    )
-                }
+                let folderName = cell?.folderNameLabel.text ?? TextLiterals.allPostsScrapFolderText
+                // TODO: 확인해보기
+                let storageView = StoragePostView(title: folderName)
+                let storageViewModel = StorageViewModel(folderName: folderName)
+                let storageViewController = StorageViewController(
+                    view: storageView,
+                    viewModel: storageViewModel
+                )
                 self?.navigationController?.pushViewController(storageViewController, animated: true)
             }
             .disposed(by: disposeBag)
         
         scrapView.addFolderButton.rx.tap
             .subscribe(onNext: { [weak self] in
-                self?.addFolderAlert()
+                let vc = FolderAlertViewController(type: .create)
+                vc.modalPresentationStyle = .overFullScreen
+                vc.modalTransitionStyle = .crossDissolve
+                vc.delegate = self
+                self?.present(vc, animated: false)
             })
             .disposed(by: disposeBag)
         
     }
     
     private func bindOutput(_ viewModel: ScrapStorageViewModel) {
+    
         viewModel.storageListOutput
             .asDriver(onErrorJustReturn: ([StorageDTO](), [String](), [Int]()))
             .drive(onNext: { [weak self] folderData, folderImageList, folderPostsCount in
@@ -62,45 +76,9 @@ final class ScrapStorageViewController: RxBaseViewController<ScrapStorageViewMod
                     folderImageList: folderImageList,
                     folderPostsCount: folderPostsCount
                 )
+                self?.scrapView.scrapCollectionView.reloadData()
             })
             .disposed(by: disposeBag)
-        
-        viewModel.alreadyHaveFolderNameRelay
-            .asDriver(onErrorJustReturn: Bool())
-            .drive(onNext: { [weak self] alreadyHaveFolderName in
-                if alreadyHaveFolderName {
-                    self?.showToast(
-                        toastText: TextLiterals.alreadyHaveFolderToastText,
-                        backgroundColor: .gray300
-                    )
-                }
-            })
-            .disposed(by: disposeBag)
-    }
-    
-    private func addFolderAlert() {
-        let alertController = UIAlertController(
-            title: TextLiterals.addFolderAlertTitle,
-            message: nil,
-            preferredStyle: .alert
-        )
-        alertController.addTextField()
-        let okAction = UIAlertAction(
-            title: TextLiterals.addFolderAlertOkActionTitle,
-            style: .default
-        ) { [weak self] action in
-            if let folderTextField = alertController.textFields?.first,
-               let addFolderName = folderTextField.text {
-                self?.viewModel?.addFolderInput.accept(addFolderName)
-            }
-        }
-        let cancelAction = UIAlertAction(
-            title: TextLiterals.addFolderAlertCancelActionTitle,
-            style: .cancel
-        )
-        alertController.addAction(cancelAction)
-        alertController.addAction(okAction)
-        present(alertController, animated: true)
     }
 
     private func setNotification() {

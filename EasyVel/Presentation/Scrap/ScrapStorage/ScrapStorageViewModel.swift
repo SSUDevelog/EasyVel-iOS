@@ -18,11 +18,10 @@ final class ScrapStorageViewModel: BaseViewModel {
     // MARK: - Output
     
     var storageListOutput = PublishRelay<([StorageDTO], [String], [Int])>()
-    var alreadyHaveFolderNameRelay = PublishRelay<Bool>()
     
     // MARK: - Input
     
-    var addFolderInput = PublishRelay<String>()
+    var yesDidTap = PublishRelay<Bool>()
     
     override init() {
         super.init()
@@ -48,41 +47,32 @@ final class ScrapStorageViewModel: BaseViewModel {
             })
             .disposed(by: disposeBag)
         
-        addFolderInput
-            .subscribe(onNext: { [weak self] folderName in
-                let storageDTO: StorageDTO = StorageDTO(
-                    articleID: UUID(),
-                    folderName: folderName,
-                    count: 0
-                )
-                if self?.realm.checkUniqueFolder(input: storageDTO) == true {
-                    self?.realm.addFolder(item: storageDTO)
-                    guard let scrapFolderRealmDTO: Results<ScrapStorageDTO> = self?.realm.getFolders() else { return }
-                    let scrapFolder = self?.realm.convertToStorageDTO(input: scrapFolderRealmDTO)
-                    let folderNameList = scrapFolder.map {
-                        $0.map {
-                            $0.folderName
-                        }
+        yesDidTap
+            .subscribe(onNext: { [weak self] _ in
+                guard let scrapFolderRealmDTO: Results<ScrapStorageDTO> = self?.realm.getFolders() else { return }
+                let scrapFolder = self?.realm.convertToStorageDTO(input: scrapFolderRealmDTO)
+                let folderNameList = scrapFolder.map {
+                    $0.map {
+                        $0.folderName
                     }
-                    let folderImageList = folderNameList.map {
-                        $0.map {
-                            self?.realm.getFolderImage(folderName: $0 ?? "") ?? String()
-                        }
+                }
+                let folderImageList = folderNameList.map {
+                    $0.map {
+                        self?.realm.getFolderImage(folderName: $0 ?? "") ?? String()
                     }
-                    let folderPostsCount = folderNameList.map {
-                        $0.map {
-                            self?.realm.getFolderPostsCount(folderName: $0 ?? "") ?? Int()
-                        }
+                }
+                let folderPostsCount = folderNameList.map {
+                    $0.map {
+                        self?.realm.getFolderPostsCount(folderName: $0 ?? "") ?? Int()
                     }
-                    if let scrapFolder = scrapFolder,
-                       let folderImageList = folderImageList,
-                       let folderPostsCount = folderPostsCount {
-                        self?.storageListOutput.accept((scrapFolder, folderImageList, folderPostsCount))
-                    }
-                } else {
-                    self?.alreadyHaveFolderNameRelay.accept(true)
+                }
+                if let scrapFolder = scrapFolder,
+                   let folderImageList = folderImageList,
+                   let folderPostsCount = folderPostsCount {
+                    self?.storageListOutput.accept((scrapFolder, folderImageList, folderPostsCount))
                 }
             })
             .disposed(by: disposeBag)
     }
+    
 }

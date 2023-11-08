@@ -8,7 +8,34 @@
 import UIKit
 import SnapKit
 
+enum ToastType {
+    case folderDeleted
+    case postDescrapped
+    
+    var text: String {
+        switch self {
+        case .folderDeleted: return TextLiterals.folderDeletedToast
+        case .postDescrapped: return TextLiterals.postDescrappedToast
+        }
+    }
+    
+    var backgroundColor: UIColor {
+        return .gray500
+    }
+}
+
 extension UIViewController {
+    func showToast(
+        of type: ToastType,
+        on viewController: UIViewController
+    ) {
+        Toast.show(
+            toastText: type.text,
+            toastBackgroundColor: type.backgroundColor,
+            controller: viewController
+        )
+    }
+    
     func showToast(
         toastText: String,
         backgroundColor: UIColor
@@ -46,7 +73,7 @@ final class Toast {
         
         toastLabel.text = toastText
         toastLabel.textColor = .white
-        toastLabel.font = .body_2_M
+        toastLabel.font = .body_2_B
         toastLabel.textAlignment = .center
         toastLabel.clipsToBounds = true
         toastLabel.numberOfLines = 0
