@@ -141,9 +141,9 @@ final class StorageViewController: BaseViewController {
             .bind(with: self, onNext: { owner, indexPath in
                 let collectionView = owner.storageView.collectionView
                 guard let postCell = collectionView.cellForItem(at: indexPath) as? Cell,
-                      let url = postCell.post?.url
+                      let post = postCell.post
                 else { return }
-                owner.pushToWebView(url)
+                owner.pushToWebView(post)
             }).disposed(by: self.disposeBag)
     }
 }
@@ -151,9 +151,10 @@ final class StorageViewController: BaseViewController {
 // MARK: - Custom Method
 
 extension StorageViewController {
-    private func pushToWebView(_ url: String) {
-        let webViewModel = WebViewModel(url: url, service: DefaultFollowService.shared)
-        let webViewController = WebViewController(viewModel: webViewModel)
+    private func pushToWebView(_ post: StoragePost) {
+        let webView = PostWebView()
+        let webViewModel = PostWebViewModel(DefaultFollowService.shared, post)
+        let webViewController = PostWebViewController(webView, webViewModel)
         self.navigationController?.pushViewController(webViewController, animated: true)
     }
     

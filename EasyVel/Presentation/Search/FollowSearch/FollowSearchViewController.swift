@@ -117,14 +117,14 @@ final class FollowSearchViewController: RxBaseViewController<FollowSearchViewMod
             .disposed(by: disposeBag)
         
         viewModel.pushToUserWeb
-            .asDriver(onErrorJustReturn: nil)
-            .drive { [weak self] url in
-                guard let url else {
-                    self?.showToast(toastText: "주소가 올바르지 않습니다.", backgroundColor: .gray500)
-                    return }
-                let webViewModel = WebViewModel(url: url,
-                                                service: DefaultFollowService.shared)
-                let webViewController = WebViewController(viewModel: webViewModel)
+            .asDriver(onErrorJustReturn: (String(), String()))
+            .drive { [weak self] userName, url in
+                let webViewModel = UserWebViewModel(
+                    user: userName,
+                    url: url,
+                    service: DefaultFollowService.shared
+                )
+                let webViewController = UserWebViewController(viewModel: webViewModel)
                 self?.navigationController?.pushViewController(webViewController, animated: true)
             }
             .disposed(by: disposeBag)

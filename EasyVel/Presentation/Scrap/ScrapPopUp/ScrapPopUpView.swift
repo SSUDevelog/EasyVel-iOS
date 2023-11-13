@@ -33,10 +33,16 @@ final class ScrapPopUpView: BaseUIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private let lineView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .gray200
+        return view
+    }()
+    
     private let scrapLabel: UILabel = {
         let label = UILabel()
         label.text = TextLiterals.scrapPopUpViewLeftText
-        label.textColor = .black
+        label.textColor = .gray500
         label.font = .body_2_M
         return label
     }()
@@ -69,25 +75,31 @@ final class ScrapPopUpView: BaseUIView {
     
     override func configUI() {
         self.addSubviews(
+            lineView,
             scrapLabel,
             goToStorageButton,
             putInFolderButton
         )
         
+        lineView.snp.makeConstraints {
+            $0.top.horizontalEdges.equalToSuperview()
+            $0.height.equalTo(1)
+        }
+        
         scrapLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(20)
-            $0.top.equalToSuperview().inset(12)
+            $0.top.equalToSuperview().inset(18)
         }
         
         putInFolderButton.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(9)
+            $0.centerY.equalTo(self.scrapLabel)
             $0.height.equalTo(32)
             $0.width.equalTo(88)
             $0.trailing.equalToSuperview().inset(20)
         }
         
         goToStorageButton.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(9)
+            $0.centerY.equalTo(self.scrapLabel)
             $0.height.equalTo(32)
             $0.width.equalTo(72)
             $0.trailing.equalTo(putInFolderButton.snp.leading).offset(-10)

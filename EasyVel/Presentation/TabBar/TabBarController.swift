@@ -70,12 +70,13 @@ final class TabBarController: UITabBarController {
     }
     
     private func setLayout(scrapPopUpView: UIView) {
-        view.addSubview(scrapPopUpView)
+        
+        UIApplication.shared.firstWindow?.addSubview(scrapPopUpView)
         
         scrapPopUpView.snp.makeConstraints {
-            $0.bottom.equalToSuperview().offset(82)
+            $0.bottom.equalToSuperview().offset(108)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(83)
+            $0.height.equalTo(108)
         }
     }
     
@@ -121,21 +122,21 @@ final class TabBarController: UITabBarController {
         scrapPopUpView.delegate = self
         setLayout(scrapPopUpView: scrapPopUpView)
         
-        self.view.layoutIfNeeded()
+        UIApplication.shared.firstWindow?.layoutIfNeeded()
         
         scrapPopUpView.snp.updateConstraints {
             $0.bottom.equalToSuperview()
         }
         
         UIView.animate(withDuration: 0.5) {
-            self.view.layoutIfNeeded()
+            UIApplication.shared.firstWindow?.layoutIfNeeded()
         } completion: { _ in
             DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
                 scrapPopUpView.snp.updateConstraints {
-                    $0.bottom.equalToSuperview().offset(83)
+                    $0.bottom.equalToSuperview().offset(108)
                 }
                 UIView.animate(withDuration: 0.5) {
-                    self.view.layoutIfNeeded()
+                    UIApplication.shared.firstWindow?.layoutIfNeeded()
                 }
             })
         }

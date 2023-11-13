@@ -24,7 +24,7 @@ final class FollowSearchViewModel: BaseViewModel {
     
     var subscriberAddStatusOutput = PublishRelay<(Bool, String)>()
     var searchUserOutput = PublishRelay<(Bool,SearchUserResponse?)>()
-    var pushToUserWeb = PublishRelay<String?>()
+    var pushToUserWeb = PublishRelay<(String, String)>()
     
     // MARK: - Input
     
@@ -67,7 +67,12 @@ final class FollowSearchViewModel: BaseViewModel {
         userDidTap
             .throttle(.seconds(2), scheduler: MainScheduler.instance)
             .subscribe { [weak self] _ in
-                self?.pushToUserWeb.accept(self?.userData?.profileURL)
+                guard let self = self,
+                      let userData = self.userData,
+                      let userName = userData.userName,
+                      let userURL = userData.profileURL
+                else { return }
+                self.pushToUserWeb.accept((userName, userURL))
             }
             .disposed(by: disposeBag)
         
