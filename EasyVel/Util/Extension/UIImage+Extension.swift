@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 extension UIImage {
     
@@ -17,3 +18,6 @@ extension UIImage {
         return resizedImage
     }
 }
+
+
+

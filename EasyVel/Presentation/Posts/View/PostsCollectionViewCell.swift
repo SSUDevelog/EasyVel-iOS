@@ -150,11 +150,7 @@ extension PostsCollectionViewCell {
         self.summaryLabel.setLineHeight(multiple: 1.44, with: post.summary ?? "")
         self.detailView.bind(name: post.name ?? "", date: post.date ?? "")
         
-        if let urlString = post.img, let url = URL(string: urlString) {
-            self.imageView.kf.setImage(with: url)
-        } else {
-            self.imageView.image = UIImage(named: "default.post")
-        }
+        imageView.setDownSampleImage(with: post.img)
         
         guard let tags = post.tag else { return }
         let tagList = tags.map { TagModel(tag: $0) }

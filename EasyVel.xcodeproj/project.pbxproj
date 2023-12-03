@@ -42,6 +42,7 @@
 		7CB706D62A32067900083EC6 /* SearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB706D52A32067900083EC6 /* SearchCollectionViewCell.swift */; };
 		87187C022A4DF7E200BF05F7 /* MyTagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87187C012A4DF7E200BF05F7 /* MyTagCollectionViewCell.swift */; };
 		87187C042A4DF7F200BF05F7 /* PopularTagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87187C032A4DF7F200BF05F7 /* PopularTagTableViewCell.swift */; };
+		872A91612B0F1C7900B3DEA9 /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872A91602B0F1C7900B3DEA9 /* UIImageView+.swift */; };
 		8745835E2A42184B00954274 /* PostsVCFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8745835D2A42184B00954274 /* PostsVCFactory.swift */; };
 		874A13FD2AE4D425000ED2C1 /* RxGesture in Frameworks */ = {isa = PBXBuildFile; productRef = 874A13FC2AE4D425000ED2C1 /* RxGesture */; };
 		8754E9A42AF3E259008FC6FD /* PostRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8754E9A32AF3E259008FC6FD /* PostRepository.swift */; };
@@ -235,6 +236,7 @@
 		7CB706D52A32067900083EC6 /* SearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewCell.swift; sourceTree = "<group>"; };
 		87187C012A4DF7E200BF05F7 /* MyTagCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTagCollectionViewCell.swift; sourceTree = "<group>"; };
 		87187C032A4DF7F200BF05F7 /* PopularTagTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularTagTableViewCell.swift; sourceTree = "<group>"; };
+		872A91602B0F1C7900B3DEA9 /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
 		8745835D2A42184B00954274 /* PostsVCFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsVCFactory.swift; sourceTree = "<group>"; };
 		8754E9A32AF3E259008FC6FD /* PostRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRepository.swift; sourceTree = "<group>"; };
 		8754E9A62AF3F076008FC6FD /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
@@ -968,6 +970,7 @@
 				3E9663592ABC745F00EC884D /* UILabel+Extension.swift */,
 				87F287EB2A9DE2A300A53218 /* UIViewController+.swift */,
 				8764A62F2ACEBB2E007D4B0A /* Reactive+.swift */,
+				872A91602B0F1C7900B3DEA9 /* UIImageView+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1468,6 +1471,7 @@
 				3EFB4A372AD3B53E006E3846 /* StorageCollectionViewHeader.swift in Sources */,
 				3E3F45872AF173B400B9D6AA /* DeleteFolderBottomSheet.swift in Sources */,
 				3EE425222ACAE00B00DE5FA5 /* TagCollectionViewCell.swift in Sources */,
+				872A91612B0F1C7900B3DEA9 /* UIImageView+.swift in Sources */,
 				9128B0262A236D2800FB1252 /* ScrapPopUpView.swift in Sources */,
 				914D8DD92A02B22A00516B4C /* UserWebViewController.swift in Sources */,
 				91ED17892A00E58D00158787 /* FollowService.swift in Sources */,
