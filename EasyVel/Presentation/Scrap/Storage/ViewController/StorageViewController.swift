@@ -66,10 +66,6 @@ final class StorageViewController: BaseViewController {
     
     // MARK: - Setting
     
-    override func render() {}
-    
-    override func configUI() {}
-    
     private func bind() {
         self.storageView.backButton.rx.tap
             .subscribe(onNext: {
@@ -133,6 +129,11 @@ final class StorageViewController: BaseViewController {
         output.showChangeNameAlert
             .drive(with: self) { owner, folderName in
                 owner.showChageFolderNameAlert(folderName: folderName)
+            }.disposed(by: self.disposeBag)
+        
+        header.showBottomSheetTrigger
+            .drive(with: self) { owner, _ in
+                owner.storageView.showDeleteFolderBottomSheet()
             }.disposed(by: self.disposeBag)
     }
     
@@ -244,5 +245,6 @@ extension StorageViewController {
 extension StorageViewController: FolderViewControllerDelegate {
     func folderVCDismiss(newFolderName: String) {
         self.storageView.updateTitle(to: newFolderName)
+        self.viewModel.updateFolderName(to: newFolderName)
     }
 }
