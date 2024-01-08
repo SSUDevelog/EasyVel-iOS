@@ -146,24 +146,6 @@ extension StoragePostView {
     }
 }
 
-//extension NewStoragePostView {
-//    
-//    func configureCollectionView(with title: String) {
-//        self.collectionView.collectionViewLayout = createLayout()
-//        self.collectionView.register(
-//            StorageCollectionViewHeader.self,
-//            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-//            withReuseIdentifier: StorageCollectionViewHeader.reuseIdentifier
-//        )
-//    }
-//}
-
-//extension NewStoragePostView {
-//    func showEmptyView() {
-//        self.emptyImageView.isHidden = false
-//    }
-//}
-
 extension StoragePostView {
     
     func createLayout() -> UICollectionViewLayout {

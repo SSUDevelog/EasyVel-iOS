@@ -20,7 +20,7 @@ final class StorageCollectionViewHeader: UICollectionReusableView {
         return self.changeNameButton.rx.tap.asDriver()
     }
     
-    var deleteFolderButtonTrigger: Driver<Void> {
+    var showBottomSheetTrigger: Driver<Void> {
         return self.deleteFolderButton.rx.tap.asDriver()
     }
     
