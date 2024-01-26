@@ -140,3 +140,9 @@ extension StorageViewModel {
         return self.realm.deleteFolder(folderName: name)
     }
 }
+
+extension StorageViewModel {
+    func updateFolderName(to name: String) {
+        self.folderName = name
+    }
+}
